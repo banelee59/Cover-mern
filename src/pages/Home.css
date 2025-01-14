@@ -40,30 +40,58 @@
 
 .hero-section {
   background: white;
-  padding: 80px 20px;
+  padding: 40px 20px;
   color: #3498db;
 }
 
 .hero-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
+  max-width: 1000px;
+  margin: 0;
   padding: 0 20px;
 }
 
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
 .hero-text h1 {
-  font-size: 2.8rem;
+  font-size: 1.1rem;
   margin-bottom: 20px;
   line-height: 1.2;
   color: #3498db;
+  max-width: 700px;
+  text-align: left;
 }
 
-.hero-text p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
+.hero-image {
+  width: 100%;
+  max-width: 500px;
+  height: 50px;
+  margin: 20px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  align-self: flex-start;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.hero-features {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.hero-features p {
+  font-size: 1rem;
+  margin-bottom: 10px;
   color: #3498db;
 }
 
@@ -857,13 +885,14 @@ footer {
 .cta-button {
   background: #3498db;
   color: white;
-  padding: 15px 30px;
+  padding: 12px 25px;
   border: none;
-  border-radius: 5px;
-  font-size: 1.1rem;
+  border-radius: 4px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s ease;
+  align-self: flex-start;
 }
 
 .cta-button:hover {
@@ -894,4 +923,19 @@ img {
 body {
   overflow-x: hidden;
   width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-image {
+    height: 250px;
+  }
+
+  .hero-features p {
+    font-size: 0.9rem;
+  }
 } 

@@ -10,18 +10,18 @@ const Home = () => {
           <div className="hero-content">
             <div className="hero-text">
               <h1>CoverUp secures your family with the right burial plan when it matters most.</h1>
+              <div className="hero-image">
+                <img 
+                  src="/images/home-image1.jpg" 
+                  alt="Family Protection" 
+                  className="hero-img"
+                />
+              </div>
               <div className="hero-features">
                 <p>✓ Simplified Burial Planning in The Palm of Your Hand</p>
                 <p>✓ Plan Ahead, Live Without Worry</p>
               </div>
               <button className="cta-button">Start your comparison</button>
-            </div>
-            <div className="hero-image">
-              <img 
-                src="/images/home-image1.jpg" 
-                alt="Family Protection" 
-                className="hero-img"
-              />
             </div>
           </div>
         </section>
@@ -81,7 +81,7 @@ const Home = () => {
               
               <div className="importance-image">
                 <img 
-                  src="/images/family-protection.jpg" 
+                  src="/images/file.png" 
                   alt="Family Protection" 
                   className="feature-image"
                 />
@@ -140,50 +140,45 @@ const Home = () => {
             </p>
             
             <div className="scheme-info">
-              <div className="scheme-text">
-                <ul className="scheme-list">
-                  <li>
-                    <span className="bullet">•</span>
-                    <div className="list-content">
-                      <h3>Financial Relief</h3>
-                      <p>These schemes ensure professional management of all logistical aspects of the funeral by providing:</p>
-                      <ul className="sub-list">
-                        <li>Essential items like coffins</li>
-                        <li>Chairs and tents for the service</li>
-                        <li>Transportation arrangements</li>
-                      </ul>
-                    </div>
-                  </li>
+              <ul className="scheme-list">
+                <li>
+                  <div className="list-content">
+                    <h3>Financial Relief</h3>
+                    <p>These schemes ensure professional management of all logistical aspects of the funeral by providing:</p>
+                    <ul className="sub-list">
+                      <li>Essential items like coffins</li>
+                      <li>Chairs and tents for the service</li>
+                      <li>Transportation arrangements</li>
+                    </ul>
+                  </div>
+                </li>
 
-                  <li>
-                    <span className="bullet">•</span>
-                    <div className="list-content">
-                      <h3>Comprehensive Funeral Services</h3>
-                      <p>The contributions paid by members guarantee:</p>
-                      <ul className="sub-list">
-                        <li>Professional funeral services</li>
-                        <li>Hearse and transportation</li>
-                        <li>Choice of burial or cremation</li>
-                        <li>Documentation assistance</li>
-                      </ul>
-                    </div>
-                  </li>
+                <li>
+                  <div className="list-content">
+                    <h3>Comprehensive Funeral Services</h3>
+                    <p>The contributions paid by members guarantee:</p>
+                    <ul className="sub-list">
+                      <li>Professional funeral services</li>
+                      <li>Hearse and transportation</li>
+                      <li>Choice of burial or cremation</li>
+                      <li>Documentation assistance</li>
+                    </ul>
+                  </div>
+                </li>
 
-                  <li>
-                    <span className="bullet">•</span>
-                    <div className="list-content">
-                      <h3>Peace of Mind</h3>
-                      <p>Benefits of pre-planned arrangements:</p>
-                      <ul className="sub-list">
-                        <li>Reduced stress during mourning</li>
-                        <li>No unexpected financial burdens</li>
-                        <li>Focus on celebrating the life of the deceased</li>
-                        <li>Support for the family during difficult times</li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                <li>
+                  <div className="list-content">
+                    <h3>Peace of Mind</h3>
+                    <p>Benefits of pre-planned arrangements:</p>
+                    <ul className="sub-list">
+                      <li>Reduced stress during mourning</li>
+                      <li>No unexpected financial burdens</li>
+                      <li>Focus on celebrating the life of the deceased</li>
+                      <li>Support for the family during difficult times</li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </section>
