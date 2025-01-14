@@ -31,7 +31,7 @@ const Contact = () => {
 
           <div className="contact-image-section">
             <div className="image-container">
-              <img src="/images/contact-image.jpg" alt="Customer Support" />
+              <img src="/images/list-image.png" alt="Customer Support" />
             </div>
             
           </div>

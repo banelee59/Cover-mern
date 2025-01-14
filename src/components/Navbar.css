@@ -29,10 +29,14 @@
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #3498db;
+  display: flex;
+  align-items: center;
   text-decoration: none;
+}
+
+.logo-image {
+  height: 40px;  /* Adjust this value based on your logo size */
+  width: auto;
 }
 
 .nav-links {
@@ -71,5 +75,9 @@
   
   .quote-button {
     padding: 8px 16px;
+  }
+  
+  .logo-image {
+    height: 32px;  /* Slightly smaller on mobile */
   }
 } 

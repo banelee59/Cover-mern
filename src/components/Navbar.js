@@ -5,11 +5,14 @@ import './Navbar.css';
 const Navbar = () => {
   return (
     <>
-     
       <nav className="navbar">
         <div className="container">
           <Link to="/" className="logo">
-            CoverUp
+            <img 
+              src="/images/coverupLogo.png" 
+              alt="CoverUp Logo" 
+              className="logo-image"
+            />
           </Link>
           <div className="nav-links">
             <Link to="/">Home</Link>
