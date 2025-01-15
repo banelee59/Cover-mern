@@ -10,7 +10,7 @@ const Home = () => {
           <div className="max-w-5xl mx-0 px-5">
             <div className="flex flex-col items-start">
               <h1 className="text-lg text-black mb-12 leading-tight max-w-2xl text-left font-semibold">
-                CoverUp secures your family with the right burial plan when it matters most.
+                Cover<span className="text-blue-500">Up</span> secures your family with the right burial plan when it matters most.
               </h1>
               
               <div className="w-full max-w-6xl h-72 mb-12 rounded-lg overflow-hidden self-start">
