@@ -17,13 +17,10 @@ const Home = () => {
                   className="hero-img"
                 />
               </div>
-              <div className="hero-features">
-                <p>✓ Simplified Burial Planning in The Palm of Your Hand</p>
-                <p>✓ Plan Ahead, Live Without Worry</p>
-              </div>
+              
               <div className="button-group">
-                <button className="cta-button primary">Get Started</button>
-                <button className="cta-button secondary">Learn More</button>
+                <button className="cta-button primary">Simplified Burial Planning in The Palm of Your Hand</button>
+                <button className="cta-button secondary">Plan Ahead, Live Without Worr</button>
               </div>
             </div>
           </div>
