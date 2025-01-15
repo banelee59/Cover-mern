@@ -10,7 +10,7 @@ const Home = () => {
           <div className="container mx-auto px-4">
             <div className="flex flex-col items-start">
               <h1 className="text-2xl text-black mb-8 leading-none max-w-none text-left font-semibold whitespace-nowrap">
-                Cover<span className="text-[#00c2ff]">Up</span> secures your family with the right burial plan when it matters most.
+                COVER<span className="text-[#00c2ff]">UP</span> SECURES YOUR FAMILY WITH THE RIGHT BURIAL PLAN WHEN IT MATTERS MOST.
               </h1>
               
               <div className="w-full max-w-6xl h-96 mb-0 rounded-lg overflow-hidden self-start">
@@ -34,63 +34,45 @@ const Home = () => {
         </section>
 
         {/* Importance Section */}
-        <section className="importance-section">
+        <section className="importance-section mb-30">
           <div className="section-container">
             <div className="importance-wrapper">
               <div className="importance-content">
-                <h2>Importance of Burial Schemes</h2>
+                <h1>IMPORTANCE OF BURIAL SCHEMES</h1>
                 <p className="section-intro">
                   A burial scheme ensures that funeral costs are covered, allowing your loved ones to focus on healing
                 </p>
                 
-                <ul className="importance-list">
-                  <li className="importance-item">
-                    <div className="item-icon">💰</div>
-                    <div className="item-content">
-                      <h3>Financial Relief</h3>
-                      <p>Relieving financial burden on family during difficult times</p>
-                    </div>
-                  </li>
+                <div className="flex flex-col gap-3 mt-4 mb-16">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[#00c2ff] text-2xl">•</span>
+                    <p className="text-gray-700">Relieving financial burden on family</p>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <span className="text-[#00c2ff] text-2xl">•</span>
+                    <p className="text-gray-700">Offers best prices from top funeral parlor</p>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <span className="text-[#00c2ff] text-2xl">•</span>
+                    <p className="text-gray-700">National Coverage</p>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <span className="text-[#00c2ff] text-2xl">•</span>
+                    <p className="text-gray-700">Cultural and Religious Sensitivity</p>
+                  </div>
+                </div>
 
-                  <li className="importance-item">
-                    <div className="item-icon">🏆</div>
-                    <div className="item-content">
-                      <h3>Best Value</h3>
-                      <p>Offers best prices from top funeral parlors</p>
-                    </div>
-                  </li>
-
-                  <li className="importance-item">
-                    <div className="item-icon">🌍</div>
-                    <div className="item-content">
-                      <h3>National Coverage</h3>
-                      <p>Comprehensive coverage across South Africa</p>
-                    </div>
-                  </li>
-
-                  <li className="importance-item">
-                    <div className="item-icon">🤝</div>
-                    <div className="item-content">
-                      <h3>Cultural Sensitivity</h3>
-                      <p>Respects and accommodates cultural and religious practices</p>
-                    </div>
-                  </li>
-
-                  <li className="importance-item">
-                    <div className="item-icon">✅</div>
-                    <div className="item-content">
-                      <h3>Simple Claims</h3>
-                      <p>A straightforward and hassle-free claims process</p>
-                    </div>
-                  </li>
-                </ul>
+                
               </div>
               
-              <div className="importance-image">
+              <div className="importance-image w-2/3">
                 <img 
-                  src="/images/file.png" 
+                  src="/images/file1.png" 
                   alt="Family Protection" 
-                  className="feature-image"
+                  className="feature-image w-full h-auto object-contain"
                 />
               </div>
             </div>
@@ -100,38 +82,40 @@ const Home = () => {
         {/* Features Section */}
         <section className="features-section">
           <div className="section-container">
-            <h2 className="features-title">Save time and money by comparing burial schemes in one place.</h2>
+            <h2 className="features-title bg-white px-4 py-2 inline-block">
+              SAVE TIME AND MONEY BY COMPARING BURIAL SCHEMES IN ONE PLACE.
+            </h2>
             
-            <div className="features-grid">
-              <div className="feature-card">
-                <div className="feature-icon">📝</div>
-                <div className="feature-content">
-                  <h3>Electronic Contracts</h3>
-                  <p>View and sign contracts electronically with secure digital signatures</p>
-                </div>
+            <div className="flex flex-row gap-8 mt-4">
+              {/* Image on the left */}
+              <div className="w-1/2">
+                <img 
+                  src="/images/waving-turtle.png" 
+                  alt="Features Overview" 
+                  className="w-2/4 h-auto rounded-lg shadow-lg object-cover mx-auto"
+                />
               </div>
 
-              <div className="feature-card">
-                <div className="feature-icon">⚡</div>
-                <div className="feature-content">
-                  <h3>Easy Updates</h3>
-                  <p>Make amendments and updates to your policy with just a few clicks</p>
+              {/* Bullet points on the right */}
+              <div className="w-1/2 flex flex-col gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-[#00c2ff] text-2xl">•</span>
+                  <p className="text-gray-700">View and sign contracts electronically</p>
                 </div>
-              </div>
-
-              <div className="feature-card">
-                <div className="feature-icon">🔒</div>
-                <div className="feature-content">
-                  <h3>Secure Storage</h3>
-                  <p>All your documents are stored securely in one convenient location</p>
+                
+                <div className="flex items-center gap-3">
+                  <span className="text-[#00c2ff] text-2xl">•</span>
+                  <p className="text-gray-700">Make amendments and updates with ease</p>
                 </div>
-              </div>
-
-              <div className="feature-card">
-                <div className="feature-icon">📱</div>
-                <div className="feature-content">
-                  <h3>Regular Updates</h3>
-                  <p>Stay informed with clear notifications about any changes to your scheme</p>
+                
+                <div className="flex items-center gap-3">
+                  <span className="text-[#00c2ff] text-2xl">•</span>
+                  <p className="text-gray-700">Store documents securely</p>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <span className="text-[#00c2ff] text-2xl">•</span>
+                  <p className="text-gray-700">Regular updates and clear information about any changes to the scheme</p>
                 </div>
               </div>
             </div>
@@ -141,7 +125,7 @@ const Home = () => {
         {/* What Is Section */}
         <section className="what-is-section">
           <div className="section-container">
-            <h2>What is a burial scheme?</h2>
+            <h2>WHAT IS A BURIAL SCHEME?</h2>
             <p className="section-intro">
               It is a monthly-paid insurance plan designed to cover essential funeral expenses
             </p>
@@ -193,12 +177,12 @@ const Home = () => {
         {/* Benefits Section */}
         <section className="benefits-section">
           <div className="section-container">
-            <h2>The benefits of a burial scheme</h2>
+            <h2>THE BENEFITS OF A BURIAL SCHEME</h2>
             <div className="benefits-boxes">
               <div className="benefit-box">
                 <div className="benefit-header">
                   <div className="benefit-icon">💰</div>
-                  <h3>Cost-Effective</h3>
+                  <h3>COST-EFFECTIVE</h3>
                 </div>
                 <div className="benefit-divider"></div>
                 <p>Burial schemes usually involve lower premiums compared to comprehensive funeral policies. The contributions are pooled within the community or group, which can reduce the overall cost for each member.</p>
@@ -207,7 +191,7 @@ const Home = () => {
               <div className="benefit-box">
                 <div className="benefit-header">
                   <div className="benefit-icon">📝</div>
-                  <h3>Simplified Claims Process</h3>
+                  <h3>SIMPLIFIED CLAIMS PROCESS</h3>
                 </div>
                 <div className="benefit-divider"></div>
                 <p>Since the scheme is managed by the funeral undertaker, the process of claiming the benefits is straightforward. There is no need to navigate through insurance claim procedures, as the undertaker will directly provide the agreed-upon services</p>
@@ -216,7 +200,7 @@ const Home = () => {
               <div className="benefit-box">
                 <div className="benefit-header">
                   <div className="benefit-icon">⚡</div>
-                  <h3>Immediate Assistance</h3>
+                  <h3>IMMEDIATE ASSISTANCE</h3>
                 </div>
                 <div className="benefit-divider"></div>
                 <p>Funeral undertakers can provide immediate assistance upon the death of a member, handling all necessary arrangements promptly. This immediate support is crucial during a time of grief.</p>
@@ -225,7 +209,7 @@ const Home = () => {
               <div className="benefit-box">
                 <div className="benefit-header">
                   <div className="benefit-icon">🎯</div>
-                  <h3>Customized Services</h3>
+                  <h3>CUSTOMIZED SERVICES</h3>
                 </div>
                 <div className="benefit-divider"></div>
                 <p>These schemes often include personalized services tailored to the deceased's and family's wishes, ensuring a respectful and appropriate funeral.</p>
@@ -234,7 +218,7 @@ const Home = () => {
               <div className="benefit-box">
                 <div className="benefit-header">
                   <div className="benefit-icon">✅</div>
-                  <h3>No Medical Examinations</h3>
+                  <h3>NO MEDICAL EXAMINATIONS</h3>
                 </div>
                 <div className="benefit-divider"></div>
                 <p>Typically, burial schemes do not require medical examinations for membership, making them accessible to a broader range of people, including those who might have difficulty obtaining traditional funeral insurance.</p>
