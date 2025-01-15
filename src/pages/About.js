@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-blue-500 text-white py-16">
+      <section className="bg-[#00c2ff] text-white py-16">
         <div className="max-w-4xl mx-auto px-6">
           <h1 className="text-3xl font-bold mb-6">About CoverUp</h1>
           <p className="text-xl leading-relaxed">
@@ -17,7 +17,7 @@ const About = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Mission */}
         <section className="mb-16">
-          <h2 className="text-2xl font-semibold text-blue-500 mb-4">Our Mission</h2>
+          <h2 className="text-2xl font-semibold text-[#00c2ff] mb-4">Our Mission</h2>
           <p className="text-gray-700 leading-relaxed">
             At CoverUp, we were founded with a simple yet powerful mission: to provide peace of mind and ensure that every family can give their loved ones a dignified farewell without the burden of financial stress.
           </p>

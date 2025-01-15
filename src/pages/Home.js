@@ -9,15 +9,15 @@ const Home = () => {
         <section className="bg-white py-4 px-5">
           <div className="max-w-5xl mx-0 px-5">
             <div className="flex flex-col items-start">
-              <h1 className="text-lg text-black mb-8 leading-tight max-w-2xl text-left font-semibold">
-                Cover<span className="text-blue-500">Up</span> secures your family with the right burial plan when it matters most.
+              <h1 className="text-2xl text-black mb-8 leading-none max-w-none text-left font-semibold whitespace-nowrap">
+                Cover<span className="text-[#00c2ff]">Up</span> secures your family with the right burial plan when it matters most.
               </h1>
               
-              <div className="w-full max-w-6xl h-72 mb-8 rounded-lg overflow-hidden self-start">
+              <div className="w-full max-w-6xl h-96 mb-8 rounded-lg overflow-hidden self-start">
                 <img 
                   src="/images/home-image1.jpg" 
                   alt="Family Protection" 
-                  className="w-full h-full object-cover rounded-lg shadow-lg"
+                  className="w-full h-full object-cover object-top rounded-lg shadow-lg"
                 />
               </div>
 
@@ -26,10 +26,10 @@ const Home = () => {
               </div>
 
               <div className="flex gap-2 mt-2">
-                <button className="px-5 py-5 text-xs font-semibold bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+                <button className="px-5 py-5 text-xs font-semibold bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
                 Simplified Burial Planning in The Palm of Your Hand
                 </button>
-                <button className="px-5 py-2 text-xs font-semibold border-2 border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition-colors">
+                <button className="px-5 py-2 text-xs font-semibold border-2 border-[#00c2ff] text-[#00c2ff] rounded hover:bg-[#00c2ff]/10 transition-colors">
                 Plan Ahead, Live Without Worry
                 </button>
               </div>
