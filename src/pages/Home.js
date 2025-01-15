@@ -21,7 +21,10 @@ const Home = () => {
                 <p>✓ Simplified Burial Planning in The Palm of Your Hand</p>
                 <p>✓ Plan Ahead, Live Without Worry</p>
               </div>
-              <button className="cta-button">Start your comparison</button>
+              <div className="button-group">
+                <button className="cta-button primary">Get Started</button>
+                <button className="cta-button secondary">Learn More</button>
+              </div>
             </div>
           </div>
         </section>
