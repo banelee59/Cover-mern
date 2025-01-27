@@ -11,29 +11,57 @@ const Contact = () => {
       <div className="contact-content">
         <div className="contact-grid">
           <div className="contact-form-section">
-            <h2>Send us a Message</h2>
-            <form className="contact-form">
+            <h2 className="text-5xl font-bold mb-8">Send us a Message</h2>
+            <form className="contact-form space-y-6">
               <div className="form-group">
-                <input type="text" placeholder="Full Name *" required />
+                <input 
+                  type="text" 
+                  placeholder="Full Name *" 
+                  required 
+                  className="w-full px-6 py-4 text-lg rounded-lg border border-gray-300 focus:border-[#00c2ff]"
+                />
               </div>
               <div className="form-group">
-                <input type="email" placeholder="Email Address *" required />
+                <input 
+                  type="email" 
+                  placeholder="Email Address *" 
+                  required 
+                  className="w-full px-6 py-4 text-lg rounded-lg border border-gray-300 focus:border-[#00c2ff]"
+                />
               </div>
               <div className="form-group">
-                <input type="tel" placeholder="Contact Number *" required />
+                <input 
+                  type="tel" 
+                  placeholder="Contact Number *" 
+                  required 
+                  className="w-full px-6 py-4 text-lg rounded-lg border border-gray-300 focus:border-[#00c2ff]"
+                />
               </div>
               <div className="form-group">
-                <textarea placeholder="Your Message *" rows="5" required></textarea>
+                <textarea 
+                  placeholder="Your Message *" 
+                  rows="8"
+                  required 
+                  className="w-full px-4 py-2 text-lg rounded-lg border border-gray-300 focus:border-[#00c2ff] resize-none"
+                ></textarea>
               </div>
-              <button type="submit" className="submit-btn">Send Message</button>
+              <button 
+                type="submit" 
+                className="submit-btn w-full px-6 py-4 text-lg font-medium bg-[#00c2ff] text-white rounded-lg hover:bg-[#00b3eb]"
+              >
+                Send Message
+              </button>
             </form>
           </div>
 
           <div className="contact-image-section">
-            <div className="image-container">
-              <img src="/images/list-image.png" alt="Customer Support" />
+            <div className="image-container !w-64">
+              <img 
+                src="/images/list-image.png" 
+                alt="Customer Support" 
+                className="!w-64 !h-auto !object-contain"
+              />
             </div>
-            
           </div>
         </div>
       </div>

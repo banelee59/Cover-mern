@@ -170,4 +170,17 @@
   .image-container {
     height: 200px;
   }
+}
+
+/* Remove or modify these styles if they exist */
+.contact-image-section .image-container {
+  /* Remove any width/height constraints */
+  max-width: none;
+  width: auto;
+}
+
+.contact-image-section img {
+  /* Remove any width/height constraints */
+  width: auto;
+  height: auto;
 } 

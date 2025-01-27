@@ -2,46 +2,104 @@ import React, { useState } from 'react';
 import './Home.css';
 
 const Home = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div className="home-container">
-      <main>
-        {/* Hero Section */}
-        <section className="bg-white py-14">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col items-start">
-              <h1 className="text-2xl text-black mb-8 leading-none max-w-none text-left font-semibold whitespace-nowrap">
-                COVER<span className="text-[#00c2ff]">UP</span> SECURES YOUR FAMILY WITH THE RIGHT BURIAL PLAN WHEN IT MATTERS MOST.
-              </h1>
-              
-              <div className="w-full max-w-6xl h-96 mb-0 rounded-lg overflow-hidden self-start">
-                <img 
-                  src="/images/home-image1.jpg" 
-                  alt="Family Protection" 
-                  className="w-full h-full object-cover object-top rounded-lg shadow-lg"
-                />
-              </div>
+      {/* Toolbar/Navigation */}
+      <nav className="fixed top-0 right-0 left-0 bg-white shadow-md z-50">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <div className="flex items-center">
+              <span className="text-xl font-bold text-gray-800">
+                COVER<span className="text-[#00c2ff]">UP</span>
+              </span>
+            </div>
 
-              <div className="flex gap-2 mt-2">
-                <button className="px-5 py-5 text-xs font-semibold bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
-                  Simplified Burial Planning in The Palm of Your Hand
-                </button>
-                <button className="px-5 py-2 text-xs font-semibold border-2 border-[#00c2ff] text-[#00c2ff] rounded hover:bg-[#00c2ff]/10 transition-colors">
-                  Plan Ahead, Live Without Worry
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#" className="text-gray-600 hover:text-[#00c2ff] transition-colors">Home</a>
+              <a href="#" className="text-gray-600 hover:text-[#00c2ff] transition-colors">About</a>
+              <a href="#" className="text-gray-600 hover:text-[#00c2ff] transition-colors">Services</a>
+              <a href="#" className="text-gray-600 hover:text-[#00c2ff] transition-colors">Contact</a>
+              <button className="px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
+                Get a Quote
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-600 hover:text-[#00c2ff] focus:outline-none"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {isMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-md">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">Home</a>
+                <a href="#" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">About</a>
+                <a href="#" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">Services</a>
+                <a href="#" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">Contact</a>
+                <button className="w-full mt-2 px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
+                  Get a Quote
                 </button>
               </div>
             </div>
-          </div>
-        </section>
+          )}
+        </div>
+      </nav>
 
+      {/* Hero Section */}
+      <section className="bg-white py-4">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-start">
+            <h1 className="text-lg sm:text-xl md:text-2xl text-black mb-4 md:mb-8 leading-tight max-w-none text-left font-semibold">
+              COVER<span className="text-[#00c2ff]">UP</span> SECURES YOUR FAMILY WITH THE RIGHT BURIAL PLAN WHEN IT MATTERS MOST.
+            </h1>
+            
+            <div className="w-full max-w-6xl h-64 sm:h-80 md:h-96 mb-0 rounded-lg overflow-hidden self-start">
+              <img 
+                src="/images/home-image1.jpg" 
+                alt="Family Protection" 
+                className="w-full h-full object-cover object-top rounded-lg shadow-lg"
+              />
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-2 mt-2 w-full">
+              <button className="px-3 sm:px-5 py-3 sm:py-5 text-xs sm:text-sm font-semibold bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
+                Simplified Burial Planning in The Palm of Your Hand
+              </button>
+              <button className="px-3 sm:px-5 py-2 text-xs sm:text-sm font-semibold border-2 border-[#00c2ff] text-[#00c2ff] rounded hover:bg-[#00c2ff]/10 transition-colors">
+                Plan Ahead, Live Without Worry
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Add margin-top to main content to account for fixed navbar */}
+      <main className="pt-16">
         {/* Importance Section */}
-        <section className="bg-gray-50 py-16">
+        <section className="py-16">
           <div className="container mx-auto px-4">
-            {/* Title and Subtitle */}
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800">
                 IMPORTANCE OF BURIAL SCHEMES
               </h2>
-              <p className="text-[#00b3eb]  text-xl max-w-3xl mx-auto mb-12">
+              <p className="text-[#00b3eb] text-xl max-w-3xl mx-auto mb-12">
                 A burial scheme ensures that funeral costs are covered, allowing your loved ones to focus on healing
               </p>
               
@@ -92,14 +150,13 @@ const Home = () => {
             </div>
 
             {/* Image moved to bottom */}
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-3xl mx-auto">
               <div className="relative">
                 <img 
                   src="/images/file.png" 
                   alt="Family Protection" 
-                  className="w-full h-auto rounded-lg shadow-lg "
+                  className="w-full h-auto max-h-[500px] object-contain"
                 />
-                <div className="absolute inset-0  from-[#00c2ff]/10 to-transparent rounded-lg"></div>
               </div>
             </div>
           </div>
@@ -152,23 +209,20 @@ const Home = () => {
         </section>
 
         {/* What Is Section */}
-        <section className="bg-gray-50 py-16">
-          <div className="container mx-auto">
-            <div className="max-w-6xl">
-              {/* Title and Subtitle aligned left */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
               <div className="mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-10 text-gray-800">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
                   WHAT IS A BURIAL SCHEME?
                 </h2>
                 <p className="text-[#00b3eb] text-xl mb-8">
                   It is a monthly-paid insurance plan designed to cover essential funeral expenses
                 </p>
               </div>
-
-              {/* Content with image */}
-              <div className="flex justify-between items-start gap-12">
-                {/* List Content with reduced width */}
-                <div className="space-y-18 max-w-2xl flex-1">
+              
+              <div className="flex flex-col md:flex-row items-start gap-12">
+                <div className="flex-1 space-y-8">
                   <div className="flex items-start gap-6">
                     <div className="flex-shrink-0 w-8 h-8 bg-[#00c2ff] rounded-full flex items-center justify-center mt-1">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -205,13 +259,13 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-               
-                {/* Small image on the right */}
+                
+                {/* Small image on the right - removed borders and shadow */}
                 <div className="w-72 h-auto flex-shrink-0">
                   <img 
                     src="/images/backgroundImg.png" 
                     alt="Burial Scheme Services" 
-                    className="w-full h-full object-contain rounded-lg shadow-lg"
+                    className="w-full h-full object-contain"
                   />
                 </div>
               </div>
