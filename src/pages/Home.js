@@ -102,10 +102,10 @@ const Home = () => {
         <section className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800">
+              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800 text-left">
                 IMPORTANCE OF BURIAL SCHEMES
               </h2>
-              <p className="text-[#00b3eb] text-xl max-w-3xl mx-auto mb-12">
+              <p className="text-[#00b3eb] text-xl max-w-3xl mx-auto mb-12 text-left">
                 A burial scheme ensures that funeral costs are covered, allowing your loved ones to focus on healing
               </p>
               
@@ -171,16 +171,16 @@ const Home = () => {
         {/* Features Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <div className="text-top mb-8">
-              <h2 className="text-lg md:text-2xl text-gray-800 font-bold ">
+            <div className="text-top mb-18">
+              <h1 className="text-lg md:text-2xl text-gray-800 font-bold text-left ">
                 SAVE TIME AND MONEY BY COMPARING
                 BURIAL SCHEMES IN ONE PLACE.
-              </h2>
+              </h1>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 px-4 ">
               <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 hover:-translate-y-10">
-                <div className="flex flex-col items-center text-center">
+                <div className="flex flex-col items-bottom text-left ">
                   <div className="benefit-icon text-2xl mb-4">💰</div>
                   <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Electronic Signing</h3>
                   <p className="text-gray-700">View and sign contracts electronically</p>
@@ -188,7 +188,7 @@ const Home = () => {
               </div>
               
               <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1">
-                <div className="flex flex-col items-center text-center">
+                <div className="flex flex-col items-center text-left">
                   <div className="benefit-icon text-2xl mb-4">📝</div>
                   <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Easy Updates</h3>
                   <p className="text-gray-700">Make amendments and updates with ease</p>
@@ -196,7 +196,7 @@ const Home = () => {
               </div>
               
               <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1">
-                <div className="flex flex-col items-center text-center">
+                <div className="flex flex-col items-center text-left">
                   <div className="benefit-icon text-2xl mb-4">⚡</div>
                   <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Secure Storage</h3>
                   <p className="text-gray-700">Store documents securely</p>
@@ -204,7 +204,7 @@ const Home = () => {
               </div>
               
               <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1">
-                <div className="flex flex-col items-center text-center">
+                <div className="flex flex-col items-center text-left">
                   <div className="benefit-icon text-2xl mb-4">✅</div>
                   <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Regular Updates</h3>
                   <p className="text-gray-700">Regular updates and clear information about any changes to the scheme</p>
@@ -219,7 +219,7 @@ const Home = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 text-left">
                   WHAT IS A BURIAL SCHEME?
                 </h2>
                 <p className="text-[#00b3eb] text-xl mb-8">
