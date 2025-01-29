@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 const About = () => {
   return (
     <div className="about-container">
-      <Navbar />
+     
       <div className="pt-16">
         {/* Hero Section */}
         <section className="bg-[#00c2ff] text-white py-16">
