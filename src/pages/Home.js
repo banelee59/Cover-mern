@@ -188,9 +188,9 @@ const Home = () => {
 
         {/* Features Section */}
         <section className="py-16">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 ">
             {/* Title above boxes */}
-            <div className="max-w-2xl mx-auto text-left mb-2">
+            <div className="max-w-2xl mx-auto text-left mb-80">
               <h2 className="text-3xl md:text-2xl font-bold text-gray-800">
                 SAVE TIME AND MONEY BY COMPARING
                 BURIAL SCHEMES IN ONE PLACE
@@ -200,7 +200,7 @@ const Home = () => {
             {/* Grid of boxes */}
             <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-4 gap-8 mt-28">
               <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                <div className="flex flex-col items-center text-left">
+                <div className="flex flex-col items-left text-left">
                   <div className="benefit-icon text-2xl mb-4">💰</div>
                   <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Electronic Signing</h3>
                   <p className="text-gray-700">View and sign contracts electronically</p>
