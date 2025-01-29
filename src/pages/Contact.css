@@ -37,6 +37,8 @@
 }
 
 .contact-grid {
+  position: relative;
+  min-height: 600px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
@@ -174,9 +176,10 @@
 
 /* Remove or modify these styles if they exist */
 .contact-image-section .image-container {
-  /* Remove any width/height constraints */
-  max-width: none;
-  width: auto;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 256px;
 }
 
 .contact-image-section img {

@@ -65,12 +65,12 @@ const Home = () => {
       {/* Hero Section */}
       <section className="bg-white py-4">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col items-start">
-            <h1 className="text-lg sm:text-xl md:text-2xl text-black mb-4 md:mb-8 leading-tight max-w-none text-left font-semibold">
-              COVER<span className="text-[#00c2ff]">UP</span> SECURES YOUR FAMILY WITH THE RIGHT BURIAL PLAN WHEN IT MATTERS MOST.
+          <div className="flex flex-col items-center max-w-5xl mx-auto">
+            <h1 className="text-lg sm:text-xl md:text-2xl text-black mb-4 md:mb-8 leading-tight text-center font-semibold">
+              Cover<span className="text-[#00c2ff]">Up</span> secures your family with the right burial plan when it matters most.
             </h1>
             
-            <div className="w-full max-w-6xl h-64 sm:h-80 md:h-96 mb-0 rounded-lg overflow-hidden self-start">
+            <div className="w-full max-w-6xl h-64 sm:h-70 md:h-96 mb-0 rounded-lg overflow-hidden">
               <img 
                 src="/images/home-image1.jpg" 
                 alt="Family Protection" 
@@ -78,13 +78,19 @@ const Home = () => {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-2 mt-2 w-full">
-              <button className="px-3 sm:px-5 py-3 sm:py-5 text-xs sm:text-sm font-semibold bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
-                Simplified Burial Planning in The Palm of Your Hand
-              </button>
-              <button className="px-3 sm:px-5 py-2 text-xs sm:text-sm font-semibold border-2 border-[#00c2ff] text-[#00c2ff] rounded hover:bg-[#00c2ff]/10 transition-colors">
-                Plan Ahead, Live Without Worry
-              </button>
+            {/* Hero Section Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 mt-2 w-full justify-left">
+              <div className="bg-[#00c2ff] rounded-lg p-1 shadow-lg hover:bg-[#00b3eb] transition-colors w-full sm:w-auto">
+                <h3 className="text-white text-lg font-semibold text-center">
+                  Simplified Burial Planning in The Palm of Your Hand
+                </h3>
+              </div>
+              
+              <div className="bg-white rounded-lg p-2 shadow-lg border-2 border-[#00c2ff] hover:bg-[#00c2ff]/10 transition-colors w-full sm:w-auto">
+                <h3 className="text-[#00c2ff] text-lg font-semibold text-center">
+                  Plan Ahead, Live Without Worry
+                </h3>
+              </div>
             </div>
           </div>
         </div>
@@ -93,7 +99,7 @@ const Home = () => {
       {/* Add margin-top to main content to account for fixed navbar */}
       <main className="pt-16">
         {/* Importance Section */}
-        <section className="py-16">
+        <section className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800">
@@ -155,7 +161,7 @@ const Home = () => {
                 <img 
                   src="/images/file.png" 
                   alt="Family Protection" 
-                  className="w-full h-auto max-h-[500px] object-contain"
+                  className="w-full h-auto max-h-[600px] object-contain"
                 />
               </div>
             </div>
@@ -163,17 +169,17 @@ const Home = () => {
         </section>
 
         {/* Features Section */}
-        <section className="features-section">
-          <div className="section-container">
-            <div className="text-center mb-8">
-              <h2 className="text-lg md:text-2xl text-gray-800 font-bold">
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="text-top mb-8">
+              <h2 className="text-lg md:text-2xl text-gray-800 font-bold ">
                 SAVE TIME AND MONEY BY COMPARING
                 BURIAL SCHEMES IN ONE PLACE.
               </h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 px-4">
-              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1">
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 hover:-translate-y-10">
                 <div className="flex flex-col items-center text-center">
                   <div className="benefit-icon text-2xl mb-4">💰</div>
                   <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Electronic Signing</h3>
@@ -209,7 +215,7 @@ const Home = () => {
         </section>
 
         {/* What Is Section */}
-        <section className="py-16">
+        <section className=" bg-gray-50 py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="mb-12">

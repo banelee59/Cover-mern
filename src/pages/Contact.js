@@ -8,60 +8,79 @@ const Contact = () => {
         
       
 
-      <div className="contact-content">
-        <div className="contact-grid">
-          <div className="contact-form-section">
-            <h2 className="text-5xl font-bold mb-8">Send us a Message</h2>
-            <form className="contact-form space-y-6">
-              <div className="form-group">
-                <input 
-                  type="text" 
-                  placeholder="Full Name *" 
-                  required 
-                  className="w-full px-6 py-4 text-lg rounded-lg border border-gray-300 focus:border-[#00c2ff]"
-                />
-              </div>
-              <div className="form-group">
-                <input 
-                  type="email" 
-                  placeholder="Email Address *" 
-                  required 
-                  className="w-full px-6 py-4 text-lg rounded-lg border border-gray-300 focus:border-[#00c2ff]"
-                />
-              </div>
-              <div className="form-group">
-                <input 
-                  type="tel" 
-                  placeholder="Contact Number *" 
-                  required 
-                  className="w-full px-6 py-4 text-lg rounded-lg border border-gray-300 focus:border-[#00c2ff]"
-                />
-              </div>
-              <div className="form-group">
-                <textarea 
-                  placeholder="Your Message *" 
-                  rows="8"
-                  required 
-                  className="w-full px-4 py-2 text-lg rounded-lg border border-gray-300 focus:border-[#00c2ff] resize-none"
-                ></textarea>
-              </div>
-              <button 
-                type="submit" 
-                className="submit-btn w-full px-6 py-4 text-lg font-medium bg-[#00c2ff] text-white rounded-lg hover:bg-[#00b3eb]"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
-
-          <div className="contact-image-section">
-            <div className="image-container !w-64">
-              <img 
-                src="/images/list-image.png" 
-                alt="Customer Support" 
-                className="!w-64 !h-auto !object-contain"
-              />
+      <div className="contact-content py-12">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative">
+            {/* Form Section */}
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <h2 className="text-3xl font-bold mb-2 text-gray-800">Send us a Message</h2>
+              <form className="space-y-5">
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="form-group">
+                    <input 
+                      type="text" 
+                      placeholder="First Name *" 
+                      required 
+                      className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-1 focus:ring-[#00c2ff]"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input 
+                      type="text" 
+                      placeholder="Last Name *" 
+                      required 
+                      className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-1 focus:ring-[#00c2ff]"
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-group">
+                  <input 
+                    type="email" 
+                    placeholder="Email Address *" 
+                    required 
+                    className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-1 focus:ring-[#00c2ff]"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <input 
+                    type="tel" 
+                    placeholder="Phone Number *" 
+                    required 
+                    className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-1 focus:ring-[#00c2ff]"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <textarea 
+                    placeholder="Your Message *" 
+                    rows="5"
+                    required 
+                    className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-1 focus:ring-[#00c2ff] resize-none"
+                  ></textarea>
+                </div>
+                
+                <button 
+                  type="submit" 
+                  className="w-full py-3 bg-[#00c2ff] text-white rounded-lg hover:bg-[#00b3eb] transition-colors font-medium"
+                >
+                  Send Message
+                </button>
+              </form>
             </div>
+
+            
+
+              {/* Image positioned at bottom right */}
+              <div className="absolute bottom-0 right-0">
+                <img 
+                  src="/images/contact.png" 
+                  alt="Customer Support" 
+                  className="w-96 h-auto object-contain"
+                />
+              </div>
+            
           </div>
         </div>
       </div>
