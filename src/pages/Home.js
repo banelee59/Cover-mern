@@ -63,18 +63,36 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-white py-4">
+      <section className="bg-white py-4 relative">
+        {/* Left blue circle decoration */}
+        <div className="absolute left-0 top-1/2 transform -translate-y-1/2">
+          <img 
+            src="/images/full.png" 
+            alt="Decoration" 
+            className="w-48 h-48 object-contain opacity-80"
+          />
+        </div>
+
+        {/* Right blue circle decoration */}
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
+          <img 
+            src="/images/full.png" 
+            alt="Decoration" 
+            className="w-48 h-48 object-contain opacity-80"
+          />
+        </div>
+
         <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center max-w-5xl mx-auto">
+          <div className="flex flex-col items-center max-w-7xl mx-auto relative z-10">
             <h1 className="text-lg sm:text-xl md:text-2xl text-black mb-4 md:mb-8 leading-tight text-center font-semibold">
               Cover<span className="text-[#00c2ff]">Up</span> secures your family with the right burial plan when it matters most.
             </h1>
             
-            <div className="w-full max-w-6xl h-64 sm:h-70 md:h-96 mb-0 rounded-lg overflow-hidden">
+            <div className="w-full max-w-7xl h-96 mb-0 rounded-lg overflow-hidden">
               <img 
                 src="/images/home-image1.jpg" 
                 alt="Family Protection" 
-                className="w-full h-full object-cover object-top rounded-lg shadow-lg"
+                className="w-full h-96 object-cover object-top rounded-lg shadow-lg"
               />
             </div>
 
@@ -171,23 +189,25 @@ const Home = () => {
         {/* Features Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <div className="text-top mb-18">
-              <h1 className="text-lg md:text-2xl text-gray-800 font-bold text-left ">
+            {/* Title above boxes */}
+            <div className="max-w-2xl mx-auto text-left mb-2">
+              <h2 className="text-3xl md:text-2xl font-bold text-gray-800">
                 SAVE TIME AND MONEY BY COMPARING
-                BURIAL SCHEMES IN ONE PLACE.
-              </h1>
+                BURIAL SCHEMES IN ONE PLACE
+              </h2>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 px-4 ">
-              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 hover:-translate-y-10">
-                <div className="flex flex-col items-bottom text-left ">
+
+            {/* Grid of boxes */}
+            <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-4 gap-8 mt-28">
+              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                <div className="flex flex-col items-center text-left">
                   <div className="benefit-icon text-2xl mb-4">💰</div>
                   <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Electronic Signing</h3>
                   <p className="text-gray-700">View and sign contracts electronically</p>
                 </div>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1">
+              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
                 <div className="flex flex-col items-center text-left">
                   <div className="benefit-icon text-2xl mb-4">📝</div>
                   <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Easy Updates</h3>
@@ -195,7 +215,7 @@ const Home = () => {
                 </div>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1">
+              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
                 <div className="flex flex-col items-center text-left">
                   <div className="benefit-icon text-2xl mb-4">⚡</div>
                   <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Secure Storage</h3>
@@ -203,7 +223,7 @@ const Home = () => {
                 </div>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1">
+              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
                 <div className="flex flex-col items-center text-left">
                   <div className="benefit-icon text-2xl mb-4">✅</div>
                   <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Regular Updates</h3>
