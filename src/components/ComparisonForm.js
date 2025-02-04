@@ -19,6 +19,29 @@ const provincialCoverOptions = {
   // Add more provinces with their specific cover options
 };
 
+const validateIdNumber = (idNumber) => {
+  // South African ID number validation (13 digits)
+  const idRegex = /^[0-9]{13}$/;
+  return idRegex.test(idNumber);
+};
+
+const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+const validatePhoneNumber = (phone) => {
+  // South African phone number validation
+  const phoneRegex = /^(\+27|0)[6-8][0-9]{8}$/;
+  return phoneRegex.test(phone);
+};
+
+const validatePostalCode = (code) => {
+  // South African postal code validation (4 digits)
+  const postalRegex = /^[0-9]{4}$/;
+  return postalRegex.test(code);
+};
+
 const ComparisonForm = () => {
   const [formData, setFormData] = useState({
     // Profile Details
@@ -65,6 +88,9 @@ const ComparisonForm = () => {
   // Add state for available cover options
   const [availableCoverOptions, setAvailableCoverOptions] = useState([]);
 
+  // Add error state
+  const [errors, setErrors] = useState({});
+
   const steps = [
     { number: 1, title: 'Profile Details' },
     { number: 2, title: 'Policy Details' },
@@ -74,6 +100,43 @@ const ComparisonForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let newErrors = { ...errors };
+
+    // Validate fields as they change
+    if (name === 'idNumber') {
+      if (!validateIdNumber(value)) {
+        newErrors.idNumber = 'Please enter a valid 13-digit South African ID number';
+      } else {
+        delete newErrors.idNumber;
+      }
+    }
+
+    if (name === 'email') {
+      if (!validateEmail(value)) {
+        newErrors.email = 'Please enter a valid email address';
+      } else {
+        delete newErrors.email;
+      }
+    }
+
+    if (name === 'phoneNumber' || name === 'alternativeNumber') {
+      if (value && !validatePhoneNumber(value)) {
+        newErrors[name] = 'Please enter a valid South African phone number';
+      } else {
+        delete newErrors[name];
+      }
+    }
+
+    if (name === 'address.postalCode') {
+      if (!validatePostalCode(value)) {
+        newErrors.postalCode = 'Please enter a valid 4-digit postal code';
+      } else {
+        delete newErrors.postalCode;
+      }
+    }
+
+    setErrors(newErrors);
+
     if (name === 'address.province') {
       // Update available cover options when province changes
       setAvailableCoverOptions(provincialCoverOptions[value] || []);
@@ -98,8 +161,72 @@ const ComparisonForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    // Handle form submission
+    if (validateStep(currentStep)) {
+      // Process form submission
+      console.log('Form submitted:', formData);
+    }
+  };
+
+  const validateStep = (step) => {
+    const newErrors = {};
+
+    switch(step) {
+      case 1:
+        if (!formData.title) newErrors.title = 'Title is required';
+        if (!formData.firstName) newErrors.firstName = 'First name is required';
+        if (!formData.lastName) newErrors.lastName = 'Last name is required';
+        if (!validateIdNumber(formData.idNumber)) {
+          newErrors.idNumber = 'Please enter a valid 13-digit South African ID number';
+        }
+        if (!formData.gender) newErrors.gender = 'Gender is required';
+        if (!validateEmail(formData.email)) {
+          newErrors.email = 'Please enter a valid email address';
+        }
+        if (!validatePhoneNumber(formData.phoneNumber)) {
+          newErrors.phoneNumber = 'Please enter a valid South African phone number';
+        }
+        if (formData.alternativeNumber && !validatePhoneNumber(formData.alternativeNumber)) {
+          newErrors.alternativeNumber = 'Please enter a valid South African phone number';
+        }
+        if (!formData.address.street) newErrors.street = 'Street address is required';
+        if (!formData.address.city) newErrors.city = 'City is required';
+        if (!formData.address.province) newErrors.province = 'Province is required';
+        if (!validatePostalCode(formData.address.postalCode)) {
+          newErrors.postalCode = 'Please enter a valid 4-digit postal code';
+        }
+        break;
+
+      case 2:
+        if (!formData.policyType) newErrors.policyType = 'Policy type is required';
+        if (!formData.premiumFrequency) newErrors.premiumFrequency = 'Premium frequency is required';
+        if (!formData.dependents && formData.dependents !== 0) {
+          newErrors.dependents = 'Number of dependents is required';
+        }
+        break;
+
+      case 4:
+        if (!formData.coverAmount) newErrors.coverAmount = 'Please select a cover amount';
+        break;
+
+      default:
+        break;
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validateStep(currentStep)) {
+      setCurrentStep(prev => prev + 1);
+    }
+  };
+
+  // Add this helper function to render error messages
+  const renderError = (fieldName) => {
+    return errors[fieldName] && (
+      <p className="text-red-500 text-xs mt-1">{errors[fieldName]}</p>
+    );
   };
 
   const renderFormStep = () => {
@@ -111,47 +238,101 @@ const ComparisonForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                <select name="title" value={formData.title} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]" required>
+                <select 
+                  name="title" 
+                  value={formData.title} 
+                  onChange={handleChange} 
+                  className={`w-full p-2 border ${errors.title ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`} 
+                  required
+                >
                   <option value="">Select</option>
                   <option value="Mr">Mr</option>
                   <option value="Mrs">Mrs</option>
                   <option value="Ms">Ms</option>
                   <option value="Dr">Dr</option>
                 </select>
+                {renderError('title')}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]" required />
+                <input 
+                  type="text" 
+                  name="firstName" 
+                  value={formData.firstName} 
+                  onChange={handleChange} 
+                  className={`w-full p-2 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`} 
+                  required 
+                />
+                {renderError('firstName')}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]" required />
+                <input 
+                  type="text" 
+                  name="lastName" 
+                  value={formData.lastName} 
+                  onChange={handleChange} 
+                  className={`w-full p-2 border ${errors.lastName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`} 
+                  required 
+                />
+                {renderError('lastName')}
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">ID Number</label>
-                <input type="text" name="idNumber" value={formData.idNumber} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]" required />
+                <input 
+                  type="text" 
+                  name="idNumber" 
+                  value={formData.idNumber} 
+                  onChange={handleChange} 
+                  className={`w-full p-2 border ${errors.idNumber ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`} 
+                  required 
+                />
+                {renderError('idNumber')}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-                <select name="gender" value={formData.gender} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]" required>
+                <select 
+                  name="gender" 
+                  value={formData.gender} 
+                  onChange={handleChange} 
+                  className={`w-full p-2 border ${errors.gender ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`} 
+                  required
+                >
                   <option value="">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
+                {renderError('gender')}
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]" required />
+                <input 
+                  type="email" 
+                  name="email" 
+                  value={formData.email} 
+                  onChange={handleChange} 
+                  className={`w-full p-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`} 
+                  required 
+                />
+                {renderError('email')}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                <input type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]" required />
+                <input 
+                  type="tel" 
+                  name="phoneNumber" 
+                  value={formData.phoneNumber} 
+                  onChange={handleChange} 
+                  className={`w-full p-2 border ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`} 
+                  required 
+                />
+                {renderError('phoneNumber')}
               </div>
             </div>
 
@@ -405,7 +586,7 @@ const ComparisonForm = () => {
             {steps.map((step, index) => (
               <div key={step.number} className="flex-1 relative">
                 <div className="flex flex-col">
-                  <div className="flex items-center w-full">
+                  <div className="flex items-center  w-full">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
                       currentStep >= step.number 
                         ? 'bg-[#00c2ff] text-white' 
@@ -451,11 +632,7 @@ const ComparisonForm = () => {
               )}
               <button
                 type={currentStep === totalSteps ? 'submit' : 'button'}
-                onClick={() => {
-                  if (currentStep < totalSteps) {
-                    setCurrentStep(prev => prev + 1);
-                  }
-                }}
+                onClick={handleNext}
                 className="ml-auto px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
               >
                 {currentStep === totalSteps ? 'Submit' : 'Next'}
