@@ -120,9 +120,11 @@ const Home = () => {
         <section className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
+          
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800 text-left">
                 IMPORTANCE OF BURIAL SCHEMES
               </h2>
+              
               <p className="text-[#00b3eb] text-xl max-w-3xl mx-auto mb-12 text-left">
                 A burial scheme ensures that funeral costs are covered, allowing your loved ones to focus on healing
               </p>
