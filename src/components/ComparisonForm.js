@@ -5,38 +5,109 @@ import Confetti from 'react-confetti';
 const provincialCoverOptions = {
   Gauteng: [
     { 
-      value: "20000",
+      value: "",
       label: "150",
       provider: "Old Mutual",
+      logo: "/policies/oldmutual.png",
       rating: 4.5,
       features: ["No medical tests", "Immediate accident cover", "Family cover"]
     },
     { 
-      value: "30000",
+      value: "",
       label: "200",
       provider: "Avbob",
+      logo: "/policies/avbob.png",
       rating: 4.2,
       features: ["Cash back benefits", "Double accident benefit", "Repatriation"]
     },
     { 
-      value: "50000",
+      value: "",
       label: "300",
       provider: "Metropolitan",
+      logo: "/policies/metropolitan.png",
       rating: 4.0,
       features: ["Premium waiver", "Flexible payments", "Quick claims"]
     }
   ],
   "Western Cape": [
-    { value: "12000", label: "R12,000 - R180/month", provider: "Provider D" },
-    { value: "18000", label: "R18,000 - R220/month", provider: "Provider E" },
-    { value: "25000", label: "R25,000 - R300/month", provider: "Provider F" },
+    { 
+      value: "25000",
+      label: "180",
+      provider: "Hollard",
+      logo: "/images/providers/hollard.png",
+      rating: 4.3,
+      features: ["Flexible payments", "Family cover", "Quick claims"]
+    },
+    { 
+      value: "35000",
+      label: "250",
+      provider: "Clientele",
+      logo: "/images/providers/clientele.png",
+      rating: 4.1,
+      features: ["Cash back rewards", "No medical tests", "24/7 support"]
+    },
+    { 
+      value: "45000",
+      label: "320",
+      provider: "Liberty",
+      logo: "/images/providers/liberty.png",
+      rating: 4.4,
+      features: ["Premium holiday", "Repatriation", "Family benefits"]
+    }
   ],
   "KwaZulu-Natal": [
-    { value: "8000", label: "R8,000 - R120/month", provider: "Provider G" },
-    { value: "16000", label: "R16,000 - R190/month", provider: "Provider H" },
-    { value: "22000", label: "R22,000 - R270/month", provider: "Provider I" },
+    { 
+      value: "22000",
+      label: "160",
+      provider: "Sanlam",
+      logo: "/images/providers/sanlam.png",
+      rating: 4.6,
+      features: ["Quick claims", "Family cover", "Premium waiver"]
+    },
+    { 
+      value: "32000",
+      label: "230",
+      provider: "Discovery",
+      logo: "/images/providers/discovery.png",
+      rating: 4.7,
+      features: ["Rewards program", "Immediate cover", "Digital claims"]
+    },
+    { 
+      value: "42000",
+      label: "290",
+      provider: "1Life",
+      logo: "/images/providers/1life.png",
+      rating: 4.2,
+      features: ["Easy application", "Family benefits", "24/7 support"]
+    }
   ],
-  // Add more provinces with their specific cover options
+  "Eastern Cape": [
+    { 
+      value: "20000",
+      label: "150",
+      provider: "African Life",
+      logo: "/images/providers/africanlife.png",
+      rating: 4.0,
+      features: ["Local support", "Family cover", "Flexible payments"]
+    },
+    { 
+      value: "30000",
+      label: "220",
+      provider: "Standard Bank",
+      logo: "/images/providers/standardbank.png",
+      rating: 4.3,
+      features: ["Banking integration", "Quick claims", "Family benefits"]
+    },
+    { 
+      value: "40000",
+      label: "280",
+      provider: "FNB Life",
+      logo: "/images/providers/fnblife.png",
+      rating: 4.4,
+      features: ["eBucks rewards", "Digital process", "Family cover"]
+    }
+  ],
+  // Add similar structure for other provinces...
 };
 
 const validateIdNumber = (idNumber) => {
@@ -122,6 +193,9 @@ const ComparisonForm = () => {
   // Add error state
   const [errors, setErrors] = useState({});
   const [showConfetti, setShowConfetti] = useState(false);
+
+  // First, add a new state to track which option's details are being shown
+  const [selectedOptionDetails, setSelectedOptionDetails] = useState(null);
 
   const steps = [
     { number: 1, title: "Profile Details" },
@@ -641,7 +715,6 @@ const ComparisonForm = () => {
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b border-gray-200">Service</th>
               <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">Yes</th>
               <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">No</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b border-gray-200">Price</th>
             </tr>
           </thead>
           <tbody>
@@ -692,14 +765,6 @@ const ComparisonForm = () => {
                     className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
                   />
                 </td>
-                <td className="px-4 py-2 text-sm text-gray-700 border-b border-gray-200">
-                  {/* Placeholder for price input */}
-                  <input
-                    type="text"
-                    placeholder="Price"
-                    className="w-20 p-1 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                  />
-                </td>
               </tr>
             ))}
           </tbody>
@@ -717,73 +782,176 @@ const ComparisonForm = () => {
               <>
                 <div className="grid gap-6">
                   {availableCoverOptions.map((option) => (
-                    <div 
-                      key={option.value}
-                      className="bg-white p-6 rounded-lg border-2 hover:border-[#00c2ff] transition-colors cursor-pointer"
-                      onClick={() => {
-                        setFormData(prev => ({
-                          ...prev,
-                          coverAmount: option.value,
-                          preferredProvider: option.provider
-                        }));
-                      }}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-4">
-                            <input
-                              type="radio"
-                              name="coverAmount"
-                              value={option.value}
-                              checked={formData.coverAmount === option.value}
-                              onChange={() => {}}
-                              className="w-5 h-5 text-[#00c2ff]"
-                            />
-                            <div>
-                              <h4 className="text-lg font-semibold text-gray-800">{option.provider}</h4>
-                              <div className="mt-1 space-y-1">
-                                <p className="text-2xl font-bold text-[#00c2ff]">R{option.value}</p>
-                                <p className="text-sm text-gray-600">From R{option.label}/month</p>
+                    <div key={option.value} className="space-y-4">
+                      <div 
+                        className="bg-white p-6 rounded-lg border-2 hover:border-[#00c2ff] transition-colors cursor-pointer"
+                        onClick={() => {
+                          setFormData(prev => ({
+                            ...prev,
+                            coverAmount: option.value,
+                            preferredProvider: option.provider
+                          }));
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-4">
+                              <input
+                                type="radio"
+                                name="coverAmount"
+                                value={option.value}
+                                checked={formData.coverAmount === option.value}
+                                onChange={() => {}}
+                                className="w-5 h-5 text-[#00c2ff]"
+                              />
+                              <div>
+                                <h4 className="text-lg font-semibold text-gray-800">{option.provider}</h4>
+                                <div className="mt-1 space-y-1">
+                                  <p className="text-2xl font-bold text-[#00c2ff]">From R{option.label}/month</p>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="mt-4 grid grid-cols-2 gap-4">
+                              <div className="flex items-center gap-2">
+                                <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span className="text-sm">No waiting period for accidental death</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span className="text-sm">Cover up to 13 family members</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span className="text-sm">Claims paid within 48 hours</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span className="text-sm">24/7 Support</span>
                               </div>
                             </div>
                           </div>
-                          
-                          <div className="mt-4 grid grid-cols-2 gap-4">
-                            <div className="flex items-center gap-2">
-                              <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                              </svg>
-                              <span className="text-sm">No waiting period for accidental death</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                              </svg>
-                              <span className="text-sm">Cover up to 13 family members</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                              </svg>
-                              <span className="text-sm">Claims paid within 48 hours</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                              </svg>
-                              <span className="text-sm">24/7 Support</span>
-                            </div>
-                          </div>
-                        </div>
 
-                        <div className="ml-6 flex flex-col items-end">
-                          <div className="text-sm text-gray-500">Trustpilot Rating</div>
-                          <div className="flex text-yellow-400">
-                            {"★".repeat(4)}{"☆".repeat(1)}
+                          <div className="flex flex-col items-end space-y-2">
+                            <div className="w-12 h-12">
+                              <img
+                                src={option.logo}
+                                alt={`${option.provider} logo`}
+                                className="w-full h-full object-contain"
+                                onError={(e) => {
+                                  e.target.src = '/policies/avbob.png';
+                                  e.target.onerror = null;
+                                }}
+                              />
+                            </div>
+                            <div className="text-sm text-gray-500">Trustpilot Rating</div>
+                            <div className="flex text-yellow-400">
+                              {"★".repeat(4)}{"☆".repeat(1)}
+                            </div>
+                            <div className="text-sm text-gray-500">4.0/5</div>
                           </div>
-                          <div className="text-sm text-gray-500">4.0/5</div>
                         </div>
                       </div>
+
+                      {/* Smaller Show More Button */}
+                      <button
+                        type="button"
+                        onClick={() => setSelectedOptionDetails(
+                          selectedOptionDetails === option.provider ? null : option.provider
+                        )}
+                        className="mt-2 px-3 py-1.5 bg-[#00c2ff] text-white rounded-lg text-sm font-medium 
+                          hover:bg-[#00b3eb] transition-colors flex items-center justify-center gap-1 w-auto ml-auto"
+                      >
+                        {selectedOptionDetails === option.provider ? 'Hide Details' : 'Show More Details'}
+                        <svg 
+                          className={`w-3 h-3 transition-transform ${
+                            selectedOptionDetails === option.provider ? 'rotate-180' : ''
+                          }`} 
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+
+                      {/* Detailed Information Panel */}
+                      {selectedOptionDetails === option.provider && (
+                        <div className="bg-gray-50 p-6 rounded-lg mt-2 space-y-4">
+                          <h4 className="font-semibold text-lg text-gray-800">
+                            {option.provider} Cover Details
+                          </h4>
+                          
+                          {/* Coverage Details */}
+                          <div className="space-y-4">
+                            <div>
+                              <h5 className="font-medium text-gray-700 mb-2">Coverage Options</h5>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="bg-white p-4 rounded-lg">
+                                  <p className="font-medium text-[#00c2ff]">Basic Cover</p>
+                                  <p className="text-sm text-gray-600">R10,000 - R30,000</p>
+                                </div>
+                                <div className="bg-white p-4 rounded-lg">
+                                  <p className="font-medium text-[#00c2ff]">Premium Cover</p>
+                                  <p className="text-sm text-gray-600">R30,000 - R50,000</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Waiting Periods */}
+                            <div>
+                              <h5 className="font-medium text-gray-700 mb-2">Waiting Periods</h5>
+                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li>Natural Death: 6 months</li>
+                                <li>Accidental Death: Immediate cover</li>
+                                <li>Suicide: 24 months</li>
+                              </ul>
+                            </div>
+
+                            {/* Additional Benefits */}
+                            <div>
+                              <h5 className="font-medium text-gray-700 mb-2">Additional Benefits</h5>
+                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li>Premium holiday facility</li>
+                                <li>Repatriation benefit</li>
+                                <li>Cash back after 5 years</li>
+                                <li>Family funeral cover options</li>
+                              </ul>
+                            </div>
+
+                            {/* Claims Process */}
+                            <div>
+                              <h5 className="font-medium text-gray-700 mb-2">Claims Process</h5>
+                              <div className="bg-white p-4 rounded-lg">
+                                <ol className="list-decimal list-inside text-sm text-gray-600 space-y-2">
+                                  <li>Contact our 24/7 claims department</li>
+                                  <li>Submit required documentation</li>
+                                  <li>Claim processed within 48 hours</li>
+                                  <li>Payment directly to nominated beneficiary</li>
+                                </ol>
+                              </div>
+                            </div>
+
+                            {/* Contact Information */}
+                            <div className="bg-white p-4 rounded-lg">
+                              <h5 className="font-medium text-gray-700 mb-2">Contact Information</h5>
+                              <div className="text-sm text-gray-600 space-y-1">
+                                <p>Claims: 0800 123 456</p>
+                                <p>Email: claims@{option.provider.toLowerCase().replace(/\s+/g, '')}.co.za</p>
+                                <p>WhatsApp: 072 123 4567</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
