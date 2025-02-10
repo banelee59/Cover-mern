@@ -27,6 +27,14 @@ const provincialCoverOptions = {
       logo: "/policies/metropolitan.png",
       rating: 4.0,
       features: ["Premium waiver", "Flexible payments", "Quick claims"]
+    },
+    { 
+      value: "",
+      label: "250",
+      provider: "Assupol",
+      logo: "/policies/assupol.png",
+      rating: 4.3,
+      features: ["Immediate accident cover", "Family benefits", "Cash back rewards"]
     }
   ],
   "Western Cape": [
@@ -53,6 +61,14 @@ const provincialCoverOptions = {
       logo: "/images/providers/liberty.png",
       rating: 4.4,
       features: ["Premium holiday", "Repatriation", "Family benefits"]
+    },
+    { 
+      value: "30000",
+      label: "220",
+      provider: "Assupol",
+      logo: "/policies/assupol.png",
+      rating: 4.3,
+      features: ["No waiting period", "Repatriation benefit", "Premium waiver"]
     }
   ],
   "KwaZulu-Natal": [
@@ -79,6 +95,14 @@ const provincialCoverOptions = {
       logo: "/images/providers/1life.png",
       rating: 4.2,
       features: ["Easy application", "Family benefits", "24/7 support"]
+    },
+    { 
+      value: "35000",
+      label: "240",
+      provider: "Assupol",
+      logo: "/policies/assupol.png",
+      rating: 4.4,
+      features: ["Family cover", "Cash back benefits", "Quick claims"]
     }
   ],
   "Eastern Cape": [
@@ -105,9 +129,186 @@ const provincialCoverOptions = {
       logo: "/images/providers/fnblife.png",
       rating: 4.4,
       features: ["eBucks rewards", "Digital process", "Family cover"]
+    },
+    { 
+      value: "25000",
+      label: "190",
+      provider: "Assupol",
+      logo: "/policies/assupol.png",
+      rating: 4.2,
+      features: ["No medical tests", "Premium holiday", "Repatriation"]
     }
   ],
-  // Add similar structure for other provinces...
+  "Free State": [
+    { 
+      value: "20000",
+      label: "160",
+      provider: "Momentum",
+      logo: "/images/providers/momentum.png",
+      rating: 4.3,
+      features: ["Family benefits", "Quick claims", "No medical tests"]
+    },
+    { 
+      value: "30000",
+      label: "230",
+      provider: "Old Mutual",
+      logo: "/images/providers/oldmutual.png",
+      rating: 4.5,
+      features: ["Premium waiver", "Immediate cover", "Repatriation"]
+    },
+    { 
+      value: "40000",
+      label: "290",
+      provider: "Avbob",
+      logo: "/images/providers/avbob.png",
+      rating: 4.2,
+      features: ["Cash back benefits", "Family cover", "24/7 support"]
+    },
+    { 
+      value: "25000",
+      label: "200",
+      provider: "Assupol",
+      logo: "/policies/assupol.png",
+      rating: 4.3,
+      features: ["Double accident benefit", "Family cover", "Premium holiday"]
+    }
+  ],
+  "Limpopo": [
+    { 
+      value: "15000",
+      label: "140",
+      provider: "Metropolitan",
+      logo: "/images/providers/metropolitan.png",
+      rating: 4.1,
+      features: ["Local support", "Flexible payments", "Family cover"]
+    },
+    { 
+      value: "25000",
+      label: "200",
+      provider: "Clientele",
+      logo: "/images/providers/clientele.png",
+      rating: 4.0,
+      features: ["Cash back rewards", "Digital claims", "No medical tests"]
+    },
+    { 
+      value: "35000",
+      label: "260",
+      provider: "Hollard",
+      logo: "/images/providers/hollard.png",
+      rating: 4.3,
+      features: ["Premium waiver", "Quick claims", "Repatriation"]
+    },
+    { 
+      value: "20000",
+      label: "180",
+      provider: "Assupol",
+      logo: "/policies/assupol.png",
+      rating: 4.2,
+      features: ["Immediate cover", "Family benefits", "Cash back rewards"]
+    }
+  ],
+  "Mpumalanga": [
+    { 
+      value: "18000",
+      label: "150",
+      provider: "Liberty",
+      logo: "/images/providers/liberty.png",
+      rating: 4.4,
+      features: ["Premium holiday", "Family cover", "Quick claims"]
+    },
+    { 
+      value: "28000",
+      label: "220",
+      provider: "Sanlam",
+      logo: "/images/providers/sanlam.png",
+      rating: 4.5,
+      features: ["Digital process", "No medical tests", "Repatriation"]
+    },
+    { 
+      value: "38000",
+      label: "280",
+      provider: "Discovery",
+      logo: "/images/providers/discovery.png",
+      rating: 4.6,
+      features: ["Rewards program", "24/7 support", "Family benefits"]
+    },
+    { 
+      value: "23000",
+      label: "190",
+      provider: "Assupol",
+      logo: "/policies/assupol.png",
+      rating: 4.3,
+      features: ["Easy application", "Premium waiver", "Cash back benefits"]
+    }
+  ],
+  "North West": [
+    { 
+      value: "17000",
+      label: "145",
+      provider: "1Life",
+      logo: "/images/providers/1life.png",
+      rating: 4.2,
+      features: ["Easy application", "Family cover", "Quick claims"]
+    },
+    { 
+      value: "27000",
+      label: "210",
+      provider: "African Life",
+      logo: "/images/providers/africanlife.png",
+      rating: 4.1,
+      features: ["Local support", "Premium waiver", "Repatriation"]
+    },
+    { 
+      value: "37000",
+      label: "270",
+      provider: "Standard Bank",
+      logo: "/images/providers/standardbank.png",
+      rating: 4.3,
+      features: ["Banking integration", "No medical tests", "Family benefits"]
+    },
+    { 
+      value: "22000",
+      label: "185",
+      provider: "Assupol",
+      logo: "/policies/assupol.png",
+      rating: 4.2,
+      features: ["Immediate cover", "Cash back rewards", "Premium holiday"]
+    }
+  ],
+  "Northern Cape": [
+    { 
+      value: "16000",
+      label: "140",
+      provider: "FNB Life",
+      logo: "/images/providers/fnblife.png",
+      rating: 4.3,
+      features: ["eBucks rewards", "Family cover", "Digital claims"]
+    },
+    { 
+      value: "26000",
+      label: "200",
+      provider: "Momentum",
+      logo: "/images/providers/momentum.png",
+      rating: 4.2,
+      features: ["Premium waiver", "Quick claims", "Repatriation"]
+    },
+    { 
+      value: "36000",
+      label: "260",
+      provider: "Old Mutual",
+      logo: "/images/providers/oldmutual.png",
+      rating: 4.4,
+      features: ["No medical tests", "24/7 support", "Family benefits"]
+    },
+    { 
+      value: "21000",
+      label: "180",
+      provider: "Assupol",
+      logo: "/policies/assupol.png",
+      rating: 4.1,
+      features: ["Local support", "Premium holiday", "Cash back benefits"]
+    }
+  ]
 };
 
 const validateIdNumber = (idNumber) => {
