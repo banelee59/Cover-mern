@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import GetStarted from './pages/GetStarted';
+import ComparisonForm from './components/ComparisonForm';
+import FuneralParlorRegistration from './components/FuneralParlorRegistration';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/get-started" element={<GetStarted />} />
+          <Route path="/comparison" element={<ComparisonForm />} />
+          <Route path="/store-registration" element={<FuneralParlorRegistration />} />
         </Routes>
       </div>
     </Router>

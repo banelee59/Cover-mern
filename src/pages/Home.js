@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './Home.css';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="home-container">
@@ -110,6 +112,13 @@ const Home = () => {
                 </h3>
               </div>
             </div>
+
+            <button
+              onClick={() => navigate('/get-started')}
+              className="px-8 py-4 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
+            >
+              Start Your Comparison Now
+            </button>
           </div>
         </div>
       </section>
