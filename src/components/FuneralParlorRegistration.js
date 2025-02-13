@@ -9,7 +9,7 @@ const FuneralParlorRegistration = () => {
     { number: 2, title: "Contact Details" },
     { number: 3, title: "Physical Address" },
     { number: 4, title: "Operational Information" },
-    { number: 5, title: "Documentation" },
+    { number: 5, title: "Extras" },
     { number: 6, title: "Declaration" }
   ];
 
@@ -42,14 +42,26 @@ const FuneralParlorRegistration = () => {
       city: '',
       province: '',
       postalCode: '',
-      gpsCoordinates: ''
+      
     },
     
     // Operational Information
     operationalHours: {
-      weekdays: '',
-      weekends: '',
-      publicHolidays: ''
+      weekdays: {
+        start: '',
+        end: '',
+        isClosed: false
+      },
+      weekends: {
+        start: '',
+        end: '',
+        isClosed: false
+      },
+      publicHolidays: {
+        start: '',
+        end: '',
+        isClosed: false
+      }
     },
     facilities: {
       mortuary: false,
@@ -64,15 +76,23 @@ const FuneralParlorRegistration = () => {
       restrooms: false
     },
     
-    // Documentation
-    documents: {
-      businessRegistration: false,
-      taxClearance: false,
-      municipalPermit: false,
-      healthCertificate: false,
-      directorIdentity: false,
-      proofOfAddress: false,
-      bankStatement: false
+    // Extras
+    extras: {
+      draping: { selected: null, price: '' },
+      mobileToilets: { selected: null, price: '' },
+      groceryBenefit: { selected: null, price: '' },
+      mobileFridge: { selected: null, price: '' },
+      soundSystem: { selected: null, price: '' },
+      videoStreaming: { selected: null, price: '' },
+      airtimeAllowance: { selected: null, price: '' },
+      tombstone: { selected: null, price: '' },
+      catering: { selected: null, price: '' },
+      griefCounselling: { selected: null, price: '' },
+      floralArrangements: { selected: null, price: '' },
+      urns: { selected: null, price: '' },
+      funeralPrograms: { selected: null, price: '' },
+      graveLiners: { selected: null, price: '' },
+      graveDigging: { selected: null, price: '' }
     },
     
     // Declaration
@@ -118,13 +138,25 @@ const FuneralParlorRegistration = () => {
         ];
       case 4: // Operational Information
         return [
-          { name: 'weekdays', section: 'operationalHours' }
+          { name: 'weekdays.start', section: 'operationalHours' },
+          { name: 'weekdays.end', section: 'operationalHours' },
+          { name: 'weekends.start', section: 'operationalHours' },
+          { name: 'weekends.end', section: 'operationalHours' },
+          { name: 'publicHolidays.start', section: 'operationalHours' },
+          { name: 'publicHolidays.end', section: 'operationalHours' }
         ];
-      case 5: // Documentation
-        return Object.keys(formData.documents).map(doc => ({
-          name: doc,
-          section: 'documents'
-        }));
+      case 5: // Extras
+        return [
+          { name: 'hasTransport', section: 'extras.transportServices' },
+          { name: 'vehicleTypes', section: 'extras.transportServices' },
+          { name: 'vehicleCount', section: 'extras.transportServices' },
+          { name: 'serviceAreas', section: 'extras.transportServices' },
+          { name: 'maxDistance', section: 'extras.transportServices' },
+          { name: 'additionalServices', section: 'extras' },
+          { name: 'hasPartnerships', section: 'extras.partnerships' },
+          { name: 'partnerTypes', section: 'extras.partnerships' },
+          { name: 'hasCertifications', section: 'extras.certifications' }
+        ];
       case 6: // Declaration
         return [
           { name: 'agreed', section: 'declaration' },
@@ -228,13 +260,59 @@ const FuneralParlorRegistration = () => {
         break;
     }
 
+    if (section === 'extras') {
+      const hasSelection = Object.values(value.extras).some(val => val !== null);
+      if (!hasSelection) {
+        error = 'Please select Yes or No for at least one service';
+      }
+    }
+
+    if (section === 'operationalHours') {
+      const timeValue = value[section][name];
+      if (name.endsWith('.start') || name.endsWith('.end')) {
+        const [period, timeType] = name.split('.');
+        const periodTimes = value[section][period];
+        
+        if (!periodTimes.isClosed) {
+          if (!timeValue) {
+            error = `${timeType.charAt(0).toUpperCase() + timeType.slice(1)} time is required`;
+          } else if (timeType === 'end' && periodTimes.start && periodTimes.start >= timeValue) {
+            error = 'End time must be after start time';
+          }
+        }
+      }
+    }
+
     return error;
   };
 
   const handleChange = (e, section) => {
     const { name, value, type, checked } = e.target;
     
-    if (section) {
+    if (section === 'operationalHours') {
+      const [period, timeType] = name.split('.');
+      setFormData(prev => ({
+        ...prev,
+        operationalHours: {
+          ...prev.operationalHours,
+          [period]: {
+            ...prev.operationalHours[period],
+            [timeType]: value
+          }
+        }
+      }));
+
+      setTouched(prev => ({
+        ...prev,
+        [`operationalHours.${period}.${timeType}`]: true
+      }));
+
+      const error = validateField(name, formData, section);
+      setErrors(prev => ({
+        ...prev,
+        [`operationalHours.${period}.${timeType}`]: error
+      }));
+    } else if (section) {
       setFormData(prev => ({
         ...prev,
         [section]: {
@@ -242,23 +320,34 @@ const FuneralParlorRegistration = () => {
           [name]: type === 'checkbox' ? checked : value
         }
       }));
+      
+      setTouched(prev => ({
+        ...prev,
+        [section ? `${section}.${name}` : name]: true
+      }));
+
+      const error = validateField(name, formData, section);
+      setErrors(prev => ({
+        ...prev,
+        [section ? `${section}.${name}` : name]: error
+      }));
     } else {
       setFormData(prev => ({
         ...prev,
         [name]: value
       }));
-    }
 
     setTouched(prev => ({
       ...prev,
-      [section ? `${section}.${name}` : name]: true
+        [name]: true
     }));
 
-    const error = validateField(name, formData, section);
+      const error = validateField(name, formData);
     setErrors(prev => ({
       ...prev,
-      [section ? `${section}.${name}` : name]: error
+        [name]: error
     }));
+    }
   };
 
   const handleNext = () => {
@@ -761,265 +850,295 @@ const FuneralParlorRegistration = () => {
             <p className="mt-1 text-sm text-red-600">{errors['physicalAddress.postalCode']}</p>
           )}
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">GPS Coordinates</label>
-          <input
-            type="text"
-            name="gpsCoordinates"
-            value={formData.physicalAddress.gpsCoordinates}
-            onChange={(e) => handleChange(e, 'physicalAddress')}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-          />
-        </div>
+       
       </div>
+    </div>
+  );
+
+  const generateTimeOptions = () => {
+    const times = [];
+    for (let hour = 0; hour < 24; hour++) {
+      for (let minute = 0; minute < 60; minute += 30) {
+        const formattedHour = hour.toString().padStart(2, '0');
+        const formattedMinute = minute.toString().padStart(2, '0');
+        const time = `${formattedHour}:${formattedMinute}`;
+        
+        // Create 12-hour format for display
+        const displayHour = hour % 12 || 12;
+        const ampm = hour < 12 ? 'AM' : 'PM';
+        const displayTime = `${displayHour}:${formattedMinute.padStart(2, '0')} ${ampm}`;
+        
+        times.push({
+          value: time,
+          display: displayTime
+        });
+      }
+    }
+    return times;
+  };
+
+  const renderTimeSelect = (period, timeType) => (
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        {timeType === 'start' ? 'Start Time*' : 'End Time*'}
+      </label>
+      <select
+        name={`${period}.${timeType}`}
+        value={formData.operationalHours[period][timeType]}
+        onChange={(e) => handleChange(e, 'operationalHours')}
+        onBlur={() => setTouched(prev => ({ 
+          ...prev, 
+          [`operationalHours.${period}.${timeType}`]: true 
+        }))}
+        className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
+          ${errors[`operationalHours.${period}.${timeType}`] && 
+            touched[`operationalHours.${period}.${timeType}`]
+            ? 'border-red-500'
+            : 'border-gray-300'}`}
+        required={!formData.operationalHours[period].isClosed}
+        disabled={formData.operationalHours[period].isClosed}
+      >
+        <option value="">Select Time</option>
+        {generateTimeOptions().map(time => (
+          <option 
+            key={`${timeType}-${time.value}`} 
+            value={time.value}
+            selected={formData.operationalHours[period][timeType] === time.value}
+          >
+            {time.display}
+          </option>
+        ))}
+      </select>
+      {errors[`operationalHours.${period}.${timeType}`] && 
+       touched[`operationalHours.${period}.${timeType}`] && (
+        <p className="mt-1 text-sm text-red-600">
+          {errors[`operationalHours.${period}.${timeType}`]}
+        </p>
+      )}
     </div>
   );
 
   const renderOperationalInformation = () => (
     <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
       <h3 className="text-xl font-semibold text-gray-900 border-b pb-2">Operational Information</h3>
-      <div className="space-y-8">
-        <div>
-          <h4 className="text-lg font-medium text-gray-800 mb-4">Operating Hours</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Weekdays*</label>
-              <input
-                type="text"
-                name="weekdays"
-                value={formData.operationalHours.weekdays}
-                onChange={(e) => handleChange(e, 'operationalHours')}
-                onBlur={() => setTouched(prev => ({ ...prev, 'operationalHours.weekdays': true }))}
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
-                  ${errors['operationalHours.weekdays'] && touched['operationalHours.weekdays'] 
-                    ? 'border-red-500' 
-                    : 'border-gray-300'}`}
-                placeholder="e.g., 08:00 - 17:00"
-                required
-              />
-              {errors['operationalHours.weekdays'] && touched['operationalHours.weekdays'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['operationalHours.weekdays']}</p>
-              )}
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Weekends</label>
-              <input
-                type="text"
-                name="weekends"
-                value={formData.operationalHours.weekends}
-                onChange={(e) => handleChange(e, 'operationalHours')}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-              />
-            </div>
+      
+      <div className="space-y-6">
+        {/* Weekdays */}
+        <div className="space-y-4">
+          <h4 className="text-lg font-medium text-gray-800">Weekdays Operating Hours</h4>
+          <div className="flex items-center mb-4">
+            <input
+              type="checkbox"
+              id="weekdaysClosed"
+              checked={formData.operationalHours.weekdays.isClosed}
+              onChange={(e) => {
+                setFormData(prev => ({
+                  ...prev,
+                  operationalHours: {
+                    ...prev.operationalHours,
+                    weekdays: {
+                      ...prev.operationalHours.weekdays,
+                      isClosed: e.target.checked,
+                      start: '',
+                      end: ''
+                    }
+                  }
+                }));
+              }}
+              className="w-4 h-4 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]"
+            />
+            <label htmlFor="weekdaysClosed" className="ml-2 text-sm text-gray-700">Closed on Weekdays</label>
           </div>
+          {!formData.operationalHours.weekdays.isClosed && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {renderTimeSelect('weekdays', 'start')}
+              {renderTimeSelect('weekdays', 'end')}
+            </div>
+          )}
         </div>
 
-        <div>
-          <h4 className="text-lg font-medium text-gray-800 mb-4">Facilities</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="mortuary"
-                  checked={formData.facilities.mortuary}
-                  onChange={(e) => handleChange(e, 'facilities')}
-                  onBlur={() => setTouched(prev => ({ ...prev, 'facilities.mortuary': true }))}
-                  className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                    ${errors['facilities.mortuary'] && touched['facilities.mortuary'] 
-                      ? 'border-red-500' 
-                      : ''}`}
-                />
-                <label className="ml-2 text-sm text-gray-700">Mortuary</label>
-              </div>
-              {errors['facilities.mortuary'] && touched['facilities.mortuary'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['facilities.mortuary']}</p>
-              )}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="storageFacility"
-                  checked={formData.facilities.storageFacility}
-                  onChange={(e) => handleChange(e, 'facilities')}
-                  onBlur={() => setTouched(prev => ({ ...prev, 'facilities.storageFacility': true }))}
-                  className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                    ${errors['facilities.storageFacility'] && touched['facilities.storageFacility'] 
-                      ? 'border-red-500' 
-                      : ''}`}
-                />
-                <label className="ml-2 text-sm text-gray-700">Storage Facility</label>
-              </div>
-              {errors['facilities.storageFacility'] && touched['facilities.storageFacility'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['facilities.storageFacility']}</p>
-              )}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="refrigeration"
-                  checked={formData.facilities.refrigeration}
-                  onChange={(e) => handleChange(e, 'facilities')}
-                  onBlur={() => setTouched(prev => ({ ...prev, 'facilities.refrigeration': true }))}
-                  className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                    ${errors['facilities.refrigeration'] && touched['facilities.refrigeration'] 
-                      ? 'border-red-500' 
-                      : ''}`}
-                />
-                <label className="ml-2 text-sm text-gray-700">Refrigeration</label>
-              </div>
-              {errors['facilities.refrigeration'] && touched['facilities.refrigeration'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['facilities.refrigeration']}</p>
-              )}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="chapel"
-                  checked={formData.facilities.chapel}
-                  onChange={(e) => handleChange(e, 'facilities')}
-                  onBlur={() => setTouched(prev => ({ ...prev, 'facilities.chapel': true }))}
-                  className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                    ${errors['facilities.chapel'] && touched['facilities.chapel'] 
-                      ? 'border-red-500' 
-                      : ''}`}
-                />
-                <label className="ml-2 text-sm text-gray-700">Chapel</label>
-              </div>
-              {errors['facilities.chapel'] && touched['facilities.chapel'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['facilities.chapel']}</p>
-              )}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="chapelCapacity"
-                  checked={formData.facilities.chapelCapacity}
-                  onChange={(e) => handleChange(e, 'facilities')}
-                  onBlur={() => setTouched(prev => ({ ...prev, 'facilities.chapelCapacity': true }))}
-                  className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                    ${errors['facilities.chapelCapacity'] && touched['facilities.chapelCapacity'] 
-                      ? 'border-red-500' 
-                      : ''}`}
-                />
-                <label className="ml-2 text-sm text-gray-700">Chapel Capacity</label>
-              </div>
-              {errors['facilities.chapelCapacity'] && touched['facilities.chapelCapacity'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['facilities.chapelCapacity']}</p>
-              )}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="parking"
-                  checked={formData.facilities.parking}
-                  onChange={(e) => handleChange(e, 'facilities')}
-                  onBlur={() => setTouched(prev => ({ ...prev, 'facilities.parking': true }))}
-                  className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                    ${errors['facilities.parking'] && touched['facilities.parking'] 
-                      ? 'border-red-500' 
-                      : ''}`}
-                />
-                <label className="ml-2 text-sm text-gray-700">Parking</label>
-              </div>
-              {errors['facilities.parking'] && touched['facilities.parking'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['facilities.parking']}</p>
-              )}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="parkingCapacity"
-                  checked={formData.facilities.parkingCapacity}
-                  onChange={(e) => handleChange(e, 'facilities')}
-                  onBlur={() => setTouched(prev => ({ ...prev, 'facilities.parkingCapacity': true }))}
-                  className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                    ${errors['facilities.parkingCapacity'] && touched['facilities.parkingCapacity'] 
-                      ? 'border-red-500' 
-                      : ''}`}
-                />
-                <label className="ml-2 text-sm text-gray-700">Parking Capacity</label>
-              </div>
-              {errors['facilities.parkingCapacity'] && touched['facilities.parkingCapacity'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['facilities.parkingCapacity']}</p>
-              )}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="disabledAccess"
-                  checked={formData.facilities.disabledAccess}
-                  onChange={(e) => handleChange(e, 'facilities')}
-                  onBlur={() => setTouched(prev => ({ ...prev, 'facilities.disabledAccess': true }))}
-                  className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                    ${errors['facilities.disabledAccess'] && touched['facilities.disabledAccess'] 
-                      ? 'border-red-500' 
-                      : ''}`}
-                />
-                <label className="ml-2 text-sm text-gray-700">Disabled Access</label>
-              </div>
-              {errors['facilities.disabledAccess'] && touched['facilities.disabledAccess'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['facilities.disabledAccess']}</p>
-              )}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="kitchen"
-                  checked={formData.facilities.kitchen}
-                  onChange={(e) => handleChange(e, 'facilities')}
-                  onBlur={() => setTouched(prev => ({ ...prev, 'facilities.kitchen': true }))}
-                  className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                    ${errors['facilities.kitchen'] && touched['facilities.kitchen'] 
-                      ? 'border-red-500' 
-                      : ''}`}
-                />
-                <label className="ml-2 text-sm text-gray-700">Kitchen</label>
-              </div>
-              {errors['facilities.kitchen'] && touched['facilities.kitchen'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['facilities.kitchen']}</p>
-              )}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="restrooms"
-                  checked={formData.facilities.restrooms}
-                  onChange={(e) => handleChange(e, 'facilities')}
-                  onBlur={() => setTouched(prev => ({ ...prev, 'facilities.restrooms': true }))}
-                  className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                    ${errors['facilities.restrooms'] && touched['facilities.restrooms'] 
-                      ? 'border-red-500' 
-                      : ''}`}
-                />
-                <label className="ml-2 text-sm text-gray-700">Restrooms</label>
-              </div>
-              {errors['facilities.restrooms'] && touched['facilities.restrooms'] && (
-                <p className="mt-1 text-sm text-red-600">{errors['facilities.restrooms']}</p>
-              )}
-            </div>
+        {/* Weekends */}
+        <div className="space-y-4">
+          <h4 className="text-lg font-medium text-gray-800">Weekend Operating Hours</h4>
+          <div className="flex items-center mb-4">
+            <input
+              type="checkbox"
+              id="weekendsClosed"
+              checked={formData.operationalHours.weekends.isClosed}
+              onChange={(e) => {
+                setFormData(prev => ({
+                  ...prev,
+                  operationalHours: {
+                    ...prev.operationalHours,
+                    weekends: {
+                      ...prev.operationalHours.weekends,
+                      isClosed: e.target.checked,
+                      start: '',
+                      end: ''
+                    }
+                  }
+                }));
+              }}
+              className="w-4 h-4 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]"
+            />
+            <label htmlFor="weekendsClosed" className="ml-2 text-sm text-gray-700">Closed on Weekends</label>
           </div>
+          {!formData.operationalHours.weekends.isClosed && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {renderTimeSelect('weekends', 'start')}
+              {renderTimeSelect('weekends', 'end')}
+            </div>
+          )}
+        </div>
+
+        {/* Public Holidays */}
+        <div className="space-y-4">
+          <h4 className="text-lg font-medium text-gray-800">Public Holiday Operating Hours</h4>
+          <div className="flex items-center mb-4">
+            <input
+              type="checkbox"
+              id="holidaysClosed"
+              checked={formData.operationalHours.publicHolidays.isClosed}
+              onChange={(e) => {
+                setFormData(prev => ({
+                  ...prev,
+                  operationalHours: {
+                    ...prev.operationalHours,
+                    publicHolidays: {
+                      ...prev.operationalHours.publicHolidays,
+                      isClosed: e.target.checked,
+                      start: '',
+                      end: ''
+                    }
+                  }
+                }));
+              }}
+              className="w-4 h-4 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]"
+            />
+            <label htmlFor="holidaysClosed" className="ml-2 text-sm text-gray-700">Closed on Public Holidays</label>
+          </div>
+          {!formData.operationalHours.publicHolidays.isClosed && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {renderTimeSelect('publicHolidays', 'start')}
+              {renderTimeSelect('publicHolidays', 'end')}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 
-  const renderDocumentation = () => (
+  const renderExtras = () => (
     <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
-      <h3 className="text-xl font-semibold text-gray-900 border-b pb-2">Required Documentation</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          {Object.keys(formData.documents).map(doc => (
-            <div key={doc} className="flex items-center">
-              <input
-                type="checkbox"
-                name={doc}
-                checked={formData.documents[doc]}
-                onChange={(e) => handleChange(e, 'documents')}
-                onBlur={() => setTouched(prev => ({ ...prev, 'documents.doc': true }))}
-                className={`w-5 h-5 text-[#00c2ff] border-gray-300 rounded focus:ring-[#00c2ff]
-                  ${errors['documents.doc'] && touched['documents.doc'] 
-                    ? 'border-red-500' 
-                    : ''}`}
-              />
-              <label className="ml-2 text-sm text-gray-700">
-                {doc.replace(/([A-Z])/g, ' $1').trim()}*
-              </label>
-            </div>
-          ))}
-        </div>
+      <h3 className="text-xl font-semibold text-gray-900 border-b pb-2">Extra Service Offerings</h3>
+      
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr className="bg-gray-50">
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b border-gray-200">Service</th>
+              <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">Yes</th>
+              <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">No</th>
+              <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">Price (R)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { name: 'draping', label: 'Draping' },
+              { name: 'mobileToilets', label: 'Mobile Toilets' },
+              { name: 'groceryBenefit', label: 'Grocery Benefit' },
+              { name: 'mobileFridge', label: 'Mobile Fridge' },
+              { name: 'soundSystem', label: 'Sound System' },
+              { name: 'videoStreaming', label: 'Video Streaming' },
+              { name: 'airtimeAllowance', label: 'Airtime Allowance' },
+              { name: 'tombstone', label: 'Tombstone' },
+              { name: 'catering', label: 'Catering' },
+              { name: 'griefCounselling', label: 'Grief Counselling' },
+              { name: 'floralArrangements', label: 'Floral Arrangements (Flowers & Wreaths)' },
+              { name: 'urns', label: 'Urns' },
+              { name: 'funeralPrograms', label: 'Funeral Programs and Stationery' },
+              { name: 'graveLiners', label: 'Grave Liners and Burial Vaults' },
+              { name: 'graveDigging', label: 'Grave Digging' },
+            ].map((service) => (
+              <tr key={service.name} className="hover:bg-gray-50">
+                <td className="px-4 py-2 text-sm text-gray-700 border-b border-gray-200">{service.label}</td>
+                <td className="px-4 py-2 text-center border-b border-gray-200">
+                  <input
+                    type="radio"
+                    name={`extras.${service.name}`}
+                    checked={formData.extras[service.name].selected === true}
+                    onChange={() => {
+                      setFormData(prev => ({
+                        ...prev,
+                        extras: {
+                          ...prev.extras,
+                          [service.name]: {
+                            ...prev.extras[service.name],
+                            selected: true
+                          }
+                        }
+                      }));
+                    }}
+                    className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
+                  />
+                </td>
+                <td className="px-4 py-2 text-center border-b border-gray-200">
+                  <input
+                    type="radio"
+                    name={`extras.${service.name}`}
+                    checked={formData.extras[service.name].selected === false}
+                    onChange={() => {
+                      setFormData(prev => ({
+                        ...prev,
+                        extras: {
+                          ...prev.extras,
+                          [service.name]: {
+                            ...prev.extras[service.name],
+                            selected: false,
+                            price: '' // Clear price when service is not selected
+                          }
+                        }
+                      }));
+                    }}
+                    className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
+                  />
+                </td>
+                <td className="px-4 py-2 text-center border-b border-gray-200">
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="0.00"
+                    value={formData.extras[service.name].price}
+                    onChange={(e) => {
+                      setFormData(prev => ({
+                        ...prev,
+                        extras: {
+                          ...prev.extras,
+                          [service.name]: {
+                            ...prev.extras[service.name],
+                            price: e.target.value
+                          }
+                        }
+                      }));
+                    }}
+                    disabled={formData.extras[service.name].selected !== true}
+                    className={`w-24 px-2 py-1 text-right border rounded-md
+                      ${formData.extras[service.name].selected === true 
+                        ? 'border-gray-300 focus:ring-[#00c2ff] focus:border-[#00c2ff]' 
+                        : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+      
+      {/* Error message if no selections made */}
+      {errors.extras && touched.extras && (
+        <p className="mt-2 text-sm text-red-600">{errors.extras}</p>
+      )}
     </div>
   );
 
@@ -1137,7 +1256,7 @@ const FuneralParlorRegistration = () => {
             {currentStep === 2 && renderContactDetails()}
             {currentStep === 3 && renderPhysicalAddress()}
             {currentStep === 4 && renderOperationalInformation()}
-            {currentStep === 5 && renderDocumentation()}
+            {currentStep === 5 && renderExtras()}
             {currentStep === 6 && renderDeclaration()}
 
             <div className="flex justify-between pt-6">
