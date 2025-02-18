@@ -1,22 +1,29 @@
 const FormSubmission = require('../models/FormSubmission');
+const FuneralParlour = require('../models/FuneralParlour');
 
-// @desc    Submit form data
-// @route   POST /api/forms
-// @access  Public
-const submitForm = async (req, res) => {
+const createFuneralParlour = async (req, res) => {
   try {
-    const formData = req.body;
-    const submission = await FormSubmission.create(formData);
-    
-    res.status(201).json({
-      success: true,
-      data: submission
-    });
+      // Extract funeral parlour data from the request body
+      const funeralParlourData = req.body;
+
+      // Create a new instance of FuneralParlour using the data
+      const newFuneralParlour = new FuneralParlour(funeralParlourData);
+
+      // Save the funeral parlour data to MongoDB
+      await newFuneralParlour.save();
+
+      // Send response back with success message
+      res.status(201).json({
+          message: "Funeral Parlour saved successfully!",
+          funeralParlour: newFuneralParlour
+      });
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      error: error.message
-    });
+      // Catch and handle errors, and send a response with error message
+      console.error("Error saving funeral parlour:", error);
+      res.status(500).json({
+          message: "Failed to save funeral parlour.",
+          error: error.message
+      });
   }
 };
 
@@ -41,6 +48,6 @@ const getFormSubmissions = async (req, res) => {
 };
 
 module.exports = {
-  submitForm,
+  createFuneralParlour,
   getFormSubmissions
 }; 

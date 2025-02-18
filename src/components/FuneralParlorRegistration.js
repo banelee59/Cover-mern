@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useFormSubmission from '../hooks/useFormSubmission';
 
 const FuneralParlorRegistration = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -108,6 +109,20 @@ const FuneralParlorRegistration = () => {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
 
+  const PROVINCES = [
+    'Eastern Cape',
+    'Free State',
+    'Gauteng',
+    'KwaZulu-Natal',
+    'Limpopo',
+    'Mpumalanga',
+    'Northern Cape',
+    'North West',
+    'Western Cape'
+  ];
+
+  const { submitFuneralParlor, loading, error, success } = useFormSubmission();
+
   const getCurrentStepFields = () => {
     switch (currentStep) {
       case 1: // Business Details
@@ -147,15 +162,21 @@ const FuneralParlorRegistration = () => {
         ];
       case 5: // Extras
         return [
-          { name: 'hasTransport', section: 'extras.transportServices' },
-          { name: 'vehicleTypes', section: 'extras.transportServices' },
-          { name: 'vehicleCount', section: 'extras.transportServices' },
-          { name: 'serviceAreas', section: 'extras.transportServices' },
-          { name: 'maxDistance', section: 'extras.transportServices' },
-          { name: 'additionalServices', section: 'extras' },
-          { name: 'hasPartnerships', section: 'extras.partnerships' },
-          { name: 'partnerTypes', section: 'extras.partnerships' },
-          { name: 'hasCertifications', section: 'extras.certifications' }
+          { name: 'draping', section: 'extras' },
+          { name: 'mobileToilets', section: 'extras' },
+          { name: 'groceryBenefit', section: 'extras' },
+          { name: 'mobileFridge', section: 'extras' },
+          { name: 'soundSystem', section: 'extras' },
+          { name: 'videoStreaming', section: 'extras' },
+          { name: 'airtimeAllowance', section: 'extras' },
+          { name: 'tombstone', section: 'extras' },
+          { name: 'catering', section: 'extras' },
+          { name: 'griefCounselling', section: 'extras' },
+          { name: 'floralArrangements', section: 'extras' },
+          { name: 'urns', section: 'extras' },
+          { name: 'funeralPrograms', section: 'extras' },
+          { name: 'graveLiners', section: 'extras' },
+          { name: 'graveDigging', section: 'extras' }
         ];
       case 6: // Declaration
         return [
@@ -402,22 +423,14 @@ const FuneralParlorRegistration = () => {
     }
 
     try {
-      const response = await fetch('/api/parlors/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      
-      if (response.ok) {
-        alert('Registration successful!');
-      } else {
-        alert('Registration failed. Please try again.');
+      const result = await submitFuneralParlor(formData);
+      if (result.success) {
+        alert(result.message);
+        // Optional: Reset form or redirect
       }
     } catch (error) {
       console.error('Registration error:', error);
-      alert('An error occurred. Please try again.');
+      alert(error.error);
     }
   };
 
@@ -816,18 +829,24 @@ const FuneralParlorRegistration = () => {
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Province*</label>
-          <input
-            type="text"
+          <select
             name="province"
             value={formData.physicalAddress.province}
             onChange={(e) => handleChange(e, 'physicalAddress')}
             onBlur={() => setTouched(prev => ({ ...prev, 'physicalAddress.province': true }))}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
-              ${errors['physicalAddress.province'] && touched['physicalAddress.province'] 
-                ? 'border-red-500' 
+              ${errors['physicalAddress.province'] && touched['physicalAddress.province']
+                ? 'border-red-500'
                 : 'border-gray-300'}`}
             required
-          />
+          >
+            <option value="">Select Province</option>
+            {PROVINCES.map(province => (
+              <option key={province} value={province}>
+                {province}
+              </option>
+            ))}
+          </select>
           {errors['physicalAddress.province'] && touched['physicalAddress.province'] && (
             <p className="mt-1 text-sm text-red-600">{errors['physicalAddress.province']}</p>
           )}

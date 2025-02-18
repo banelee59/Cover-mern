@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { submitForm, getFormSubmissions } = require('../controllers/formController');
+const { createFuneralParlour, getFormSubmissions } = require('../controllers/formController');
 
-router.post('/', submitForm);
+router.post('/register-funeral-parlour', createFuneralParlour);
 router.get('/', getFormSubmissions);
 
 module.exports = router; 
