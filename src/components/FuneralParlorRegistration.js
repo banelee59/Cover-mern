@@ -1178,7 +1178,7 @@ const FuneralParlorRegistration = () => {
                 : ''}`}
           />
           <label className="ml-2 text-sm text-gray-700">
-            I agree to the terms and conditions of the Funeral Parlor Membership Application.
+            I agree to the terms and conditions of the Funeral Parlour Membership Application.
           </label>
         </div>
         {errors['declaration.agreed'] && touched['declaration.agreed'] && (
@@ -1265,7 +1265,7 @@ const FuneralParlorRegistration = () => {
       <div className="max-w-5xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-            Funeral Parlor Membership Application
+            Funeral Parlour Membership Application
           </h2>
 
           <ProgressBar />

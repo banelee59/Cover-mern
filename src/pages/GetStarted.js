@@ -12,7 +12,7 @@ const GetStarted = () => {
             Choose Your Path
           </h2>
           <p className="text-gray-600 mb-8">
-            Select whether you want to compare funeral policies or register your funeral parlor
+            Select whether you want to compare funeral policies or register your funeral parlour
           </p>
         </div>
 
@@ -74,10 +74,10 @@ const GetStarted = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-900">
-                Register Your Funeral Parlor
+                Register Your Funeral Parlour
               </h3>
               <p className="text-gray-600">
-                Register your funeral parlor business and reach more customers through our platform
+                Register your funeral parlour business and reach more customers through our platform
               </p>
               <button
                 className="mt-4 px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
