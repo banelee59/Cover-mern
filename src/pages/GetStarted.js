@@ -5,7 +5,7 @@ const GetStarted = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 flex flex-col flex items-center justify-center px-4">
       <div className="max-w-4xl w-full space-y-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">

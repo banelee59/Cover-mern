@@ -1,86 +1,81 @@
 import React from 'react';
-import './Contact.css';
 
 const Contact = () => {
   return (
-    <div className="contact-container">
-    
-        
-      
-
-      <div className="contact-content py-12">
-        <div className="max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 flex flex-col">
+      {/* Contact Form Section */}
+      <div className="flex-grow py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative">
             {/* Form Section */}
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h2 className="text-3xl font-bold mb-2 text-gray-800">Send us a Message</h2>
-              <form className="space-y-5">
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="form-group">
-                    <input 
-                      type="text" 
-                      placeholder="First Name *" 
-                      required 
-                      className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-1 focus:ring-[#00c2ff]"
+            <div className="bg-white p-8 rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105">
+              <h2 className="text-4xl font-bold mb-6 text-gray-800">Send us a Message</h2>
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="First Name *"
+                      required
+                      className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-2 focus:ring-[#00c2ff] transition-all"
                     />
                   </div>
-                  <div className="form-group">
-                    <input 
-                      type="text" 
-                      placeholder="Last Name *" 
-                      required 
-                      className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-1 focus:ring-[#00c2ff]"
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Last Name *"
+                      required
+                      className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-2 focus:ring-[#00c2ff] transition-all"
                     />
                   </div>
                 </div>
-                
-                <div className="form-group">
-                  <input 
-                    type="email" 
-                    placeholder="Email Address *" 
-                    required 
-                    className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-1 focus:ring-[#00c2ff]"
+
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Email Address *"
+                    required
+                    className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-2 focus:ring-[#00c2ff] transition-all"
                   />
                 </div>
-                
-                <div className="form-group">
-                  <input 
-                    type="tel" 
-                    placeholder="Phone Number *" 
-                    required 
-                    className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-1 focus:ring-[#00c2ff]"
+
+                <div>
+                  <input
+                    type="tel"
+                    placeholder="Phone Number *"
+                    required
+                    className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-2 focus:ring-[#00c2ff] transition-all"
                   />
                 </div>
-                
-                <div className="form-group">
-                  <textarea 
-                    placeholder="Your Message *" 
+
+                <div>
+                  <textarea
+                    placeholder="Your Message *"
                     rows="5"
-                    required 
-                    className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-1 focus:ring-[#00c2ff] resize-none"
+                    required
+                    className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-2 focus:ring-[#00c2ff] resize-none transition-all"
                   ></textarea>
                 </div>
-                
-                <button 
-                  type="submit" 
-                  className="w-full py-3 bg-[#00c2ff] text-white rounded-lg hover:bg-[#00b3eb] transition-colors font-medium"
-                >
-                  Send Message
-                </button>
+
+                <div className="mt-4">
+                  <button
+                    type="submit"
+                    className="w-full py-3 bg-gradient-to-r from-[#00c2ff] to-[#0078ff] text-white rounded-lg hover:from-[#00b3eb] hover:to-[#0066cc] transition-all font-medium transform hover:scale-105"
+                  >
+                    Send Message
+                  </button>
+                </div>
               </form>
             </div>
 
-            
-
-              {/* Image positioned at bottom right */}
-              <div className="absolute bottom-0 right-0">
-                <img 
-                  src="/images/contact.png" 
-                  alt="Customer Support" 
-                  className="w-96 h-auto object-contain"
-                />
-              </div>
-            
+            {/* Image Section */}
+            <div className="hidden lg:block">
+              <img
+                src="/images/contact.png"
+                alt="Customer Support"
+                className="w-full h-auto object-contain transform transition-all duration-300 hover:scale-110"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -122,4 +117,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;
