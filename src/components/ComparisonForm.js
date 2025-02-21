@@ -1522,12 +1522,12 @@ const ComparisonForm = () => {
       ) : (
         <div className="min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 flex flex-col py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto relative">
-            {/* Turtle Image */}
-            <div className="absolute -left-32 top-40">
+            {/* Turtle Image - Adjusted position */}
+            <div className="absolute -left-[100%] top-40">
               <img
                 src="/images/greeny.png"
                 alt="Greeny Turtle"
-                className="w-44 h-44 object-contain opacity-90"
+                className="w-64 h-44 object-contain opacity-90"
               />
             </div>
 
