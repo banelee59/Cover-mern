@@ -66,23 +66,7 @@ const Home = () => {
 
       {/* Hero Section */}
       <section className="bg-white py-4 relative">
-        {/* Left blue circle decoration */}
-        <div className="absolute left-0 top-1/2 transform -translate-y-1/2">
-          <img 
-            src="/images/full.png" 
-            alt="Decoration" 
-            className="w-48 h-48 object-contain opacity-80"
-          />
-        </div>
-
-        {/* Right blue circle decoration */}
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
-          <img 
-            src="/images/full.png" 
-            alt="Decoration" 
-            className="w-48 h-48 object-contain opacity-80"
-          />
-        </div>
+      
 
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center max-w-7xl mx-auto relative z-10">
