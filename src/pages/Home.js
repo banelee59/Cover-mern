@@ -72,21 +72,22 @@ const Home = () => {
           backgroundImage: 'url("/images/home-image1.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          minHeight: 'calc(100vh - 70px)',
+          minHeight: 'calc(100vh - 64px)',
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-10"></div>
-        <div className="container h-full flex items-center justify-center mx-auto px-4 relative">
-          <div className="flex items-end justify-between w-full relative z-10">
-            <div className='w-5/12'>
-              <div className='w-fit' >
-                <h1 className="text-4xl md:text-5xl font-bold text-white">
+        <div className="container h-full flex items-center justify-center mx-auto px-4 relative py-12 md:py-0">
+          <div className="flex flex-col md:flex-row md:items-end justify-between w-full relative z-10 gap-8">
+            <div className='w-full md:w-5/12'>
+              <div className='w-fit'>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center md:text-left">
                   Cover Up Quotes
                 </h1>
-                <img src="/images/underline.png" alt="Hero Image" className="top-4 mx-auto w-[370px] h-auto object-contain" />
+                <img src="/images/underline.png" alt="Hero Image" className="top-4 mx-auto w-full max-w-[370px] h-auto object-contain" />
               </div>
-              <p className="text-white text-xl mt-4">
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content
+              <p className="text-white text-lg md:text-xl mt-4 text-center md:text-left">
+                Cover<span>Up</span> secures your family with the right burial
+                plan when it matters most. Offers Simplified Burial Planning in The Palm of Your Hand
               </p>
             </div>
             <div className='bg-[#00c2ff] items-center rounded-full border-white border-2 py-2 flex px-2'>
@@ -100,7 +101,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <h4 className='text-white font-bold mb-1 text-2xl'>Compare funeral parlour quotations</h4>
+              <h4 className='text-white font-bold mb-0 text-2xl'>Plan Ahead, Live Without Worry</h4>
             </div>
           </div>
         </div>
@@ -116,7 +117,7 @@ const Home = () => {
         {/* Importance Section */}
         <section className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
+            <div className="text-center mb-0">
 
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800 text-left">
                 IMPORTANCE OF BURIAL SCHEMES

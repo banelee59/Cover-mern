@@ -12,6 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .contact-info {
@@ -22,20 +23,22 @@
 .navbar {
   background: white;
   padding: 15px 0;
-  box-shadow: none;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
+  left: 0;
   z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .logo {
   display: flex;
   align-items: center;
-  text-decoration: none;
+  z-index: 1001;
 }
 
 .logo-image {
-  height: 40px;  /* Adjust this value based on your logo size */
+  height: 40px;
   width: auto;
 }
 
@@ -43,12 +46,15 @@
   display: flex;
   gap: 30px;
   align-items: center;
+  margin-left: auto;
 }
 
 .nav-links a {
   color: #333;
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -68,16 +74,207 @@
   background: #2980b9;
 }
 
-@media (max-width: 768px) {
+/* Burger Menu Styles */
+.burger-menu {
+  display: none;
+  width: 30px;
+  height: 20px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 0;
+}
+
+.burger-bar {
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+
+.burger-bar::before,
+.burger-bar::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.burger-bar::before {
+  top: -8px;
+}
+
+.burger-bar::after {
+  top: 8px;
+}
+
+/* Open state for burger menu */
+.burger-bar.open {
+  background-color: transparent;
+}
+
+.burger-bar.open::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.burger-bar.open::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  padding-top: 80px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 15px 20px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  transition: color 0.3s ease;
+  font-size: 16px;
+}
+
+.mobile-menu a:hover {
+  color: #00c2ff;
+}
+
+.mobile-menu .mobile-cta {
+  background-color: #00c2ff;
+  color: white;
+  margin: 20px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.mobile-menu .mobile-cta:hover {
+  background-color: #00b3eb;
+  color: white;
+}
+
+/* Screen-specific styles */
+/* Large Screens (Desktops) */
+@media (min-width: 1280px) {
+  .container {
+    padding: 0 40px;
+  }
+  
+  .nav-links {
+    gap: 40px;
+  }
+  
+  .logo-image {
+    height: 45px;
+  }
+}
+
+/* Medium Screens (Laptops) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .container {
+    padding: 0 30px;
+  }
+  
+  .nav-links {
+    gap: 30px;
+  }
+}
+
+/* Small Screens (Tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 0 20px;
+  }
+  
   .nav-links {
     gap: 20px;
   }
   
-  .quote-button {
-    padding: 8px 16px;
+  .nav-links a {
+    font-size: 14px;
+  }
+}
+
+/* Mobile Screens */
+@media (max-width: 767px) {
+  .nav-links {
+    display: none;
+  }
+
+  .burger-menu {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .logo-image {
+    height: 32px;
+  }
+}
+
+/* Add smooth transitions */
+.nav-links a,
+.mobile-menu a,
+.burger-menu,
+.logo-image {
+  transition: all 0.3s ease;
+}
+
+/* Ensure content below navbar is properly spaced */
+body {
+  padding-top: 70px;
+}
+
+/* Fix for very small screens */
+@media (max-width: 320px) {
+  .container {
+    padding: 0 10px;
   }
   
   .logo-image {
-    height: 32px;  /* Slightly smaller on mobile */
+    height: 28px;
+  }
+}
+
+/* Fix for extra large screens */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px;
+  }
+  
+  .nav-links {
+    gap: 50px;
   }
 } 
