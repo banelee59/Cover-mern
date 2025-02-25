@@ -83,15 +83,18 @@ const Home = () => {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center md:text-left">
                   Cover Up Quotes
                 </h1>
-                <img src="/images/underline.png" alt="Hero Image" className="top-4 mx-auto w-full max-w-[370px] h-auto object-contain" />
+                <img 
+                  src="/images/underline.png" 
+                  alt="Hero Image" 
+                  className="top-4 mx-auto w-full max-w-[370px] h-auto object-contain brightness-0 invert"
+                />
               </div>
               <p className="text-white text-lg md:text-xl mt-4 text-center md:text-left">
                 Cover<span>Up</span> secures your family with the right burial
                 plan when it matters most. Offers Simplified Burial Planning in The Palm of Your Hand
               </p>
             </div>
-            <div className='bg-[#00c2ff] items-center rounded-full border-white border-2 py-2 flex px-2'>
-
+            <div className='bg-[#00c2ff] items-center rounded-full border-white border-2 py-2 flex px-2 cursor-pointer' onClick={() => navigate('/get-started')}>
               <div className='mr-[74px] relative'>
                 <div className='bg-white size-20 flex items-center justify-center rounded-full -top-[40px] -left-[16px] absolute'>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 ml-1 text-[#00c2ff]" viewBox="0 0 24 24" fill="currentColor">
@@ -100,13 +103,15 @@ const Home = () => {
                   </svg>
                 </div>
               </div>
-
               <h4 className='text-white font-bold mb-0 text-2xl'>Plan Ahead, Live Without Worry</h4>
             </div>
           </div>
         </div>
 
-        <div className='absolute -bottom-10 rounded-lg border-white border-2 px-4 py-5 bg-[#00b3eb]'>
+        <div 
+          className='absolute -bottom-10 rounded-lg border-white border-2 px-4 py-5 bg-[#00b3eb] cursor-pointer hover:bg-[#00c2ff] transition-colors'
+          onClick={() => navigate('/get-started')}
+        >
           <h3 className='text-3xl text-white font-bold mb-1'>Compare funeral parlour quotations</h3>
         </div>
 

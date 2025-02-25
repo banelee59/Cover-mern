@@ -418,7 +418,7 @@ const ComparisonForm = () => {
     { number: 3, title: "Select extras Details" },
     { number: 4, title: "Cover Options" },
     { number: 5, title: "Confirmation" },
-    { number: 5, title: "" },
+    
   ];
 
   const handleChange = (e) => {
