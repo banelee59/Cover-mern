@@ -1519,17 +1519,21 @@ const ComparisonForm = () => {
       {isSubmitted ? (
         <SuccessView />
       ) : (
-        <div className="min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 flex flex-col py-12 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto w-full">
-            {/* Turtle Image - Adjusted position */}
-            <div className="absolute -left-[100%] top-40">
-              <img
-                src="/images/greeny.png"
-                alt="Greeny Turtle"
-                className="w-64 h-44 object-contain opacity-90"
-              />
-            </div>
-
+        <div 
+          className="min-h-screen flex flex-col py-12 px-4 sm:px-6 lg:px-8 relative"
+          style={{
+            backgroundImage: 'url("/images/greeny.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed',
+          }}
+        >
+          {/* Lighter overlay to make the background more visible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-50/70 to-indigo-50/70"></div>
+          
+          {/* Main content container */}
+          <div className="max-w-3xl mx-auto w-full relative z-10">
             {/* Progress Steps */}
             <div className="mb-8 w-full">
               <div className="flex justify-between items-center">
@@ -1566,7 +1570,7 @@ const ComparisonForm = () => {
             </div>
 
             {/* Form Container */}
-            <div className="bg-white rounded-xl shadow-lg p-8 w-full">
+            <div className="bg-white/90 rounded-xl shadow-lg p-8 w-full backdrop-blur-sm">
               <form onSubmit={handleSubmit} className="space-y-6 w-full">
                 {renderFormStep()}
 
