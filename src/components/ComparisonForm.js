@@ -415,10 +415,9 @@ const ComparisonForm = () => {
   const steps = [
     { number: 1, title: "Profile Details" },
     { number: 2, title: "Policy Details" },
-    { number: 3, title: "Select extras Details" },
+    { number: 3, title: "Extras" },
     { number: 4, title: "Cover Options" },
     { number: 5, title: "Confirmation" },
-    
   ];
 
   const handleChange = (e) => {
@@ -505,7 +504,7 @@ const ComparisonForm = () => {
       if (currentStep < totalSteps) {
         setCurrentStep((prev) => prev + 1);
         console.log("Moving to step:", currentStep + 1);
-        console.log("Step title:", steps[currentStep].title);
+        
       }
     } else {
       console.log("Validation failed for step:", currentStep);
@@ -1521,7 +1520,7 @@ const ComparisonForm = () => {
         <SuccessView />
       ) : (
         <div className="min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 flex flex-col py-12 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto relative">
+          <div className="max-w-3xl mx-auto w-full">
             {/* Turtle Image - Adjusted position */}
             <div className="absolute -left-[100%] top-40">
               <img
@@ -1532,7 +1531,7 @@ const ComparisonForm = () => {
             </div>
 
             {/* Progress Steps */}
-            <div className="mb-8">
+            <div className="mb-8 w-full">
               <div className="flex justify-between items-center">
                 {steps.map((step, index) => (
                   <div key={step.number} className="flex-1 relative">
@@ -1566,8 +1565,9 @@ const ComparisonForm = () => {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Form Container */}
+            <div className="bg-white rounded-xl shadow-lg p-8 w-full">
+              <form onSubmit={handleSubmit} className="space-y-6 w-full">
                 {renderFormStep()}
 
                 {/* Navigation buttons */}
