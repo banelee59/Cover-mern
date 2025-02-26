@@ -495,7 +495,7 @@ const ComparisonForm = () => {
     }
   };
 
-  // Update the handleSuburbChange function
+  // Add this function to handle suburb input changes
   const handleSuburbChange = async (e) => {
     const value = e.target.value;
     setFormData(prev => ({
@@ -510,15 +510,9 @@ const ComparisonForm = () => {
       try {
         const request = {
           input: value,
-          componentRestrictions: { country: 'ZA' },
-          types: ['(regions)', 'sublocality', 'neighborhood'],
-          bounds: {
-            south: -34.8333, // South Africa bounds
-            west: 16.4667,
-            north: -22.1250,
-            east: 32.8917
-          },
-          strictBounds: true
+          componentRestrictions: { country: 'ZA' }, // Restrict to South Africa
+          types: ['geocode', 'establishment'],
+          language: 'en',
         };
 
         autocompleteRef.current.getPlacePredictions(request, (predictions, status) => {
@@ -539,17 +533,15 @@ const ComparisonForm = () => {
     }
   };
 
-  // Update the handleSuggestionSelect function
+  // Add this function to handle suggestion selection
   const handleSuggestionSelect = (suggestion) => {
-    // Get detailed place information
     const request = {
       placeId: suggestion.placeId,
-      fields: ['address_components', 'formatted_address', 'geometry']
+      fields: ['address_components', 'geometry']
     };
 
     placeDetailsService.current.getDetails(request, (place, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        // Extract address components
         const addressComponents = {};
         place.address_components.forEach(component => {
           const type = component.types[0];
@@ -562,20 +554,15 @@ const ComparisonForm = () => {
           if (type === 'postal_code') {
             addressComponents.postalCode = component.long_name;
           }
-          if (type === 'locality') {
-            addressComponents.city = component.long_name;
-          }
         });
 
-        // Update form data with detailed address information
         setFormData(prev => ({
           ...prev,
           address: {
             ...prev.address,
             suburb: addressComponents.suburb || suggestion.mainText,
-            city: addressComponents.city || '',
-            province: addressComponents.province || '',
-            postalCode: addressComponents.postalCode || ''
+            province: addressComponents.province || prev.address.province,
+            postalCode: addressComponents.postalCode || prev.address.postalCode
           }
         }));
       }
@@ -874,24 +861,31 @@ const ComparisonForm = () => {
                   value={formData.address.suburb || ''}
                   onChange={handleSuburbChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                  placeholder="Enter your suburb"
+                  placeholder="Start typing your suburb..."
+                  autoComplete="off"
                 />
                 {suggestions.length > 0 && (
-                  <div className="absolute z-20 w-full mt-1 bg-white shadow-lg rounded-md border border-gray-200 max-h-60 overflow-auto">
+                  <div className="absolute z-50 w-full mt-1 bg-white shadow-xl rounded-md border border-gray-200 max-h-60 overflow-y-auto">
                     {suggestions.map((suggestion) => (
                       <div
                         key={suggestion.placeId}
-                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                        onClick={() => handleSuggestionSelect(suggestion)}
+                        className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-0"
+                        onClick={() => {
+                          setFormData(prev => ({
+                            ...prev,
+                            address: {
+                              ...prev.address,
+                              suburb: suggestion.mainText
+                            }
+                          }));
+                          setSuggestions([]);
+                        }}
                       >
-                        <div className="font-medium">{suggestion.mainText}</div>
+                        <div className="font-medium text-gray-800">{suggestion.mainText}</div>
                         <div className="text-sm text-gray-500">{suggestion.secondaryText}</div>
                       </div>
                     ))}
                   </div>
-                )}
-                {errors.suburb && (
-                  <p className="mt-1 text-sm text-red-600">{errors.suburb}</p>
                 )}
               </div>
 
