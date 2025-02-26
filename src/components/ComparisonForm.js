@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Confetti from "react-confetti";
 
 const provincialCoverOptions = {
@@ -412,6 +412,19 @@ const ComparisonForm = () => {
   // Add this state at the top of your component
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // Add this state for Google Places suggestions
+  const [suggestions, setSuggestions] = useState([]);
+  const autocompleteRef = useRef(null);
+  const placeDetailsService = useRef(null);
+
+  // Add this useEffect for Google Places initialization
+  useEffect(() => {
+    if (window.google && window.google.maps && window.google.maps.places) {
+      autocompleteRef.current = new window.google.maps.places.AutocompleteService();
+      placeDetailsService.current = new window.google.maps.places.PlacesService(document.createElement('div'));
+    }
+  }, []);
+
   const steps = [
     { number: 1, title: "Profile Details" },
     { number: 2, title: "Policy Details" },
@@ -480,6 +493,95 @@ const ComparisonForm = () => {
         [name]: value,
       }));
     }
+  };
+
+  // Update the handleSuburbChange function
+  const handleSuburbChange = async (e) => {
+    const value = e.target.value;
+    setFormData(prev => ({
+      ...prev,
+      address: {
+        ...prev.address,
+        suburb: value
+      }
+    }));
+
+    if (value.length > 2 && autocompleteRef.current) {
+      try {
+        const request = {
+          input: value,
+          componentRestrictions: { country: 'ZA' },
+          types: ['(regions)', 'sublocality', 'neighborhood'],
+          bounds: {
+            south: -34.8333, // South Africa bounds
+            west: 16.4667,
+            north: -22.1250,
+            east: 32.8917
+          },
+          strictBounds: true
+        };
+
+        autocompleteRef.current.getPlacePredictions(request, (predictions, status) => {
+          if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
+            setSuggestions(predictions.map(p => ({
+              description: p.description,
+              placeId: p.place_id,
+              mainText: p.structured_formatting.main_text,
+              secondaryText: p.structured_formatting.secondary_text
+            })));
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching suggestions:', error);
+      }
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  // Update the handleSuggestionSelect function
+  const handleSuggestionSelect = (suggestion) => {
+    // Get detailed place information
+    const request = {
+      placeId: suggestion.placeId,
+      fields: ['address_components', 'formatted_address', 'geometry']
+    };
+
+    placeDetailsService.current.getDetails(request, (place, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        // Extract address components
+        const addressComponents = {};
+        place.address_components.forEach(component => {
+          const type = component.types[0];
+          if (type === 'sublocality_level_1' || type === 'locality') {
+            addressComponents.suburb = component.long_name;
+          }
+          if (type === 'administrative_area_level_1') {
+            addressComponents.province = component.long_name;
+          }
+          if (type === 'postal_code') {
+            addressComponents.postalCode = component.long_name;
+          }
+          if (type === 'locality') {
+            addressComponents.city = component.long_name;
+          }
+        });
+
+        // Update form data with detailed address information
+        setFormData(prev => ({
+          ...prev,
+          address: {
+            ...prev.address,
+            suburb: addressComponents.suburb || suggestion.mainText,
+            city: addressComponents.city || '',
+            province: addressComponents.province || '',
+            postalCode: addressComponents.postalCode || ''
+          }
+        }));
+      }
+    });
+
+    setSuggestions([]);
   };
 
   const handleSubmit = async (e) => {
@@ -762,20 +864,38 @@ const ComparisonForm = () => {
                 />
               </div>
 
+              <div className="relative">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Suburb
+                </label>
+                <input
+                  type="text"
+                  name="address.suburb"
+                  value={formData.address.suburb || ''}
+                  onChange={handleSuburbChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                  placeholder="Enter your suburb"
+                />
+                {suggestions.length > 0 && (
+                  <div className="absolute z-20 w-full mt-1 bg-white shadow-lg rounded-md border border-gray-200 max-h-60 overflow-auto">
+                    {suggestions.map((suggestion) => (
+                      <div
+                        key={suggestion.placeId}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                        onClick={() => handleSuggestionSelect(suggestion)}
+                      >
+                        <div className="font-medium">{suggestion.mainText}</div>
+                        <div className="text-sm text-gray-500">{suggestion.secondaryText}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {errors.suburb && (
+                  <p className="mt-1 text-sm text-red-600">{errors.suburb}</p>
+                )}
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Suburb
-                  </label>
-                  <input
-                    type="text"
-                    name="address.suburb"
-                    value={formData.address.suburb}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                    required
-                  />
-                </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     City
@@ -789,9 +909,6 @@ const ComparisonForm = () => {
                     required
                   />
                 </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Province
@@ -815,6 +932,9 @@ const ComparisonForm = () => {
                     <option value="Northern Cape">Northern Cape</option>
                   </select>
                 </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Postal Code
