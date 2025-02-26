@@ -1641,10 +1641,11 @@ const ComparisonForm = () => {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             backgroundAttachment: 'fixed',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
           }}
         >
-          {/* Lighter overlay to make the background more visible */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-50/70 to-indigo-50/70"></div>
+          {/* Update the overlay to be more transparent */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-50/40 to-indigo-50/40"></div>
           
           {/* Main content container */}
           <div className="max-w-3xl mx-auto w-full relative z-10">
@@ -1683,8 +1684,8 @@ const ComparisonForm = () => {
               </div>
             </div>
 
-            {/* Form Container */}
-            <div className="bg-white/90 rounded-xl shadow-lg p-8 w-full backdrop-blur-sm">
+            {/* Form Container - make slightly more transparent */}
+            <div className="bg-white/85 rounded-xl shadow-lg p-8 w-full backdrop-blur-sm">
               <form onSubmit={handleSubmit} className="space-y-6 w-full">
                 {renderFormStep()}
 
