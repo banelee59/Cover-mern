@@ -2,324 +2,164 @@ import React, { useState, useEffect, useRef } from "react";
 import Confetti from "react-confetti";
 
 const provincialCoverOptions = {
-  Gauteng: [
-    { 
-      value: "100",
-      label: "151",
-      provider: "Old Mutual",
-      logo: "/policies/oldmutual.png",
-      rating: 4.5,
+  "Gauteng": [
+    {
+      value: "standard_b",
+      label: "75",
+      provider: "Mpiti Funeral - Standard Package B",
+      logo: "/images/providers/mpiti.png",
+      rating: 4.8,
       features: [
-        "No medical tests",
-        "Immediate accident cover",
-        "Family cover",
+        "Collection and Delivery of deceased",
+        "Cleaning and preparation of corpse",
+        "Administration of Death Certificate",
+        "Flat-Lid Coffin",
+        "Storage of deceased"
       ],
+      coverageDetails: {
+        singleMember: "R75 (Age 18-59) / R95 (Above 60)",
+        memberWithChildren: "R85 (Age 18-59) / R105 (Above 60)",
+        cashBenefit: "R4,000"
+      },
+      benefits: [
+        "2 Pole Tent or R1000 cash",
+        "Back deco",
+        "Table",
+        "50 Chairs",
+        "50 Chair Covers",
+        "Burial Service"
+      ]
     },
     {
-      value: "200",
-      label: "200",
-      provider: "Avbob",
-      logo: "/policies/avbob.png",
-      rating: 4.2,
+      value: "standard_ca",
+      label: "85",
+      provider: "Mpiti Funeral - Standard Package CA",
+      logo: "/images/providers/mpiti.png",
+      rating: 4.8,
       features: [
-        "Cash back benefits",
-        "Double accident benefit",
-        "Repatriation",
+        "Collection and Delivery of deceased",
+        "Cleaning and preparation of corpse",
+        "Administration of Death Certificate",
+        "Halfview casket",
+        "Storage of deceased"
       ],
+      coverageDetails: {
+        singleMember: {
+          age18_59: "R85",
+          age60_74: "R105",
+          age75_100: "R120"
+        },
+        memberWithChildren: {
+          age18_59: "R95",
+          age60_74: "R110",
+          age75_100: "R135"
+        },
+        cashBenefit: "R2,000"
+      },
+      benefits: [
+        "2 Pole Tent or R1000 cash",
+        "Back deco",
+        "Table",
+        "50 Chairs",
+        "50 Chair Covers",
+        "50 Programmes",
+        "Burial Service"
+      ]
     },
     {
-      value: "300",
-      label: "300",
-      provider: "Metropolitan",
-      logo: "/policies/metropolitan.png",
-      rating: 4.0,
-      features: ["Premium waiver", "Flexible payments", "Quick claims"],
-    },
-    {
-      value: "400",
-      label: "250",
-      provider: "Assupol",
-      logo: "/policies/assupol.png",
-      rating: 4.3,
+      value: "package_cb",
+      label: "115",
+      provider: "Mpiti Funeral - Package CB",
+      logo: "/images/providers/mpiti.png",
+      rating: 4.9,
       features: [
-        "Immediate accident cover",
-        "Family benefits",
-        "Cash back rewards",
+        "Collection and Delivery of deceased",
+        "Cleaning and preparation of corpse",
+        "Administration of Death Certificate",
+        "Half-View Casket",
+        "Storage of deceased"
       ],
+      coverageDetails: {
+        singleMember: {
+          age18_59: "R115",
+          age60_74: "R135",
+          age75_up: "R160"
+        },
+        memberWithChildren: {
+          age18_59: "R125",
+          age60_105: "R145",
+          age75_up: "R175"
+        },
+        cashBenefit: "R4,000"
+      },
+      benefits: [
+        "2 Pole Tent or R1000 cash",
+        "Back deco",
+        "Table & 50 chairs",
+        "50 Chair Covers",
+        "50 Programmes",
+        "Burial Service"
+      ]
     },
-  ],
-  "Western Cape": [
     {
-      value: "25000",
+      value: "package_d",
       label: "180",
-      provider: "Hollard",
-      logo: "/images/providers/hollard.png",
-      rating: 4.3,
-      features: ["Flexible payments", "Family cover", "Quick claims"],
+      provider: "Mpiti Funeral - Package D",
+      logo: "/images/providers/mpiti.png",
+      rating: 4.9,
+      features: [
+        "Collection and Delivery of deceased",
+        "Cleaning and preparation of corpse",
+        "Administration of Death Certificate",
+        "Oval line casket",
+        "Storage of deceased"
+      ],
+      coverageDetails: {
+        member: {
+          age18_59: "R180",
+          age60_99: "R210"
+        },
+        cashBenefit: "R5,000"
+      },
+      benefits: [
+        "2 Pole Tent or R1000 cash",
+        "Back deco",
+        "Table",
+        "100 Chairs",
+        "50 Chair Covers",
+        "50 Programmes"
+      ]
     },
     {
-      value: "35000",
-      label: "250",
-      provider: "Clientele",
-      logo: "/images/providers/clientele.png",
-      rating: 4.1,
-      features: ["Cash back rewards", "No medical tests", "24/7 support"],
-    },
-    {
-      value: "45000",
-      label: "320",
-      provider: "Liberty",
-      logo: "/images/providers/liberty.png",
-      rating: 4.4,
-      features: ["Premium holiday", "Repatriation", "Family benefits"],
-    },
-    {
-      value: "30000",
-      label: "220",
-      provider: "Assupol",
-      logo: "/policies/assupol.png",
-      rating: 4.3,
-      features: ["No waiting period", "Repatriation benefit", "Premium waiver"],
-    },
-  ],
-  "KwaZulu-Natal": [
-    {
-      value: "22000",
-      label: "160",
-      provider: "Sanlam",
-      logo: "/images/providers/sanlam.png",
-      rating: 4.6,
-      features: ["Quick claims", "Family cover", "Premium waiver"],
-    },
-    {
-      value: "32000",
-      label: "230",
-      provider: "Discovery",
-      logo: "/images/providers/discovery.png",
-      rating: 4.7,
-      features: ["Rewards program", "Immediate cover", "Digital claims"],
-    },
-    {
-      value: "42000",
-      label: "290",
-      provider: "1Life",
-      logo: "/images/providers/1life.png",
-      rating: 4.2,
-      features: ["Easy application", "Family benefits", "24/7 support"],
-    },
-    {
-      value: "35000",
-      label: "240",
-      provider: "Assupol",
-      logo: "/policies/assupol.png",
-      rating: 4.4,
-      features: ["Family cover", "Cash back benefits", "Quick claims"],
-    },
-  ],
-  "Eastern Cape": [
-    {
-      value: "20000",
-      label: "150",
-      provider: "African Life",
-      logo: "/images/providers/africanlife.png",
-      rating: 4.0,
-      features: ["Local support", "Family cover", "Flexible payments"],
-    },
-    {
-      value: "30000",
-      label: "220",
-      provider: "Standard Bank",
-      logo: "/images/providers/standardbank.png",
-      rating: 4.3,
-      features: ["Banking integration", "Quick claims", "Family benefits"],
-    },
-    {
-      value: "40000",
-      label: "280",
-      provider: "FNB Life",
-      logo: "/images/providers/fnblife.png",
-      rating: 4.4,
-      features: ["eBucks rewards", "Digital process", "Family cover"],
-    },
-    {
-      value: "25000",
-      label: "190",
-      provider: "Assupol",
-      logo: "/policies/assupol.png",
-      rating: 4.2,
-      features: ["No medical tests", "Premium holiday", "Repatriation"],
-    },
-  ],
-  "Free State": [
-    {
-      value: "20000",
-      label: "160",
-      provider: "Momentum",
-      logo: "/images/providers/momentum.png",
-      rating: 4.3,
-      features: ["Family benefits", "Quick claims", "No medical tests"],
-    },
-    {
-      value: "30000",
-      label: "230",
-      provider: "Old Mutual",
-      logo: "/images/providers/oldmutual.png",
-      rating: 4.5,
-      features: ["Premium waiver", "Immediate cover", "Repatriation"],
-    },
-    {
-      value: "40000",
-      label: "290",
-      provider: "Avbob",
-      logo: "/images/providers/avbob.png",
-      rating: 4.2,
-      features: ["Cash back benefits", "Family cover", "24/7 support"],
-    },
-    {
-      value: "25000",
-      label: "200",
-      provider: "Assupol",
-      logo: "/policies/assupol.png",
-      rating: 4.3,
-      features: ["Double accident benefit", "Family cover", "Premium holiday"],
-    },
-  ],
-  Limpopo: [
-    {
-      value: "15000",
-      label: "140",
-      provider: "Metropolitan",
-      logo: "/images/providers/metropolitan.png",
-      rating: 4.1,
-      features: ["Local support", "Flexible payments", "Family cover"],
-    },
-    {
-      value: "25000",
-      label: "200",
-      provider: "Clientele",
-      logo: "/images/providers/clientele.png",
-      rating: 4.0,
-      features: ["Cash back rewards", "Digital claims", "No medical tests"],
-    },
-    {
-      value: "35000",
-      label: "260",
-      provider: "Hollard",
-      logo: "/images/providers/hollard.png",
-      rating: 4.3,
-      features: ["Premium waiver", "Quick claims", "Repatriation"],
-    },
-    {
-      value: "20000",
-      label: "180",
-      provider: "Assupol",
-      logo: "/policies/assupol.png",
-      rating: 4.2,
-      features: ["Immediate cover", "Family benefits", "Cash back rewards"],
-    },
-  ],
-  Mpumalanga: [
-    {
-      value: "18000",
-      label: "150",
-      provider: "Liberty",
-      logo: "/images/providers/liberty.png",
-      rating: 4.4,
-      features: ["Premium holiday", "Family cover", "Quick claims"],
-    },
-    {
-      value: "28000",
-      label: "220",
-      provider: "Sanlam",
-      logo: "/images/providers/sanlam.png",
-      rating: 4.5,
-      features: ["Digital process", "No medical tests", "Repatriation"],
-    },
-    {
-      value: "38000",
-      label: "280",
-      provider: "Discovery",
-      logo: "/images/providers/discovery.png",
-      rating: 4.6,
-      features: ["Rewards program", "24/7 support", "Family benefits"],
-    },
-    {
-      value: "23000",
-      label: "190",
-      provider: "Assupol",
-      logo: "/policies/assupol.png",
-      rating: 4.3,
-      features: ["Easy application", "Premium waiver", "Cash back benefits"],
-    },
-  ],
-  "North West": [
-    {
-      value: "17000",
-      label: "145",
-      provider: "1Life",
-      logo: "/images/providers/1life.png",
-      rating: 4.2,
-      features: ["Easy application", "Family cover", "Quick claims"],
-    },
-    {
-      value: "27000",
-      label: "210",
-      provider: "African Life",
-      logo: "/images/providers/africanlife.png",
-      rating: 4.1,
-      features: ["Local support", "Premium waiver", "Repatriation"],
-    },
-    {
-      value: "37000",
-      label: "270",
-      provider: "Standard Bank",
-      logo: "/images/providers/standardbank.png",
-      rating: 4.3,
-      features: ["Banking integration", "No medical tests", "Family benefits"],
-    },
-    {
-      value: "22000",
-      label: "185",
-      provider: "Assupol",
-      logo: "/policies/assupol.png",
-      rating: 4.2,
-      features: ["Immediate cover", "Cash back rewards", "Premium holiday"],
-    },
-  ],
-  "Northern Cape": [
-    {
-      value: "16000",
-      label: "140",
-      provider: "FNB Life",
-      logo: "/images/providers/fnblife.png",
-      rating: 4.3,
-      features: ["eBucks rewards", "Family cover", "Digital claims"],
-    },
-    {
-      value: "26000",
-      label: "200",
-      provider: "Momentum",
-      logo: "/images/providers/momentum.png",
-      rating: 4.2,
-      features: ["Premium waiver", "Quick claims", "Repatriation"],
-    },
-    {
-      value: "36000",
-      label: "260",
-      provider: "Old Mutual",
-      logo: "/images/providers/oldmutual.png",
-      rating: 4.4,
-      features: ["No medical tests", "24/7 support", "Family benefits"],
-    },
-    {
-      value: "21000",
-      label: "180",
-      provider: "Assupol",
-      logo: "/policies/assupol.png",
-      rating: 4.1,
-      features: ["Local support", "Premium holiday", "Cash back benefits"],
-    },
-  ],
+      value: "package_e",
+      label: "215",
+      provider: "Mpiti Funeral - Package E",
+      logo: "/images/providers/mpiti.png",
+      rating: 5.0,
+      features: [
+        "Collection and Delivery of deceased",
+        "Cleaning and preparation of corpse",
+        "Administration of Death Certificate",
+        "Oval line casket",
+        "Storage of deceased"
+      ],
+      coverageDetails: {
+        singleMember: {
+          age18_59: "R215",
+          age60_99: "R245"
+        },
+        cashBenefit: "R6,000"
+      },
+      benefits: [
+        "2 Pole Tent or R1000 cash",
+        "Back deco",
+        "Table",
+        "100 Chairs",
+        "50 Chair Covers",
+        "50 Programmes"
+      ]
+    }
+  ]
 };
 
 const validateIdNumber = (idNumber) => {
@@ -916,14 +756,6 @@ const ComparisonForm = () => {
                   >
                     <option value="">Select Province</option>
                     <option value="Gauteng">Gauteng</option>
-                    <option value="Western Cape">Western Cape</option>
-                    <option value="KwaZulu-Natal">KwaZulu-Natal</option>
-                    <option value="Eastern Cape">Eastern Cape</option>
-                    <option value="Free State">Free State</option>
-                    <option value="Limpopo">Limpopo</option>
-                    <option value="Mpumalanga">Mpumalanga</option>
-                    <option value="North West">North West</option>
-                    <option value="Northern Cape">Northern Cape</option>
                   </select>
                 </div>
               </div>
@@ -1248,7 +1080,7 @@ const ComparisonForm = () => {
                                 alt={`${option.provider} logo`}
                                 className="w-full h-full object-contain"
                                 onError={(e) => {
-                                  e.target.src = "/policies/avbob.png";
+                                  e.target.src = "/images/providers/mpiti.png";
                                   e.target.onerror = null;
                                 }}
                               />
@@ -1304,92 +1136,96 @@ const ComparisonForm = () => {
                       {selectedOptionDetails === option.provider && (
                         <div className="bg-gray-50 p-6 rounded-lg mt-2 space-y-4">
                           <h4 className="font-semibold text-lg text-gray-800">
-                            {option.provider} Cover Details
+                            {option.provider} Details
                           </h4>
 
                           {/* Coverage Details */}
                           <div className="space-y-4">
                             <div>
-                              <h5 className="font-medium text-gray-700 mb-2">
-                                Coverage Options
+                              <h5 className="font-medium text-[#00c2ff] mb-2">
+                                Coverage Details
                               </h5>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="bg-white p-4 rounded-lg">
-                                  <p className="font-medium text-[#00c2ff]">
-                                    Basic Cover
-                                  </p>
-                                  <p className="text-sm text-gray-600">
-                                    R10,000 - R30,000
-                                  </p>
-                                </div>
-                                <div className="bg-white p-4 rounded-lg">
-                                  <p className="font-medium text-[#00c2ff]">
-                                    Premium Cover
-                                  </p>
-                                  <p className="text-sm text-gray-600">
-                                    R30,000 - R50,000
-                                  </p>
-                                </div>
+                              <div className="bg-white p-4 rounded-lg">
+                                {option.value === 'standard_b' && (
+                                  <>
+                                    <p className="mb-2"><span className="font-medium text-[#00c2ff]">Single Member:</span> {option.coverageDetails.singleMember}</p>
+                                    <p className="mb-2"><span className="font-medium text-[#00c2ff]">Member + Children:</span> {option.coverageDetails.memberWithChildren}</p>
+                                    <p><span className="font-medium text-[#00c2ff]">Cash Benefit:</span> {option.coverageDetails.cashBenefit}</p>
+                                  </>
+                                )}
+                                {(option.value === 'standard_ca' || option.value === 'package_cb') && (
+                                  <>
+                                    <p className="font-medium text-[#00c2ff] mb-2">Single Member:</p>
+                                    <ul className="list-disc list-inside mb-3 ml-2">
+                                      <li><span className="text-[#00c2ff]">Age 18-59:</span> {option.coverageDetails.singleMember.age18_59}</li>
+                                      <li><span className="text-[#00c2ff]">Age 60-74:</span> {option.coverageDetails.singleMember.age60_74}</li>
+                                      <li><span className="text-[#00c2ff]">Age 75+:</span> {option.coverageDetails.singleMember.age75_100 || option.coverageDetails.singleMember.age75_up}</li>
+                                    </ul>
+                                    <p className="font-medium text-[#00c2ff] mb-2">Member + Children:</p>
+                                    <ul className="list-disc list-inside mb-3 ml-2">
+                                      <li><span className="text-[#00c2ff]">Age 18-59:</span> {option.coverageDetails.memberWithChildren.age18_59}</li>
+                                      <li><span className="text-[#00c2ff]">Age 60-74:</span> {option.coverageDetails.memberWithChildren.age60_74}</li>
+                                      <li><span className="text-[#00c2ff]">Age 75+:</span> {option.coverageDetails.memberWithChildren.age75_100 || option.coverageDetails.memberWithChildren.age75_up}</li>
+                                    </ul>
+                                    <p><span className="font-medium text-[#00c2ff]">Cash Benefit:</span> {option.coverageDetails.cashBenefit}</p>
+                                  </>
+                                )}
+                                {option.value === 'package_d' && (
+                                  <>
+                                    <p className="font-medium mb-2">Member:</p>
+                                    <ul className="list-disc list-inside mb-3 ml-2">
+                                      <li>Age 18-59: {option.coverageDetails.member.age18_59}</li>
+                                      <li>Age 60-99: {option.coverageDetails.member.age60_99}</li>
+                                    </ul>
+                                    <p><span className="font-medium text-[#00c2ff]">Cash Benefit:</span> {option.coverageDetails.cashBenefit}</p>
+                                  </>
+                                )}
+                                {option.value === 'package_e' && (
+                                  <>
+                                    <p className="font-medium mb-2">Single Member:</p>
+                                    <ul className="list-disc list-inside mb-3 ml-2">
+                                      <li>Age 18-59: {option.coverageDetails.singleMember.age18_59}</li>
+                                      <li>Age 60-99: {option.coverageDetails.singleMember.age60_99}</li>
+                                    </ul>
+                                    <p><span className="font-medium text-[#00c2ff]">Cash Benefit:</span> {option.coverageDetails.cashBenefit}</p>
+                                  </>
+                                )}
                               </div>
-                </div>
-
-                            {/* Waiting Periods */}
-                            <div>
-                              <h5 className="font-medium text-gray-700 mb-2">
-                                Waiting Periods
-                              </h5>
-                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-                                <li>Natural Death: 6 months</li>
-                                <li>Accidental Death: Immediate cover</li>
-                                <li>Suicide: 24 months</li>
-                  </ul>
                             </div>
 
-                            {/* Additional Benefits */}
+                            {/* Features */}
                             <div>
-                              <h5 className="font-medium text-gray-700 mb-2">
-                                Additional Benefits
+                              <h5 className="font-medium text-[#00c2ff] mb-2">
+                                Features
                               </h5>
-                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-                                <li>Premium holiday facility</li>
-                                <li>Repatriation benefit</li>
-                                <li>Cash back after 5 years</li>
-                                <li>Family funeral cover options</li>
+                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1 ml-2">
+                                {option.features.map((feature, index) => (
+                                  <li key={index}>{feature}</li>
+                                ))}
                               </ul>
                             </div>
 
-                            {/* Claims Process */}
+                            {/* Benefits */}
                             <div>
-                              <h5 className="font-medium text-gray-700 mb-2">
-                                Claims Process
+                              <h5 className="font-medium text-[#00c2ff] mb-2">
+                                Benefits
                               </h5>
-                              <div className="bg-white p-4 rounded-lg">
-                                <ol className="list-decimal list-inside text-sm text-gray-600 space-y-2">
-                                  <li>Contact our 24/7 claims department</li>
-                                  <li>Submit required documentation</li>
-                                  <li>Claim processed within 48 hours</li>
-                                  <li>
-                                    Payment directly to nominated beneficiary
-                                  </li>
-                                </ol>
-                              </div>
+                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1 ml-2">
+                                {option.benefits.map((benefit, index) => (
+                                  <li key={index}>{benefit}</li>
+                                ))}
+                              </ul>
                             </div>
 
                             {/* Contact Information */}
                             <div className="bg-white p-4 rounded-lg">
-                              <h5 className="font-medium text-gray-700 mb-2">
+                              <h5 className="font-medium text-[#00c2ff] mb-2">
                                 Contact Information
                               </h5>
                               <div className="text-sm text-gray-600 space-y-1">
-                                <p>Claims: 0800 123 456</p>
-                                <p>
-                                  Email: claims@
-                                  {option.provider
-                                    .toLowerCase()
-                                    .replace(/\s+/g, "")}
-                                  .co.za
-                                </p>
-                                <p>WhatsApp: 072 123 4567</p>
+                                <p><span className="text-[#00c2ff]">Claims:</span> 0800 123 456</p>
+                                <p><span className="text-[#00c2ff]">Email:</span> info@mpitifuneral.co.za</p>
+                                <p><span className="text-[#00c2ff]">WhatsApp:</span> 072 123 4567</p>
                               </div>
                             </div>
                           </div>
@@ -1706,7 +1542,7 @@ const ComparisonForm = () => {
                       onClick={handleNext}
                       className="ml-auto px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
                     >
-                      Next
+                      {currentStep === totalSteps - 1 ? 'Submit' : 'Next'}
                     </button>
                   ) : (
                     <button
