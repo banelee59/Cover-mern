@@ -102,10 +102,10 @@ const Contact = () => {
             <h3>Quick Links</h3>
             <ul>
               <li>Home</li>
+              <li>Products</li>
               <li>About Us</li>
               <li>Contact Us</li>
-              <li>Privacy Policy</li>
-              <li>Get a Quote</li>
+              <li>Get Started</li>
             </ul>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Home.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const Home = () => {
@@ -22,13 +22,21 @@ const Home = () => {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-600 hover:text-[#00c2ff] transition-colors">Home</a>
-              <a href="#" className="text-gray-600 hover:text-[#00c2ff] transition-colors">About</a>
-              <a href="#" className="text-gray-600 hover:text-[#00c2ff] transition-colors">Services</a>
-              <a href="#" className="text-gray-600 hover:text-[#00c2ff] transition-colors">Contact</a>
-              <button className="px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
-                Get a Quote
-              </button>
+              <Link to="/" className="text-gray-600 hover:text-[#00c2ff] transition-colors">
+                Home
+              </Link>
+              <Link to="/PRODUCTS" className="text-gray-600 hover:text-[#00c2ff] transition-colors">
+                Products
+              </Link>
+              <Link to="/about" className="text-gray-600 hover:text-[#00c2ff] transition-colors">
+                About Us
+              </Link>
+              <Link to="/contact" className="text-gray-600 hover:text-[#00c2ff] transition-colors">
+                Contact Us
+              </Link>
+              <Link to="/get-started" className="px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
+                Get Started
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -52,13 +60,21 @@ const Home = () => {
           {isMenuOpen && (
             <div className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-md">
               <div className="px-2 pt-2 pb-3 space-y-1">
-                <a href="#" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">Home</a>
-                <a href="#" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">About</a>
-                <a href="#" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">Services</a>
-                <a href="#" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">Contact</a>
-                <button className="w-full mt-2 px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
-                  Get a Quote
-                </button>
+                <Link to="/" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
+                  Home
+                </Link>
+                <Link to="/PRODUCTS" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
+                  Products
+                </Link>
+                <Link to="/about" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
+                  About Us
+                </Link>
+                <Link to="/contact" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
+                  Contact Us
+                </Link>
+                <Link to="/get-started" className="w-full mt-2 px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
+                  Get Started
+                </Link>
               </div>
             </div>
           )}
@@ -412,11 +428,31 @@ const Home = () => {
             <div className="footer-links">
               <h3>Quick Links</h3>
               <ul>
-                <li>Home</li>
-                <li>About Us</li>
-                <li>Contact Us</li>
-                <li>Privacy Policy</li>
-                <li>Get a Quote</li>
+                <li>
+                  <Link to="/" className="hover:text-[#00c2ff] transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/PRODUCTS" className="hover:text-[#00c2ff] transition-colors">
+                    Products
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="hover:text-[#00c2ff] transition-colors">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="hover:text-[#00c2ff] transition-colors">
+                    Contact Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/get-started" className="hover:text-[#00c2ff] transition-colors">
+                    Get Started
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
