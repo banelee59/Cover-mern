@@ -257,11 +257,23 @@ const ComparisonForm = () => {
   const autocompleteRef = useRef(null);
   const placeDetailsService = useRef(null);
 
+  // Add this state for price range filter
+  const [priceRange, setPriceRange] = useState({ min: '', max: '' });
+
   // Add this useEffect for Google Places initialization
   useEffect(() => {
-    if (window.google && window.google.maps && window.google.maps.places) {
+    if (!window.google || !window.google.maps || !window.google.maps.places) {
+      console.error('Google Places API not loaded');
+      return;
+    }
+
+    try {
       autocompleteRef.current = new window.google.maps.places.AutocompleteService();
-      placeDetailsService.current = new window.google.maps.places.PlacesService(document.createElement('div'));
+      placeDetailsService.current = new window.google.maps.places.PlacesService(
+        document.createElement('div')
+      );
+    } catch (error) {
+      console.error('Error initializing Google Places:', error);
     }
   }, []);
 
@@ -374,57 +386,97 @@ const ComparisonForm = () => {
   };
 
   // Add this function to handle suggestion selection
-  const handleSuggestionSelect = (suggestion) => {
-    const request = {
-      placeId: suggestion.placeId,
-      fields: ['address_components', 'geometry']
-    };
+  const handleSuggestionSelect = async (suggestion) => {
+    if (!placeDetailsService.current) {
+      console.error('Place Details service not initialized');
+      return;
+    }
 
-    placeDetailsService.current.getDetails(request, (place, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        const addressComponents = {};
-        place.address_components.forEach(component => {
-          const type = component.types[0];
-          if (type === 'sublocality_level_1' || type === 'locality') {
-            addressComponents.suburb = component.long_name;
-          }
-          if (type === 'administrative_area_level_1') {
-            addressComponents.province = component.long_name;
-          }
-          if (type === 'postal_code') {
-            addressComponents.postalCode = component.long_name;
-          }
-        });
+    try {
+      placeDetailsService.current.getDetails(
+        { placeId: suggestion.placeId },
+        (place, status) => {
+          if (status === 'OK' && place) {
+            // Process address components
+            const addressComponents = {};
+            place.address_components.forEach((component) => {
+              const type = component.types[0];
+              addressComponents[type] = component.long_name;
+            });
 
-        setFormData(prev => ({
-          ...prev,
-          address: {
-            ...prev.address,
-            suburb: addressComponents.suburb || suggestion.mainText,
-            province: addressComponents.province || prev.address.province,
-            postalCode: addressComponents.postalCode || prev.address.postalCode
+            setFormData((prev) => ({
+              ...prev,
+              address: {
+                street: `${addressComponents.street_number || ''} ${
+                  addressComponents.route || ''
+                }`.trim(),
+                suburb: addressComponents.sublocality || '',
+                city: addressComponents.locality || '',
+                province: addressComponents.administrative_area_level_1 || '',
+                postalCode: addressComponents.postal_code || '',
+              },
+            }));
+          } else {
+            console.error('Error fetching place details:', status);
           }
-        }));
-      }
-    });
+        }
+      );
+    } catch (error) {
+      console.error('Error selecting address:', error);
+    }
 
     setSuggestions([]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateStep(currentStep)) {
-      try {
-        console.log("Form Data:", formData);
-        setIsSubmitted(true); // Set to true after successful submission
-        setShowConfetti(true);
-      } catch (error) {
-        console.error("Form submission error:", error);
-        setErrors((prev) => ({
-          ...prev,
-          submission: "There was an error submitting your form. Please try again.",
-        }));
+    setShowConfetti(true);
+
+    try {
+      // First API call to save form data
+      const formResponse = await fetch('https://api.coverupquotes.co.za/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          totalPremium: calculateTotalPremium(formData),
+          referenceNumber: `REF-${Date.now().toString().slice(-8)}`
+        }),
+      });
+
+      if (!formResponse.ok) {
+        throw new Error('Form submission failed');
       }
+
+      // Second API call to send email notification
+      const emailResponse = await fetch('https://api.coverupquotes.co.za/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: formData.email,
+          subject: 'CoverUp Insurance Application Confirmation',
+          name: `${formData.firstName} ${formData.lastName}`,
+          referenceNumber: `REF-${Date.now().toString().slice(-8)}`,
+          selectedPlan: formData.coverAmount,
+          totalPremium: calculateTotalPremium(formData)
+        }),
+      });
+
+      if (!emailResponse.ok) {
+        console.warn('Email notification failed, but form was submitted');
+      }
+
+      // Show success state
+      setIsSubmitted(true);
+      
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('There was an error submitting your application. Please try again.');
+      setShowConfetti(false);
     }
   };
 
@@ -501,6 +553,43 @@ const ComparisonForm = () => {
     );
   };
 
+  // Add this constant for extra service prices
+  const extraServices = [
+    { name: "draping", label: "Draping", price: 10 },
+    { name: "mobileToilets", label: "Mobile Toilets", price: 10 },
+    { name: "groceryBenefit", label: "Grocery Benefit", price: 10 },
+    { name: "mobileFridge", label: "Mobile Fridge", price: 10 },
+    { name: "soundSystem", label: "Sound System", price: 10 },
+    { name: "videoStreaming", label: "Video Streaming", price: 10 },
+    { name: "airtimeAllowance", label: "Airtime Allowance", price: 10 },
+    { name: "tombstone", label: "Tombstone", price: 10 },
+    { name: "catering", label: "Catering", price: 10 },
+    { name: "griefCounselling", label: "Grief Counselling", price: 10 },
+    { name: "floralArrangements", label: "Floral Arrangements", price: 10 },
+    { name: "urns", label: "Urns", price: 10 },
+    { name: "funeralPrograms", label: "Funeral Programs", price: 10 },
+    { name: "graveLiners", label: "Grave Liners", price: 10 },
+    { name: "graveDigging", label: "Grave Digging", price: 10 }
+  ];
+
+  // Add this function to filter options by price
+  const getFilteredOptions = () => {
+    return availableCoverOptions.filter(option => {
+      const price = parseInt(option.label);
+      if (priceRange.min && priceRange.max) {
+        return price >= parseInt(priceRange.min) && price <= parseInt(priceRange.max);
+      }
+      if (priceRange.min) {
+        return price >= parseInt(priceRange.min);
+      }
+      if (priceRange.max) {
+        return price <= parseInt(priceRange.max);
+      }
+      return true;
+    });
+  };
+
+  // Update the table in case 3
   const renderFormStep = () => {
     switch (currentStep) {
       case 1: // Profile Details
@@ -869,18 +958,21 @@ const ComparisonForm = () => {
           </div>
         );
 
-        case 3: // Select Extras
-  return (
-    <div className="space-y-4">
+      case 3: // Select Extras
+        return (
+          <div className="space-y-4">
             <h3 className="text-xl font-semibold text-gray-800 mb-4">
               Extra Service Offerings
             </h3>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="bg-gray-50">
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white border border-gray-200">
+                <thead>
+                  <tr className="bg-gray-50">
                     <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b border-gray-200">
                       Service
+                    </th>
+                    <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">
+                      Price
                     </th>
                     <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">
                       Yes
@@ -888,74 +980,64 @@ const ComparisonForm = () => {
                     <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">
                       No
                     </th>
-            </tr>
-          </thead>
-          <tbody>
-            {[
-                    { name: "draping", label: "Draping" },
-                    { name: "mobileToilets", label: "Mobile Toilets" },
-                    { name: "groceryBenefit", label: "Grocery Benefit" },
-                    { name: "mobileFridge", label: "Mobile Fridge" },
-                    { name: "soundSystem", label: "Sound System" },
-                    { name: "videoStreaming", label: "Video Streaming" },
-                    { name: "airtimeAllowance", label: "Airtime Allowance" },
-                    { name: "tombstone", label: "Tombstone" },
-                    { name: "catering", label: "Catering" },
-                    { name: "griefCounselling", label: "Grief Counselling" },
-                    {
-                      name: "floralArrangements",
-                      label: "Floral Arrangements (Flowers & Wreaths)",
-                    },
-                    { name: "urns", label: "Urns" },
-                    {
-                      name: "funeralPrograms",
-                      label: "Funeral Programs and Stationery",
-                    },
-                    {
-                      name: "graveLiners",
-                      label: "Grave Liners and Burial Vaults",
-                    },
-                    { name: "graveDigging", label: "Grave Digging" },
-            ].map((service) => (
-              <tr key={service.name} className="hover:bg-gray-50">
+                  </tr>
+                </thead>
+                <tbody>
+                  {extraServices.map((service) => (
+                    <tr key={service.name} className="hover:bg-gray-50">
                       <td className="px-4 py-2 text-sm text-gray-700 border-b border-gray-200">
                         {service.label}
                       </td>
-                <td className="px-4 py-2 text-center border-b border-gray-200">
-                  <input
-                    type="radio"
-                    name={service.name}
-                    checked={formData[service.name] === true}
-                    onChange={() => {
+                      <td className="px-4 py-2 text-center text-sm text-gray-700 border-b border-gray-200">
+                        R{service.price}
+                      </td>
+                      <td className="px-4 py-2 text-center border-b border-gray-200">
+                        <input
+                          type="radio"
+                          name={service.name}
+                          checked={formData[service.name] === true}
+                          onChange={() => {
                             setFormData((prev) => ({
-                        ...prev,
+                              ...prev,
                               [service.name]: true,
-                      }));
-                    }}
-                    className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
-                  />
-                </td>
-                <td className="px-4 py-2 text-center border-b border-gray-200">
-                  <input
-                    type="radio"
-                    name={service.name}
-                    checked={formData[service.name] === false}
-                    onChange={() => {
+                              totalPremium: calculateTotalPremium(prev, service.name, true)
+                            }));
+                          }}
+                          className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
+                        />
+                      </td>
+                      <td className="px-4 py-2 text-center border-b border-gray-200">
+                        <input
+                          type="radio"
+                          name={service.name}
+                          checked={formData[service.name] === false}
+                          onChange={() => {
                             setFormData((prev) => ({
-                        ...prev,
+                              ...prev,
                               [service.name]: false,
-                      }));
-                    }}
-                    className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+                              totalPremium: calculateTotalPremium(prev, service.name, false)
+                            }));
+                          }}
+                          className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {/* Total Premium Display */}
+              <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                <p className="text-lg font-semibold text-gray-800">
+                  Total Monthly Premium: 
+                  <span className="text-[#00c2ff] ml-2">
+                    R{calculateTotalPremium(formData)}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        );
 
       case 4: // Cover Options
         return (
@@ -963,115 +1045,107 @@ const ComparisonForm = () => {
             <h3 className="text-xl font-semibold text-gray-800 mb-4">
               Compare Funeral Cover Options
             </h3>
+
+            {/* Price Range Filter */}
+            <div className="bg-white p-4 rounded-lg shadow-sm">
+              <h4 className="text-sm font-medium text-gray-700 mb-3">
+                Filter by Monthly Premium
+              </h4>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-gray-600">R</span>
+                  <input
+                    type="number"
+                    placeholder="Min"
+                    value={priceRange.min}
+                    onChange={(e) => setPriceRange(prev => ({ ...prev, min: e.target.value }))}
+                    className="w-24 p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                  />
+                </div>
+                <span className="text-gray-400">to</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-gray-600">R</span>
+                  <input
+                    type="number"
+                    placeholder="Max"
+                    value={priceRange.max}
+                    onChange={(e) => setPriceRange(prev => ({ ...prev, max: e.target.value }))}
+                    className="w-24 p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                  />
+                </div>
+                <button
+                  onClick={() => setPriceRange({ min: '', max: '' })}
+                  className="px-3 py-2 text-sm text-gray-600 hover:text-[#00c2ff] transition-colors"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
             
             {formData.address.province ? (
               <>
                 <div className="grid gap-6">
-                  {availableCoverOptions.map((option) => (
+                  {getFilteredOptions().map((option) => (
                     <div key={option.value} className="space-y-4">
                       <div className="bg-white p-6 rounded-lg border-2 hover:border-[#00c2ff] transition-colors cursor-pointer">
-                      <div className="flex items-center justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-4">
-                            <input
-                              type="radio"
-                              name="coverAmount"
-                                value={option.value} // Ensure this is unique and non-empty
-                              checked={formData.coverAmount === option.value}
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-4">
+                              <input
+                                type="radio"
+                                name="coverAmount"
+                                value={option.value}
+                                checked={formData.coverAmount === option.value}
                                 onChange={() => {
-                                  setFormData((prev) => ({
+                                  setFormData(prev => ({
                                     ...prev,
                                     coverAmount: option.value,
-                                    preferredProvider: option.provider,
+                                    totalPremium: calculateTotalPremium({
+                                      ...prev,
+                                      coverAmount: option
+                                    })
                                   }));
                                 }}
-                              className="w-5 h-5 text-[#00c2ff]"
-                            />
-                            <div>
+                                className="w-4 h-4 text-[#00c2ff] border-gray-300 focus:ring-[#00c2ff]"
+                              />
+                              <div>
                                 <h4 className="text-lg font-semibold text-gray-800">
                                   {option.provider}
                                 </h4>
-                              <div className="mt-1 space-y-1">
-                                  <p className="text-2xl font-bold text-[#00c2ff]">
-                                    From R{option.label}/month
+                                <div className="flex flex-col gap-1">
+                                  <p className="text-sm text-gray-600">
+                                    From{" "}
+                                    <span className="font-semibold text-[#00c2ff]">
+                                      R{option.label}
+                                    </span>
+                                    /month
                                   </p>
+                                  {/* Add new premium breakdown */}
+                                  <div className="flex items-center gap-2 text-sm">
+                                    <span className="text-gray-600">Selected extras:</span>
+                                    <span className="font-medium text-[#00c2ff]">
+                                      +R{calculateTotalPremium({
+                                        ...formData,
+                                        coverAmount: option
+                                      }) - parseInt(option.label)}
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-gray-600 font-medium">Total monthly premium:</span>
+                                    <span className="font-bold text-[#00c2ff]">
+                                      R{calculateTotalPremium({
+                                        ...formData,
+                                        coverAmount: option
+                                      })}
+                                    </span>
+                                  </div>
+                                  <p className="text-xs text-gray-500 italic">
+                                    * Includes base premium and selected extra benefits (R10 each)
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>
-                          
-                          <div className="mt-4 grid grid-cols-2 gap-4">
-                            <div className="flex items-center gap-2">
-                                <svg
-                                  className="w-5 h-5 text-green-500"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M5 13l4 4L19 7"
-                                  />
-                              </svg>
-                                <span className="text-sm">
-                                  No waiting period for accidental death
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <svg
-                                  className="w-5 h-5 text-green-500"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M5 13l4 4L19 7"
-                                  />
-                              </svg>
-                                <span className="text-sm">
-                                  Cover up to 13 family members
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <svg
-                                  className="w-5 h-5 text-green-500"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M5 13l4 4L19 7"
-                                  />
-                              </svg>
-                                <span className="text-sm">
-                                  Claims paid within 48 hours
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <svg
-                                  className="w-5 h-5 text-green-500"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M5 13l4 4L19 7"
-                                  />
-                              </svg>
-                              <span className="text-sm">24/7 Support</span>
-                            </div>
-                          </div>
-                        </div>
 
                           <div className="flex flex-col items-end space-y-2">
                             <div className="w-12 h-12">
@@ -1088,49 +1162,51 @@ const ComparisonForm = () => {
                             <div className="text-sm text-gray-500">
                               Trustpilot Rating
                             </div>
-                          <div className="flex text-yellow-400">
-                              {"★".repeat(4)}
-                              {"☆".repeat(1)}
+                            <div className="flex text-yellow-400">
+                              {"★".repeat(Math.floor(option.rating))}
+                              {"☆".repeat(5 - Math.floor(option.rating))}
+                            </div>
+                            <div className="text-sm text-gray-500">{option.rating}/5</div>
                           </div>
-                          <div className="text-sm text-gray-500">4.0/5</div>
                         </div>
                       </div>
-                    </div>
 
                       {/* Smaller Show More Button */}
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setSelectedOptionDetails(
-                            selectedOptionDetails === option.provider
-                              ? null
-                              : option.provider
-                          )
-                        }
-                        className="mt-2 px-3 py-1.5 bg-[#00c2ff] text-white rounded-lg text-sm font-medium 
-                    hover:bg-[#00b3eb] transition-colors flex items-center justify-center gap-1 w-auto ml-auto"
-                      >
-                        {selectedOptionDetails === option.provider
-                          ? "Hide Details"
-                          : "Show More Details"}
-                        <svg
-                          className={`w-3 h-3 transition-transform ${
-                            selectedOptionDetails === option.provider
-                              ? "rotate-180"
-                              : ""
-                          }`}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                      <div className="mt-4 flex justify-end">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setSelectedOptionDetails(
+                              selectedOptionDetails === option.provider
+                                ? null
+                                : option.provider
+                            )
+                          }
+                          className="mt-2 px-3 py-1.5 bg-[#00c2ff] text-white rounded-lg text-sm font-medium 
+                          hover:bg-[#00b3eb] transition-colors flex items-center justify-center gap-1 w-auto ml-auto"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
-                      </button>
+                          {selectedOptionDetails === option.provider
+                            ? "Hide Details"
+                            : "Show More Details"}
+                          <svg
+                            className={`w-3 h-3 transition-transform ${
+                              selectedOptionDetails === option.provider
+                                ? "rotate-180"
+                                : ""
+                            }`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </button>
+                      </div>
 
                       {/* Detailed Information Panel */}
                       {selectedOptionDetails === option.provider && (
@@ -1234,6 +1310,21 @@ const ComparisonForm = () => {
                     </div>
                   ))}
                 </div>
+                
+                {/* No Results Message */}
+                {getFilteredOptions().length === 0 && (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">
+                      No cover options found in this price range.
+                    </p>
+                    <button
+                      onClick={() => setPriceRange({ min: '', max: '' })}
+                      className="mt-2 text-[#00c2ff] hover:text-[#00b3eb] transition-colors"
+                    >
+                      Reset Filters
+                    </button>
+                  </div>
+                )}
               </>
             ) : (
               <div className="p-4 bg-yellow-50 rounded-lg">
@@ -1462,6 +1553,20 @@ const ComparisonForm = () => {
       </div>
     </div>
   );
+
+  // Add this function to calculate total premium
+  const calculateTotalPremium = (formData, changedService = null, newValue = null) => {
+    let basePremium = parseInt(formData.coverAmount?.label || 0);
+    
+    let extrasCost = 0;
+    extraServices.forEach(service => {
+      if (service.name === changedService ? newValue : formData[service.name]) {
+        extrasCost += service.price;
+      }
+    });
+
+    return basePremium + extrasCost;
+  };
 
   return (
     <>

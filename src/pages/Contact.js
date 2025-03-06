@@ -1,6 +1,31 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const form = useRef();
+  const [status, setStatus] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus('sending');
+
+    emailjs.sendForm(
+      'service_qqxqwzp', // Your EmailJS service ID
+      'template_qqxqwzp', // Your EmailJS template ID
+      form.current,
+      'Uc7jLGmg8Uz3PgHYA' // Your EmailJS public key
+    )
+    .then((result) => {
+      setStatus('success');
+      form.current.reset();
+      setTimeout(() => setStatus(''), 5000);
+    }, (error) => {
+      setStatus('error');
+      console.error('EmailJS Error:', error);
+      setTimeout(() => setStatus(''), 5000);
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 flex flex-col">
       {/* Contact Form Section */}
@@ -10,11 +35,30 @@ const Contact = () => {
             {/* Form Section */}
             <div className="bg-white p-8 rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105">
               <h2 className="text-4xl font-bold mb-6 text-gray-800">Send us a Message</h2>
-              <form className="space-y-6">
+              
+              {/* Status Messages */}
+              {status === 'success' && (
+                <div className="mb-4 p-4 bg-green-100 text-green-700 rounded">
+                  Message sent successfully!
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="mb-4 p-4 bg-red-100 text-red-700 rounded">
+                  Failed to send message. Please try again.
+                </div>
+              )}
+              {status === 'sending' && (
+                <div className="mb-4 p-4 bg-blue-100 text-blue-700 rounded">
+                  Sending message...
+                </div>
+              )}
+
+              <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <input
                       type="text"
+                      name="from_name"
                       placeholder="First Name *"
                       required
                       className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-2 focus:ring-[#00c2ff] transition-all"
@@ -23,6 +67,7 @@ const Contact = () => {
                   <div>
                     <input
                       type="text"
+                      name="last_name"
                       placeholder="Last Name *"
                       required
                       className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-2 focus:ring-[#00c2ff] transition-all"
@@ -33,6 +78,7 @@ const Contact = () => {
                 <div>
                   <input
                     type="email"
+                    name="from_email"
                     placeholder="Email Address *"
                     required
                     className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-2 focus:ring-[#00c2ff] transition-all"
@@ -42,6 +88,7 @@ const Contact = () => {
                 <div>
                   <input
                     type="tel"
+                    name="phone_number"
                     placeholder="Phone Number *"
                     required
                     className="w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:border-[#00c2ff] focus:ring-2 focus:ring-[#00c2ff] transition-all"
@@ -50,6 +97,7 @@ const Contact = () => {
 
                 <div>
                   <textarea
+                    name="message"
                     placeholder="Your Message *"
                     rows="5"
                     required
@@ -60,9 +108,10 @@ const Contact = () => {
                 <div className="mt-4">
                   <button
                     type="submit"
-                    className="w-full py-3 bg-gradient-to-r from-[#00c2ff] to-[#0078ff] text-white rounded-lg hover:from-[#00b3eb] hover:to-[#0066cc] transition-all font-medium transform hover:scale-105"
+                    disabled={status === 'sending'}
+                    className="w-full py-3 bg-gradient-to-r from-[#00c2ff] to-[#0078ff] text-white rounded-lg hover:from-[#00b3eb] hover:to-[#0066cc] transition-all font-medium transform hover:scale-105 disabled:opacity-50"
                   >
-                    Send Message
+                    {status === 'sending' ? 'Sending...' : 'Send Message'}
                   </button>
                 </div>
               </form>
