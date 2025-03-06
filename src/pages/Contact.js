@@ -10,10 +10,10 @@ const Contact = () => {
     setStatus('sending');
 
     emailjs.sendForm(
-      'service_qqxqwzp', // Your EmailJS service ID
-      'template_qqxqwzp', // Your EmailJS template ID
+      'service_8mlreqk', // Your EmailJS service ID
+      'template_gzqy8vm', // Your EmailJS template ID
       form.current,
-      'Uc7jLGmg8Uz3PgHYA' // Your EmailJS public key
+      'HSU9pLEF7KwdhfRSy' // Your EmailJS public key
     )
     .then((result) => {
       setStatus('success');
