@@ -430,53 +430,65 @@ const ComparisonForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowConfetti(true);
+    
+    if (validateStep(currentStep)) {
+      setShowConfetti(true);
 
-    try {
-      // First API call to save form data
-      const formResponse = await fetch('https://api.coverupquotes.co.za/submit-form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          totalPremium: calculateTotalPremium(formData),
-          referenceNumber: `REF-${Date.now().toString().slice(-8)}`
-        }),
-      });
+      try {
+        // First API call to save form data
+        const formResponse = await fetch('https://api.coverupquotes.co.za/submit-form', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...formData,
+            totalPremium: calculateTotalPremium(formData),
+            referenceNumber: `REF-${Date.now().toString().slice(-8)}`
+          }),
+        });
 
-      if (!formResponse.ok) {
-        throw new Error('Form submission failed');
+        if (!formResponse.ok) {
+          throw new Error('Form submission failed');
+        }
+
+        // Second API call to send email notification
+        const emailResponse = await fetch('https://api.coverupquotes.co.za/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            to: formData.email,
+            subject: 'CoverUp Insurance Application Confirmation',
+            name: `${formData.firstName} ${formData.lastName}`,
+            referenceNumber: `REF-${Date.now().toString().slice(-8)}`,
+            selectedPlan: formData.coverAmount,
+            totalPremium: calculateTotalPremium(formData)
+          }),
+        });
+
+        if (!emailResponse.ok) {
+          console.warn('Email notification failed, but form was submitted');
+        }
+
+        // Show success state
+        setIsSubmitted(true);
+        
+      } catch (error) {
+        console.error('Submission error:', error);
+        setErrors(prev => ({
+          ...prev,
+          submission: 'There was an error submitting your application. Please try again.'
+        }));
+        setShowConfetti(false);
       }
-
-      // Second API call to send email notification
-      const emailResponse = await fetch('https://api.coverupquotes.co.za/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          to: formData.email,
-          subject: 'CoverUp Insurance Application Confirmation',
-          name: `${formData.firstName} ${formData.lastName}`,
-          referenceNumber: `REF-${Date.now().toString().slice(-8)}`,
-          selectedPlan: formData.coverAmount,
-          totalPremium: calculateTotalPremium(formData)
-        }),
-      });
-
-      if (!emailResponse.ok) {
-        console.warn('Email notification failed, but form was submitted');
-      }
-
-      // Show success state
-      setIsSubmitted(true);
-      
-    } catch (error) {
-      console.error('Submission error:', error);
-      alert('There was an error submitting your application. Please try again.');
-      setShowConfetti(false);
+    } else {
+      console.log("Validation failed for step:", currentStep);
+      setErrors(prev => ({
+        ...prev,
+        submission: 'Please complete all required fields before submitting.'
+      }));
     }
   };
 
@@ -1339,146 +1351,152 @@ const ComparisonForm = () => {
 
       case 5: // Confirmation Step
         return (
-          <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
-              Confirmation
+          <div className="space-y-8">
+            <h3 className="text-2xl font-bold text-gray-800 mb-6">
+              Review Your Application
             </h3>
 
-            {/* Profile Details Summary */}
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h4 className="text-lg font-semibold text-gray-800 mb-4">
-                Profile Details
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <p>
-                  <span className="font-medium">Title:</span> {formData.title}
-                </p>
-                <p>
-                  <span className="font-medium">Name:</span>{" "}
-                  {formData.firstName} {formData.lastName}
-                </p>
-                <p>
-                  <span className="font-medium">ID Number:</span>{" "}
-                  {formData.idNumber}
-                </p>
-                <p>
-                  <span className="font-medium">Gender:</span> {formData.gender}
-                </p>
-                <p>
-                  <span className="font-medium">Email:</span> {formData.email}
-                </p>
-                <p>
-                  <span className="font-medium">Phone:</span>{" "}
-                  {formData.phoneNumber}
-                </p>
-                <p>
-                  <span className="font-medium">Address:</span>{" "}
-                  {formData.address.street}, {formData.address.suburb},{" "}
-                  {formData.address.city}, {formData.address.province},{" "}
-                  {formData.address.postalCode}
-                </p>
-                <p>
-                  <span className="font-medium">Marital Status:</span>{" "}
-                  {formData.maritalStatus}
-                </p>
-                <p>
-                  <span className="font-medium">Employment Status:</span>{" "}
-                  {formData.employmentStatus}
-                </p>
-                <p>
-                  <span className="font-medium">Monthly Income:</span> R
-                  {formData.monthlyIncome}
-                </p>
+            {/* Selected Plan Summary - Highlighted Box */}
+            <div className="bg-[#00c2ff]/10 p-6 rounded-lg border border-[#00c2ff]/20">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h4 className="text-lg font-semibold text-[#00c2ff]">
+                    Selected Plan
+                  </h4>
+                  {availableCoverOptions
+                    .filter((option) => option.value === formData.coverAmount)
+                    .map((option) => (
+                      <div key={option.value} className="mt-2 space-y-1">
+                        <p className="text-xl font-bold text-gray-800">
+                          {option.provider}
+                        </p>
+                        <p className="text-gray-600">
+                          Base Premium: <span className="font-semibold">R{option.label}/month</span>
+                        </p>
+                        <p className="text-[#00c2ff] font-semibold">
+                          Total Premium: R{calculateTotalPremium(formData)}/month
+                        </p>
+                      </div>
+                    ))}
+                </div>
+                <img 
+                  src="/images/providers/mpiti.png" 
+                  alt="Provider Logo" 
+                  className="w-20 h-20 object-contain"
+                />
               </div>
             </div>
 
-            {/* Policy Details Summary */}
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h4 className="text-lg font-semibold text-gray-800 mb-4">
-                Policy Details
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <p>
-                  <span className="font-medium">Policy Type:</span>{" "}
-                  {formData.policyType}
-                </p>
-                <p>
-                  <span className="font-medium">Premium Frequency:</span>{" "}
-                  {formData.premiumFrequency}
-                </p>
-                <p>
-                  <span className="font-medium">Dependents:</span>{" "}
-                  {formData.dependents}
-                </p>
-              </div>
-            </div>
-
-            {/* Extra Benefits Summary */}
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h4 className="text-lg font-semibold text-gray-800 mb-4">
-                Extra Benefits
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {[
-                  { name: "draping", label: "Draping" },
-                  { name: "mobileToilets", label: "Mobile Toilets" },
-                  { name: "groceryBenefit", label: "Grocery Benefit" },
-                  { name: "mobileFridge", label: "Mobile Fridge" },
-                  { name: "soundSystem", label: "Sound System" },
-                  { name: "videoStreaming", label: "Video Streaming" },
-                  { name: "airtimeAllowance", label: "Airtime Allowance" },
-                  { name: "tombstone", label: "Tombstone" },
-                  { name: "catering", label: "Catering" },
-                  { name: "griefCounselling", label: "Grief Counselling" },
-                  { name: "floralArrangements", label: "Floral Arrangements" },
-                  { name: "urns", label: "Urns" },
-                  { name: "funeralPrograms", label: "Funeral Programs" },
-                  { name: "graveLiners", label: "Grave Liners" },
-                  { name: "graveDigging", label: "Grave Digging" },
-                ].map((service) => (
-                  <p key={service.name}>
-                    <span className="font-medium">{service.label}:</span>{" "}
-                    {formData[service.name] ? "Yes" : "No"}
-                  </p>
-                ))}
-              </div>
-            </div>
-
-            {/* Cover Options Summary */}
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h4 className="text-lg font-semibold text-gray-800 mb-4">
-                Selected Cover Option
-              </h4>
-              {availableCoverOptions
-                .filter((option) => option.value === formData.coverAmount)
-                .map((option) => (
-                  <div key={option.value} className="space-y-2">
-                    <p>
-                      <span className="font-medium">Provider:</span>{" "}
-                      {option.provider}
-                    </p>
-                    <p>
-                      <span className="font-medium">Cover Amount:</span> R
-                      {option.label}/month
-                    </p>
-                    <p>
-                      <span className="font-medium">Features:</span>{" "}
-                      {option.features.join(", ")}
-                    </p>
+            {/* Main Details Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Personal Information */}
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                  <svg className="w-5 h-5 text-[#00c2ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  Personal Information
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Full Name:</span>
+                    <span className="font-medium">{formData.firstName} {formData.lastName}</span>
                   </div>
-                ))}
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">ID Number:</span>
+                    <span className="font-medium">{formData.idNumber}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Email:</span>
+                    <span className="font-medium">{formData.email}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Phone:</span>
+                    <span className="font-medium">{formData.phoneNumber}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Address Information */}
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                  <svg className="w-5 h-5 text-[#00c2ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  Address Details
+                </h4>
+                <div className="space-y-3">
+                  <p className="text-gray-600">
+                    {formData.address.street},<br />
+                    {formData.address.suburb},<br />
+                    {formData.address.city},<br />
+                    {formData.address.province}, {formData.address.postalCode}
+                  </p>
+                </div>
+              </div>
+
+              {/* Selected Extras */}
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                  <svg className="w-5 h-5 text-[#00c2ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                  Selected Extra Benefits
+                </h4>
+                <div className="grid grid-cols-2 gap-3">
+                  {Object.entries(formData)
+                    .filter(([key, value]) => typeof value === 'boolean' && value === true)
+                    .map(([key]) => (
+                      <div key={key} className="flex items-center gap-2">
+                        <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-gray-600">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                      </div>
+                    ))}
+                </div>
+              </div>
+
+              {/* Policy Details */}
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                  <svg className="w-5 h-5 text-[#00c2ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Policy Details
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Policy Type:</span>
+                    <span className="font-medium">{formData.policyType}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Premium Frequency:</span>
+                    <span className="font-medium">{formData.premiumFrequency}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Dependents:</span>
+                    <span className="font-medium">{formData.dependents}</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Confirmation Message */}
-            <div className="bg-green-50 p-6 rounded-lg shadow-sm">
-              <h4 className="text-lg font-semibold text-green-800 mb-4">
-                Thank You!
-              </h4>
-              <p className="text-green-700">
-                Please review your details above. If everything is correct,
-                click <span className="font-semibold">Submit</span> to complete
-                your application.
-              </p>
+            {/* Terms and Confirmation */}
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 mt-1">
+                  <svg className="w-5 h-5 text-[#00c2ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <p className="text-sm text-gray-600">
+                  By clicking Submit, you confirm that all the information provided is accurate and complete. 
+                  You understand that any false information may result in your application being rejected or 
+                  your policy being voided.
+                </p>
+              </div>
             </div>
           </div>
         );
@@ -1488,71 +1506,87 @@ const ComparisonForm = () => {
     }
   };
 
-  // Add this success view component
-  const SuccessView = () => (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg text-center relative">
-        {/* Success Icon */}
-        <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
-          <svg
-            className="w-16 h-16 text-green-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </div>
-
-        {/* Success Message */}
-        <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Application Submitted!
-          </h2>
-          <p className="mt-2 text-lg text-gray-600">
-            Thank you for choosing CoverUp. We'll be in touch with you shortly.
-          </p>
-        </div>
-
-        {/* Reference Number */}
-        <div className="bg-gray-50 p-4 rounded-lg">
-          <p className="text-sm text-gray-500">Reference Number</p>
-          <p className="text-lg font-semibold text-gray-700">
-            {`REF-${Date.now().toString().slice(-8)}`}
-          </p>
-        </div>
-
-        {/* Action Button */}
-        <div className="mt-6">
-          <button
-            onClick={() => window.location.href = '/'}
-            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#00c2ff] hover:bg-[#00b3eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00c2ff]"
-          >
-            Return to Home
-          </button>
-        </div>
-
-        {/* Additional Info */}
-        <div className="mt-4 text-sm text-gray-500">
-          <p>A confirmation email has been sent to your inbox.</p>
-          <p className="mt-2">
-            Need help? Contact us at{" "}
-            <a
-              href="mailto:support@coverup.co.za"
-              className="text-[#00c2ff] hover:text-[#00b3eb]"
+  // Update the SuccessView component to include the reference number from form data
+  const SuccessView = () => {
+    const referenceNumber = `REF-${Date.now().toString().slice(-8)}`;
+    
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg text-center relative">
+          {/* Success Icon */}
+          <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
+            <svg
+              className="w-16 h-16 text-green-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              support@coverup.co.za
-            </a>
-          </p>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+
+          {/* Success Message */}
+          <div className="text-center">
+            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+              Application Submitted!
+            </h2>
+            <p className="mt-2 text-lg text-gray-600">
+              Thank you for choosing CoverUp. We'll be in touch with you shortly.
+            </p>
+          </div>
+
+          {/* Reference Number */}
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-500">Reference Number</p>
+            <p className="text-lg font-semibold text-gray-700">
+              {referenceNumber}
+            </p>
+          </div>
+
+          {/* Selected Plan Details */}
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-500">Selected Plan</p>
+            <p className="text-lg font-semibold text-gray-700">
+              {formData.coverAmount}
+            </p>
+            <p className="text-sm text-gray-500 mt-2">Monthly Premium</p>
+            <p className="text-lg font-semibold text-[#00c2ff]">
+              R{calculateTotalPremium(formData)}
+            </p>
+          </div>
+
+          {/* Action Button */}
+          <div className="mt-6">
+            <button
+              onClick={() => window.location.href = '/'}
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#00c2ff] hover:bg-[#00b3eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00c2ff]"
+            >
+              Return to Home
+            </button>
+          </div>
+
+          {/* Additional Info */}
+          <div className="mt-4 text-sm text-gray-500">
+            <p>A confirmation email has been sent to your inbox.</p>
+            <p className="mt-2">
+              Need help? Contact us at{" "}
+              <a
+                href="mailto:support@coverup.co.za"
+                className="text-[#00c2ff] hover:text-[#00b3eb]"
+              >
+                support@coverup.co.za
+              </a>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   // Add this function to calculate total premium
   const calculateTotalPremium = (formData, changedService = null, newValue = null) => {
@@ -1591,37 +1625,54 @@ const ComparisonForm = () => {
           {/* Main content container */}
           <div className="max-w-3xl mx-auto w-full relative z-10">
             {/* Progress Steps */}
-            <div className="mb-8 w-full">
-              <div className="flex justify-between items-center">
-                {steps.map((step, index) => (
-                  <div key={step.number} className="flex-1 relative">
-                    <div className="flex flex-col">
-                      <div className="flex items-center  w-full">
-                        <div
-                          className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            currentStep >= step.number
-                              ? "bg-[#00c2ff] text-white"
-                              : "bg-gray-200 text-gray-500"
-                          }`}
-                        >
-                          {step.number}
+            <div className="mb-12 w-full overflow-x-auto">
+              <div className="min-w-[600px] md:min-w-full">
+                <div className="flex justify-between items-center px-8">
+                  {steps.map((step, index) => (
+                    <div key={step.number} className="flex-1 relative">
+                      <div className="flex flex-col items-center">
+                        {/* Progress Bar and Circle */}
+                        <div className="flex items-center w-full">
+                          {/* Step Circle */}
+                          <div className="relative flex items-center justify-center w-full">
+                            <div
+                              className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm 
+                                ${currentStep >= step.number
+                                  ? "bg-[#00c2ff] text-white"
+                                  : "bg-gray-200 text-gray-500"
+                                } shadow-sm z-10`}
+                            >
+                              {step.number}
+                            </div>
+                            {/* Progress Line */}
+                            {index < steps.length - 1 && (
+                              <div
+                                className={`absolute top-1/2 left-1/2 w-full h-1 -translate-y-1/2 
+                                  ${currentStep > step.number
+                                    ? "bg-[#00c2ff]"
+                                    : "bg-gray-200"
+                                  }`}
+                              />
+                            )}
+                          </div>
                         </div>
-                        <div
-                          className={`flex-1 h-1 ${
-                            index < steps.length - 1
-                              ? currentStep > step.number
-                                ? "bg-[#00c2ff]"
-                                : "bg-gray-200"
-                              : "hidden"
-                          }`}
-                        />
-                      </div>
-                      <div className="text-sm mt-2 font-bold text-gray-700 ml-0">
-                        {step.title}
+                        
+                        {/* Step Title */}
+                        <div className="mt-4 text-center w-full">
+                          <span 
+                            className={`text-xs sm:text-sm font-medium block px-2
+                              ${currentStep >= step.number
+                                ? "text-black"
+                                : "text-black"
+                              }`}
+                          >
+                            {step.title}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 
