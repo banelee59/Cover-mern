@@ -506,52 +506,57 @@ const ComparisonForm = () => {
 
   const validateStep = (step) => {
     const newErrors = {};
+    console.log('Validating step:', step);
+    console.log('Current form data:', formData);
 
     switch (step) {
       case 1:
         // Profile Details validation
-        if (!formData.title) newErrors.title = "Title is required";
-        if (!formData.firstName) newErrors.firstName = "First name is required";
-        if (!formData.lastName) newErrors.lastName = "Last name is required";
-        if (!validateIdNumber(formData.idNumber)) {
-          newErrors.idNumber =
-            "Please enter a valid 13-digit South African ID number";
+        if (!formData.title?.trim()) newErrors.title = "Title is required";
+        if (!formData.firstName?.trim()) newErrors.firstName = "First name is required";
+        if (!formData.lastName?.trim()) newErrors.lastName = "Last name is required";
+        if (!formData.idNumber?.trim() || !validateIdNumber(formData.idNumber)) {
+          newErrors.idNumber = "Please enter a valid 13-digit South African ID number";
         }
-        if (!formData.gender) newErrors.gender = "Gender is required";
-        if (!validateEmail(formData.email)) {
+        if (!formData.gender?.trim()) newErrors.gender = "Gender is required";
+        if (!formData.email?.trim() || !validateEmail(formData.email)) {
           newErrors.email = "Please enter a valid email address";
         }
-        if (!validatePhoneNumber(formData.phoneNumber)) {
-          newErrors.phoneNumber =
-            "Please enter a valid South African phone number";
+        if (!formData.phoneNumber?.trim() || !validatePhoneNumber(formData.phoneNumber)) {
+          newErrors.phoneNumber = "Please enter a valid South African phone number";
         }
+        // Make address fields optional
         break;
 
       case 2:
         // Policy Details validation
-        if (!formData.policyType)
+        if (!formData.policyType?.trim()) {
           newErrors.policyType = "Policy type is required";
-        if (!formData.premiumFrequency)
+        }
+        if (!formData.premiumFrequency?.trim()) {
           newErrors.premiumFrequency = "Premium frequency is required";
-        if (!formData.dependents && formData.dependents !== 0) {
+        }
+        // Allow dependents to be 0
+        if (formData.dependents === "" || formData.dependents === undefined) {
           newErrors.dependents = "Number of dependents is required";
         }
         break;
 
       case 3:
-        // Extra Services validation - no required fields, can proceed
+        // Extra Services validation - no required fields
         break;
 
       case 4:
-        // Cover Options validation
-        if (!formData.coverAmount)
-          newErrors.coverAmount = "Please select a cover amount";
+      //  if (!formData.coverAmount || isNaN(formData.coverAmount) || formData.coverAmount <= 0) {
+      //     newErrors.coverAmount = "Please select a valid cover amount";
+      //   }
         break;
 
       default:
         break;
     }
 
+    console.log('Validation errors:', newErrors);
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -1497,6 +1502,47 @@ const ComparisonForm = () => {
                   your policy being voided.
                 </p>
               </div>
+            </div>
+          </div>
+        );
+
+        case 6: // Success Step
+        const referenceNumber = `REF-${Date.now().toString().slice(-8)}`;
+        return (
+          <div className="text-center space-y-6 py-8">
+            <div className="w-16 h-16 bg-green-100 rounded-full mx-auto flex items-center justify-center">
+              <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            
+            <h3 className="text-2xl font-bold text-gray-800">
+              Application Successfully Submitted!
+            </h3>
+            
+            <div className="bg-gray-50 p-6 rounded-lg max-w-md mx-auto">
+              <p className="text-gray-600 mb-4">
+                Thank you for choosing CoverUp Insurance. Your application has been received and is being processed.
+              </p>
+              
+              <div className="bg-white p-4 rounded-lg border border-gray-200">
+                <p className="text-sm text-gray-500">Your Reference Number</p>
+                <p className="text-xl font-bold text-[#00c2ff]">{referenceNumber}</p>
+              </div>
+            </div>
+            
+            <div className="text-sm text-gray-600 space-y-2">
+              <p>A confirmation email has been sent to {formData.email}</p>
+              <p>Please keep your reference number for future correspondence.</p>
+            </div>
+            
+            <div className="mt-8">
+              <button
+                onClick={() => window.location.reload()}
+                className="px-6 py-2 bg-[#00c2ff] text-white rounded-lg hover:bg-[#00b3eb] transition-colors"
+              >
+                Start New Application
+              </button>
             </div>
           </div>
         );
