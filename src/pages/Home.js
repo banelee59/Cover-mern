@@ -407,6 +407,55 @@ const Home = () => {
           </div>
         </section>
 
+
+
+        
+                  {/* Companies We've Worked With Section */}
+          <section className="companies-section py-12 bg-gray-50">
+            <div className="section-container">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
+                  COMPANIES WE'VE WORKED WITH
+                </h2>
+              </div>
+              <div className="flex flex-wrap justify-center items-center gap-8">
+                <img
+                  src="/images/coca-cola.jpg"
+                  alt="Coca-Cola"
+                  className="w-32 h-32 object-contain"
+                />
+                <img
+                  src="/images/cisco.jpg"
+                  alt="CISCO"
+                  className="w-32 h-32 object-contain"
+                />
+                <img
+                  src="/images/google.png"
+                  alt="Google"
+                  className="w-32 h-32 object-contain"
+                />
+                <img
+                  src="/images/amazon-logo.png"
+                  alt="Amazon"
+                  className="w-32 h-32 object-contain"
+                />
+                <img
+                  src="/images/Barclays-Logo.jpg"
+                  alt="Barclays"
+                  className="w-32 h-32 object-contain"
+                />
+                <img
+                  src="/images/standard-bank-vector-logo.png"
+                  alt="Standard Bank"
+                  className="w-32 h-32 object-contain"
+                />
+              </div>
+            </div>
+          </section>
+
+
+
+
         {/* Footer */}
         <footer>
           <div className="footer-content">
