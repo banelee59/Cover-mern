@@ -435,7 +435,7 @@ const Home = () => {
                   className="w-32 h-32 object-contain"
                 />
                 <img
-                  src="/images/amazon-logo.png"
+                  src="/images/Amazon-logo.png"
                   alt="Amazon"
                   className="w-32 h-32 object-contain"
                 />
