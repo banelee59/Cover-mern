@@ -14,6 +14,29 @@ const FuneralParlorRegistration = () => {
     { number: 6, title: "Declaration" }
   ];
 
+  const ASSOCIATIONS = [
+    'NFDA (National Funeral Directors Association)',
+    'SAFPA (South African Funeral Practitioners Association)',
+    'FFSA (Funeral Federation of South Africa)',
+    'NAFUPA (National Funeral Practitioners Association)',
+    'SAFPS (South African Funeral Parlour Society)',
+    'Other'
+  ];
+
+  const REGIONS = [
+    'Johannesburg North',
+    'Johannesburg South',
+    'Johannesburg East',
+    'Johannesburg West',
+    'Pretoria',
+    'East Rand',
+    'West Rand',
+    'Vaal Triangle',
+    'Soweto',
+    'Alexandra',
+    'Other Gauteng Regions'
+  ];
+
   const [formData, setFormData] = useState({
     // Business Details
     businessName: '',
@@ -22,6 +45,8 @@ const FuneralParlorRegistration = () => {
     vatNumber: '',
     businessType: '',
     dateEstablished: '',
+    association: '',
+    operatingRegion: '',
     
     // Contact Details
     contactPerson: {
@@ -130,7 +155,9 @@ const FuneralParlorRegistration = () => {
           { name: 'businessName' },
           { name: 'registrationNumber' },
           { name: 'businessType' },
-          { name: 'dateEstablished' }
+          { name: 'dateEstablished' },
+          { name: 'association' },
+          { name: 'operatingRegion' }
         ];
       case 2: // Contact Details
         return [
@@ -602,6 +629,44 @@ const FuneralParlorRegistration = () => {
           {errors.dateEstablished && touched.dateEstablished && (
             <p className="mt-1 text-sm text-red-600">{errors.dateEstablished}</p>
           )}
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Funeral Association*
+          </label>
+          <select
+            name="association"
+            value={formData.association}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+            required
+          >
+            <option value="">Select Association</option>
+            {ASSOCIATIONS.map((association) => (
+              <option key={association} value={association}>
+                {association}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Primary Operating Region*
+          </label>
+          <select
+            name="operatingRegion"
+            value={formData.operatingRegion}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+            required
+          >
+            <option value="">Select Region</option>
+            {REGIONS.map((region) => (
+              <option key={region} value={region}>
+                {region}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     </div>

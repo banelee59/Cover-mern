@@ -508,7 +508,7 @@ const ComparisonForm = () => {
     const newErrors = {};
     console.log('Validating step:', step);
     console.log('Current form data:', formData);
-
+    
     switch (step) {
       case 1:
         // Profile Details validation
