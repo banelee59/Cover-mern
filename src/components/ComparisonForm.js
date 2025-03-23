@@ -407,9 +407,8 @@ const ComparisonForm = () => {
             setFormData((prev) => ({
               ...prev,
               address: {
-                street: `${addressComponents.street_number || ''} ${
-                  addressComponents.route || ''
-                }`.trim(),
+                street: `${addressComponents.street_number || ''} ${addressComponents.route || ''
+                  }`.trim(),
                 suburb: addressComponents.sublocality || '',
                 city: addressComponents.locality || '',
                 province: addressComponents.administrative_area_level_1 || '',
@@ -428,15 +427,17 @@ const ComparisonForm = () => {
     setSuggestions([]);
   };
 
+  const [referenceNumber, setReferenceNumber] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (validateStep(currentStep)) {
       setShowConfetti(true);
 
       try {
         // First API call to save form data
-        const formResponse = await fetch('https://api.coverupquotes.co.za/submit-form', {
+        const formResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/submit-application`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -444,7 +445,6 @@ const ComparisonForm = () => {
           body: JSON.stringify({
             ...formData,
             totalPremium: calculateTotalPremium(formData),
-            referenceNumber: `REF-${Date.now().toString().slice(-8)}`
           }),
         });
 
@@ -452,8 +452,11 @@ const ComparisonForm = () => {
           throw new Error('Form submission failed');
         }
 
+        const responseData = await formResponse.json();
+        setReferenceNumber(responseData.referenceNumber);
+
         // Second API call to send email notification
-        const emailResponse = await fetch('https://api.coverupquotes.co.za/send-email', {
+        const emailResponse = await fetch(`${process.env.REACT_APP_API_URL}/send-email`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -474,7 +477,7 @@ const ComparisonForm = () => {
 
         // Show success state
         setIsSubmitted(true);
-        
+
       } catch (error) {
         console.error('Submission error:', error);
         setErrors(prev => ({
@@ -497,7 +500,7 @@ const ComparisonForm = () => {
       if (currentStep < totalSteps) {
         setCurrentStep((prev) => prev + 1);
         console.log("Moving to step:", currentStep + 1);
-        
+
       }
     } else {
       console.log("Validation failed for step:", currentStep);
@@ -508,7 +511,7 @@ const ComparisonForm = () => {
     const newErrors = {};
     console.log('Validating step:', step);
     console.log('Current form data:', formData);
-    
+
     switch (step) {
       case 1:
         // Profile Details validation
@@ -547,9 +550,9 @@ const ComparisonForm = () => {
         break;
 
       case 4:
-      //  if (!formData.coverAmount || isNaN(formData.coverAmount) || formData.coverAmount <= 0) {
-      //     newErrors.coverAmount = "Please select a valid cover amount";
-      //   }
+        //  if (!formData.coverAmount || isNaN(formData.coverAmount) || formData.coverAmount <= 0) {
+        //     newErrors.coverAmount = "Please select a valid cover amount";
+        //   }
         break;
 
       default:
@@ -624,9 +627,8 @@ const ComparisonForm = () => {
                   name="title"
                   value={formData.title}
                   onChange={handleChange}
-                  className={`w-full p-2 border ${
-                    errors.title ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  className={`w-full p-2 border ${errors.title ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
                   required
                 >
                   <option value="">Select</option>
@@ -646,9 +648,8 @@ const ComparisonForm = () => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className={`w-full p-2 border ${
-                    errors.firstName ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  className={`w-full p-2 border ${errors.firstName ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
                   required
                 />
                 {renderError("firstName")}
@@ -662,9 +663,8 @@ const ComparisonForm = () => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className={`w-full p-2 border ${
-                    errors.lastName ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  className={`w-full p-2 border ${errors.lastName ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
                   required
                 />
                 {renderError("lastName")}
@@ -681,9 +681,8 @@ const ComparisonForm = () => {
                   name="idNumber"
                   value={formData.idNumber}
                   onChange={handleChange}
-                  className={`w-full p-2 border ${
-                    errors.idNumber ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  className={`w-full p-2 border ${errors.idNumber ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
                   required
                 />
                 {renderError("idNumber")}
@@ -696,9 +695,8 @@ const ComparisonForm = () => {
                   name="gender"
                   value={formData.gender}
                   onChange={handleChange}
-                  className={`w-full p-2 border ${
-                    errors.gender ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  className={`w-full p-2 border ${errors.gender ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
                   required
                 >
                   <option value="">Select</option>
@@ -719,9 +717,8 @@ const ComparisonForm = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full p-2 border ${
-                    errors.email ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  className={`w-full p-2 border ${errors.email ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
                   required
                 />
                 {renderError("email")}
@@ -735,9 +732,8 @@ const ComparisonForm = () => {
                   name="phoneNumber"
                   value={formData.phoneNumber}
                   onChange={handleChange}
-                  className={`w-full p-2 border ${
-                    errors.phoneNumber ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  className={`w-full p-2 border ${errors.phoneNumber ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
                   required
                 />
                 {renderError("phoneNumber")}
@@ -1046,7 +1042,7 @@ const ComparisonForm = () => {
               {/* Total Premium Display */}
               <div className="mt-6 p-4 bg-gray-50 rounded-lg">
                 <p className="text-lg font-semibold text-gray-800">
-                  Total Monthly Premium: 
+                  Total Monthly Premium:
                   <span className="text-[#00c2ff] ml-2">
                     R{calculateTotalPremium(formData)}
                   </span>
@@ -1098,7 +1094,7 @@ const ComparisonForm = () => {
                 </button>
               </div>
             </div>
-            
+
             {formData.address.province ? (
               <>
                 <div className="grid gap-6">
@@ -1206,11 +1202,10 @@ const ComparisonForm = () => {
                             ? "Hide Details"
                             : "Show More Details"}
                           <svg
-                            className={`w-3 h-3 transition-transform ${
-                              selectedOptionDetails === option.provider
+                            className={`w-3 h-3 transition-transform ${selectedOptionDetails === option.provider
                                 ? "rotate-180"
                                 : ""
-                            }`}
+                              }`}
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -1327,7 +1322,7 @@ const ComparisonForm = () => {
                     </div>
                   ))}
                 </div>
-                
+
                 {/* No Results Message */}
                 {getFilteredOptions().length === 0 && (
                   <div className="text-center py-8">
@@ -1384,9 +1379,9 @@ const ComparisonForm = () => {
                       </div>
                     ))}
                 </div>
-                <img 
-                  src="/images/providers/mpiti.png" 
-                  alt="Provider Logo" 
+                <img
+                  src="/images/providers/mpiti.png"
+                  alt="Provider Logo"
                   className="w-20 h-20 object-contain"
                 />
               </div>
@@ -1497,8 +1492,8 @@ const ComparisonForm = () => {
                   </svg>
                 </div>
                 <p className="text-sm text-gray-600">
-                  By clicking Submit, you confirm that all the information provided is accurate and complete. 
-                  You understand that any false information may result in your application being rejected or 
+                  By clicking Submit, you confirm that all the information provided is accurate and complete.
+                  You understand that any false information may result in your application being rejected or
                   your policy being voided.
                 </p>
               </div>
@@ -1506,8 +1501,7 @@ const ComparisonForm = () => {
           </div>
         );
 
-        case 6: // Success Step
-        const referenceNumber = `REF-${Date.now().toString().slice(-8)}`;
+      case 6: // Success Step
         return (
           <div className="text-center space-y-6 py-8">
             <div className="w-16 h-16 bg-green-100 rounded-full mx-auto flex items-center justify-center">
@@ -1515,27 +1509,27 @@ const ComparisonForm = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            
+
             <h3 className="text-2xl font-bold text-gray-800">
               Application Successfully Submitted!
             </h3>
-            
+
             <div className="bg-gray-50 p-6 rounded-lg max-w-md mx-auto">
               <p className="text-gray-600 mb-4">
                 Thank you for choosing CoverUp Insurance. Your application has been received and is being processed.
               </p>
-              
+
               <div className="bg-white p-4 rounded-lg border border-gray-200">
                 <p className="text-sm text-gray-500">Your Reference Number</p>
                 <p className="text-xl font-bold text-[#00c2ff]">{referenceNumber}</p>
               </div>
             </div>
-            
+
             <div className="text-sm text-gray-600 space-y-2">
               <p>A confirmation email has been sent to {formData.email}</p>
               <p>Please keep your reference number for future correspondence.</p>
             </div>
-            
+
             <div className="mt-8">
               <button
                 onClick={() => window.location.reload()}
@@ -1552,92 +1546,90 @@ const ComparisonForm = () => {
     }
   };
 
-    // Update the SuccessView component to include the reference number from form data
-    const SuccessView = () => {
-      const referenceNumber = `REF-${Date.now().toString().slice(-8)}`;
-      
-      return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg text-center relative">
-            {/* Success Icon */}
-            <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
-              <svg
-                className="w-16 h-16 text-green-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+  // Update the SuccessView component to include the reference number from form data
+  const SuccessView = () => {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg text-center relative">
+          {/* Success Icon */}
+          <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
+            <svg
+              className="w-16 h-16 text-green-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+
+          {/* Success Message */}
+          <div className="text-center">
+            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+              Application Submitted!
+            </h2>
+            <p className="mt-2 text-lg text-gray-600">
+              Thank you for choosing CoverUp. We'll be in touch with you shortly.
+            </p>
+          </div>
+
+          {/* Reference Number */}
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-500">Reference Number</p>
+            <p className="text-lg font-semibold text-gray-700">
+              {referenceNumber}
+            </p>
+          </div>
+
+          {/* Selected Plan Details */}
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-500">Selected Plan</p>
+            <p className="text-lg font-semibold text-gray-700">
+              {formData.coverAmount}
+            </p>
+            <p className="text-sm text-gray-500 mt-2">Monthly Premium</p>
+            <p className="text-lg font-semibold text-[#00c2ff]">
+              R{calculateTotalPremium(formData)}
+            </p>
+          </div>
+
+          {/* Action Button */}
+          <div className="mt-6">
+            <button
+              onClick={() => window.location.href = '/'}
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#00c2ff] hover:bg-[#00b3eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00c2ff]"
+            >
+              Return to Home
+            </button>
+          </div>
+
+          {/* Additional Info */}
+          <div className="mt-4 text-sm text-gray-500">
+            <p>A confirmation email has been sent to your inbox.</p>
+            <p className="mt-2">
+              Need help? Contact us at{" "}
+              <a
+                href="mailto:support@coverup.co.za"
+                className="text-[#00c2ff] hover:text-[#00b3eb]"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-
-            {/* Success Message */}
-            <div className="text-center">
-              <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-                Application Submitted!
-              </h2>
-              <p className="mt-2 text-lg text-gray-600">
-                Thank you for choosing CoverUp. We'll be in touch with you shortly.
-              </p>
-            </div>
-
-            {/* Reference Number */}
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-500">Reference Number</p>
-              <p className="text-lg font-semibold text-gray-700">
-                {referenceNumber}
-              </p>
-            </div>
-
-            {/* Selected Plan Details */}
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-500">Selected Plan</p>
-              <p className="text-lg font-semibold text-gray-700">
-                {formData.coverAmount}
-              </p>
-              <p className="text-sm text-gray-500 mt-2">Monthly Premium</p>
-              <p className="text-lg font-semibold text-[#00c2ff]">
-                R{calculateTotalPremium(formData)}
-              </p>
-            </div>
-
-            {/* Action Button */}
-            <div className="mt-6">
-              <button
-                onClick={() => window.location.href = '/'}
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#00c2ff] hover:bg-[#00b3eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00c2ff]"
-              >
-                Return to Home
-              </button>
-            </div>
-
-            {/* Additional Info */}
-            <div className="mt-4 text-sm text-gray-500">
-              <p>A confirmation email has been sent to your inbox.</p>
-              <p className="mt-2">
-                Need help? Contact us at{" "}
-                <a
-                  href="mailto:support@coverup.co.za"
-                  className="text-[#00c2ff] hover:text-[#00b3eb]"
-                >
-                  support@coverup.co.za
-                </a>
-              </p>
-            </div>
+                support@coverup.co.za
+              </a>
+            </p>
           </div>
         </div>
-      );
-    };
+      </div>
+    );
+  };
 
   // Add this function to calculate total premium
   const calculateTotalPremium = (formData, changedService = null, newValue = null) => {
     let basePremium = parseInt(formData.coverAmount?.label || 0);
-    
+
     let extrasCost = 0;
     extraServices.forEach(service => {
       if (service.name === changedService ? newValue : formData[service.name]) {
@@ -1654,7 +1646,7 @@ const ComparisonForm = () => {
       {isSubmitted ? (
         <SuccessView />
       ) : (
-        <div 
+        <div
           className="min-h-screen flex flex-col py-12 px-4 sm:px-6 lg:px-8 relative"
           style={{
             backgroundImage: 'url("/images/greeny.png")',
@@ -1667,7 +1659,7 @@ const ComparisonForm = () => {
         >
           {/* Update the overlay to be more transparent */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-50/40 to-indigo-50/40"></div>
-          
+
           {/* Main content container */}
           <div className="max-w-3xl mx-auto w-full relative z-10">
             {/* Progress Steps */}
@@ -1702,10 +1694,10 @@ const ComparisonForm = () => {
                             )}
                           </div>
                         </div>
-                        
+
                         {/* Step Title */}
                         <div className="mt-4 text-center w-full">
-                          <span 
+                          <span
                             className={`text-xs sm:text-sm font-medium block px-2
                               ${currentStep >= step.number
                                 ? "text-black"
