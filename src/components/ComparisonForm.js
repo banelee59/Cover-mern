@@ -1552,87 +1552,87 @@ const ComparisonForm = () => {
     }
   };
 
-  // Update the SuccessView component to include the reference number from form data
-  const SuccessView = () => {
-    const referenceNumber = `REF-${Date.now().toString().slice(-8)}`;
-    
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg text-center relative">
-          {/* Success Icon */}
-          <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
-            <svg
-              className="w-16 h-16 text-green-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </div>
-
-          {/* Success Message */}
-          <div className="text-center">
-            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-              Application Submitted!
-            </h2>
-            <p className="mt-2 text-lg text-gray-600">
-              Thank you for choosing CoverUp. We'll be in touch with you shortly.
-            </p>
-          </div>
-
-          {/* Reference Number */}
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-500">Reference Number</p>
-            <p className="text-lg font-semibold text-gray-700">
-              {referenceNumber}
-            </p>
-          </div>
-
-          {/* Selected Plan Details */}
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-500">Selected Plan</p>
-            <p className="text-lg font-semibold text-gray-700">
-              {formData.coverAmount}
-            </p>
-            <p className="text-sm text-gray-500 mt-2">Monthly Premium</p>
-            <p className="text-lg font-semibold text-[#00c2ff]">
-              R{calculateTotalPremium(formData)}
-            </p>
-          </div>
-
-          {/* Action Button */}
-          <div className="mt-6">
-            <button
-              onClick={() => window.location.href = '/'}
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#00c2ff] hover:bg-[#00b3eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00c2ff]"
-            >
-              Return to Home
-            </button>
-          </div>
-
-          {/* Additional Info */}
-          <div className="mt-4 text-sm text-gray-500">
-            <p>A confirmation email has been sent to your inbox.</p>
-            <p className="mt-2">
-              Need help? Contact us at{" "}
-              <a
-                href="mailto:support@coverup.co.za"
-                className="text-[#00c2ff] hover:text-[#00b3eb]"
+    // Update the SuccessView component to include the reference number from form data
+    const SuccessView = () => {
+      const referenceNumber = `REF-${Date.now().toString().slice(-8)}`;
+      
+      return (
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg text-center relative">
+            {/* Success Icon */}
+            <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
+              <svg
+                className="w-16 h-16 text-green-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                support@coverup.co.za
-              </a>
-            </p>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+
+            {/* Success Message */}
+            <div className="text-center">
+              <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+                Application Submitted!
+              </h2>
+              <p className="mt-2 text-lg text-gray-600">
+                Thank you for choosing CoverUp. We'll be in touch with you shortly.
+              </p>
+            </div>
+
+            {/* Reference Number */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-sm text-gray-500">Reference Number</p>
+              <p className="text-lg font-semibold text-gray-700">
+                {referenceNumber}
+              </p>
+            </div>
+
+            {/* Selected Plan Details */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-sm text-gray-500">Selected Plan</p>
+              <p className="text-lg font-semibold text-gray-700">
+                {formData.coverAmount}
+              </p>
+              <p className="text-sm text-gray-500 mt-2">Monthly Premium</p>
+              <p className="text-lg font-semibold text-[#00c2ff]">
+                R{calculateTotalPremium(formData)}
+              </p>
+            </div>
+
+            {/* Action Button */}
+            <div className="mt-6">
+              <button
+                onClick={() => window.location.href = '/'}
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#00c2ff] hover:bg-[#00b3eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00c2ff]"
+              >
+                Return to Home
+              </button>
+            </div>
+
+            {/* Additional Info */}
+            <div className="mt-4 text-sm text-gray-500">
+              <p>A confirmation email has been sent to your inbox.</p>
+              <p className="mt-2">
+                Need help? Contact us at{" "}
+                <a
+                  href="mailto:support@coverup.co.za"
+                  className="text-[#00c2ff] hover:text-[#00b3eb]"
+                >
+                  support@coverup.co.za
+                </a>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    );
-  };
+      );
+    };
 
   // Add this function to calculate total premium
   const calculateTotalPremium = (formData, changedService = null, newValue = null) => {
