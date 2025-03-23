@@ -7,24 +7,25 @@ const formSubmissionSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   idNumber: { type: String, required: true },
   gender: { type: String, required: true },
+  dateOfBirth: { type: String }, // Added dateOfBirth field
   email: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   alternativeNumber: String,
   address: {
-    street: { type: String, required: true },
-    suburb: { type: String, required: true },
-    city: { type: String, required: true },
-    province: { type: String, required: true },
-    postalCode: { type: String, required: true }
+    street: { type: String },  // Removed required since empty string is allowed
+    suburb: { type: String },  // Removed required since empty string is allowed
+    city: { type: String },    // Removed required since empty string is allowed
+    province: { type: String }, // Removed required since empty string is allowed
+    postalCode: { type: String } // Removed required since empty string is allowed
   },
-  maritalStatus: { type: String, required: true },
-  employmentStatus: { type: String, required: true },
-  monthlyIncome: { type: String, required: true },
+  maritalStatus: { type: String }, // Removed required since empty string is allowed
+  employmentStatus: { type: String }, // Removed required since empty string is allowed
+  monthlyIncome: { type: String }, // Removed required since empty string is allowed
 
   // Policy Details
   policyType: { type: String, required: true },
   premiumFrequency: { type: String, required: true },
-  dependents: { type: Number, required: true },
+  dependents: { type: String, required: true }, // Changed to String type to match the data
 
   // Extra Benefits
   draping: { type: Boolean, default: false },
@@ -44,11 +45,15 @@ const formSubmissionSchema = new mongoose.Schema({
   graveDigging: { type: Boolean, default: false },
 
   // Cover Options
-  coverAmount: { type: String, required: true },
+  coverAmount: { type: String }, // Removed required since empty string is allowed
   preferredCoverage: String,
+  
+  // Additional Fields
+  totalPremium: { type: Number, default: 0 }, // Added totalPremium field
+  referenceNumber: { type: String, required: true }, // Added referenceNumber field
 
   // Metadata
   submittedAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('FormSubmission', formSubmissionSchema); 
+module.exports = mongoose.model('FormSubmission', formSubmissionSchema);
