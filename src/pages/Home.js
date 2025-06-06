@@ -1,49 +1,54 @@
 import React, { useState } from 'react';
-import './Home.css';
-import { useNavigate, Link } from 'react-router-dom';
-
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate();
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  const handleGetStarted = () => {
+    console.log('Navigating to get started with:', phoneNumber);
+  };
+
+  const handleNavigation = (path) => {
+    console.log('Navigating to:', path);
+  };
 
   return (
-    <div className="home-container">
-      {/* Toolbar/Navigation */}
-      <nav className="fixed top-0 right-0 left-0 bg-white shadow-md z-50">
+    <div className="min-h-screen">
+      {/* Navigation */}
+      <nav className="fixed top-0 right-0 left-0 bg-transparent z-50">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <span className="text-xl font-bold text-gray-800">
-                COVER<span className="text-[#00c2ff]">UP</span>
+              <span className="text-xl font-bold text-white">
+                Cover<span className="text-[#00c2ff]">Up</span>
               </span>
             </div>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/" className="text-gray-600 hover:text-[#00c2ff] transition-colors">
-                Home
-              </Link>
-              <Link to="/PRODUCTS" className="text-gray-600 hover:text-[#00c2ff] transition-colors">
-                Products
-              </Link>
-              <Link to="/about" className="text-gray-600 hover:text-[#00c2ff] transition-colors">
-                About Us
-              </Link>
-              <Link to="/contact" className="text-gray-600 hover:text-[#00c2ff] transition-colors">
-                Contact Us
-              </Link>
-              <Link to="/get-started" className="px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
-                Get Started
-              </Link>
+              <button onClick={() => handleNavigation('/')} className="text-white hover:text-[#00c2ff] transition-colors">
+                HOME
+              </button>
+              <button onClick={() => handleNavigation('/about')} className="text-white hover:text-[#00c2ff] transition-colors">
+                ABOUT US
+              </button>
+              <button onClick={() => handleNavigation('/benefits')} className="text-white hover:text-[#00c2ff] transition-colors">
+                BENEFITS
+              </button>
+              <button onClick={() => handleNavigation('/contact')} className="text-white hover:text-[#00c2ff] transition-colors">
+                CONTACT
+              </button>
+              <button onClick={() => handleNavigation('/get-started')} className="px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
+                SETUP MY PARLOUR
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-600 hover:text-[#00c2ff] focus:outline-none"
+                className="text-white hover:text-[#00c2ff] focus:outline-none"
               >
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   {isMenuOpen ? (
@@ -60,21 +65,21 @@ const Home = () => {
           {isMenuOpen && (
             <div className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-md">
               <div className="px-2 pt-2 pb-3 space-y-1">
-                <Link to="/" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
-                  Home
-                </Link>
-                <Link to="/PRODUCTS" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
-                  Products
-                </Link>
-                <Link to="/about" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
-                  About Us
-                </Link>
-                <Link to="/contact" className="block px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
-                  Contact Us
-                </Link>
-                <Link to="/get-started" className="w-full mt-2 px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
-                  Get Started
-                </Link>
+                <button onClick={() => handleNavigation('/')} className="block w-full text-left px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
+                  HOME
+                </button>
+                <button onClick={() => handleNavigation('/about')} className="block w-full text-left px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
+                  ABOUT US
+                </button>
+                <button onClick={() => handleNavigation('/benefits')} className="block w-full text-left px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
+                  BENEFITS
+                </button>
+                <button onClick={() => handleNavigation('/contact')} className="block w-full text-left px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
+                  CONTACT
+                </button>
+                <button onClick={() => handleNavigation('/get-started')} className="block w-full mt-2 px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors text-center">
+                  SETUP MY PARLOUR
+                </button>
               </div>
             </div>
           )}
@@ -82,434 +87,332 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <section
-        className="py-4 relative bg-cover flex items-center justify-center bg-center"
-        style={{
-          backgroundImage: 'url("/images/home-image1.jpg")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          minHeight: 'calc(100vh - 64px)',
-        }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-10"></div>
-        <div className="container h-full flex items-center justify-center mx-auto px-4 relative py-12 md:py-0">
-          <div className="flex flex-col md:flex-row md:items-end justify-between w-full relative z-10 gap-8">
-            <div className='w-full md:w-5/12'>
-              <div className='w-fit'>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center md:text-left">
-                  Cover Up Quotes
-                </h1>
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#2c5f5f] via-[#3d7373] to-[#4a8c8c]">
+        <div className="container mx-auto px-4 py-20">
+          <div className="flex flex-col lg:flex-row items-center justify-between">
+            {/* Left Content */}
+            <div className="lg:w-1/2 text-white mb-12 lg:mb-0">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                Get burial schemes quotes in under 2 minutes.
+              </h1>
+              <p className="text-lg mb-8 opacity-90 leading-relaxed">
+                Ensure peace of mind knowing that funeral arrangements are taken care of in advance. CoverUp is here to help you find the perfect funeral plan for your needs. Just follow a few simple steps to compare burial scheme quotes.
+              </p>
+              
+              {/* Phone Input */}
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md">
+                <input
+                  type="tel"
+                  placeholder="ENTER YOUR ID NUMBER"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="flex-1 px-4 py-3 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00c2ff]"
+                />
+                <button
+                  onClick={handleGetStarted}
+                  className="px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
+                >
+                  GET STARTED
+                </button>
+              </div>
+            </div>
+
+            {/* Right Content - Insurance Protection Image */}
+            <div className="lg:w-1/2 flex justify-center relative">
+              <div className="relative">
+                {/* Decorative circles */}
+                <div className="absolute -top-10 -left-10 w-20 h-20 bg-[#00c2ff] opacity-20 rounded-full"></div>
+                <div className="absolute top-20 -right-16 w-32 h-32 bg-white opacity-10 rounded-full"></div>
+                <div className="absolute -bottom-5 left-10 w-16 h-16 bg-[#00c2ff] opacity-30 rounded-full"></div>
+                
+                {/* Insurance Protection Image - completely borderless */}
                 <img 
-                  src="/images/underline.png" 
-                  alt="Hero Image" 
-                  className="top-4 mx-auto w-full max-w-[370px] h-auto object-contain brightness-0 invert"
+                  src="/images/green.png" 
+                  alt="Family Protection and Security"
+                  className="w-80 h-80 object-cover"
                 />
               </div>
-              <p className="text-white text-lg md:text-xl mt-4 text-center md:text-left">
-                Cover<span>Up</span> secures your family with the right burial
-                plan when it matters most. Offers Simplified Burial Planning in The Palm of Your Hand
-              </p>
-            </div>
-            <div className='bg-[#00c2ff] items-center rounded-full border-white border-2 py-2 flex px-2 cursor-pointer' onClick={() => navigate('/get-started')}>
-              <div className='mr-[74px] relative'>
-                <div className='bg-white size-20 flex items-center justify-center rounded-full -top-[40px] -left-[16px] absolute'>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 ml-1 text-[#00c2ff]" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M5.055 7.06C3.805 6.347 2.25 7.25 2.25 8.69v8.122c0 1.44 1.555 2.343 2.805 1.628l7.108-4.061c1.26-.72 1.26-2.536 0-3.256L5.055 7.061z" />
-                    <path d="M12.055 7.06c-1.25-.713-2.805.19-2.805 1.63v8.122c0 1.44 1.555 2.343 2.805 1.628l7.108-4.061c1.26-.72 1.26-2.536 0-3.256l-7.108-4.062z" />
-                  </svg>
-                </div>
-              </div>
-              <h4 className='text-white font-bold mb-0 text-2xl'>Plan Ahead, Live Without Worry</h4>
             </div>
           </div>
         </div>
-
-        <div 
-          className='absolute -bottom-10 rounded-lg border-white border-2 px-4 py-5 bg-[#00b3eb] cursor-pointer hover:bg-[#00c2ff] transition-colors'
-          onClick={() => navigate('/get-started')}
-        >
-          <h3 className='text-3xl text-white font-bold mb-1'>Compare funeral parlour quotations</h3>
-        </div>
-
       </section>
 
-      {/* Add margin-top to main content to account for fixed navbar */}
-      <main className="">
-        {/* Importance Section */}
-        <section className="bg-gray-50 py-16">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-0">
+      {/* What is a burial scheme Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            {/* Left - Family Image */}
+            <div className="lg:w-1/2">
+              <div className="overflow-hidden">
+                <img 
+                  src="/images/home.png"
+                  alt="Happy African Family Together"
+                  className="w-full h-96 object-cover rounded-2xl"
+                />
+              </div>
+            </div>
 
-              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800 text-left">
-                IMPORTANCE OF BURIAL SCHEMES
+            {/* Right - Content */}
+            <div className="lg:w-1/2">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">
+                What is a burial scheme?
               </h2>
+              <p className="text-gray-600 mb-6">
+                It is a monthly-paid insurance plan designed to cover essential funeral expenses
+              </p>
 
-              <p className="text-[#00b3eb] text-xl max-w-3xl mx-auto mb-12 text-left">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-semibold text-gray-800 mb-2">Financial Relief:</h3>
+                  <p className="text-gray-600">
+                    Families can reduce financial burdens during difficult times by paying a small monthly premium to avoid unexpected funeral costs.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-800 mb-2">Comprehensive Funeral Services:</h3>
+                  <p className="text-gray-600">
+                    These schemes ensure professional management of all logistical aspects of the funeral by providing essential items like coffins, chairs, and tents.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-800 mb-2">Peace of Mind:</h3>
+                  <p className="text-gray-600">
+                    Knowing that funeral arrangements are pre-planned and covered allows individuals and their families to focus on mourning and celebrating the life of the deceased without the added stress of planning and paying for the funeral.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Importance Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            {/* Left - Content */}
+            <div className="lg:w-1/2">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">
+                Importance of a burial scheme
+              </h2>
+              <p className="text-gray-600 mb-8">
                 A burial scheme ensures that funeral costs are covered, allowing your loved ones to focus on healing
               </p>
 
-              {/* Steps moved here, directly under subtitle */}
-              <div className="max-w-3xl mx-auto">
-                <div className="space-y-8 text-left">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0 w-8 h-8 bg-[#00c2ff] rounded-full flex items-center justify-center mt-1">
-                      <span className="text-white text-sm font-semibold">1</span>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">Financial Relief</h3>
-                      <p className="text-gray-600 leading-relaxed">Relieving financial burden on family</p>
-                    </div>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#00c2ff] rounded-sm flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
                   </div>
+                  <span className="text-gray-700">Relieving financial burden on family</span>
+                </div>
 
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0 w-8 h-8 bg-[#00c2ff] rounded-full flex items-center justify-center mt-1">
-                      <span className="text-white text-sm font-semibold">2</span>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">Best Value</h3>
-                      <p className="text-gray-600 leading-relaxed">Offers best prices from top funeral parlor</p>
-                    </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#00c2ff] rounded-sm flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
                   </div>
+                  <span className="text-gray-700">Offers best prices from top funeral parlor</span>
+                </div>
 
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0 w-8 h-8 bg-[#00c2ff] rounded-full flex items-center justify-center mt-1">
-                      <span className="text-white text-sm font-semibold">3</span>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">National Coverage</h3>
-                      <p className="text-gray-600 leading-relaxed">Comprehensive coverage across the country</p>
-                    </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#00c2ff] rounded-sm flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
                   </div>
+                  <span className="text-gray-700">National Coverage</span>
+                </div>
 
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0 w-8 h-8 bg-[#00c2ff] rounded-full flex items-center justify-center mt-1">
-                      <span className="text-white text-sm font-semibold">4</span>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">Cultural Sensitivity</h3>
-                      <p className="text-gray-600 leading-relaxed">Cultural and Religious Sensitivity</p>
-                    </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#00c2ff] rounded-sm flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
                   </div>
+                  <span className="text-gray-700">Cultural and Religious Sensitivity</span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#00c2ff] rounded-sm flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700">A straightforward and hassle-free claims process</span>
                 </div>
               </div>
+
+              <button onClick={() => handleNavigation('/get-started')}  className="mt-8 px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
+                APPLY NOW
+
+              </button>
             </div>
 
-            {/* Image moved to bottom */}
-            <div className="max-w-3xl mx-auto">
+            {/* Right - Funeral Services Image - completely borderless */}
+            <div className="lg:w-1/2 flex justify-center relative">
               <div className="relative">
-                <img
-                  src="/images/file.png"
-                  alt="Family Protection"
-                  className="w-full h-auto max-h-[600px] object-contain"
+                {/* Decorative circles */}
+                <div className="absolute -top-8 -right-8 w-24 h-24 bg-blue-200 opacity-50 rounded-full"></div>
+                <div className="absolute bottom-10 -left-12 w-16 h-16 bg-blue-300 opacity-40 rounded-full"></div>
+                <div className="absolute top-20 left-8 w-12 h-12 bg-blue-400 opacity-30 rounded-full"></div>
+                
+                {/* Funeral Services Image - completely borderless */}
+                <img 
+                  src="/images/list-image.png"
+                  alt="Professional Funeral Services"
+                  className="w-72 h-72 object-cover"
                 />
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Features Section */}
-        <section className="py-16">
-          <div className="container md:flex md:flex-col mx-auto px-4 ">
-            {/* Title above boxes */}
-            <div className="max-w-2xl mx-auto mx-auto text-left">
-              <h2 className="text-3xl md:text-2xl font-bold text-gray-800">
-                SAVE TIME AND MONEY BY COMPARING
-                BURIAL SCHEMES IN ONE PLACE
+      {/* Why Choose CoverUp Section */}
+      <section className="py-20 bg-gradient-to-br from-[#2c5f5f] via-[#3d7373] to-[#4a8c8c]">
+        <div className="container mx-auto px-4">
+          {/* Title aligned with other sections */}
+          <div className="mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+              Why Choose CoverUp?
+            </h2>
+          </div>
+
+          {/* Grid items positioned below the title */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {/* Cost Effective Cover */}
+            <div className="text-center text-white">
+              <div className="w-20 h-20 mx-auto mb-6 bg-white bg-opacity-20 rounded-xl flex items-center justify-center p-3">
+                <img 
+                  src="/images/investment.png" 
+                  alt="Cost Effective"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-semibold mb-4">Cost Effective Cover</h3>
+              <p className="text-sm opacity-90 leading-relaxed">
+                Burial schemes offer lower premiums than traditional policies by pooling resources in a group. This reduces the cost for each member.
+              </p>
+            </div>
+
+            {/* Simple Claims Process */}
+            <div className="text-center text-white">
+              <div className="w-20 h-20 mx-auto mb-6 bg-white bg-opacity-20 rounded-xl flex items-center justify-center p-3">
+                <img 
+                  src="/images/process.png" 
+                  alt="Simple Claims Process"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-semibold mb-4">Simple Claims Process</h3>
+              <p className="text-sm opacity-90 leading-relaxed">
+                With the undertaker managing the scheme, claiming is fast and direct. No complex insurance steps, just the agreed services when needed most.
+              </p>
+            </div>
+
+            {/* Fast, Personal Support */}
+            <div className="text-center text-white">
+              <div className="w-20 h-20 mx-auto mb-6 bg-white bg-opacity-20 rounded-xl flex items-center justify-center p-3">
+                <img 
+                  src="/images/operator.png" 
+                  alt="Fast Personal Support"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-semibold mb-4">Fast, Personal Support</h3>
+              <p className="text-sm opacity-90 leading-relaxed">
+                Families get immediate help with funeral arrangements. This ensures timely, respectful service during emotionally difficult moments.
+              </p>
+            </div>
+
+            {/* No Medical Checks */}
+            <div className="text-center text-white">
+              <div className="w-20 h-20 mx-auto mb-6 bg-white bg-opacity-20 rounded-xl flex items-center justify-center p-3">
+                <img 
+                  src="/images/protection.png" 
+                  alt="No Medical Checks"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-semibold mb-4">No Medical Checks</h3>
+              <p className="text-sm opacity-90 leading-relaxed">
+                These plans don't require medical exams, making them accessible to more people, even those with health issues or limited coverage options.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Apply Now Section */}
+      <section className="py-16 bg-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center justify-between bg-white rounded-2xl p-8 lg:p-12 shadow-lg">
+            {/* Left - Insurance Consultation Image - completely borderless */}
+            <div className="lg:w-1/3 mb-8 lg:mb-0">
+              <img 
+                src="/images/waving-turtle.png"
+                alt="Insurance Consultation and Support"
+                className="w-48 h-48 object-cover mx-auto"
+              />
+            </div>
+
+            {/* Right - Content */}
+            <div className="lg:w-2/3 text-center lg:text-left">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
+                Apply now and get covered
               </h2>
-            </div>
-
-            {/* Grid of boxes */}
-            <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-4 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                <div className="flex flex-col items-left text-left">
-                  <div className="benefit-icon text-2xl mb-4">💰</div>
-                  <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Electronic Signing</h3>
-                  <p className="text-gray-700">View and sign contracts electronically</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                <div className="flex flex-col items-center text-left">
-                  <div className="benefit-icon text-2xl mb-4">📝</div>
-                  <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Easy Updates</h3>
-                  <p className="text-gray-700">Make amendments and updates with ease</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                <div className="flex flex-col items-center text-left">
-                  <div className="benefit-icon text-2xl mb-4">⚡</div>
-                  <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Secure Storage</h3>
-                  <p className="text-gray-700">Store documents securely</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                <div className="flex flex-col items-center text-left">
-                  <div className="benefit-icon text-2xl mb-4">✅</div>
-                  <h3 className="text-lg font-semibold mb-2 text-[#00c2ff]">Regular Updates</h3>
-                  <p className="text-gray-700">Regular updates and clear information about any changes to the scheme</p>
-                </div>
-              </div>
+              <p className="text-gray-600 mb-8">
+                A burial scheme ensures that funeral costs are covered, allowing your loved ones to focus on healing.
+              </p>
+              <button className="px-8 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
+                APPLY NOW
+              </button>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* What Is Section */}
-        <section className=" bg-gray-50 py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 text-left">
-                  WHAT IS A BURIAL SCHEME?
-                </h2>
-                <p className="text-[#00b3eb] text-xl mb-8">
-                  It is a monthly-paid insurance plan designed to cover essential funeral expenses
-                </p>
-              </div>
-
-              <div className="flex flex-col md:flex-row items-start gap-12">
-                <div className="flex-1 space-y-8">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0 w-8 h-8 bg-[#00c2ff] rounded-full flex items-center justify-center mt-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-[#00c2ff] mb-2">Financial Relief</h3>
-                      <p className="text-gray-600 leading-relaxed mb-4">These schemes ensure professional management of all logistical aspects of the funeral by providing essential items like coffins, chairs, and tents.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0 w-8 h-8 bg-[#00c2ff] rounded-full flex items-center justify-center mt-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-[#00c2ff] mb-2">Comprehensive Funeral Services</h3>
-                      <p className="text-gray-600 leading-relaxed mb-4">The contributions paid by members guarantee specific funeral services such as the coffin, hearse, and burial or cremation.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0 w-8 h-8 bg-[#00c2ff] rounded-full flex items-center justify-center mt-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-[#00c2ff] mb-2">Peace of Mind</h3>
-                      <p className="text-gray-600 leading-relaxed mb-4">Knowing that funeral arrangements are pre-planned and covered allows individuals and their families to focus on mourning and celebrating the life of the deceased without the added stress of planning and paying for the funeral</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Small image on the right - removed borders and shadow */}
-                <div className="w-72 h-auto flex-shrink-0">
-                  <img
-                    src="/images/backgroundImg.png"
-                    alt="Burial Scheme Services"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </div>
+       {/* Footer */}
+       <footer className="bg-gray-800 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div>
+              <div className="text-xl font-bold mb-4">COVER UP</div>
+              <p className="text-gray-300 text-sm">CoverUp Insurance offers comprehensive insurance solutions to protect what matters most. Located in the heart of Johannesburg, we are dedicated to providing personalized service and peace of mind.</p>
             </div>
-          </div>
-        </section>
-
-        {/* Benefits Section */}
-        <section className="benefits-section">
-          <div className="section-container">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-                THE BENEFITS OF A BURIAL SCHEME
-              </h2>
-            </div>
-            <div className="benefits-boxes">
-              <div className="benefit-box">
-                <div className="w-12 h-12 mx-auto mb-4">
-                  <img
-                    src="/images/invesment.png"
-                    alt="Cost Effective"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="benefit-header">
-                  <h3>COST-EFFECTIVE</h3>
-                </div>
-                <div className="benefit-divider"></div>
-                <p>Burial schemes usually involve lower premiums compared to comprehensive funeral policies. The contributions are pooled within the community or group, which can reduce the overall cost for each member.</p>
-              </div>
-
-              <div className="benefit-box">
-                <div className="w-12 h-12 mx-auto mb-4">
-                  <img
-                    src="/images/process.png"
-                    alt="Simplified Claims"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="benefit-header">
-                  <h3>SIMPLIFIED CLAIMS PROCESS</h3>
-                </div>
-                <div className="benefit-divider"></div>
-                <p>Since the scheme is managed by the funeral undertaker, the process of claiming the benefits is straightforward. There is no need to navigate through insurance claim procedures, as the undertaker will directly provide the agreed-upon services</p>
-              </div>
-
-              <div className="benefit-box">
-                <div className="w-12 h-12 mx-auto mb-4">
-                  <img
-                    src="/images/operator.png"
-                    alt="Immediate Assistance"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="benefit-header">
-                  <h3>IMMEDIATE ASSISTANCE</h3>
-                </div>
-                <div className="benefit-divider"></div>
-                <p>Funeral undertakers can provide immediate assistance upon the death of a member, handling all necessary arrangements promptly. This immediate support is crucial during a time of grief.</p>
-              </div>
-
-              <div className="benefit-box">
-                <div className="w-12 h-12 mx-auto mb-4">
-                  <img
-                    src="/images/wrench.png"
-                    alt="Customized Services"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="benefit-header">
-                  <h3>CUSTOMIZED SERVICES</h3>
-                </div>
-                <div className="benefit-divider"></div>
-                <p>These schemes often include personalized services tailored to the deceased's and family's wishes, ensuring a respectful and appropriate funeral.</p>
-              </div>
-
-              <div className="benefit-box">
-                <div className="w-12 h-12 mx-auto mb-4">
-                  <img
-                    src="/images/protection.png"
-                    alt="No Medical Examinations"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="benefit-header">
-                  <h3>NO MEDICAL EXAMINATIONS</h3>
-                </div>
-                <div className="benefit-divider"></div>
-                <p>Typically, burial schemes do not require medical examinations for membership, making them accessible to a broader range of people, including those who might have difficulty obtaining traditional funeral insurance.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-
-        
-                  {/* Companies We've Worked With Section */}
-          <section className="companies-section py-12 bg-gray-50">
-            <div className="section-container">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-                  COMPANIES WE'VE WORKED WITH
-                </h2>
-              </div>
-              <div className="flex flex-wrap justify-center items-center gap-8">
-                <img
-                  src="/images/coca-cola.jpg"
-                  alt="Coca-Cola"
-                  className="w-32 h-32 object-contain"
-                />
-                <img
-                  src="/images/cisco.jpg"
-                  alt="CISCO"
-                  className="w-32 h-32 object-contain"
-                />
-                <img
-                  src="/images/google.png"
-                  alt="Google"
-                  className="w-32 h-32 object-contain"
-                />
-                <img
-                  src="/images/Amazon-logo.png"
-                  alt="Amazon"
-                  className="w-32 h-32 object-contain"
-                />
-                <img
-                  src="/images/Barclays-Logo.jpg"
-                  alt="Barclays"
-                  className="w-32 h-32 object-contain"
-                />
-                <img
-                  src="/images/standard-bank-vector-logo.png"
-                  alt="Standard Bank"
-                  className="w-32 h-32 object-contain"
-                />
-              </div>
-            </div>
-          </section>
-
-
-
-
-        {/* Footer */}
-        <footer>
-          <div className="footer-content">
-            <div className="footer-info">
-              <div className="footer-logo">COVER UP</div>
-              <p>CoverUp Insurance offers comprehensive insurance solutions to protect what matters most. Located in the heart of Johannesburg, we are dedicated to providing personalized service and peace of mind.</p>
+            
+            <div>
+              <h3 className="font-semibold mb-4">Our Office</h3>
+              <p className="text-gray-300 text-sm">Address: Thornhill Office Park 84, Bekker road, Midrand 1685</p>
             </div>
 
-            <div className="footer-office">
-              <h3>Our Office</h3>
-              <p>Address: Thornhill Office Park 84, Bekker road, Midrand 1685</p>
+            <div>
+              <h3 className="font-semibold mb-4">Contact Us</h3>
+              <p className="text-gray-300 text-sm">Email: info@coverupquotes.co.za</p>
             </div>
 
-            <div className="footer-contact">
-              <h3>Contact Us</h3>
-              <p>Email: info@coverupquotes.co.za</p>
-            </div>
-
-            <div className="footer-links">
-              <h3>Quick Links</h3>
-              <ul>
-                <li>
-                  <Link to="/" className="hover:text-[#00c2ff] transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/PRODUCTS" className="hover:text-[#00c2ff] transition-colors">
-                    Products
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/about" className="hover:text-[#00c2ff] transition-colors">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/contact" className="hover:text-[#00c2ff] transition-colors">
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/get-started" className="hover:text-[#00c2ff] transition-colors">
-                    Get Started
-                  </Link>
-                </li>
+            <div>
+              <h3 className="font-semibold mb-4">Quick Links</h3>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li>Home</li>
+                <li>Products</li>
+                <li>About Us</li>
+                <li>Contact Us</li>
+                <li>Get Started</li>
               </ul>
             </div>
           </div>
-          <div className="footer-bottom">
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
             <p>© 2024 CoverUp Insurance | All rights reserved</p>
           </div>
-        </footer>
-      </main>
+        </div>
+      </footer>
     </div>
   );
 };

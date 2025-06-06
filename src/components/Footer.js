@@ -1,40 +1,49 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
 
 const Footer = () => {
   return (
-    <footer>
-      <div className="footer-content">
-        <div className="footer-info">
-          <Link to="/" className="footer-logo">COVER UP</Link>
-          <p>CoverUp Insurance offers comprehensive insurance solutions to protect what matters most. Located in the heart of Johannesburg, we are dedicated to providing personalized service and peace of mind.</p>
+    <footer className="bg-[#376c6c] text-white py-12">
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Logo and Description */}
+        <div>
+          <h2 className="text-2xl font-bold mb-4">COVER UP</h2>
+          <p>
+            CoverUp Insurance offers comprehensive insurance solutions to protect what matters most.
+            Located in the heart of Johannesburg, we are dedicated to providing personalized service and peace of mind.
+          </p>
         </div>
-        
-        <div className="footer-office">
-          <h3>Our Office</h3>
+
+        {/* Office Info */}
+        <div>
+          <h3 className="text-xl font-semibold mb-2">Our Office</h3>
           <p>Address: Thornhill Office Park 84, Bekker road, Midrand 1685</p>
         </div>
 
-        <div className="footer-contact">
-          <h3>Contact Us</h3>
+        {/* Contact Info */}
+        <div>
+          <h3 className="text-xl font-semibold mb-2">Contact Us</h3>
           <p>Email: info@coverupquotes.co.za</p>
         </div>
 
-        <div className="footer-links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><Link to="/" className="hover:text-[#00c2ff] transition-colors">Home</Link></li>
-            <li><Link to="/about" className="hover:text-[#00c2ff] transition-colors">About Us</Link></li>
-            <li><Link to="/contact" className="hover:text-[#00c2ff] transition-colors">Contact Us</Link></li>
-            <li><Link to="/get-started" className="hover:text-[#00c2ff] transition-colors">Get a Quote</Link></li>
+        {/* Quick Links */}
+        <div>
+          <h3 className="text-xl font-semibold mb-2">Quick Links</h3>
+          <ul className="space-y-1">
+            <li><a href="#" className="hover:underline">Home</a></li>
+            <li><a href="#" className="hover:underline">Products</a></li>
+            <li><a href="#" className="hover:underline">About Us</a></li>
+            <li><a href="#" className="hover:underline">Contact Us</a></li>
+            <li><a href="#" className="hover:underline">Get Started</a></li>
           </ul>
         </div>
       </div>
-      <div className="footer-bottom">
+
+      {/* Bottom Bar */}
+      <div className="mt-8 border-t border-white/20 pt-4 text-center text-sm">
         <p>© 2024 CoverUp Insurance | All rights reserved</p>
       </div>
     </footer>
   );
 };
 
-export default Footer; 
+export default Footer;
