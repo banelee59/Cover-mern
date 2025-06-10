@@ -7,6 +7,9 @@ import Contact from './pages/Contact';
 import GetStarted from './pages/GetStarted';
 import ComparisonForm from './components/ComparisonForm';
 import FuneralParlorRegistration from './components/FuneralParlorRegistration';
+import Welcome from './pages/Welcome';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/comparison" element={<ComparisonForm />} />
           <Route path="/store-registration" element={<FuneralParlorRegistration />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>
     </Router>

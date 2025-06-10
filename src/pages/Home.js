@@ -5,11 +5,11 @@ const Home = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleGetStarted = () => {
-    console.log('Navigating to get started with:', phoneNumber);
+    window.location.href = '/welcome';
   };
 
   const handleNavigation = (path) => {
-    console.log('Navigating to:', path);
+    window.location.href = path;
   };
 
   return (
@@ -39,8 +39,8 @@ const Home = () => {
               <button onClick={() => handleNavigation('/contact')} className="text-white hover:text-[#00c2ff] transition-colors">
                 CONTACT
               </button>
-              <button onClick={() => handleNavigation('/get-started')} className="px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
-                SETUP MY PARLOUR
+              <button onClick={() => handleNavigation('/welcome')} className="px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
+                GET STARTED
               </button>
             </div>
 
@@ -77,8 +77,8 @@ const Home = () => {
                 <button onClick={() => handleNavigation('/contact')} className="block w-full text-left px-3 py-2 text-gray-600 hover:text-[#00c2ff] transition-colors">
                   CONTACT
                 </button>
-                <button onClick={() => handleNavigation('/get-started')} className="block w-full mt-2 px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors text-center">
-                  SETUP MY PARLOUR
+                <button onClick={() => handleNavigation('/welcome')} className="block w-full mt-2 px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors text-center">
+                  GET STARTED
                 </button>
               </div>
             </div>
@@ -87,15 +87,15 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#2c5f5f] via-[#3d7373] to-[#4a8c8c]">
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#00c2ff] via-[#00c2ff] to-[#00c2ff]">
         <div className="container mx-auto px-4 py-20">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             {/* Left Content */}
             <div className="lg:w-1/2 text-white mb-12 lg:mb-0">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-8 text-center lg:text-left">
                 Get burial schemes quotes in under 2 minutes.
               </h1>
-              <p className="text-lg mb-8 opacity-90 leading-relaxed">
+              <p className="text-lg mb-8 opacity-90 leading-relaxed text-center lg:text-left">
                 Ensure peace of mind knowing that funeral arrangements are taken care of in advance. CoverUp is here to help you find the perfect funeral plan for your needs. Just follow a few simple steps to compare burial scheme quotes.
               </p>
               
@@ -110,7 +110,7 @@ const Home = () => {
                 />
                 <button
                   onClick={handleGetStarted}
-                  className="px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
+                  className="px-6 py-3 bg-white text-black rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
                 >
                   GET STARTED
                 </button>
@@ -154,10 +154,10 @@ const Home = () => {
 
             {/* Right - Content */}
             <div className="lg:w-1/2">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-8 text-center lg:text-left">
                 What is a burial scheme?
               </h2>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-8 text-center lg:text-left">
                 It is a monthly-paid insurance plan designed to cover essential funeral expenses
               </p>
 
@@ -194,10 +194,9 @@ const Home = () => {
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Left - Content */}
             <div className="lg:w-1/2">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">
-                Importance of a burial scheme
-              </h2>
-              <p className="text-gray-600 mb-8">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-8 text-center lg:text-left">Importance of a burial scheme</h2>
+
+              <p className="text-gray-600 mb-8 text-center lg:text-left">
                 A burial scheme ensures that funeral costs are covered, allowing your loved ones to focus on healing
               </p>
 
@@ -275,7 +274,7 @@ const Home = () => {
       </section>
 
       {/* Why Choose CoverUp Section */}
-      <section className="py-20 bg-gradient-to-br from-[#2c5f5f] via-[#3d7373] to-[#4a8c8c]">
+      <section className="py-20 bg-gradient-to-br from-[#00c2ff] via-[#00c2ff] to-[#00c2ff]">
         <div className="container mx-auto px-4">
           {/* Title aligned with other sections */}
           <div className="mb-16">
@@ -364,13 +363,13 @@ const Home = () => {
 
             {/* Right - Content */}
             <div className="lg:w-2/3 text-center lg:text-left">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-8 text-center lg:text-left">
                 Apply now and get covered
               </h2>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 mb-8 text-center lg:text-left">
                 A burial scheme ensures that funeral costs are covered, allowing your loved ones to focus on healing.
               </p>
-              <button className="px-8 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
+              <button onClick={() => handleNavigation('/welcome')} className="px-8 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
                 APPLY NOW
               </button>
             </div>
