@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    window.location.href = '/welcome';
+    navigate('/welcome');
   };
 
   const handleNavigation = (path) => {
-    window.location.href = path;
+    navigate(path);
   };
 
   return (
@@ -191,11 +193,10 @@ const Home = () => {
       {/* Importance Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="flex flex-col lg:flex-row items-left gap-12">
             {/* Left - Content */}
             <div className="lg:w-1/2">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-8 text-center lg:text-left">Importance of a burial scheme</h2>
-
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-4 text-left lg:text-left">Importance of a burial scheme</h2>
               <p className="text-gray-600 mb-8 text-center lg:text-left">
                 A burial scheme ensures that funeral costs are covered, allowing your loved ones to focus on healing
               </p>
@@ -247,9 +248,8 @@ const Home = () => {
                 </div>
               </div>
 
-              <button onClick={() => handleNavigation('/get-started')}  className="mt-8 px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
+              <button onClick={() => handleNavigation('/get-started')} className="mt-8 px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
                 APPLY NOW
-
               </button>
             </div>
 
@@ -275,13 +275,14 @@ const Home = () => {
 
       {/* Why Choose CoverUp Section */}
       <section className="py-20 bg-gradient-to-br from-[#00c2ff] via-[#00c2ff] to-[#00c2ff]">
-        <div className="container mx-auto px-4">
-          {/* Title aligned with other sections */}
-          <div className="mb-16">
+         {/* Title aligned with other sections */}
+         <div className="mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
               Why Choose CoverUp?
             </h2>
           </div>
+        <div className="container mx-auto px-4">
+         
 
           {/* Grid items positioned below the title */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -378,36 +379,36 @@ const Home = () => {
       </section>
 
        {/* Footer */}
-       <footer className="bg-gray-800 text-white py-12">
+       <footer className="bg-[#00c2ff] text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
               <div className="text-xl font-bold mb-4">COVER UP</div>
-              <p className="text-gray-300 text-sm">CoverUp Insurance offers comprehensive insurance solutions to protect what matters most. Located in the heart of Johannesburg, we are dedicated to providing personalized service and peace of mind.</p>
+              <p className="text-white text-sm">CoverUp Insurance offers comprehensive insurance solutions to protect what matters most. Located in the heart of Johannesburg, we are dedicated to providing personalized service and peace of mind.</p>
             </div>
             
             <div>
               <h3 className="font-semibold mb-4">Our Office</h3>
-              <p className="text-gray-300 text-sm">Address: Thornhill Office Park 84, Bekker road, Midrand 1685</p>
+              <p className="text-white text-sm">Address: Thornhill Office Park 84, Bekker road, Midrand 1685</p>
             </div>
 
             <div>
               <h3 className="font-semibold mb-4">Contact Us</h3>
-              <p className="text-gray-300 text-sm">Email: info@coverupquotes.co.za</p>
+              <p className="text-white text-sm">Email: info@coverupquotes.co.za</p>
             </div>
 
             <div>
               <h3 className="font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2 text-sm text-gray-300">
-                <li>Home</li>
-                <li>Products</li>
-                <li>About Us</li>
-                <li>Contact Us</li>
-                <li>Get Started</li>
+              <ul className="space-y-2 text-sm text-white">
+                <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/')}>Home</li>
+                <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/products')}>Products</li>
+                <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/about')}>About Us</li>
+                <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/contact')}>Contact Us</li>
+                <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/welcome')}>Get Started</li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-white">
             <p>© 2024 CoverUp Insurance | All rights reserved</p>
           </div>
         </div>

@@ -37,21 +37,21 @@ const SignUp = () => {
       <div className="flex items-center justify-center min-h-screen px-4">
         <div className="flex items-center justify-between max-w-6xl w-full">
           {/* Left side - Signup Form */}
-          <div className="w-full max-w-md z-10">
+          <div className="flex-1 flex flex-col items-center justify-center space-y-8">
             {/* Logo */}
             <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold text-gray-800">
+              <h1 className="text-5xl font-bold text-gray-900 mb-2">
                 Cover<span className="text-cyan-500">Up</span>
               </h1>
             </div>
 
             {/* Signup Title */}
-            <h2 className="text-3xl font-semibold text-gray-800 text-center mb-8">
+            <h2 className="text-4xl font-bold text-gray-800 text-center mb-16">
               Create Account
             </h2>
 
             {/* Signup Form */}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="w-full max-w-2xl space-y-8 bg-white/5 rounded-xl border-2 border-[#00c2ff] p-8 shadow-md hover:border-[#00c2ff] transition-all duration-200">
               <div>
                 <input
                   type="text"
@@ -70,7 +70,7 @@ const SignUp = () => {
                   placeholder="EMAIL ADDRESS"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-4 bg-gray-100 border-0 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:bg-white transition-all duration-200"
+                  className="w-full px-6 py-4 bg-gray-100 border-0 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:bg-white transition-all duration-200 font-medium border-2 border-[#00c2ff]/50 focus:ring-[#00c2ff]/50"
                 />
               </div>
 
@@ -81,7 +81,7 @@ const SignUp = () => {
                   placeholder="CONTACT NUMBER"
                   value={formData.contact}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-4 bg-gray-100 border-0 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:bg-white transition-all duration-200"
+                  className="w-full px-6 py-4 bg-gray-100 border-0 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:bg-white transition-all duration-200 font-medium border-2 border-[#00c2ff]/50 focus:ring-[#00c2ff]/50"
                 />
               </div>
 
@@ -92,7 +92,7 @@ const SignUp = () => {
                   placeholder="PASSWORD"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-4 bg-gray-100 border-0 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:bg-white transition-all duration-200"
+                  className="w-full px-6 py-4 bg-gray-100 border-0 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:bg-white transition-all duration-200 font-medium border-2 border-[#00c2ff]/50 focus:ring-[#00c2ff]/50"
                 />
               </div>
 
@@ -103,21 +103,21 @@ const SignUp = () => {
                   placeholder="CONFIRM PASSWORD"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-4 bg-gray-100 border-0 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:bg-white transition-all duration-200"
+                  className="w-full px-6 py-4 bg-gray-100 border-0 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:bg-white transition-all duration-200 font-medium border-2 border-[#00c2ff]/50 focus:ring-[#00c2ff]/50"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 transform hover:scale-105 active:scale-95"
+                className="w-full bg-gradient-to-r from-[#00c2ff] to-[#00b3eb] hover:from-[#00b3eb] hover:to-[#00a3eb] text-white font-bold py-5 px-8 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-xl hover:shadow-2xl text-lg tracking-wide border-2 border-[#00c2ff]/50 hover:border-[#00c2ff]/70"
               >
                 SIGN UP
               </button>
 
-              <div className="text-center mt-4">
-                <p className="text-gray-600">
+              <div className="text-center mt-6">
+                <p className="text-gray-600 text-sm">
                   Already have an account?{' '}
-                  <a href="/login" className="text-cyan-500 hover:text-cyan-600 font-semibold">
+                  <a href="/login" className="text-[#00c2ff] hover:text-[#00b3eb] font-semibold">
                     Login
                   </a>
                 </p>
