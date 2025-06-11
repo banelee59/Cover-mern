@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ComparisonForm from '../components/ComparisonForm';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +10,7 @@ const Login = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setFormData({
@@ -49,8 +52,8 @@ const Login = () => {
     const newErrors = validateForm();
     
     if (Object.keys(newErrors).length === 0) {
-      console.log('Login attempted with:', formData);
-      // Handle successful form submission
+      // Navigate to comparison form page after successful login
+      navigate('/comparison');
     } else {
       setErrors(newErrors);
     }
@@ -58,16 +61,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
-      {/* Floating Bubbles */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-20 w-16 h-16 bg-blue-200 rounded-full opacity-40 animate-pulse"></div>
-        <div className="absolute top-40 right-32 w-12 h-12 bg-cyan-200 rounded-full opacity-50 animate-bounce"></div>
-        <div className="absolute top-60 left-1/4 w-8 h-8 bg-blue-300 rounded-full opacity-35 animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute bottom-40 right-20 w-20 h-20 bg-cyan-300 rounded-full opacity-30 animate-bounce" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-60 left-16 w-14 h-14 bg-blue-200 rounded-full opacity-45 animate-pulse" style={{animationDelay: '0.5s'}}></div>
-        <div className="absolute top-32 right-1/4 w-6 h-6 bg-cyan-400 rounded-full opacity-40 animate-bounce" style={{animationDelay: '1.5s'}}></div>
-        <div className="absolute bottom-80 left-1/3 w-10 h-10 bg-blue-400 rounded-full opacity-25 animate-pulse" style={{animationDelay: '3s'}}></div>
-      </div>
+      
 
       <div className="flex items-center justify-center min-h-screen px-4">
         <div className="w-full max-w-6xl flex items-center justify-between">
@@ -138,6 +132,8 @@ const Login = () => {
               </button>
             </div>
           </div>
+
+
 
           {/* Right side - Turtle Mascot */}
           <div className="hidden lg:flex items-center justify-center flex-1 relative">

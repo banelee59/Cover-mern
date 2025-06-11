@@ -1,88 +1,153 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Eye, Shield, Users, TrendingUp, ChevronRight } from 'lucide-react';
 
 const RegisterFuneralParlour = () => {
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = () => {
+    if (email) {
+      console.log('Registration submitted:', email);
+      setEmail('');
+      // Handle form submission here
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 flex flex-col flex items-center justify-center px-4">
-      <div className="max-w-4xl w-full space-y-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Choose Your Path
-          </h2>
-          <p className="text-gray-600 mb-8">
-            Select whether you want to compare funeral policies or register your funeral parlour
-          </p>
-        </div>
+    <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: 'url("/images/turtle-8.png")',
+      backgroundSize: '1440px 801px',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed'
+    }}>
+     
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* User Comparison Option */}
-          <div 
-            onClick={() => navigate('/comparison')}
-            className="bg-white rounded-xl shadow-lg p-8 cursor-pointer hover:shadow-xl transition-shadow border-2 hover:border-[#00c2ff]"
-          >
-            <div className="flex flex-col items-center text-center space-y-4">
-              <div className="w-20 h-20 bg-[#00c2ff]/10 rounded-full flex items-center justify-center">
-                <svg 
-                  className="w-10 h-10 text-[#00c2ff]" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth="2" 
-                    d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
-                  />
-                </svg>
+      {/* Hero Section */}
+      <div className="flex items-center justify-between px-6 py-16 max-w-7xl mx-auto relative">
+       
+        <div className="flex-1 max-w-2xl">
+          <h1 className="text-5xl font-bold text-white mb-6 leading-tight relative z-10">
+            Grow Your Business<br />
+            <span className="text-white">reach with CoverUp</span>
+          </h1>
+          
+          <p className="text-white text-lg mb-8 leading-relaxed relative z-10">
+            Join a growing network of trusted service providers. Expand your reach, serve more families, and simplify your admin with our platform.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button className="bg-cyan-400 text-teal-900 px-8 py-3 rounded-full font-semibold hover:bg-cyan-300 transition-all transform hover:scale-105">
+              REGISTER FOR FREE
+            </button>
+            <button className="text-white border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-teal-700 transition-all">
+              ALREADY REGISTERED? <span style={{color: "#00a9df"}}> LOGIN</span> 
+            </button>
+          </div>
+        </div>
+      </div>  
+
+     
+      {/* Features Section */}
+      <div className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-gray-800 mb-16">
+            Why Join Coverup?
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Feature 1 */}
+            <div className="text-center group hover:transform hover:scale-105 transition-all duration-300">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal-200 transition-colors">
+                <Shield className="w-8 h-8 text-teal-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900">
-                Compare Funeral Policies
-              </h3>
-              <p className="text-gray-600">
-                Compare different funeral policies and find the best coverage for you and your family
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Trusted Network</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Enhance your family's quality and safety with our family-centered approach to personal care and housekeeping.
               </p>
-              <button
-                className="mt-4 px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
-              >
-                Start Comparison
-              </button>
+            </div>
+            
+            {/* Feature 2 */}
+            <div className="text-center group hover:transform hover:scale-105 transition-all duration-300">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal-200 transition-colors">
+                <Eye className="w-8 h-8 text-teal-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Visibility & Convenience</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Enjoy our competitive pricing and receive updated schedules for seamless coordination.
+              </p>
+            </div>
+            
+            {/* Feature 3 */}
+            <div className="text-center group hover:transform hover:scale-105 transition-all duration-300">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal-200 transition-colors">
+                <Users className="w-8 h-8 text-teal-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Verified Client Network</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Receive referrals from our verified clients, backed by our comprehensive screening process.
+              </p>
+            </div>
+            
+            {/* Feature 4 */}
+            <div className="text-center group hover:transform hover:scale-105 transition-all duration-300">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal-200 transition-colors">
+                <TrendingUp className="w-8 h-8 text-teal-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Growth Opportunities</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Quality customers and transparent reviews help you build trust and grow your business.
+              </p>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Store Application Option */}
-          <div 
-            onClick={() => navigate('/store-registration')}
-            className="bg-white rounded-xl shadow-lg p-8 cursor-pointer hover:shadow-xl transition-shadow border-2 hover:border-[#00c2ff]"
-          >
-            <div className="flex flex-col items-center text-center space-y-4">
-              <div className="w-20 h-20 bg-[#00c2ff]/10 rounded-full flex items-center justify-center">
-                <svg 
-                  className="w-10 h-10 text-[#00c2ff]" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth="2" 
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                  />
-                </svg>
+      {/* CTA Section */}
+      <div className="bg-gray-100 py-20">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          {/* Turtle Illustration */}
+          <div className="hidden md:block">
+            <div className="w-48 h-48 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-xl">
+              <div className="w-36 h-36 bg-gradient-to-br from-green-300 to-green-500 rounded-full relative overflow-hidden">
+ Simplified turtle for CTA section */}
+                <div className="absolute inset-3 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full">
+                  <div className="absolute inset-1 bg-gradient-to-br from-amber-300 to-orange-400 rounded-full"></div>
+                </div>
+                
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-10 bg-gradient-to-b from-green-400 to-green-600 rounded-full">
+                  <div className="absolute top-1 left-1 w-2 h-2 bg-white rounded-full">
+                    <div className="absolute top-0 left-0 w-1 h-1 bg-black rounded-full"></div>
+                  </div>
+                  <div className="absolute top-1 right-1 w-2 h-2 bg-white rounded-full">
+                    <div className="absolute top-0 right-0 w-1 h-1 bg-black rounded-full"></div>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900">
-                Register Your Funeral Parlour
-              </h3>
-              <p className="text-gray-600">
-                Register your funeral parlour business and reach more customers through our platform
-              </p>
+            </div>
+          </div>
+          
+          <div className="flex-1 md:ml-12">
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              Register to start earning
+            </h2>
+            <p className="text-gray-600 text-lg mb-8">
+              Expand your reach, serve more families, and simplify your admin with our platform.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                className="flex-1 px-6 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              />
               <button
-                className="mt-4 px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
+                onClick={handleSubmit}
+                className="bg-cyan-400 text-teal-900 px-8 py-3 rounded-full font-semibold hover:bg-cyan-300 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
               >
-                Start Registration
+                REGISTER FOR FREE
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -92,4 +157,4 @@ const RegisterFuneralParlour = () => {
   );
 };
 
-export default RegisterFuneralParlour; 
+export default RegisterFuneralParlour;

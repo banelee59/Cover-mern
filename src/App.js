@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import RegisterFuneralParlour from './pages/RegisterFuneralParlour';
-import ComparisonForm from './components/ComparisonForm';
+import Comparison from './pages/Comparison';
 import FuneralParlorRegistration from './components/FuneralParlorRegistration';
 import Welcome from './pages/Welcome';
 import Login from './pages/Login';
@@ -21,7 +21,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/register-funeral-parlour" element={<RegisterFuneralParlour />} />
-          <Route path="/comparison" element={<ComparisonForm />} />
+          <Route path="/comparison" element={<Comparison />} />
           <Route path="/store-registration" element={<FuneralParlorRegistration />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/login" element={<Login />} />

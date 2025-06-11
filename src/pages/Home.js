@@ -114,7 +114,7 @@ const Home = () => {
                 />
                 <button
                   onClick={handleGetStarted}
-                  className="px-6 py-3 bg-[#00c2ff] text-black rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
+                  className="px-6 py-3 bg-[#00a9df] text-white rounded-lg font-semibold hover:bg-[#00a9df] transition-colors"
                 >
                   GET STARTED
                 </button>
@@ -190,7 +190,7 @@ const Home = () => {
 
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#00c2ff] rounded-sm flex items-center justify-center">
+                  <div className="w-6 h-6 bg-[#00a9df] rounded-sm flex items-center justify-center">
                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -199,7 +199,7 @@ const Home = () => {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#00c2ff] rounded-sm flex items-center justify-center">
+                  <div className="w-6 h-6 bg-[#00a9df] rounded-sm flex items-center justify-center">
                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -208,7 +208,7 @@ const Home = () => {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#00c2ff] rounded-sm flex items-center justify-center">
+                  <div className="w-6 h-6 bg-[#00a9df] rounded-sm flex items-center justify-center">
                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -217,7 +217,7 @@ const Home = () => {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#00c2ff] rounded-sm flex items-center justify-center">
+                  <div className="w-6 h-6 bg-[#00a9df] rounded-sm flex items-center justify-center">
                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -226,7 +226,7 @@ const Home = () => {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#00c2ff] rounded-sm flex items-center justify-center">
+                  <div className="w-6 h-6 bg-[#00a9df] rounded-sm flex items-center justify-center">
                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -235,7 +235,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <button onClick={() => handleNavigation('/get-started')} className="mt-8 px-6 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
+              <button onClick={() => handleNavigation('/get-started')} className="mt-8 px-6 py-3 bg-[#00a9df] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
                 APPLY NOW
               </button>
             </div>
@@ -336,34 +336,36 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Apply Now Section */}
-      <section className="py-16 bg-gray-100">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center justify-between bg-white rounded-2xl p-8 lg:p-12 shadow-lg">
-            {/* Left - Insurance Consultation Image - completely borderless */}
-            <div className="lg:w-1/3 mb-8 lg:mb-0">
-              <img 
-                src="/images/turtle-4.jpg"
-                alt="Insurance Consultation and Support"
-                className="w-48 h-48 object-cover mx-auto"
-              />
-            </div>
-
-            {/* Right - Content */}
-            <div className="lg:w-2/3 text-center lg:text-left">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-8 text-center lg:text-left">
-                Apply now and get covered
-              </h2>
-              <p className="text-gray-600 mb-8 text-center lg:text-left">
-                A burial scheme ensures that funeral costs are covered, allowing your loved ones to focus on healing.
-              </p>
-              <button onClick={() => handleNavigation('/welcome')} className="px-8 py-3 bg-[#00c2ff] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
-                APPLY NOW
-              </button>
+              {/* Apply Now Section */}
+        <section className="py-16 bg-[white]">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col lg:flex-row items-center justify-between rounded-lg p-8 lg:p-12 w-[1186px] h-[356px]  bg-cover bg-center bg-no-repeat relative overflow-hidden" style={{
+                backgroundImage: 'url("/images/turtle-7.png")'
+              }}>
+              {/* Overlay for better text readability */}
+              
+              
+              {/* Content */}
+              <div className="relative z-10 text-black lg:w-1/2 lg:ml-auto">
+                <div>
+                  <h2 className="text-3xl lg:text-4xl font-bold mb-4 lg:text-left">
+                    Apply now and get covered
+                  </h2>
+                  <p className="text-lg mb-6 leading-relaxed max-w-2xl">
+                    A burial scheme ensures that funeral costs are covered, 
+                    allowing your loved ones to focus on healing
+                  </p>
+                  <button 
+                    onClick={() => handleNavigation('/welcome')} 
+                    className="bg-[#00a9df] hover:bg-[#00b3eb] text-white font-semibold py-3 px-8 rounded-full transition-colors duration-200"
+                  >
+                    APPLY NOW
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
        {/* Footer */}
        <footer className="bg-[#376c6c] text-white py-12">
