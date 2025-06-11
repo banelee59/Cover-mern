@@ -1,166 +1,269 @@
 import React, { useState, useEffect, useRef } from "react";
 import Confetti from "react-confetti";
 
-const provincialCoverOptions = {
-  "Gauteng": [
+// const provincialCoverOptions = {
+//   "Gauteng": [
+//     {
+//       value: "standard_b",
+//       label: "75",
+//       provider: "Mpiti Funeral - Standard Package B",
+//       logo: "/images/providers/mpiti.png",
+//       rating: 4.8,
+//       features: [
+//         "Collection and Delivery of deceased",
+//         "Cleaning and preparation of corpse",
+//         "Administration of Death Certificate",
+//         "Flat-Lid Coffin",
+//         "Storage of deceased"
+//       ],
+//       coverageDetails: {
+//         singleMember: "R75 (Age 18-59) / R95 (Above 60)",
+//         memberWithChildren: "R85 (Age 18-59) / R105 (Above 60)",
+//         cashBenefit: "R4,000"
+//       },
+//       benefits: [
+//         "2 Pole Tent or R1000 cash",
+//         "Back deco",
+//         "Table",
+//         "50 Chairs",
+//         "50 Chair Covers",
+//         "Burial Service"
+//       ]
+//     },
+//     {
+//       value: "standard_ca",
+//       label: "85",
+//       provider: "Mpiti Funeral - Standard Package CA",
+//       logo: "/images/providers/mpiti.png",
+//       rating: 4.8,
+//       features: [
+//         "Collection and Delivery of deceased",
+//         "Cleaning and preparation of corpse",
+//         "Administration of Death Certificate",
+//         "Halfview casket",
+//         "Storage of deceased"
+//       ],
+//       coverageDetails: {
+//         singleMember: {
+//           age18_59: "R85",
+//           age60_74: "R105",
+//           age75_100: "R120"
+//         },
+//         memberWithChildren: {
+//           age18_59: "R95",
+//           age60_74: "R110",
+//           age75_100: "R135"
+//         },
+//         cashBenefit: "R2,000"
+//       },
+//       benefits: [
+//         "2 Pole Tent or R1000 cash",
+//         "Back deco",
+//         "Table",
+//         "50 Chairs",
+//         "50 Chair Covers",
+//         "50 Programmes",
+//         "Burial Service"
+//       ]
+//     },
+//     {
+//       value: "package_cb",
+//       label: "115",
+//       provider: "Mpiti Funeral - Package CB",
+//       logo: "/images/providers/mpiti.png",
+//       rating: 4.9,
+//       features: [
+//         "Collection and Delivery of deceased",
+//         "Cleaning and preparation of corpse",
+//         "Administration of Death Certificate",
+//         "Half-View Casket",
+//         "Storage of deceased"
+//       ],
+//       coverageDetails: {
+//         singleMember: {
+//           age18_59: "R115",
+//           age60_74: "R135",
+//           age75_up: "R160"
+//         },
+//         memberWithChildren: {
+//           age18_59: "R125",
+//           age60_105: "R145",
+//           age75_up: "R175"
+//         },
+//         cashBenefit: "R4,000"
+//       },
+//       benefits: [
+//         "2 Pole Tent or R1000 cash",
+//         "Back deco",
+//         "Table & 50 chairs",
+//         "50 Chair Covers",
+//         "50 Programmes",
+//         "Burial Service"
+//       ]
+//     },
+//     {
+//       value: "package_d",
+//       label: "180",
+//       provider: "Mpiti Funeral - Package D",
+//       logo: "/images/providers/mpiti.png",
+//       rating: 4.9,
+//       features: [
+//         "Collection and Delivery of deceased",
+//         "Cleaning and preparation of corpse",
+//         "Administration of Death Certificate",
+//         "Oval line casket",
+//         "Storage of deceased"
+//       ],
+//       coverageDetails: {
+//         member: {
+//           age18_59: "R180",
+//           age60_99: "R210"
+//         },
+//         cashBenefit: "R5,000"
+//       },
+//       benefits: [
+//         "2 Pole Tent or R1000 cash",
+//         "Back deco",
+//         "Table",
+//         "100 Chairs",
+//         "50 Chair Covers",
+//         "50 Programmes"
+//       ]
+//     },
+//     {
+//       value: "package_e",
+//       label: "215",
+//       provider: "Mpiti Funeral - Package E",
+//       logo: "/images/providers/mpiti.png",
+//       rating: 5.0,
+//       features: [
+//         "Collection and Delivery of deceased",
+//         "Cleaning and preparation of corpse",
+//         "Administration of Death Certificate",
+//         "Oval line casket",
+//         "Storage of deceased"
+//       ],
+//       coverageDetails: {
+//         singleMember: {
+//           age18_59: "R215",
+//           age60_99: "R245"
+//         },
+//         cashBenefit: "R6,000"
+//       },
+//       benefits: [
+//         "2 Pole Tent or R1000 cash",
+//         "Back deco",
+//         "Table",
+//         "100 Chairs",
+//         "50 Chair Covers",
+//         "50 Programmes"
+//       ]
+//     }
+//   ]
+// };
+ const coverOptions = [
     {
-      value: "standard_b",
-      label: "75",
-      provider: "Mpiti Funeral - Standard Package B",
-      logo: "/images/providers/mpiti.png",
+      value: 'avbob_standard_b',
+      provider: 'Avbob',
+      label: '75',
+      basePremium: 75,
+      logo: '/images/providers/avbob.png',
+      rating: 4.6,
+      selectedExtras: 40,
+      totalPremium: 115,
+      coverageDetails: {
+        singleMember: 'R15,000',
+        memberWithChildren: 'R20,000',
+        cashBenefit: 'R2,000'
+      },
+      features: [
+        'Comprehensive funeral cover',
+        '24/7 Claims support',
+        'Nationwide coverage'
+      ],
+      benefits: [
+        'No waiting periods for accidents',
+        'Family protection included',
+        'Affordable monthly premiums'
+      ]
+    },
+    {
+      value: 'icebolethu_standard',
+      provider: 'Icebolethu',
+      label: '80',
+      basePremium: 80,
+      logo: '/images/providers/icebolethu.png',
+      rating: 4.6,
+      selectedExtras: 40,
+      totalPremium: 230,
+      coverageDetails: {
+        singleMember: 'R18,000',
+        memberWithChildren: 'R25,000',
+        cashBenefit: 'R2,500'
+      },
+      features: [
+        'Standard funeral package',
+        'Quick claim processing',
+        'Local service centers'
+      ],
+      benefits: [
+        'Extended family coverage',
+        'Cash payout option',
+        'Flexible payment terms'
+      ]
+    },
+    {
+      value: 'raaa_comprehensive',
+      provider: 'RAAA',
+      label: '100',
+      basePremium: 100,
+      logo: '/images/providers/raaa.png',
       rating: 4.8,
-      features: [
-        "Collection and Delivery of deceased",
-        "Cleaning and preparation of corpse",
-        "Administration of Death Certificate",
-        "Flat-Lid Coffin",
-        "Storage of deceased"
-      ],
+      selectedExtras: 40,
+      totalPremium: 140,
       coverageDetails: {
-        singleMember: "R75 (Age 18-59) / R95 (Above 60)",
-        memberWithChildren: "R85 (Age 18-59) / R105 (Above 60)",
-        cashBenefit: "R4,000"
+        singleMember: 'R25,000',
+        memberWithChildren: 'R30,000',
+        cashBenefit: 'R3,000'
       },
+      features: [
+        'Comprehensive package',
+        'Premium service guarantee',
+        'Multiple benefit options'
+      ],
       benefits: [
-        "2 Pole Tent or R1000 cash",
-        "Back deco",
-        "Table",
-        "50 Chairs",
-        "50 Chair Covers",
-        "Burial Service"
+        'Higher coverage amounts',
+        'Priority claim processing',
+        'Additional family benefits'
       ]
     },
     {
-      value: "standard_ca",
-      label: "85",
-      provider: "Mpiti Funeral - Standard Package CA",
-      logo: "/images/providers/mpiti.png",
-      rating: 4.8,
-      features: [
-        "Collection and Delivery of deceased",
-        "Cleaning and preparation of corpse",
-        "Administration of Death Certificate",
-        "Halfview casket",
-        "Storage of deceased"
-      ],
+      value: 'metropolitan',
+      provider: 'Metropolitan',
+      label: '95',
+      basePremium: 95,
+      logo: '/images/providers/metropolitan.png',
+      rating: 4.4,
+      selectedExtras: 40,
+      totalPremium: 135,
       coverageDetails: {
-        singleMember: {
-          age18_59: "R85",
-          age60_74: "R105",
-          age75_100: "R120"
-        },
-        memberWithChildren: {
-          age18_59: "R95",
-          age60_74: "R110",
-          age75_100: "R135"
-        },
-        cashBenefit: "R2,000"
+        singleMember: 'R20,000',
+        memberWithChildren: 'R28,000',
+        cashBenefit: 'R2,800'
       },
-      benefits: [
-        "2 Pole Tent or R1000 cash",
-        "Back deco",
-        "Table",
-        "50 Chairs",
-        "50 Chair Covers",
-        "50 Programmes",
-        "Burial Service"
-      ]
-    },
-    {
-      value: "package_cb",
-      label: "115",
-      provider: "Mpiti Funeral - Package CB",
-      logo: "/images/providers/mpiti.png",
-      rating: 4.9,
       features: [
-        "Collection and Delivery of deceased",
-        "Cleaning and preparation of corpse",
-        "Administration of Death Certificate",
-        "Half-View Casket",
-        "Storage of deceased"
+        'Established provider',
+        'Reliable service',
+        'Competitive rates'
       ],
-      coverageDetails: {
-        singleMember: {
-          age18_59: "R115",
-          age60_74: "R135",
-          age75_up: "R160"
-        },
-        memberWithChildren: {
-          age18_59: "R125",
-          age60_105: "R145",
-          age75_up: "R175"
-        },
-        cashBenefit: "R4,000"
-      },
       benefits: [
-        "2 Pole Tent or R1000 cash",
-        "Back deco",
-        "Table & 50 chairs",
-        "50 Chair Covers",
-        "50 Programmes",
-        "Burial Service"
-      ]
-    },
-    {
-      value: "package_d",
-      label: "180",
-      provider: "Mpiti Funeral - Package D",
-      logo: "/images/providers/mpiti.png",
-      rating: 4.9,
-      features: [
-        "Collection and Delivery of deceased",
-        "Cleaning and preparation of corpse",
-        "Administration of Death Certificate",
-        "Oval line casket",
-        "Storage of deceased"
-      ],
-      coverageDetails: {
-        member: {
-          age18_59: "R180",
-          age60_99: "R210"
-        },
-        cashBenefit: "R5,000"
-      },
-      benefits: [
-        "2 Pole Tent or R1000 cash",
-        "Back deco",
-        "Table",
-        "100 Chairs",
-        "50 Chair Covers",
-        "50 Programmes"
-      ]
-    },
-    {
-      value: "package_e",
-      label: "215",
-      provider: "Mpiti Funeral - Package E",
-      logo: "/images/providers/mpiti.png",
-      rating: 5.0,
-      features: [
-        "Collection and Delivery of deceased",
-        "Cleaning and preparation of corpse",
-        "Administration of Death Certificate",
-        "Oval line casket",
-        "Storage of deceased"
-      ],
-      coverageDetails: {
-        singleMember: {
-          age18_59: "R215",
-          age60_99: "R245"
-        },
-        cashBenefit: "R6,000"
-      },
-      benefits: [
-        "2 Pole Tent or R1000 cash",
-        "Back deco",
-        "Table",
-        "100 Chairs",
-        "50 Chair Covers",
-        "50 Programmes"
+        'Trusted brand',
+        'Stable coverage',
+        'Good customer support'
       ]
     }
-  ]
-};
+  ];
+
 
 const validateIdNumber = (idNumber) => {
   // South African ID number validation (13 digits)
@@ -536,9 +639,7 @@ const ComparisonForm = () => {
         if (!formData.policyType?.trim()) {
           newErrors.policyType = "Policy type is required";
         }
-        if (!formData.premiumFrequency?.trim()) {
-          newErrors.premiumFrequency = "Premium frequency is required";
-        }
+        
         // Allow dependents to be 0
         if (formData.dependents === "" || formData.dependents === undefined) {
           newErrors.dependents = "Number of dependents is required";
@@ -934,62 +1035,150 @@ const ComparisonForm = () => {
             </div>
           </div>
         );
-      case 2: // Policy Details
+        case 2: // Policy Details
         return (
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">
               Policy Information
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Policy Type
-                </label>
-                <select
-                  name="policyType"
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                  required
-                >
-                  <option value="">Select Policy Type</option>
-                  <option value="individual">Individual</option>
-                  <option value="family">Family</option>
-                  <option value="extended">Extended Family</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Premium Frequency
-                </label>
-                <select
-                  name="premiumFrequency"
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                  required
-                >
-                  <option value="">Select Frequency</option>
-                  <option value="monthly">Monthly</option>
-                  <option value="annually">Annually</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Number of Dependents
-              </label>
-              <input
-                type="number"
+            
+            {/* Number of dependants dropdown */}
+            <div className="max-w-sm">
+              <select
                 name="dependents"
-                min="0"
-                max="10"
                 onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff] text-gray-700"
                 required
-              />
+              >
+                <option value="">Number of dependants</option>
+                <option value="0">0 dependants</option>
+                <option value="1">1 dependant</option>
+                <option value="2">2 dependants</option>
+                <option value="3">3 dependants</option>
+                <option value="4">4 dependants</option>
+                <option value="5">5 dependants</option>
+                <option value="6">6 dependants</option>
+                <option value="7">7 dependants</option>
+                <option value="8">8 dependants</option>
+                <option value="9">9 dependants</option>
+                <option value="10">10 dependants</option>
+              </select>
+            </div>
+      
+            {/* Who do you want to cover section */}
+            <div>
+              <h4 className="text-lg font-medium text-gray-800 mb-4">
+                Who do you want to cover? <span className="text-[#00c2ff]">Select one</span>
+              </h4>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Individual cover */}
+                <div 
+                  className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                    formData.policyType === 'individual' 
+                      ? 'border-[#00c2ff] bg-blue-50' 
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                  onClick={() => handleChange({ target: { name: 'policyType', value: 'individual' } })}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" 
+                        alt="Individual" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="font-semibold text-gray-800 mb-2">Individual cover</h5>
+                      <p className="text-sm text-gray-600">
+                        Covers only the main policy-holder. Ideal for those who want a simple, personal funeral plan.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+      
+                {/* Family cover */}
+                <div 
+                  className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                    formData.policyType === 'family' 
+                      ? 'border-[#00c2ff] bg-blue-50' 
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                  onClick={() => handleChange({ target: { name: 'policyType', value: 'family' } })}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=150&h=150&fit=crop" 
+                        alt="Family" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="font-semibold text-gray-800 mb-2">Family cover</h5>
+                      <p className="text-sm text-gray-600">
+                        Includes the policyholder, their spouse, and children. A great choice for full household protection.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+      
+                {/* Extended Family Cover */}
+                <div 
+                  className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                    formData.policyType === 'extended' 
+                      ? 'border-[#00c2ff] bg-blue-50' 
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                  onClick={() => handleChange({ target: { name: 'policyType', value: 'extended' } })}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src="https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=150&h=150&fit=crop" 
+                        alt="Extended Family" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="font-semibold text-gray-800 mb-2">Extended Family Cover (Max 9 People)</h5>
+                      <p className="text-sm text-gray-600">
+                        Add up to nine extra members like parents, siblings, or a domestic worker to one policy.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+      
+                {/* Parent or Parent-Only Cover */}
+                <div 
+                  className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                    formData.policyType === 'parent' 
+                      ? 'border-[#00c2ff] bg-blue-50' 
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                  onClick={() => handleChange({ target: { name: 'policyType', value: 'parent' } })}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=150&h=150&fit=crop" 
+                        alt="Parent Cover" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="font-semibold text-gray-800 mb-2">Parent or Parent-Only Cover</h5>
+                      <p className="text-sm text-gray-600">
+                        Covers one or both parents or in-laws. Perfect for taking care of the elders in your family.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         );
-
       case 3: // Select Extras
         return (
           <div className="space-y-4">
