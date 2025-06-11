@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import Confetti from "react-confetti";
 
- const provincialCoverOptions = {
-   "Gauteng": [
-     {
-       value: "standard_b",
-       label: "75",
-       provider: "Mpiti Funeral - Standard Package B",
-     logo: "/images/providers/mpiti.png",
+const provincialCoverOptions = {
+  "Gauteng": [
+    {
+      value: "standard_b",
+      label: "75",
+      provider: "Mpiti Funeral - Standard Package B",
+      logo: "/images/providers/mpiti.png",
       rating: 4.8,
       features: [
         "Collection and Delivery of deceased",
@@ -17,8 +17,8 @@ import Confetti from "react-confetti";
         "Storage of deceased"
       ],
       coverageDetails: {
-         singleMember: "R75 (Age 18-59) / R95 (Above 60)",
-         memberWithChildren: "R85 (Age 18-59) / R105 (Above 60)",        
+        singleMember: "R75 (Age 18-59) / R95 (Above 60)",
+        memberWithChildren: "R85 (Age 18-59) / R105 (Above 60)",
         cashBenefit: "R4,000"
       },
       benefits: [
@@ -49,10 +49,10 @@ import Confetti from "react-confetti";
           age60_74: "R105",
           age75_100: "R120"
         },
-       memberWithChildren: {
-         age18_59: "R95",
-         age60_74: "R110",
-         age75_100: "R135"
+        memberWithChildren: {
+          age18_59: "R95",
+          age60_74: "R110",
+          age75_100: "R135"
         },
         cashBenefit: "R2,000"
       },
@@ -79,9 +79,9 @@ import Confetti from "react-confetti";
         "Half-View Casket",
         "Storage of deceased"
       ],
-       coverageDetails: {
+      coverageDetails: {
         singleMember: {
-           age18_59: "R115",
+          age18_59: "R115",
           age60_74: "R135",
           age75_up: "R160"
         },
@@ -121,47 +121,47 @@ import Confetti from "react-confetti";
         },
         cashBenefit: "R5,000"
       },
-       benefits: [
+      benefits: [
         "2 Pole Tent or R1000 cash",
         "Back deco",
-         "Table",
-         "100 Chairs",
-         "50 Chair Covers",
-         "50 Programmes"
-       ]
-     },
-     {
-       value: "package_e",
-       label: "215",
-       provider: "Mpiti Funeral - Package E",
-       logo: "/images/providers/mpiti.png",
-       rating: 5.0,
-       features: [
-         "Collection and Delivery of deceased",
-         "Cleaning and preparation of corpse",
-         "Administration of Death Certificate",
-         "Oval line casket",
-         "Storage of deceased"
-       ],
-       coverageDetails: {
-         singleMember: {
-           age18_59: "R215",
-           age60_99: "R245"
-         },
-         cashBenefit: "R6,000"
-       },
+        "Table",
+        "100 Chairs",
+        "50 Chair Covers",
+        "50 Programmes"
+      ]
+    },
+    {
+      value: "package_e",
+      label: "215",
+      provider: "Mpiti Funeral - Package E",
+      logo: "/images/providers/mpiti.png",
+      rating: 5.0,
+      features: [
+        "Collection and Delivery of deceased",
+        "Cleaning and preparation of corpse",
+        "Administration of Death Certificate",
+        "Oval line casket",
+        "Storage of deceased"
+      ],
+      coverageDetails: {
+        singleMember: {
+          age18_59: "R215",
+          age60_99: "R245"
+        },
+        cashBenefit: "R6,000"
+      },
       benefits: [
-         "2 Pole Tent or R1000 cash",
-         "Back deco",
-         "Table",
-         "100 Chairs",
-         "50 Chair Covers",
+        "2 Pole Tent or R1000 cash",
+        "Back deco",
+        "Table",
+        "100 Chairs",
+        "50 Chair Covers",
         "50 Programmes"
       ]
     }
-   ]
+  ]
 };
- 
+
 
 
 const validateIdNumber = (idNumber) => {
@@ -935,7 +935,7 @@ const ComparisonForm = () => {
           </div>
         );
 
-        
+
         case 2: // Policy Details
         return (
           <div className="space-y-6">
