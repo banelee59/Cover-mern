@@ -1680,6 +1680,57 @@ const ComparisonForm = () => {
               height: '129px',
               flexShrink: 0
             }}></div>
+
+            {/* Progress Bar */}
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-full max-w-md">
+              <div className="flex justify-center">
+                <div className="flex items-center space-x-8">
+                  {/* Step 1 */}
+                  <div className="flex flex-col items-center">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 1 ? 'bg-[#00c2ff] text-white' : 'bg-gray-200 text-gray-500'}`}>
+                      <span>1</span>
+                    </div>
+                    <span className="mt-1 text-xs text-white whitespace-nowrap">Personal Details</span>
+                  </div>
+                  <div className="flex-1 border-t border-gray-300"></div>
+                  
+                  {/* Step 2 */}
+                  <div className="flex flex-col items-center">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 2 ? 'bg-[#00c2ff] text-white' : 'bg-gray-200 text-gray-500'}`}>
+                      <span>2</span>
+                    </div>
+                    <span className="mt-1 text-xs text-white whitespace-nowrap">Policy Details</span>
+                  </div>
+                  <div className="flex-1 border-t border-gray-300"></div>
+
+                  {/* Step 3 */}
+                  <div className="flex flex-col items-center">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 3 ? 'bg-[#00c2ff] text-white' : 'bg-gray-200 text-gray-500'}`}>
+                      <span>3</span>
+                    </div>
+                    <span className="mt-1 text-xs text-white whitespace-nowrap">Extra Options</span>
+                  </div>
+                  <div className="flex-1 border-t border-gray-300"></div>
+
+                  {/* Step 4 */}
+                  <div className="flex flex-col items-center">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 4 ? 'bg-[#00c2ff] text-white' : 'bg-gray-200 text-gray-500'}`}>
+                      <span>4</span>
+                    </div>
+                    <span className="mt-1 text-xs text-white whitespace-nowrap">Cover Options</span>
+                  </div>
+                  <div className="flex-1 border-t border-gray-300"></div>
+
+                  {/* Step 5 */}
+                  <div className="flex flex-col items-center">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 5 ? 'bg-[#00c2ff] text-white' : 'bg-gray-200 text-gray-500'}`}>
+                      <span>5</span>
+                    </div>
+                    <span className="mt-1 text-xs text-white whitespace-nowrap">Confirmation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             {/* White overlay for better readability */}
             <div className="absolute top-0 left-0 right-0 h-2/4 bg-white bg-opacity-10 z-10"></div>
 
