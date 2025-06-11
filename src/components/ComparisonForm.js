@@ -1080,83 +1080,349 @@ const ComparisonForm = () => {
             </div>
           </div>
         );
-      case 3: // Select Extras
+        case 3: // Select Extras
         return (
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">
               Extra Service Offerings
             </h3>
-            <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border border-gray-200">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b border-gray-200">
-                      Service
-                    </th>
-                    <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">
-                      Price
-                    </th>
-                    <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">
-                      Yes
-                    </th>
-                    <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">
-                      No
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {extraServices.map((service) => (
-                    <tr key={service.name} className="hover:bg-gray-50">
-                      <td className="px-4 py-2 text-sm text-gray-700 border-b border-gray-200">
-                        {service.label}
-                      </td>
-                      <td className="px-4 py-2 text-center text-sm text-gray-700 border-b border-gray-200">
-                        R{service.price}
-                      </td>
-                      <td className="px-4 py-2 text-center border-b border-gray-200">
-                        <input
-                          type="radio"
-                          name={service.name}
-                          checked={formData[service.name] === true}
-                          onChange={() => {
-                            setFormData((prev) => ({
-                              ...prev,
-                              [service.name]: true,
-                              totalPremium: calculateTotalPremium(prev, service.name, true)
-                            }));
-                          }}
-                          className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
-                        />
-                      </td>
-                      <td className="px-4 py-2 text-center border-b border-gray-200">
-                        <input
-                          type="radio"
-                          name={service.name}
-                          checked={formData[service.name] === false}
-                          onChange={() => {
-                            setFormData((prev) => ({
-                              ...prev,
-                              [service.name]: false,
-                              totalPremium: calculateTotalPremium(prev, service.name, false)
-                            }));
-                          }}
-                          className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-
-              {/* Total Premium Display */}
-              <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                <p className="text-lg font-semibold text-gray-800">
-                  Total Monthly Premium:
-                  <span className="text-[#00c2ff] ml-2">
-                    R{calculateTotalPremium(formData)}
-                  </span>
-                </p>
+            
+            {/* Three column grid layout */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              {/* First Column */}
+              <div className="bg-white rounded-lg shadow-lg border overflow-hidden">
+                <div className="grid grid-cols-3 gap-4 mb-4 bg-gray-800 text-white p-4">
+                  <div className="font-medium text-sm">Service</div>
+                  <div className="font-medium text-sm text-center">Price</div>
+                  <div className="font-medium text-sm text-center">Include</div>
+                </div>
+                
+                <div className="space-y-3 p-4">
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Draping</div>
+                    <div className="text-gray-700 text-sm text-center">R20</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.draping || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            draping: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Mobile Toilets</div>
+                    <div className="text-gray-700 text-sm text-center">R15</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.mobileToilets || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            mobileToilets: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Grocery Benefit</div>
+                    <div className="text-gray-700 text-sm text-center">R12</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.groceryBenefit || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            groceryBenefit: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Mobile Fridge</div>
+                    <div className="text-gray-700 text-sm text-center">R20</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.mobileFridge || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            mobileFridge: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Sound System</div>
+                    <div className="text-gray-700 text-sm text-center">R10</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.soundSystem || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            soundSystem: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
+      
+              {/* Second Column */}
+              <div className="bg-white rounded-lg shadow-lg border overflow-hidden">
+                <div className="grid grid-cols-3 gap-4 mb-4 bg-gray-800 text-white p-4">
+                  <div className="font-medium text-sm">Service</div>
+                  <div className="font-medium text-sm text-center">Price</div>
+                  <div className="font-medium text-sm text-center">Include</div>
+                </div>
+                
+                <div className="space-y-3 p-4">
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Video Streaming</div>
+                    <div className="text-gray-700 text-sm text-center">R10</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.videoStreaming || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            videoStreaming: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Airtime Allowance</div>
+                    <div className="text-gray-700 text-sm text-center">R15</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.airtimeAllowance || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            airtimeAllowance: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Tombstone</div>
+                    <div className="text-gray-700 text-sm text-center">R10</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.tombstone || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            tombstone: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Catering</div>
+                    <div className="text-gray-700 text-sm text-center">R20</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.catering || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            catering: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Grief Counselling</div>
+                    <div className="text-gray-700 text-sm text-center">R22</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.griefCounselling || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            griefCounselling: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              {/* Third Column */}
+              <div className="bg-white rounded-lg shadow-lg border overflow-hidden">
+                <div className="grid grid-cols-3 gap-4 mb-4 bg-gray-800 text-white p-4">
+                  <div className="font-medium text-sm">Service</div>
+                  <div className="font-medium text-sm text-center">Price</div>
+                  <div className="font-medium text-sm text-center">Include</div>
+                </div>
+                
+                <div className="space-y-3 p-4">
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Floral Arrangements</div>
+                    <div className="text-gray-700 text-sm text-center">R10</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.floralArrangements || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            floralArrangements: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Urns</div>
+                    <div className="text-gray-700 text-sm text-center">R15</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.urns || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            urns: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Funeral Programs</div>
+                    <div className="text-gray-700 text-sm text-center">R12</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.funeralPrograms || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            funeralPrograms: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Grave Liners</div>
+                    <div className="text-gray-700 text-sm text-center">R10</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.graveLiners || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            graveLiners: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm">Grave Digging</div>
+                    <div className="text-gray-700 text-sm text-center">R15</div>
+                    <div className="text-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.graveDigging || false}
+                        onChange={(e) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            graveDigging: e.target.checked,
+                          }));
+                        }}
+                        className="w-4 h-4 text-[#00c2ff] bg-white border-gray-300 rounded focus:ring-[#00c2ff] focus:ring-2"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            {/* Total Premium Display */}
+            <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+              <p className="text-lg font-semibold text-gray-800">
+                Total Monthly Premium:
+                <span className="text-[#00c2ff] ml-2">
+                  R{(() => {
+                    let total = 0;
+                    
+                    // Add only selected services (removed base premium)
+                    if (formData.draping) total += 20;
+                    if (formData.mobileToilets) total += 15;
+                    if (formData.groceryBenefit) total += 12;
+                    if (formData.mobileFridge) total += 20;
+                    if (formData.soundSystem) total += 10;
+                    if (formData.videoStreaming) total += 10;
+                    if (formData.airtimeAllowance) total += 15;
+                    if (formData.tombstone) total += 10;
+                    if (formData.catering) total += 20;
+                    if (formData.griefCounselling) total += 22;
+                    if (formData.floralArrangements) total += 10;
+                    if (formData.urns) total += 15;
+                    if (formData.funeralPrograms) total += 12;
+                    if (formData.graveLiners) total += 10;
+                    if (formData.graveDigging) total += 15;
+                    
+                    return total;
+                  })()}
+                </span>
+              </p>
             </div>
           </div>
         );
