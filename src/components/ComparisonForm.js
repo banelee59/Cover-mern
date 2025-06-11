@@ -1666,10 +1666,10 @@ const ComparisonForm = () => {
         <SuccessView />
       ) : (
         <div
-          className="min-h-screen flex flex-col relative bg-white"
+          className="min-h-screen flex flex-col relative bg-white overflow-hidden"
         >
           {/* Main content container */}
-          <div className="w-full h-full relative mb-24 mt-0 z-10">
+          <div className="w-full relative mb-24 mt-0 z-10">
             {/* Background Image */}
             <div className="absolute top-0 left-0 right-0 z-0" style={{
               backgroundImage: 'url("/images/turtle-9.jpg")',
