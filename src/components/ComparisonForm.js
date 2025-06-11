@@ -613,135 +613,142 @@ const ComparisonForm = () => {
   const renderFormStep = () => {
     switch (currentStep) {
       case 1: // Profile Details
-        return (
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
-              Personal Information
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Title
-                </label>
-                <select
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  className={`w-full p-2 border ${errors.title ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                  required
-                >
-                  <option value="">Select</option>
-                  <option value="Mr">Mr</option>
-                  <option value="Mrs">Mrs</option>
-                  <option value="Ms">Ms</option>
-                  <option value="Dr">Dr</option>
-                </select>
-                {renderError("title")}
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  className={`w-full p-2 border ${errors.firstName ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                  required
-                />
-                {renderError("firstName")}
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  className={`w-full p-2 border ${errors.lastName ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                  required
-                />
-                {renderError("lastName")}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  ID Number
-                </label>
-                <input
-                  type="text"
-                  name="idNumber"
-                  value={formData.idNumber}
-                  onChange={handleChange}
-                  className={`w-full p-2 border ${errors.idNumber ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                  required
-                />
-                {renderError("idNumber")}
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Gender
-                </label>
-                <select
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleChange}
-                  className={`w-full p-2 border ${errors.gender ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                  required
-                >
-                  <option value="">Select</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-                {renderError("gender")}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`w-full p-2 border ${errors.email ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                  required
-                />
-                {renderError("email")}
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
-                  className={`w-full p-2 border ${errors.phoneNumber ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                  required
-                />
-                {renderError("phoneNumber")}
-              </div>
-            </div>
-
+      return (
+        <div className="space-y-6">
+          <h3 className="text-xl font-semibold text-gray-800 mb-6">
+            Personal Information
+          </h3>
+          
+          {/* First Row - Title, First Name, Last Name */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Title
+              </label>
+              <select
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                className={`w-full p-3 border ${errors.title ? "border-red-500" : "border-gray-300"
+                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white`}
+                required
+              >
+                <option value="">Title</option>
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Ms">Ms</option>
+                <option value="Dr">Dr</option>
+              </select>
+              {renderError("title")}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                First Name
+              </label>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="First name"
+                className={`w-full p-3 border ${errors.firstName ? "border-red-500" : "border-gray-300"
+                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                required
+              />
+              {renderError("firstName")}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Last Name
+              </label>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Last Name"
+                className={`w-full p-3 border ${errors.lastName ? "border-red-500" : "border-gray-300"
+                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                required
+              />
+              {renderError("lastName")}
+            </div>
+          </div>
+    
+          {/* Second Row - ID Number, Gender, Email */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                ID Number
+              </label>
+              <input
+                type="text"
+                name="idNumber"
+                value={formData.idNumber}
+                onChange={handleChange}
+                placeholder="ID Number"
+                className={`w-full p-3 border ${errors.idNumber ? "border-red-500" : "border-gray-300"
+                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                required
+              />
+              {renderError("idNumber")}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Gender
+              </label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                className={`w-full p-3 border ${errors.gender ? "border-red-500" : "border-gray-300"
+                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white`}
+                required
+              >
+                <option value="">Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              {renderError("gender")}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email address"
+                className={`w-full p-3 border ${errors.email ? "border-red-500" : "border-gray-300"
+                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                required
+              />
+              {renderError("email")}
+            </div>
+          </div>
+    
+          {/* Third Row - Phone Number, Alternative Number, Marital Status */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                placeholder="Phone Number"
+                className={`w-full p-3 border ${errors.phoneNumber ? "border-red-500" : "border-gray-300"
+                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                required
+              />
+              {renderError("phoneNumber")}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Alternative Number
               </label>
               <input
@@ -749,38 +756,40 @@ const ComparisonForm = () => {
                 name="alternativeNumber"
                 value={formData.alternativeNumber}
                 onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                placeholder="Alternative number"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
               />
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Marital Status
-                </label>
-                <select
-                  name="maritalStatus"
-                  value={formData.maritalStatus}
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                  required
-                >
-                  <option value="">Select Status</option>
-                  <option value="single">Single</option>
-                  <option value="married">Married</option>
-                  <option value="divorced">Divorced</option>
-                  <option value="widowed">Widowed</option>
-                </select>
-              </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Marital Status
+              </label>
+              <select
+                name="maritalStatus"
+                value={formData.maritalStatus}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
+                required
+              >
+                <option value="">Marital status</option>
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+                <option value="divorced">Divorced</option>
+                <option value="widowed">Widowed</option>
+              </select>
             </div>
-
-            <div className="space-y-4">
-              <h4 className="text-lg font-medium text-gray-800">
-                Physical Address
-              </h4>
-
+          </div>
+    
+          {/* Physical Address Section */}
+          <div className="space-y-4 pt-4">
+            <h4 className="text-lg font-semibold text-gray-800">
+              Physical address
+            </h4>
+    
+            {/* Address Row 1 - Street Address, Suburb, City */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Street Address
                 </label>
                 <input
@@ -788,26 +797,26 @@ const ComparisonForm = () => {
                   name="address.street"
                   value={formData.address.street}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                  placeholder="Street Address"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
                   required
                 />
               </div>
-
               <div className="relative">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Suburb
-                  </label>
-                  <input
-                    type="text"
-                    name="address.suburb"
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Suburb
+                </label>
+                <input
+                  type="text"
+                  name="address.suburb"
                   value={formData.address.suburb || ''}
                   onChange={handleSuburbChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                  placeholder="Start typing your suburb..."
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                  placeholder="Suburb"
                   autoComplete="off"
                 />
                 {suggestions.length > 0 && (
-                  <div className="absolute z-50 w-full mt-1 bg-white shadow-xl rounded-md border border-gray-200 max-h-60 overflow-y-auto">
+                  <div className="absolute z-50 w-full mt-1 bg-white shadow-xl rounded-lg border border-gray-200 max-h-60 overflow-y-auto">
                     {suggestions.map((suggestion) => (
                       <div
                         key={suggestion.placeId}
@@ -825,81 +834,90 @@ const ComparisonForm = () => {
                       >
                         <div className="font-medium text-gray-800">{suggestion.mainText}</div>
                         <div className="text-sm text-gray-500">{suggestion.secondaryText}</div>
-                </div>
+                      </div>
                     ))}
                   </div>
                 )}
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    City
-                  </label>
-                  <input
-                    type="text"
-                    name="address.city"
-                    value={formData.address.city}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Province
-                  </label>
-                  <select
-                    name="address.province"
-                    value={formData.address.province}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                    required
-                  >
-                    <option value="">Select Province</option>
-                    <option value="Gauteng">Gauteng</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Postal Code
-                  </label>
-                  <input
-                    type="text"
-                    name="address.postalCode"
-                    value={formData.address.postalCode}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                    required
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  City
+                </label>
+                <input
+                  type="text"
+                  name="address.city"
+                  value={formData.address.city}
+                  onChange={handleChange}
+                  placeholder="City"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                  required
+                />
               </div>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+            {/* Address Row 2 - Province, Postal Code, Employment Status */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Province
+                </label>
+                <select
+                  name="address.province"
+                  value={formData.address.province}
+                  onChange={handleChange}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
+                  required
+                >
+                  <option value="">Select Province</option>
+                  <option value="Gauteng">Gauteng</option>
+                  <option value="Western Cape">Western Cape</option>
+                  <option value="Eastern Cape">Eastern Cape</option>
+                  <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                  <option value="Free State">Free State</option>
+                  <option value="Limpopo">Limpopo</option>
+                  <option value="Mpumalanga">Mpumalanga</option>
+                  <option value="North West">North West</option>
+                  <option value="Northern Cape">Northern Cape</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Postal Code
+                </label>
+                <input
+                  type="text"
+                  name="address.postalCode"
+                  value={formData.address.postalCode}
+                  onChange={handleChange}
+                  placeholder="Postal code"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Employment Status
                 </label>
                 <select
                   name="employmentStatus"
                   value={formData.employmentStatus}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
                   required
                 >
-                  <option value="">Select</option>
+                  <option value="">Employment status</option>
                   <option value="employed">Employed</option>
                   <option value="self-employed">Self-Employed</option>
                   <option value="unemployed">Unemployed</option>
                   <option value="retired">Retired</option>
                 </select>
               </div>
+            </div>
+    
+            {/* Monthly Income Row */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Monthly Income
                 </label>
                 <input
@@ -907,14 +925,15 @@ const ComparisonForm = () => {
                   name="monthlyIncome"
                   value={formData.monthlyIncome}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                  placeholder="Monthly income"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
                   required
                 />
               </div>
             </div>
           </div>
-        );
-
+        </div>
+      );
       case 2: // Policy Details
         return (
           <div className="space-y-4">
@@ -1549,7 +1568,7 @@ const ComparisonForm = () => {
   // Update the SuccessView component to include the reference number from form data
   const SuccessView = () => {
     return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg text-center relative">
         {/* Success Icon */}
         <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
@@ -1647,80 +1666,31 @@ const ComparisonForm = () => {
         <SuccessView />
       ) : (
         <div
-          className="min-h-screen flex flex-col py-12 px-4 sm:px-6 lg:px-8 relative"
-          style={{
-            backgroundImage: 'url("/images/greeny.png")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-          }}
+          className="min-h-screen flex flex-col relative bg-white"
         >
-          {/* Update the overlay to be more transparent */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-50/40 to-indigo-50/40"></div>
-
           {/* Main content container */}
-          <div className="max-w-3xl mx-auto w-full relative z-10">
-            {/* Progress Steps */}
-            <div className="mb-12 w-full overflow-x-auto">
-              <div className="min-w-[600px] md:min-w-full">
-                <div className="flex justify-between items-center px-8">
-                {steps.map((step, index) => (
-                  <div key={step.number} className="flex-1 relative">
-                      <div className="flex flex-col items-center">
-                        {/* Progress Bar and Circle */}
-                        <div className="flex items-center w-full">
-                          {/* Step Circle */}
-                          <div className="relative flex items-center justify-center w-full">
-                            <div
-                              className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm 
-                                ${currentStep >= step.number
-                              ? "bg-[#00c2ff] text-white"
-                              : "bg-gray-200 text-gray-500"
-                                } shadow-sm z-10`}
-                        >
-                          {step.number}
-                        </div>
-                            {/* Progress Line */}
-                            {index < steps.length - 1 && (
-                        <div
-                                className={`absolute top-1/2 left-1/2 w-full h-1 -translate-y-1/2 
-                                  ${currentStep > step.number
-                                ? "bg-[#00c2ff]"
-                                : "bg-gray-200"
-                          }`}
-                        />
-                            )}
-                      </div>
-                        </div>
+          <div className="w-full h-full relative mb-24 mt-0 z-10">
+            {/* Background Image */}
+            <div className="absolute top-0 left-0 right-0 z-0" style={{
+              backgroundImage: 'url("/images/turtle-9.jpg")',
+              backgroundSize: 'cover',
+              backgroundPosition: ' top',
+              backgroundRepeat: 'no-repeat',
+              width: '1440px',
+              height: '129px',
+              flexShrink: 0
+            }}></div>
+            {/* White overlay for better readability */}
+            <div className="absolute top-0 left-0 right-0 h-2/4 bg-white bg-opacity-10 z-10"></div>
 
-                        {/* Step Title */}
-                        <div className="mt-4 text-center w-full">
-                          <span
-                            className={`text-xs sm:text-sm font-medium block px-2
-                              ${currentStep >= step.number
-                                ? "text-black"
-                                : "text-black"
-                              }`}
-                          >
-                        {step.title}
-                          </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                </div>
-              </div>
-            </div>
 
-            {/* Form Container - make slightly more transparent */}
-            <div className="bg-white/85 rounded-xl shadow-lg p-8 w-full backdrop-blur-sm">
-              <form onSubmit={handleSubmit} className="space-y-6 w-full">
+            {/* Form Container */}
+            <div className="bg-white rounded-xl shadow-lg p-8 mt-40 w-full">
+              <form onSubmit={handleSubmit} className="space-y-6 w-full h-full">
                 {renderFormStep()}
 
                 {/* Navigation buttons */}
-                <div className="flex justify-between pt-6">
+                <div className="flex justify-between pt-6 w-full">
                   {currentStep > 1 && (
                     <button
                       type="button"

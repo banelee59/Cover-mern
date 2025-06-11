@@ -7,7 +7,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/welcome');
+    navigate('/store-registration');
   };
 
   const handleNavigation = (path) => {
@@ -352,16 +352,18 @@ const Home = () => {
                     allowing your loved ones to focus on healing
                   </p>
                   <button 
-                    onClick={() => handleNavigation('/welcome')} 
-                    className="bg-[#00a9df] hover:bg-[#00b3eb] text-white font-semibold py-3 px-8 rounded-full transition-colors duration-200"
-                  >
-                    APPLY NOW
-                  </button>
+                onClick={handleGetStarted} 
+                className="bg-[#00a9df] hover:bg-[#00b3eb] text-white font-semibold py-3 px-8 rounded-full transition-colors duration-200"
+              >
+                GET STARTED
+              </button>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
+
 
        {/* Footer */}
        <footer className="bg-[#376c6c] text-white py-12">
