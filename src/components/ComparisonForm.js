@@ -433,7 +433,7 @@ const ComparisonForm = () => {
     e.preventDefault();
 
     if (validateStep(currentStep)) {
-        setShowConfetti(true);
+      setShowConfetti(true);
 
       try {
         // First API call to save form data
@@ -613,18 +613,18 @@ const ComparisonForm = () => {
   const renderFormStep = () => {
     switch (currentStep) {
       case 1: // Profile Details
-      return (
-        <div className="space-y-6">
-          <h3 className="text-xl font-semibold text-gray-800 mb-6">
-            Personal Information
-          </h3>
-          
-          {/* First Row - Title, First Name, Last Name */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Title
-              </label>
+        return (
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">
+              Personal Information
+            </h3>
+
+            {/* First Row - Title, First Name, Last Name */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Title
+                </label>
               <select
                 name="title"
                 value={formData.title}
@@ -633,307 +633,307 @@ const ComparisonForm = () => {
                 } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white`}
                 required
               >
-                <option value="">Title</option>
-                <option value="Mr">Mr</option>
-                <option value="Mrs">Mrs</option>
+                  <option value="">Title</option>
+                  <option value="Mr">Mr</option>
+                  <option value="Mrs">Mrs</option>
                 <option value="Ms">Ms</option>
                 <option value="Dr">Dr</option>
-              </select>
-              {renderError("title")}
+                </select>
+                {renderError("title")}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="First name"
+                  className={`w-full p-3 border ${errors.firstName ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  required
+                />
+                {renderError("firstName")}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Last Name"
+                  className={`w-full p-3 border ${errors.lastName ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  required
+                />
+                {renderError("lastName")}
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                First Name
-              </label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                placeholder="First name"
-                className={`w-full p-3 border ${errors.firstName ? "border-red-500" : "border-gray-300"
-                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                required
-              />
-              {renderError("firstName")}
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Last Name
-              </label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                placeholder="Last Name"
-                className={`w-full p-3 border ${errors.lastName ? "border-red-500" : "border-gray-300"
-                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                required
-              />
-              {renderError("lastName")}
-            </div>
-          </div>
-    
-          {/* Second Row - ID Number, Gender, Email */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                ID Number
-              </label>
-              <input
-                type="text"
-                name="idNumber"
-                value={formData.idNumber}
-                onChange={handleChange}
-                placeholder="ID Number"
-                className={`w-full p-3 border ${errors.idNumber ? "border-red-500" : "border-gray-300"
-                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                required
-              />
-              {renderError("idNumber")}
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Gender
-              </label>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className={`w-full p-3 border ${errors.gender ? "border-red-500" : "border-gray-300"
-                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white`}
-                required
-              >
-                <option value="">Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-              {renderError("gender")}
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email address"
-                className={`w-full p-3 border ${errors.email ? "border-red-500" : "border-gray-300"
-                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                required
-              />
-              {renderError("email")}
-            </div>
-          </div>
-    
-          {/* Third Row - Phone Number, Alternative Number, Marital Status */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                placeholder="Phone Number"
-                className={`w-full p-3 border ${errors.phoneNumber ? "border-red-500" : "border-gray-300"
-                } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
-                required
-              />
-              {renderError("phoneNumber")}
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Alternative Number
-              </label>
-              <input
-                type="tel"
-                name="alternativeNumber"
-                value={formData.alternativeNumber}
-                onChange={handleChange}
-                placeholder="Alternative number"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Marital Status
-              </label>
-              <select
-                name="maritalStatus"
-                value={formData.maritalStatus}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
-                required
-              >
-                <option value="">Marital status</option>
-                <option value="single">Single</option>
-                <option value="married">Married</option>
-                <option value="divorced">Divorced</option>
-                <option value="widowed">Widowed</option>
-              </select>
-            </div>
-          </div>
-    
-          {/* Physical Address Section */}
-          <div className="space-y-4 pt-4">
-            <h4 className="text-lg font-semibold text-gray-800">
-              Physical address
-            </h4>
-    
-            {/* Address Row 1 - Street Address, Suburb, City */}
+
+            {/* Second Row - ID Number, Gender, Email */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Street Address
+                  ID Number
                 </label>
                 <input
                   type="text"
-                  name="address.street"
-                  value={formData.address.street}
+                  name="idNumber"
+                  value={formData.idNumber}
                   onChange={handleChange}
-                  placeholder="Street Address"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                  placeholder="ID Number"
+                  className={`w-full p-3 border ${errors.idNumber ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
                   required
                 />
-              </div>
-              <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Suburb
-                </label>
-                <input
-                  type="text"
-                  name="address.suburb"
-                  value={formData.address.suburb || ''}
-                  onChange={handleSuburbChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                  placeholder="Suburb"
-                  autoComplete="off"
-                />
-                {suggestions.length > 0 && (
-                  <div className="absolute z-50 w-full mt-1 bg-white shadow-xl rounded-lg border border-gray-200 max-h-60 overflow-y-auto">
-                    {suggestions.map((suggestion) => (
-                      <div
-                        key={suggestion.placeId}
-                        className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-0"
-                        onClick={() => {
-                          setFormData(prev => ({
-                            ...prev,
-                            address: {
-                              ...prev.address,
-                              suburb: suggestion.mainText
-                            }
-                          }));
-                          setSuggestions([]);
-                        }}
-                      >
-                        <div className="font-medium text-gray-800">{suggestion.mainText}</div>
-                        <div className="text-sm text-gray-500">{suggestion.secondaryText}</div>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                {renderError("idNumber")}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  City
-                </label>
-                <input
-                  type="text"
-                  name="address.city"
-                  value={formData.address.city}
-                  onChange={handleChange}
-                  placeholder="City"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                  required
-                />
-              </div>
-            </div>
-    
-            {/* Address Row 2 - Province, Postal Code, Employment Status */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Province
+                  Gender
                 </label>
                 <select
-                  name="address.province"
-                  value={formData.address.province}
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  className={`w-full p-3 border ${errors.gender ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white`}
+                  required
+                >
+                  <option value="">Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                {renderError("gender")}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email address"
+                  className={`w-full p-3 border ${errors.email ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  required
+                />
+                {renderError("email")}
+              </div>
+            </div>
+
+            {/* Third Row - Phone Number, Alternative Number, Marital Status */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  placeholder="Phone Number"
+                  className={`w-full p-3 border ${errors.phoneNumber ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]`}
+                  required
+                />
+                {renderError("phoneNumber")}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Alternative Number
+                </label>
+                <input
+                  type="tel"
+                  name="alternativeNumber"
+                  value={formData.alternativeNumber}
+                  onChange={handleChange}
+                  placeholder="Alternative number"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Marital Status
+                </label>
+                <select
+                  name="maritalStatus"
+                  value={formData.maritalStatus}
                   onChange={handleChange}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
                   required
                 >
-                  <option value="">Select Province</option>
-                  <option value="Gauteng">Gauteng</option>
-                  <option value="Western Cape">Western Cape</option>
-                  <option value="Eastern Cape">Eastern Cape</option>
-                  <option value="KwaZulu-Natal">KwaZulu-Natal</option>
-                  <option value="Free State">Free State</option>
-                  <option value="Limpopo">Limpopo</option>
-                  <option value="Mpumalanga">Mpumalanga</option>
-                  <option value="North West">North West</option>
-                  <option value="Northern Cape">Northern Cape</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Postal Code
-                </label>
-                <input
-                  type="text"
-                  name="address.postalCode"
-                  value={formData.address.postalCode}
-                  onChange={handleChange}
-                  placeholder="Postal code"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Employment Status
-                </label>
-                <select
-                  name="employmentStatus"
-                  value={formData.employmentStatus}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
-                  required
-                >
-                  <option value="">Employment status</option>
-                  <option value="employed">Employed</option>
-                  <option value="self-employed">Self-Employed</option>
-                  <option value="unemployed">Unemployed</option>
-                  <option value="retired">Retired</option>
+                  <option value="">Marital status</option>
+                  <option value="single">Single</option>
+                  <option value="married">Married</option>
+                  <option value="divorced">Divorced</option>
+                  <option value="widowed">Widowed</option>
                 </select>
               </div>
             </div>
-    
-            {/* Monthly Income Row */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Monthly Income
-                </label>
-                <input
-                  type="text"
-                  name="monthlyIncome"
-                  value={formData.monthlyIncome}
-                  onChange={handleChange}
-                  placeholder="Monthly income"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-                  required
-                />
+
+            {/* Physical Address Section */}
+            <div className="space-y-4 pt-4">
+              <h4 className="text-lg font-semibold text-gray-800">
+                Physical address
+              </h4>
+
+              {/* Address Row 1 - Street Address, Suburb, City */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Street Address
+                  </label>
+                  <input
+                    type="text"
+                    name="address.street"
+                    value={formData.address.street}
+                    onChange={handleChange}
+                    placeholder="Street Address"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                    required
+                  />
+                </div>
+                <div className="relative">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Suburb
+                  </label>
+                  <input
+                    type="text"
+                    name="address.suburb"
+                    value={formData.address.suburb || ''}
+                    onChange={handleSuburbChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                    placeholder="Suburb"
+                    autoComplete="off"
+                  />
+                  {suggestions.length > 0 && (
+                    <div className="absolute z-50 w-full mt-1 bg-white shadow-xl rounded-lg border border-gray-200 max-h-60 overflow-y-auto">
+                      {suggestions.map((suggestion) => (
+                        <div
+                          key={suggestion.placeId}
+                          className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-0"
+                          onClick={() => {
+                            setFormData(prev => ({
+                              ...prev,
+                              address: {
+                                ...prev.address,
+                                suburb: suggestion.mainText
+                              }
+                            }));
+                            setSuggestions([]);
+                          }}
+                        >
+                          <div className="font-medium text-gray-800">{suggestion.mainText}</div>
+                          <div className="text-sm text-gray-500">{suggestion.secondaryText}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    City
+                  </label>
+                  <input
+                    type="text"
+                    name="address.city"
+                    value={formData.address.city}
+                    onChange={handleChange}
+                    placeholder="City"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Address Row 2 - Province, Postal Code, Employment Status */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Province
+                  </label>
+                  <select
+                    name="address.province"
+                    value={formData.address.province}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
+                    required
+                  >
+                    <option value="">Select Province</option>
+                    <option value="Gauteng">Gauteng</option>
+                    <option value="Western Cape">Western Cape</option>
+                    <option value="Eastern Cape">Eastern Cape</option>
+                    <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                    <option value="Free State">Free State</option>
+                    <option value="Limpopo">Limpopo</option>
+                    <option value="Mpumalanga">Mpumalanga</option>
+                    <option value="North West">North West</option>
+                    <option value="Northern Cape">Northern Cape</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Postal Code
+                  </label>
+                  <input
+                    type="text"
+                    name="address.postalCode"
+                    value={formData.address.postalCode}
+                    onChange={handleChange}
+                    placeholder="Postal code"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Employment Status
+                  </label>
+                  <select
+                    name="employmentStatus"
+                    value={formData.employmentStatus}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
+                    required
+                  >
+                    <option value="">Employment status</option>
+                    <option value="employed">Employed</option>
+                    <option value="self-employed">Self-Employed</option>
+                    <option value="unemployed">Unemployed</option>
+                    <option value="retired">Retired</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Monthly Income Row */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Monthly Income
+                  </label>
+                  <input
+                    type="text"
+                    name="monthlyIncome"
+                    value={formData.monthlyIncome}
+                    onChange={handleChange}
+                    placeholder="Monthly income"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                    required
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      );
+        );
       case 2: // Policy Details
         return (
           <div className="space-y-4">
@@ -990,16 +990,16 @@ const ComparisonForm = () => {
           </div>
         );
 
-        case 3: // Select Extras
-  return (
-    <div className="space-y-4">
+      case 3: // Select Extras
+        return (
+          <div className="space-y-4">
             <h3 className="text-xl font-semibold text-gray-800 mb-4">
               Extra Service Offerings
             </h3>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="bg-gray-50">
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white border border-gray-200">
+                <thead>
+                  <tr className="bg-gray-50">
                     <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b border-gray-200">
                       Service
                     </th>
@@ -1012,51 +1012,51 @@ const ComparisonForm = () => {
                     <th className="px-4 py-2 text-center text-sm font-medium text-gray-700 border-b border-gray-200">
                       No
                     </th>
-            </tr>
-          </thead>
-          <tbody>
+                  </tr>
+                </thead>
+                <tbody>
                   {extraServices.map((service) => (
-              <tr key={service.name} className="hover:bg-gray-50">
+                    <tr key={service.name} className="hover:bg-gray-50">
                       <td className="px-4 py-2 text-sm text-gray-700 border-b border-gray-200">
                         {service.label}
                       </td>
                       <td className="px-4 py-2 text-center text-sm text-gray-700 border-b border-gray-200">
                         R{service.price}
                       </td>
-                <td className="px-4 py-2 text-center border-b border-gray-200">
-                  <input
-                    type="radio"
-                    name={service.name}
-                    checked={formData[service.name] === true}
-                    onChange={() => {
+                      <td className="px-4 py-2 text-center border-b border-gray-200">
+                        <input
+                          type="radio"
+                          name={service.name}
+                          checked={formData[service.name] === true}
+                          onChange={() => {
                             setFormData((prev) => ({
-                        ...prev,
+                              ...prev,
                               [service.name]: true,
                               totalPremium: calculateTotalPremium(prev, service.name, true)
-                      }));
-                    }}
-                    className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
-                  />
-                </td>
-                <td className="px-4 py-2 text-center border-b border-gray-200">
-                  <input
-                    type="radio"
-                    name={service.name}
-                    checked={formData[service.name] === false}
-                    onChange={() => {
+                            }));
+                          }}
+                          className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
+                        />
+                      </td>
+                      <td className="px-4 py-2 text-center border-b border-gray-200">
+                        <input
+                          type="radio"
+                          name={service.name}
+                          checked={formData[service.name] === false}
+                          onChange={() => {
                             setFormData((prev) => ({
-                        ...prev,
+                              ...prev,
                               [service.name]: false,
                               totalPremium: calculateTotalPremium(prev, service.name, false)
-                      }));
-                    }}
-                    className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                            }));
+                          }}
+                          className="w-4 h-4 text-[#00c2ff] rounded border-gray-300 focus:ring-[#00c2ff]"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
 
               {/* Total Premium Display */}
               <div className="mt-6 p-4 bg-gray-50 rounded-lg">
@@ -1067,9 +1067,9 @@ const ComparisonForm = () => {
                   </span>
                 </p>
               </div>
-      </div>
-    </div>
-  );
+            </div>
+          </div>
+        );
 
       case 4: // Cover Options
         return (
@@ -1113,21 +1113,21 @@ const ComparisonForm = () => {
                 </button>
               </div>
             </div>
-            
+
             {formData.address.province ? (
               <>
                 <div className="grid gap-6">
                   {getFilteredOptions().map((option) => (
                     <div key={option.value} className="space-y-4">
                       <div className="bg-white p-6 rounded-lg border-2 hover:border-[#00c2ff] transition-colors cursor-pointer">
-                      <div className="flex items-center justify-between">
-                        <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
                             <div className="flex items-center space-x-4">
-                            <input
-                              type="radio"
-                              name="coverAmount"
+                              <input
+                                type="radio"
+                                name="coverAmount"
                                 value={option.value}
-                              checked={formData.coverAmount === option.value}
+                                checked={formData.coverAmount === option.value}
                                 onChange={() => {
                                   setFormData(prev => ({
                                     ...prev,
@@ -1139,8 +1139,8 @@ const ComparisonForm = () => {
                                   }));
                                 }}
                                 className="w-4 h-4 text-[#00c2ff] border-gray-300 focus:ring-[#00c2ff]"
-                            />
-                            <div>
+                              />
+                              <div>
                                 <h4 className="text-lg font-semibold text-gray-800">
                                   {option.provider}
                                 </h4>
@@ -1160,24 +1160,24 @@ const ComparisonForm = () => {
                                         ...formData,
                                         coverAmount: option
                                       }) - parseInt(option.label)}
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-2">
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
                                     <span className="text-gray-600 font-medium">Total monthly premium:</span>
                                     <span className="font-bold text-[#00c2ff]">
                                       R{calculateTotalPremium({
                                         ...formData,
                                         coverAmount: option
                                       })}
-                                </span>
-                            </div>
+                                    </span>
+                                  </div>
                                   <p className="text-xs text-gray-500 italic">
                                     * Includes base premium and selected extra benefits (R10 each)
                                   </p>
-                            </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
 
                           <div className="flex flex-col items-end space-y-2">
                             <div className="w-12 h-12">
@@ -1194,49 +1194,49 @@ const ComparisonForm = () => {
                             <div className="text-sm text-gray-500">
                               Trustpilot Rating
                             </div>
-                          <div className="flex text-yellow-400">
+                            <div className="flex text-yellow-400">
                               {"★".repeat(Math.floor(option.rating))}
                               {"☆".repeat(5 - Math.floor(option.rating))}
-                          </div>
+                            </div>
                             <div className="text-sm text-gray-500">{option.rating}/5</div>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
                       {/* Smaller Show More Button */}
                       <div className="mt-4 flex justify-end">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setSelectedOptionDetails(
-                            selectedOptionDetails === option.provider
-                              ? null
-                              : option.provider
-                          )
-                        }
-                        className="mt-2 px-3 py-1.5 bg-[#00c2ff] text-white rounded-lg text-sm font-medium 
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setSelectedOptionDetails(
+                              selectedOptionDetails === option.provider
+                                ? null
+                                : option.provider
+                            )
+                          }
+                          className="mt-2 px-3 py-1.5 bg-[#00c2ff] text-white rounded-lg text-sm font-medium 
                     hover:bg-[#00b3eb] transition-colors flex items-center justify-center gap-1 w-auto ml-auto"
-                      >
-                        {selectedOptionDetails === option.provider
-                          ? "Hide Details"
-                          : "Show More Details"}
-                        <svg
+                        >
+                          {selectedOptionDetails === option.provider
+                            ? "Hide Details"
+                            : "Show More Details"}
+                          <svg
                             className={`w-3 h-3 transition-transform ${selectedOptionDetails === option.provider
                               ? "rotate-180"
                               : ""
-                          }`}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
-                      </button>
+                              }`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </button>
                       </div>
 
                       {/* Detailed Information Panel */}
@@ -1252,7 +1252,7 @@ const ComparisonForm = () => {
                               <h5 className="font-medium text-[#00c2ff] mb-2">
                                 Coverage Details
                               </h5>
-                                <div className="bg-white p-4 rounded-lg">
+                              <div className="bg-white p-4 rounded-lg">
                                 {option.value === 'standard_b' && (
                                   <>
                                     <p className="mb-2"><span className="font-medium text-[#00c2ff]">Single Member:</span> {option.coverageDetails.singleMember}</p>
@@ -1298,7 +1298,7 @@ const ComparisonForm = () => {
                                   </>
                                 )}
                               </div>
-                </div>
+                            </div>
 
                             {/* Features */}
                             <div>
@@ -1309,7 +1309,7 @@ const ComparisonForm = () => {
                                 {option.features.map((feature, index) => (
                                   <li key={index}>{feature}</li>
                                 ))}
-                  </ul>
+                              </ul>
                             </div>
 
                             {/* Benefits */}
@@ -1381,7 +1381,7 @@ const ComparisonForm = () => {
                 <div>
                   <h4 className="text-lg font-semibold text-[#00c2ff]">
                     Selected Plan
-              </h4>
+                  </h4>
                   {availableCoverOptions
                     .filter((option) => option.value === formData.coverAmount)
                     .map((option) => (
@@ -1415,7 +1415,7 @@ const ComparisonForm = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                   Personal Information
-              </h4>
+                </h4>
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Full Name:</span>
@@ -1433,8 +1433,8 @@ const ComparisonForm = () => {
                     <span className="text-gray-600">Phone:</span>
                     <span className="font-medium">{formData.phoneNumber}</span>
                   </div>
+                </div>
               </div>
-            </div>
 
               {/* Address Information */}
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
@@ -1444,7 +1444,7 @@ const ComparisonForm = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                   Address Details
-              </h4>
+                </h4>
                 <div className="space-y-3">
                   <p className="text-gray-600">
                     {formData.address.street},<br />
@@ -1452,8 +1452,8 @@ const ComparisonForm = () => {
                     {formData.address.city},<br />
                     {formData.address.province}, {formData.address.postalCode}
                   </p>
+                </div>
               </div>
-            </div>
 
               {/* Selected Extras */}
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
@@ -1462,7 +1462,7 @@ const ComparisonForm = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
                   Selected Extra Benefits
-              </h4>
+                </h4>
                 <div className="grid grid-cols-2 gap-3">
                   {Object.entries(formData)
                     .filter(([key, value]) => typeof value === 'boolean' && value === true)
@@ -1472,10 +1472,10 @@ const ComparisonForm = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                         </svg>
                         <span className="text-gray-600">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
-                  </div>
-                ))}
+                      </div>
+                    ))}
                 </div>
-            </div>
+              </div>
 
               {/* Policy Details */}
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
@@ -1484,7 +1484,7 @@ const ComparisonForm = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                   Policy Details
-              </h4>
+                </h4>
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Policy Type:</span>
@@ -1568,39 +1568,39 @@ const ComparisonForm = () => {
   // Update the SuccessView component to include the reference number from form data
   const SuccessView = () => {
     return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg text-center relative">
-        {/* Success Icon */}
-        <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
-          <svg
-            className="w-16 h-16 text-green-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg text-center relative">
+          {/* Success Icon */}
+          <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
+            <svg
+              className="w-16 h-16 text-green-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
 
-        {/* Success Message */}
-        <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Application Submitted!
-          </h2>
-          <p className="mt-2 text-lg text-gray-600">
-            Thank you for choosing CoverUp. We'll be in touch with you shortly.
-          </p>
-        </div>
+          {/* Success Message */}
+          <div className="text-center">
+            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+              Application Submitted!
+            </h2>
+            <p className="mt-2 text-lg text-gray-600">
+              Thank you for choosing CoverUp. We'll be in touch with you shortly.
+            </p>
+          </div>
 
-        {/* Reference Number */}
-        <div className="bg-gray-50 p-4 rounded-lg">
-          <p className="text-sm text-gray-500">Reference Number</p>
-          <p className="text-lg font-semibold text-gray-700">
+          {/* Reference Number */}
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-500">Reference Number</p>
+            <p className="text-lg font-semibold text-gray-700">
               {referenceNumber}
             </p>
           </div>
@@ -1614,35 +1614,35 @@ const ComparisonForm = () => {
             <p className="text-sm text-gray-500 mt-2">Monthly Premium</p>
             <p className="text-lg font-semibold text-[#00c2ff]">
               R{calculateTotalPremium(formData)}
-          </p>
-        </div>
+            </p>
+          </div>
 
-        {/* Action Button */}
-        <div className="mt-6">
-          <button
-            onClick={() => window.location.href = '/'}
-            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#00c2ff] hover:bg-[#00b3eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00c2ff]"
-          >
-            Return to Home
-          </button>
-        </div>
-
-        {/* Additional Info */}
-        <div className="mt-4 text-sm text-gray-500">
-          <p>A confirmation email has been sent to your inbox.</p>
-          <p className="mt-2">
-            Need help? Contact us at{" "}
-            <a
-              href="mailto:support@coverup.co.za"
-              className="text-[#00c2ff] hover:text-[#00b3eb]"
+          {/* Action Button */}
+          <div className="mt-6">
+            <button
+              onClick={() => window.location.href = '/'}
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#00c2ff] hover:bg-[#00b3eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00c2ff]"
             >
-              support@coverup.co.za
-            </a>
-          </p>
+              Return to Home
+            </button>
+          </div>
+
+          {/* Additional Info */}
+          <div className="mt-4 text-sm text-gray-500">
+            <p>A confirmation email has been sent to your inbox.</p>
+            <p className="mt-2">
+              Need help? Contact us at{" "}
+              <a
+                href="mailto:support@coverup.co.za"
+                className="text-[#00c2ff] hover:text-[#00b3eb]"
+              >
+                support@coverup.co.za
+              </a>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
   };
 
   // Add this function to calculate total premium
@@ -1693,7 +1693,7 @@ const ComparisonForm = () => {
                     <span className="mt-1 text-xs text-white whitespace-nowrap">Personal Details</span>
                   </div>
                   <div className="flex-1 border-t border-gray-300"></div>
-                  
+
                   {/* Step 2 */}
                   <div className="flex flex-col items-center">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 2 ? 'bg-[#00c2ff] text-white' : 'bg-gray-200 text-gray-500'}`}>
@@ -1731,9 +1731,6 @@ const ComparisonForm = () => {
                 </div>
               </div>
             </div>
-            {/* White overlay for better readability */}
-            <div className="absolute top-0 left-0 right-0 h-2/4 bg-white bg-opacity-10 z-10"></div>
-
 
             {/* Form Container */}
             <div className="bg-white rounded-xl shadow-lg p-8 mt-40 w-full">
