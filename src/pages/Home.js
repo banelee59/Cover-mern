@@ -243,16 +243,12 @@ const Home = () => {
             {/* Right - Funeral Services Image - completely borderless */}
             <div className="lg:w-1/2 flex justify-center relative">
               <div className="relative">
-                {/* Decorative circles */}
-                <div className="absolute -top-8 -right-8 w-24 h-24 bg-blue-200 opacity-50 rounded-full"></div>
-                <div className="absolute bottom-10 -left-12 w-16 h-16 bg-blue-300 opacity-40 rounded-full"></div>
-                <div className="absolute top-20 left-8 w-12 h-12 bg-blue-400 opacity-30 rounded-full"></div>
                 
                 {/* Funeral Services Image - completely borderless */}
                 <img 
-                  src="/images/list-image.png"
+                  src="/images/turtle-2.jpg"
                   alt="Professional Funeral Services"
-                  className="w-72 h-72 object-cover"
+                  className="w-full h-82 object-cover"
                 />
               </div>
             </div>
@@ -261,7 +257,7 @@ const Home = () => {
       </section>
 
       {/* Why Choose CoverUp Section */}
-      <section className="py-20 bg-gradient-to-br from-[#376c6c] via-[#376c6c] to-[#376c6c]">
+      <section className="py-20 bg-gradient-to-br from-[#173541] via-[#173541] to-[#173541]">
          {/* Title aligned with other sections */}
          <div className="mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
