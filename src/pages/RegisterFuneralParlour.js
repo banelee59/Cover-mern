@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const GetStarted = () => {
+const RegisterFuneralParlour = () => {
   const navigate = useNavigate();
 
   return (
@@ -92,4 +92,4 @@ const GetStarted = () => {
   );
 };
 
-export default GetStarted; 
+export default RegisterFuneralParlour; 

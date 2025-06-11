@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import GetStarted from './pages/GetStarted';
+import RegisterFuneralParlour from './pages/RegisterFuneralParlour';
 import ComparisonForm from './components/ComparisonForm';
 import FuneralParlorRegistration from './components/FuneralParlorRegistration';
 import Welcome from './pages/Welcome';
@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/get-started" element={<GetStarted />} />
+          <Route path="/register-funeral-parlour" element={<RegisterFuneralParlour />} />
           <Route path="/comparison" element={<ComparisonForm />} />
           <Route path="/store-registration" element={<FuneralParlorRegistration />} />
           <Route path="/welcome" element={<Welcome />} />

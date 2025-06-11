@@ -41,8 +41,8 @@ const Home = () => {
               <button onClick={() => handleNavigation('/contact')} className="text-white hover:text-[#00c2ff] transition-colors">
                 CONTACT
               </button>
-              <button onClick={() => handleNavigation('/welcome')} className="px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00b3eb] transition-colors">
-                GET STARTED
+              <button onClick={() => handleNavigation('/welcome')} className="px-4 py-2 bg-[#00c2ff] text-white rounded hover:bg-[#00c2ff] transition-colors">
+               REGISTER FUNERAL PARLOUR
               </button>
             </div>
 
@@ -89,13 +89,15 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#00c2ff] via-[#00c2ff] to-[#00c2ff]">
+      <section className="relative min-h-screen flex items-center justify-center bg-[#376c6c] bg-cover bg-center bg-no-repeat" style={{
+        backgroundImage: 'url("/images/turtle-5.jpg")'
+      }}>
         <div className="container mx-auto px-4 py-20">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             {/* Left Content */}
             <div className="lg:w-1/2 text-white mb-12 lg:mb-0">
               <h1 className="text-4xl lg:text-5xl font-bold mb-8 text-center lg:text-left">
-                Get burial schemes quotes in under 2 minutes.
+                Get burial scheme quotes in under 2 minutes.
               </h1>
               <p className="text-lg mb-8 opacity-90 leading-relaxed text-center lg:text-left">
                 Ensure peace of mind knowing that funeral arrangements are taken care of in advance. CoverUp is here to help you find the perfect funeral plan for your needs. Just follow a few simple steps to compare burial scheme quotes.
@@ -112,29 +114,14 @@ const Home = () => {
                 />
                 <button
                   onClick={handleGetStarted}
-                  className="px-6 py-3 bg-white text-black rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
+                  className="px-6 py-3 bg-[#00c2ff] text-black rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors"
                 >
                   GET STARTED
                 </button>
               </div>
             </div>
 
-            {/* Right Content - Insurance Protection Image */}
-            <div className="lg:w-1/2 flex justify-center relative">
-              <div className="relative">
-                {/* Decorative circles */}
-                <div className="absolute -top-10 -left-10 w-20 h-20 bg-[#00c2ff] opacity-20 rounded-full"></div>
-                <div className="absolute top-20 -right-16 w-32 h-32 bg-white opacity-10 rounded-full"></div>
-                <div className="absolute -bottom-5 left-10 w-16 h-16 bg-[#00c2ff] opacity-30 rounded-full"></div>
-                
-                {/* Insurance Protection Image - completely borderless */}
-                <img 
-                  src="/images/green.png" 
-                  alt="Family Protection and Security"
-                  className="w-80 h-80 object-cover"
-                />
-              </div>
-            </div>
+            
           </div>
         </div>
       </section>
@@ -147,7 +134,7 @@ const Home = () => {
             <div className="lg:w-1/2">
               <div className="overflow-hidden">
                 <img 
-                  src="/images/home.png"
+                  src="/images/family.jpg"
                   alt="Happy African Family Together"
                   className="w-full h-96 object-cover rounded-2xl"
                 />
@@ -274,7 +261,7 @@ const Home = () => {
       </section>
 
       {/* Why Choose CoverUp Section */}
-      <section className="py-20 bg-gradient-to-br from-[#00c2ff] via-[#00c2ff] to-[#00c2ff]">
+      <section className="py-20 bg-gradient-to-br from-[#376c6c] via-[#376c6c] to-[#376c6c]">
          {/* Title aligned with other sections */}
          <div className="mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
@@ -356,7 +343,7 @@ const Home = () => {
             {/* Left - Insurance Consultation Image - completely borderless */}
             <div className="lg:w-1/3 mb-8 lg:mb-0">
               <img 
-                src="/images/waving-turtle.png"
+                src="/images/turtle-4.jpg"
                 alt="Insurance Consultation and Support"
                 className="w-48 h-48 object-cover mx-auto"
               />
@@ -379,7 +366,7 @@ const Home = () => {
       </section>
 
        {/* Footer */}
-       <footer className="bg-[#00c2ff] text-white py-12">
+       <footer className="bg-[#376c6c] text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
