@@ -694,7 +694,7 @@ const ComparisonForm = () => {
                 {renderError("idNumber")}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   Gender
                 </label>
                 <select
@@ -702,7 +702,7 @@ const ComparisonForm = () => {
                   value={formData.gender}
                   onChange={handleChange}
                   className={`w-full p-3 border ${errors.gender ? "border-red-500" : "border-gray-300"
-                    } rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white`}
+                    } rounded-lg  text-gray-700 focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white`}
                   required
                 >
                   <option value="">Gender</option>
@@ -761,14 +761,14 @@ const ComparisonForm = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   Marital Status
                 </label>
                 <select
                   name="maritalStatus"
                   value={formData.maritalStatus}
                   onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
+                  className="w-full p-3 border text-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
                   required
                 >
                   <option value="">Marital status</option>
@@ -938,8 +938,8 @@ const ComparisonForm = () => {
 
         case 2: // Policy Details
         return (
-          <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-gray-800 mb-6">
+          <div className="space-y-6 w-582pt h-128pt">
+            <h3 className="text-xl font-semibold  text-gray-800 mb-6">
               Policy Information
             </h3>
             
@@ -952,7 +952,7 @@ const ComparisonForm = () => {
                 required
               >
                 <option value="">Number of dependants</option>
-                <option value="0">0 dependants</option>
+              
                 <option value="1">1 dependant</option>
                 <option value="2">2 dependants</option>
                 <option value="3">3 dependants</option>
@@ -962,7 +962,7 @@ const ComparisonForm = () => {
                 <option value="7">7 dependants</option>
                 <option value="8">8 dependants</option>
                 <option value="9">9 dependants</option>
-                <option value="10">10 dependants</option>
+                
               </select>
             </div>
       
@@ -980,6 +980,7 @@ const ComparisonForm = () => {
                       ? 'border-[#00c2ff] bg-blue-50' 
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
+                  style={{ width: '582px', height: '128px', flexShrink: 0 }}
                   onClick={() => handleChange({ target: { name: 'policyType', value: 'individual' } })}
                 >
                   <div className="flex items-start space-x-4">
@@ -1005,6 +1006,7 @@ const ComparisonForm = () => {
                       ? 'border-[#00c2ff] bg-blue-50' 
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
+                  style={{ width: '582px', height: '128px', flexShrink: 0 }}
                   onClick={() => handleChange({ target: { name: 'policyType', value: 'family' } })}
                 >
                   <div className="flex items-start space-x-4">
@@ -1031,6 +1033,7 @@ const ComparisonForm = () => {
                       ? 'border-[#00c2ff] bg-blue-50' 
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
+                  style={{ width: '582px', height: '128px', flexShrink: 0 }}
                   onClick={() => handleChange({ target: { name: 'policyType', value: 'extended' } })}
                 >
                   <div className="flex items-start space-x-4">
@@ -1057,6 +1060,7 @@ const ComparisonForm = () => {
                       ? 'border-[#00c2ff] bg-blue-50' 
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
+                  style={{ width: '582px', height: '128px', flexShrink: 0 }}
                   onClick={() => handleChange({ target: { name: 'policyType', value: 'parent' } })}
                 >
                   <div className="flex items-start space-x-4">
