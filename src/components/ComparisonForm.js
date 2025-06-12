@@ -985,8 +985,7 @@ const ComparisonForm = () => {
                   <div className="flex items-start space-x-4">
                     <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
                       <img 
-                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" 
-                        alt="Individual" 
+                        src="/images/individual.jpeg"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -1011,7 +1010,7 @@ const ComparisonForm = () => {
                   <div className="flex items-start space-x-4">
                     <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
                       <img 
-                        src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=150&h=150&fit=crop" 
+                        src="/images/family-cover.jpeg" 
                         alt="Family" 
                         className="w-full h-full object-cover"
                       />
@@ -1037,7 +1036,7 @@ const ComparisonForm = () => {
                   <div className="flex items-start space-x-4">
                     <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
                       <img 
-                        src="https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=150&h=150&fit=crop" 
+                        src="/images/extended.jpeg"
                         alt="Extended Family" 
                         className="w-full h-full object-cover"
                       />
@@ -1063,7 +1062,7 @@ const ComparisonForm = () => {
                   <div className="flex items-start space-x-4">
                     <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
                       <img 
-                        src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=150&h=150&fit=crop" 
+                        src="/images/parent.jpeg" 
                         alt="Parent Cover" 
                         className="w-full h-full object-cover"
                       />
