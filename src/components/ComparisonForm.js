@@ -1083,6 +1083,7 @@ const ComparisonForm = () => {
             </div>
           </div>
         );
+        
         case 3: // Select Extras
         return (
           <div className="space-y-6">
@@ -1091,20 +1092,19 @@ const ComparisonForm = () => {
             </h3>
             
             {/* Three column grid layout */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="flex justify-center"></div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
               
               {/* First Column */}
               <div className="bg-white rounded-lg shadow-lg border overflow-hidden">
-                <div className="grid grid-cols-3 gap-4 mb-4 bg-gray-800 text-white p-4">
-                  <div className="font-medium text-sm">Service</div>
-                  <div className="font-medium text-sm text-center">Price</div>
-                  <div className="font-medium text-sm text-center">Include</div>
+                <div className="grid grid-cols-2 gap-4 mb-4 bg-gray-800 text-white p-4">
+                <div className="font-medium text-left text-sm pl-8">Service</div>
+                <div className="font-medium text-sm text-center">Include</div>
                 </div>
                 
                 <div className="space-y-3 p-4">
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Draping</div>
-                    <div className="text-gray-700 text-sm text-center">R20</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Draping</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1120,9 +1120,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Mobile Toilets</div>
-                    <div className="text-gray-700 text-sm text-center">R15</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Mobile Toilets</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1138,9 +1137,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Grocery Benefit</div>
-                    <div className="text-gray-700 text-sm text-center">R12</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Grocery Benefit</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1156,9 +1154,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Mobile Fridge</div>
-                    <div className="text-gray-700 text-sm text-center">R20</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Mobile Fridge</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1174,9 +1171,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Sound System</div>
-                    <div className="text-gray-700 text-sm text-center">R10</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Sound System</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1196,16 +1192,14 @@ const ComparisonForm = () => {
       
               {/* Second Column */}
               <div className="bg-white rounded-lg shadow-lg border overflow-hidden">
-                <div className="grid grid-cols-3 gap-4 mb-4 bg-gray-800 text-white p-4">
-                  <div className="font-medium text-sm">Service</div>
-                  <div className="font-medium text-sm text-center">Price</div>
+                <div className="grid grid-cols-2 gap-4 mb-4 bg-gray-800 text-white p-4">
+                <div className="font-medium text-left text-sm pl-8">Service</div>
                   <div className="font-medium text-sm text-center">Include</div>
                 </div>
                 
                 <div className="space-y-3 p-4">
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Video Streaming</div>
-                    <div className="text-gray-700 text-sm text-center">R10</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Video Streaming</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1221,9 +1215,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Airtime Allowance</div>
-                    <div className="text-gray-700 text-sm text-center">R15</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Airtime Allowance</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1239,9 +1232,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Tombstone</div>
-                    <div className="text-gray-700 text-sm text-center">R10</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Tombstone</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1257,9 +1249,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Catering</div>
-                    <div className="text-gray-700 text-sm text-center">R20</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Catering</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1275,9 +1266,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Grief Counselling</div>
-                    <div className="text-gray-700 text-sm text-center">R22</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Grief Counselling</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1297,16 +1287,16 @@ const ComparisonForm = () => {
       
               {/* Third Column */}
               <div className="bg-white rounded-lg shadow-lg border overflow-hidden">
-                <div className="grid grid-cols-3 gap-4 mb-4 bg-gray-800 text-white p-4">
-                  <div className="font-medium text-sm">Service</div>
-                  <div className="font-medium text-sm text-center">Price</div>
+                <div className="grid grid-cols-2 gap-4 mb-4 bg-gray-800 text-white p-4">
+                <div className="font-medium text-left text-sm pl-8">Service</div>
+
+
                   <div className="font-medium text-sm text-center">Include</div>
                 </div>
                 
                 <div className="space-y-3 p-4">
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Floral Arrangements</div>
-                    <div className="text-gray-700 text-sm text-center">R10</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Floral Arrangements</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1322,9 +1312,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Urns</div>
-                    <div className="text-gray-700 text-sm text-center">R15</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Urns</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1340,9 +1329,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Funeral Programs</div>
-                    <div className="text-gray-700 text-sm text-center">R12</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Funeral Programs</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1358,9 +1346,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Grave Liners</div>
-                    <div className="text-gray-700 text-sm text-center">R10</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Grave Liners</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1376,9 +1363,8 @@ const ComparisonForm = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-4 items-center py-2">
-                    <div className="text-gray-700 text-sm">Grave Digging</div>
-                    <div className="text-gray-700 text-sm text-center">R15</div>
+                  <div className="grid grid-cols-2 gap-4 items-center py-2">
+                    <div className="text-gray-700 text-sm pl-8">Grave Digging</div>
                     <div className="text-center">
                       <input
                         type="checkbox"
@@ -1397,38 +1383,9 @@ const ComparisonForm = () => {
               </div>
             </div>
       
-            {/* Total Premium Display */}
-            <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-              <p className="text-lg font-semibold text-gray-800">
-                Total Monthly Premium:
-                <span className="text-[#00c2ff] ml-2">
-                  R{(() => {
-                    let total = 0;
-                    
-                    // Add only selected services (removed base premium)
-                    if (formData.draping) total += 20;
-                    if (formData.mobileToilets) total += 15;
-                    if (formData.groceryBenefit) total += 12;
-                    if (formData.mobileFridge) total += 20;
-                    if (formData.soundSystem) total += 10;
-                    if (formData.videoStreaming) total += 10;
-                    if (formData.airtimeAllowance) total += 15;
-                    if (formData.tombstone) total += 10;
-                    if (formData.catering) total += 20;
-                    if (formData.griefCounselling) total += 22;
-                    if (formData.floralArrangements) total += 10;
-                    if (formData.urns) total += 15;
-                    if (formData.funeralPrograms) total += 12;
-                    if (formData.graveLiners) total += 10;
-                    if (formData.graveDigging) total += 15;
-                    
-                    return total;
-                  })()}
-                </span>
-              </p>
-            </div>
           </div>
         );
+
 
       case 4: // Cover Options
         return (
@@ -1473,298 +1430,283 @@ const ComparisonForm = () => {
               </div>
             </div>
 
+          
+
             {formData.address.province ? (
-              <>
-                <div className="grid gap-6">
-                  {getFilteredOptions().map((option) => (
-                    <div key={option.value} className="space-y-4">
-                      <div className="bg-white p-6 rounded-lg border-2 hover:border-[#00c2ff] transition-colors cursor-pointer">
-                        <div className="flex items-center justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center space-x-4">
-                              <input
-                                type="radio"
-                                name="coverAmount"
-                                value={option.value}
-                                checked={formData.coverAmount === option.value}
-                                onChange={() => {
-                                  setFormData(prev => ({
-                                    ...prev,
-                                    coverAmount: option.value,
-                                    totalPremium: calculateTotalPremium({
-                                      ...prev,
-                                      coverAmount: option
-                                    })
-                                  }));
-                                }}
-                                className="w-4 h-4 text-[#00c2ff] border-gray-300 focus:ring-[#00c2ff]"
-                              />
-                              <div>
-                                <h4 className="text-lg font-semibold text-gray-800">
-                                  {option.provider}
-                                </h4>
-                                <div className="flex flex-col gap-1">
-                                  <p className="text-sm text-gray-600">
-                                    From{" "}
-                                    <span className="font-semibold text-[#00c2ff]">
-                                      R{option.label}
-                                    </span>
-                                    /month
-                                  </p>
-                                  {/* Add new premium breakdown */}
-                                  <div className="flex items-center gap-2 text-sm">
-                                    <span className="text-gray-600">Selected extras:</span>
-                                    <span className="font-medium text-[#00c2ff]">
-                                      +R{calculateTotalPremium({
-                                        ...formData,
-                                        coverAmount: option
-                                      }) - parseInt(option.label)}
-                                    </span>
-                                  </div>
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-gray-600 font-medium">Total monthly premium:</span>
-                                    <span className="font-bold text-[#00c2ff]">
-                                      R{calculateTotalPremium({
-                                        ...formData,
-                                        coverAmount: option
-                                      })}
-                                    </span>
-                                  </div>
-                                  <p className="text-xs text-gray-500 italic">
-                                    * Includes base premium and selected extra benefits (R10 each)
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+  <>
+    <div className="grid gap-6">
+      {getFilteredOptions().map((option) => (
+        <div key={option.value} className="relative space-y-4">
+          <input
+            type="radio"
+            name="coverAmount"
+            value={option.value}
+            checked={formData.coverAmount === option.value}
+            onChange={() => {
+              setFormData((prev) => ({
+                ...prev,
+                coverAmount: option.value,
+                totalPremium: calculateTotalPremium({
+                  ...prev,
+                  coverAmount: option
+                })
+              }));
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#00c2ff] border-gray-300 focus:ring-[#00c2ff] z-10"
+          />
 
-                          <div className="flex flex-col items-end space-y-2">
-                            <div className="w-12 h-12">
-                              <img
-                                src={option.logo}
-                                alt={`${option.provider} logo`}
-                                className="w-full h-full object-contain"
-                                onError={(e) => {
-                                  e.target.src = "/images/providers/mpiti.png";
-                                  e.target.onerror = null;
-                                }}
-                              />
-                            </div>
-                            <div className="text-sm text-gray-500">
-                              Trustpilot Rating
-                            </div>
-                            <div className="flex text-yellow-400">
-                              {"★".repeat(Math.floor(option.rating))}
-                              {"☆".repeat(5 - Math.floor(option.rating))}
-                            </div>
-                            <div className="text-sm text-gray-500">{option.rating}/5</div>
-                          </div>
-                        </div>
-                      </div>
+          <div className="bg-white p-6 rounded-lg border-2 hover:border-[#00c2ff] transition-colors cursor-pointer">
+            <div className="flex items-center justify-between">
+              <div className="w-40 h-40 flex-shrink-0">
+                <img
+                  src={option.logo}
+                  alt={`${option.provider} logo`}
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    e.target.src = "/images/turtle-5.jpg";
+                    e.target.onerror = null;
+                  }}
+                />
+              </div>
 
-                      {/* Smaller Show More Button */}
-                      <div className="mt-4 flex justify-end">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setSelectedOptionDetails(
-                              selectedOptionDetails === option.provider
-                                ? null
-                                : option.provider
-                            )
-                          }
-                          className="mt-2 px-3 py-1.5 bg-[#00c2ff] text-white rounded-lg text-sm font-medium 
-                    hover:bg-[#00b3eb] transition-colors flex items-center justify-center gap-1 w-auto ml-auto"
-                        >
-                          {selectedOptionDetails === option.provider
-                            ? "Hide Details"
-                            : "Show More Details"}
-                          <svg
-                            className={`w-3 h-3 transition-transform ${selectedOptionDetails === option.provider
-                              ? "rotate-180"
-                              : ""
-                              }`}
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M19 9l-7 7-7-7"
-                            />
-                          </svg>
-                        </button>
-                      </div>
+              <div className="flex-1 flex justify-center">
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-800 text-left">
+                    {option.provider}
+                  </h4>
 
-                      {/* Detailed Information Panel */}
-                      {selectedOptionDetails === option.provider && (
-                        <div className="bg-gray-50 p-6 rounded-lg mt-2 space-y-4">
-                          <h4 className="font-semibold text-lg text-gray-800">
-                            {option.provider} Details
-                          </h4>
+                  <div className="flex flex-col gap-1 text-left">
+                    <p className="text-sm text-gray-600">
+                      From{" "}
+                      <span className="font-semibold text-[#00c2ff]">
+                        R{option.label}
+                      </span>
+                      /month
+                    </p>
 
-                          {/* Coverage Details */}
-                          <div className="space-y-4">
-                            <div>
-                              <h5 className="font-medium text-[#00c2ff] mb-2">
-                                Coverage Details
-                              </h5>
-                              <div className="bg-white p-4 rounded-lg">
-                                {option.value === 'standard_b' && (
-                                  <>
-                                    <p className="mb-2"><span className="font-medium text-[#00c2ff]">Single Member:</span> {option.coverageDetails.singleMember}</p>
-                                    <p className="mb-2"><span className="font-medium text-[#00c2ff]">Member + Children:</span> {option.coverageDetails.memberWithChildren}</p>
-                                    <p><span className="font-medium text-[#00c2ff]">Cash Benefit:</span> {option.coverageDetails.cashBenefit}</p>
-                                  </>
-                                )}
-                                {(option.value === 'standard_ca' || option.value === 'package_cb') && (
-                                  <>
-                                    <p className="font-medium text-[#00c2ff] mb-2">Single Member:</p>
-                                    <ul className="list-disc list-inside mb-3 ml-2">
-                                      <li><span className="text-[#00c2ff]">Age 18-59:</span> {option.coverageDetails.singleMember.age18_59}</li>
-                                      <li><span className="text-[#00c2ff]">Age 60-74:</span> {option.coverageDetails.singleMember.age60_74}</li>
-                                      <li><span className="text-[#00c2ff]">Age 75+:</span> {option.coverageDetails.singleMember.age75_100 || option.coverageDetails.singleMember.age75_up}</li>
-                                    </ul>
-                                    <p className="font-medium text-[#00c2ff] mb-2">Member + Children:</p>
-                                    <ul className="list-disc list-inside mb-3 ml-2">
-                                      <li><span className="text-[#00c2ff]">Age 18-59:</span> {option.coverageDetails.memberWithChildren.age18_59}</li>
-                                      <li><span className="text-[#00c2ff]">Age 60-74:</span> {option.coverageDetails.memberWithChildren.age60_74}</li>
-                                      <li><span className="text-[#00c2ff]">Age 75+:</span> {option.coverageDetails.memberWithChildren.age75_100 || option.coverageDetails.memberWithChildren.age75_up}</li>
-                                    </ul>
-                                    <p><span className="font-medium text-[#00c2ff]">Cash Benefit:</span> {option.coverageDetails.cashBenefit}</p>
-                                  </>
-                                )}
-                                {option.value === 'package_d' && (
-                                  <>
-                                    <p className="font-medium mb-2">Member:</p>
-                                    <ul className="list-disc list-inside mb-3 ml-2">
-                                      <li>Age 18-59: {option.coverageDetails.member.age18_59}</li>
-                                      <li>Age 60-99: {option.coverageDetails.member.age60_99}</li>
-                                    </ul>
-                                    <p><span className="font-medium text-[#00c2ff]">Cash Benefit:</span> {option.coverageDetails.cashBenefit}</p>
-                                  </>
-                                )}
-                                {option.value === 'package_e' && (
-                                  <>
-                                    <p className="font-medium mb-2">Single Member:</p>
-                                    <ul className="list-disc list-inside mb-3 ml-2">
-                                      <li>Age 18-59: {option.coverageDetails.singleMember.age18_59}</li>
-                                      <li>Age 60-99: {option.coverageDetails.singleMember.age60_99}</li>
-                                    </ul>
-                                    <p><span className="font-medium text-[#00c2ff]">Cash Benefit:</span> {option.coverageDetails.cashBenefit}</p>
-                                  </>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Features */}
-                            <div>
-                              <h5 className="font-medium text-[#00c2ff] mb-2">
-                                Features
-                              </h5>
-                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1 ml-2">
-                                {option.features.map((feature, index) => (
-                                  <li key={index}>{feature}</li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            {/* Benefits */}
-                            <div>
-                              <h5 className="font-medium text-[#00c2ff] mb-2">
-                                Benefits
-                              </h5>
-                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1 ml-2">
-                                {option.benefits.map((benefit, index) => (
-                                  <li key={index}>{benefit}</li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            {/* Contact Information */}
-                            <div className="bg-white p-4 rounded-lg">
-                              <h5 className="font-medium text-[#00c2ff] mb-2">
-                                Contact Information
-                              </h5>
-                              <div className="text-sm text-gray-600 space-y-1">
-                                <p><span className="text-[#00c2ff]">Claims:</span> 0800 123 456</p>
-                                <p><span className="text-[#00c2ff]">Email:</span> info@mpitifuneral.co.za</p>
-                                <p><span className="text-[#00c2ff]">WhatsApp:</span> 072 123 4567</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
+                    <div className="flex justify-left items-left gap-2 text-sm">
+                      <span className="text-gray-600">Selected extras:</span>
+                      <span className="font-medium text-[#00c2ff]">
+                        +R{calculateTotalPremium({
+                          ...formData,
+                          coverAmount: option
+                        }) - parseInt(option.label)}
+                      </span>
                     </div>
-                  ))}
+
+                    <div className="flex justify-left items-left gap-2">
+                      <span className="text-gray-600 font-medium">
+                        Total monthly premium:
+                      </span>
+                      <span className="font-bold text-[#00c2ff]">
+                        R{calculateTotalPremium({
+                          ...formData,
+                          coverAmount: option
+                        })}
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-gray-500 text-left italic">
+                      * Includes base premium and selected extra benefits (R10 each)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-end mt-4 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    alert(`You are interested in ${option.provider}`);
+                    // Replace with your custom logic if needed
+                  }}
+                  className="px-3 py-1.5 bg-green-500 text-white rounded-lg text-sm font-medium 
+                  hover:bg-green-600 transition-colors flex items-center justify-center gap-1"
+                >
+                  I'm Interested
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelectedOptionDetails(
+                      selectedOptionDetails === option.provider
+                        ? null
+                        : option.provider
+                    )
+                  }
+                  className="px-3 py-1.5 bg-[#00c2ff] text-white rounded-lg text-sm font-medium 
+                  hover:bg-[#00b3eb] transition-colors flex items-center justify-center gap-1"
+                >
+                  {selectedOptionDetails === option.provider
+                    ? "Hide Details"
+                    : "Show More Details"}
+                  <svg
+                    className={`w-3 h-3 transition-transform ${
+                      selectedOptionDetails === option.provider ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {selectedOptionDetails === option.provider && (
+            <div className="bg-gray-50 p-6 rounded-lg mt-2 space-y-4">
+              <h4 className="font-semibold text-lg text-gray-800">
+                {option.provider} Details
+              </h4>
+
+              <div className="space-y-4">
+                <div>
+                  <h5 className="font-medium text-[#00c2ff] mb-2">Coverage Details</h5>
+                  <div className="bg-white p-4 rounded-lg">
+                    {(formData.familyStatus === 'member_with_children') && (
+                      <>
+                        {option.coverageDetails?.memberWithChildren && (
+                          <>
+                            <p className="font-medium text-[#00c2ff] mb-2">Member + Children:</p>
+                            <ul className="list-disc list-inside mb-3 ml-2">
+                              {option.coverageDetails.memberWithChildren.age18_59 && (
+                                <li>
+                                  <span className="text-[#00c2ff]">Age 18-59:</span>{" "}
+                                  {option.coverageDetails.memberWithChildren.age18_59}
+                                </li>
+                              )}
+                              {option.coverageDetails.memberWithChildren.age60_74 && (
+                                <li>
+                                  <span className="text-[#00c2ff]">Age 60-74:</span>{" "}
+                                  {option.coverageDetails.memberWithChildren.age60_74}
+                                </li>
+                              )}
+                              {(option.coverageDetails.memberWithChildren.age75_100 ||
+                                option.coverageDetails.memberWithChildren.age75_up) && (
+                                <li>
+                                  <span className="text-[#00c2ff]">Age 75+:</span>{" "}
+                                  {option.coverageDetails.memberWithChildren.age75_100 ||
+                                    option.coverageDetails.memberWithChildren.age75_up}
+                                </li>
+                              )}
+                            </ul>
+                          </>
+                        )}
+                      </>
+                    )}
+
+                    {option.coverageDetails?.cashBenefit && (
+                      <p>
+                        <span className="font-medium text-[#00c2ff]">Cash Benefit:</span>{" "}
+                        {option.coverageDetails.cashBenefit}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
-                {/* No Results Message */}
-                {getFilteredOptions().length === 0 && (
-                  <div className="text-center py-8">
-                    <p className="text-gray-500">
-                      No cover options found in this price range.
-                    </p>
-                    <button
-                      onClick={() => setPriceRange({ min: '', max: '' })}
-                      className="mt-2 text-[#00c2ff] hover:text-[#00b3eb] transition-colors"
-                    >
-                      Reset Filters
-                    </button>
+                <div>
+                  <h5 className="font-medium text-[#00c2ff] mb-2">Features</h5>
+                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-1 ml-2">
+                    {option.features.map((feature, index) => (
+                      <li key={index}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h5 className="font-medium text-[#00c2ff] mb-2">Benefits</h5>
+                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-1 ml-2">
+                    {option.benefits.map((benefit, index) => (
+                      <li key={index}>{benefit}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="bg-white p-4 rounded-lg">
+                  <h5 className="font-medium text-[#00c2ff] mb-2">Contact Information</h5>
+                  <div className="text-sm text-gray-600 space-y-1">
+                    <p><span className="text-[#00c2ff]">Claims:</span> 0800 123 456</p>
+                    <p><span className="text-[#00c2ff]">Email:</span> info@mpitifuneral.co.za</p>
+                    <p><span className="text-[#00c2ff]">WhatsApp:</span> 072 123 4567</p>
                   </div>
-                )}
-              </>
-            ) : (
-              <div className="p-4 bg-yellow-50 rounded-lg">
-                <p className="text-sm text-yellow-800">
-                  Please select your province in the Profile Details section to
-                  see available cover options.
-                </p>
+                </div>
               </div>
-            )}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    {getFilteredOptions().length === 0 && (
+      <div className="text-center py-8">
+        <p className="text-gray-500">No cover options found in this price range.</p>
+        <button
+          onClick={() => setPriceRange({ min: '', max: '' })}
+          className="mt-2 text-[#00c2ff] hover:text-[#00b3eb] transition-colors"
+        >
+          Reset Filters
+        </button>
+      </div>
+    )}
+  </>
+) : (
+  <div className="p-4 bg-yellow-50 rounded-lg">
+    <p className="text-sm text-yellow-800">
+      Please select your province in the Profile Details section to see available cover options.
+    </p>
+  </div>
+)}
+
+
           </div>
         );
 
-      case 5: // Confirmation Step
+        case 5: // Confirmation Step
         return (
           <div className="space-y-8">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">
               Review Your Application
             </h3>
-
+      
             {/* Selected Plan Summary - Highlighted Box */}
-            <div className="bg-[#00c2ff]/10 p-6 rounded-lg border border-[#00c2ff]/20">
-              <div className="flex items-start justify-between">
-                <div>
-                  <h4 className="text-lg font-semibold text-[#00c2ff]">
-                    Selected Plan
-                  </h4>
-                  {availableCoverOptions
-                    .filter((option) => option.value === formData.coverAmount)
-                    .map((option) => (
-                      <div key={option.value} className="mt-2 space-y-1">
-                        <p className="text-xl font-bold text-gray-800">
-                          {option.provider}
-                        </p>
-                        <p className="text-gray-600">
-                          Base Premium: <span className="font-semibold">R{option.label}/month</span>
-                        </p>
-                        <p className="text-[#00c2ff] font-semibold">
-                          Total Premium: R{calculateTotalPremium(formData)}/month
-                        </p>
-                      </div>
-                    ))}
-                </div>
+            <div className="bg-[#00c2ff]/10 p-6 rounded-lg border  border-[#00c2ff]/20">
+              <div className="flex items-start h-gap-4">
                 <img
-                  src="/images/providers/mpiti.png"
+                  src="/images/turtle-5.jpg"
                   alt="Provider Logo"
-                  className="w-20 h-20 object-contain"
+                  className="w-40 h-40 object-contain self-start"
                 />
+                <div className="text-center flex-1">
+  <h4 className="text-lg text-center font-semibold text-[#00c2ff]">
+    Selected Plan
+  </h4>
+  {availableCoverOptions
+    .filter((option) => option.value === formData.coverAmount)
+    .map((option) => (
+      <div key={option.value} className="text-left mt-2 space-y-1">
+        <p className="text-xl text-center font-bold text-gray-800">
+          {option.provider}
+        </p>
+        <p className="text-gray-600 text-center">
+          Base Premium: <span className="font-semibold">R{option.label}/month</span>
+        </p>
+        <p className="text-[#00c2ff] font-semibold text-center">
+          Total Premium: R{calculateTotalPremium(formData)}/month
+        </p>
+      </div>
+    ))}
+</div>
               </div>
             </div>
-
+      
             {/* Main Details Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Personal Information */}
@@ -1794,7 +1736,7 @@ const ComparisonForm = () => {
                   </div>
                 </div>
               </div>
-
+      
               {/* Address Information */}
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                 <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
@@ -1813,7 +1755,7 @@ const ComparisonForm = () => {
                   </p>
                 </div>
               </div>
-
+      
               {/* Selected Extras */}
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                 <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
@@ -1835,7 +1777,7 @@ const ComparisonForm = () => {
                     ))}
                 </div>
               </div>
-
+      
               {/* Policy Details */}
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                 <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
@@ -1860,7 +1802,7 @@ const ComparisonForm = () => {
                 </div>
               </div>
             </div>
-
+      
             {/* Terms and Confirmation */}
             <div className="bg-gray-50 p-6 rounded-lg">
               <div className="flex items-start gap-3">
@@ -1878,7 +1820,7 @@ const ComparisonForm = () => {
             </div>
           </div>
         );
-
+      
       case 6: // Success Step
         return (
           <div className="text-center space-y-6 py-8">
