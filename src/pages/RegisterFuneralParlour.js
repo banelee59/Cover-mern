@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Eye, Shield, Users, TrendingUp, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterFuneralParlour = () => {
   const [email, setEmail] = useState('');
+  const navigate = useNavigate(); // React Router hook
 
   const handleSubmit = () => {
     if (email) {
@@ -10,6 +12,10 @@ const RegisterFuneralParlour = () => {
       setEmail('');
       // Handle form submission here
     }
+  };
+
+  const handleRegisterClick = () => {
+    navigate("/register"); // Navigate to existing registration page
   };
 
   return (
@@ -24,7 +30,7 @@ const RegisterFuneralParlour = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        {/* Overlay for better text readability */}
+        {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         
         <div className="container mx-auto px-6 relative z-10">
@@ -39,7 +45,10 @@ const RegisterFuneralParlour = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className=" bg-[#00a9df] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#00a9df] transition-all transform hover:scale-105">
+              <button 
+                onClick={handleRegisterClick}
+                className="bg-[#00a9df] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#00a9df] transition-all transform hover:scale-105"
+              >
                 REGISTER 
               </button>
               <button className="text-white border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-teal-700 transition-all">
@@ -50,14 +59,12 @@ const RegisterFuneralParlour = () => {
         </div>
       </div>
 
-      {/* Features Section - Optimized spacing */}
+      {/* Features Section */}
       <div className="bg-white py-16 lg:py-24">
-      <h2 className="text-4xl lg:text-5xl font-bold text-center text-gray-800 mb-16">
-            Why Join CoverUp?
-          </h2>
+        <h2 className="text-4xl lg:text-5xl font-bold text-center text-gray-800 mb-16">
+          Why Join CoverUp?
+        </h2>
         <div className="container mx-auto px-6">
-          
-          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Feature 1 */}
             <div className="text-center group hover:transform hover:scale-105 transition-all duration-300">
@@ -69,7 +76,7 @@ const RegisterFuneralParlour = () => {
                 Enhance your family's quality and safety with our family-centered approach to personal care and housekeeping.
               </p>
             </div>
-            
+
             {/* Feature 2 */}
             <div className="text-center group hover:transform hover:scale-105 transition-all duration-300">
               <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:from-teal-200 group-hover:to-cyan-200 transition-all shadow-lg">
@@ -80,7 +87,7 @@ const RegisterFuneralParlour = () => {
                 Enjoy our competitive pricing and receive updated schedules for seamless coordination.
               </p>
             </div>
-            
+
             {/* Feature 3 */}
             <div className="text-center group hover:transform hover:scale-105 transition-all duration-300">
               <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:from-teal-200 group-hover:to-cyan-200 transition-all shadow-lg">
@@ -91,7 +98,7 @@ const RegisterFuneralParlour = () => {
                 Receive referrals from our verified clients, backed by our comprehensive screening process.
               </p>
             </div>
-            
+
             {/* Feature 4 */}
             <div className="text-center group hover:transform hover:scale-105 transition-all duration-300">
               <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:from-teal-200 group-hover:to-cyan-200 transition-all shadow-lg">
@@ -112,8 +119,6 @@ const RegisterFuneralParlour = () => {
           <div className="flex flex-col lg:flex-row items-center justify-between rounded-lg p-8 lg:p-12 w-[1186px] h-[356px] bg-cover bg-center bg-no-repeat relative overflow-hidden" style={{
             backgroundImage: 'url("/images/turtle-7.png")'
           }}>
-           
-            
             {/* Content */}
             <div className="relative z-10 text-black lg:w-1/2 lg:ml-auto">
               <div>
@@ -124,10 +129,10 @@ const RegisterFuneralParlour = () => {
                   Expand your reach, serve more families, and simplify your admin with our platform.
                 </p>
                 <button 
-                   
+                  onClick={handleRegisterClick}
                   className="bg-[#00a9df] hover:bg-[#00b3eb] text-white font-semibold py-3 px-8 rounded-full transition-colors duration-200"
                 >
-                 REGISTER FOR PARLOUR
+                  REGISTER FOR PARLOUR
                 </button>
               </div>
             </div>

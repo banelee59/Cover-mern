@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useFormSubmission from '../hooks/useFormSubmission';
 
-const FuneralParlorRegistration = () => {
+const FuneralRegistration = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 6; // Updated to match PDF sections
 
@@ -237,8 +237,11 @@ const FuneralParlorRegistration = () => {
     };
 
     const isValidPhone = (phone) => {
-      return /^[0-9]{10}$/.test(phone.replace(/[^0-9]/g, ''));
+      const digitsOnly = phone.replace(/\D/g, ''); // Remove all non-digit characters
+      return /^\d{10}$/.test(digitsOnly); // Check if exactly 10 digits remain
     };
+    
+    
 
     const isValidIDNumber = (id) => {
       return /^[0-9]{13}$/.test(id.replace(/[^0-9]/g, ''));
@@ -290,11 +293,13 @@ const FuneralParlorRegistration = () => {
         else if (!isValidEmail(fieldValue)) error = 'Please enter a valid email address';
         break;
 
-      case 'cellphone':
-        if (!fieldValue) error = 'Cell phone is required';
-        else if (!isValidPhone(fieldValue)) error = 'Please enter a valid 10-digit phone number';
-        break;
-
+        case 'cellphone':
+          if (!fieldValue) {
+            error = 'Cell phone is required';
+          } else if (!isValidPhone(fieldValue)) {
+            error = 'Please enter a valid 10-digit phone number';
+          }
+          break;
       case 'streetNumber':
       case 'streetName':
       case 'suburb':
@@ -532,7 +537,7 @@ const FuneralParlorRegistration = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Registered Business Name*
+            Funeral Parlour Name*
           </label>
           <input
             type="text"
@@ -672,18 +677,24 @@ const FuneralParlorRegistration = () => {
     </div>
   );
 
+// OWNER
+
   const renderContactDetails = () => (
     <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
-      <h3 className="text-xl font-semibold text-gray-900 border-b pb-2">Contact Details</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="bg-[#1e3a8a] text-white p-3 -m-6 mb-6 rounded-t-lg">
+        <h3 className="text-lg font-semibold">FUNERAL PARLOUR OWNER DETAILS</h3>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {/* Title */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Title*</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Title :</label>
           <select
             name="title"
             value={formData.contactPerson.title}
             onChange={(e) => handleChange(e, 'contactPerson')}
             onBlur={() => setTouched(prev => ({ ...prev, 'contactPerson.title': true }))}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
+            className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
               ${errors['contactPerson.title'] && touched['contactPerson.title'] 
                 ? 'border-red-500' 
                 : 'border-gray-300'}`}
@@ -699,14 +710,59 @@ const FuneralParlorRegistration = () => {
             <p className="mt-1 text-sm text-red-600">{errors['contactPerson.title']}</p>
           )}
         </div>
+  
+        {/* Initials */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">First Name*</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Initials :</label>
+          <input
+            type="text"
+            name="initials"
+            value={formData.contactPerson.initials || ''}
+            onChange={(e) => handleChange(e, 'contactPerson')}
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
+          />
+        </div>
+  
+        {/* Gender */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Gender :</label>
+          <div className="flex space-x-4">
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="gender"
+                value="Male"
+                checked={formData.contactPerson.gender === 'Male'}
+                onChange={(e) => handleChange(e, 'contactPerson')}
+                className="mr-2"
+              />
+              <span className="px-3 py-1 bg-blue-50 border rounded">Male</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="gender"
+                value="Female"
+                checked={formData.contactPerson.gender === 'Female'}
+                onChange={(e) => handleChange(e, 'contactPerson')}
+                className="mr-2"
+              />
+              <span className="px-3 py-1 bg-blue-50 border rounded">Female</span>
+            </label>
+          </div>
+        </div>
+      </div>
+  
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Name */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Name :</label>
           <input
             type="text"
             name="firstName"
             value={formData.contactPerson.firstName}
             onChange={(e) => handleChange(e, 'contactPerson')}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
+            className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
               ${errors['contactPerson.firstName'] && touched['contactPerson.firstName'] 
                 ? 'border-red-500' 
                 : 'border-gray-300'}`}
@@ -716,14 +772,16 @@ const FuneralParlorRegistration = () => {
             <p className="mt-1 text-sm text-red-600">{errors['contactPerson.firstName']}</p>
           )}
         </div>
+  
+        {/* Surname */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Last Name*</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Surname :</label>
           <input
             type="text"
             name="lastName"
             value={formData.contactPerson.lastName}
             onChange={(e) => handleChange(e, 'contactPerson')}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
+            className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
               ${errors['contactPerson.lastName'] && touched['contactPerson.lastName'] 
                 ? 'border-red-500' 
                 : 'border-gray-300'}`}
@@ -733,66 +791,18 @@ const FuneralParlorRegistration = () => {
             <p className="mt-1 text-sm text-red-600">{errors['contactPerson.lastName']}</p>
           )}
         </div>
+      </div>
+  
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Mobile Number */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Position*</label>
-          <input
-            type="text"
-            name="position"
-            value={formData.contactPerson.position}
-            onChange={(e) => handleChange(e, 'contactPerson')}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
-              ${errors['contactPerson.position'] && touched['contactPerson.position'] 
-                ? 'border-red-500' 
-                : 'border-gray-300'}`}
-            required
-          />
-          {errors['contactPerson.position'] && touched['contactPerson.position'] && (
-            <p className="mt-1 text-sm text-red-600">{errors['contactPerson.position']}</p>
-          )}
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">ID Number*</label>
-          <input
-            type="text"
-            name="idNumber"
-            value={formData.contactPerson.idNumber}
-            onChange={(e) => handleChange(e, 'contactPerson')}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
-              ${errors['contactPerson.idNumber'] && touched['contactPerson.idNumber'] 
-                ? 'border-red-500' 
-                : 'border-gray-300'}`}
-            required
-          />
-          {errors['contactPerson.idNumber'] && touched['contactPerson.idNumber'] && (
-            <p className="mt-1 text-sm text-red-600">{errors['contactPerson.idNumber']}</p>
-          )}
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Email*</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.contactPerson.email}
-            onChange={(e) => handleChange(e, 'contactPerson')}
-            onBlur={() => setTouched(prev => ({ ...prev, 'contactPerson.email': true }))}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
-              ${errors['contactPerson.email'] && touched['contactPerson.email'] 
-                ? 'border-red-500' 
-                : 'border-gray-300'}`}
-            required
-          />
-          {errors['contactPerson.email'] && touched['contactPerson.email'] && (
-            <p className="mt-1 text-sm text-red-600">{errors['contactPerson.email']}</p>
-          )}
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Cellphone*</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number :</label>
           <input
             type="text"
             name="cellphone"
             value={formData.contactPerson.cellphone}
             onChange={(e) => handleChange(e, 'contactPerson')}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
+            className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
               ${errors['contactPerson.cellphone'] && touched['contactPerson.cellphone'] 
                 ? 'border-red-500' 
                 : 'border-gray-300'}`}
@@ -802,19 +812,218 @@ const FuneralParlorRegistration = () => {
             <p className="mt-1 text-sm text-red-600">{errors['contactPerson.cellphone']}</p>
           )}
         </div>
+  
+        {/* Alt Number */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Telephone</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Alt Number :</label>
           <input
             type="text"
             name="telephone"
             value={formData.contactPerson.telephone}
             onChange={(e) => handleChange(e, 'contactPerson')}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
           />
         </div>
       </div>
+  
+      {/* E-Mail */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">E-Mail :</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.contactPerson.email}
+          onChange={(e) => handleChange(e, 'contactPerson')}
+          onBlur={() => setTouched(prev => ({ ...prev, 'contactPerson.email': true }))}
+          className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+            ${errors['contactPerson.email'] && touched['contactPerson.email'] 
+              ? 'border-red-500' 
+              : 'border-gray-300'}`}
+          required
+        />
+        {errors['contactPerson.email'] && touched['contactPerson.email'] && (
+          <p className="mt-1 text-sm text-red-600">{errors['contactPerson.email']}</p>
+        )}
+      </div>
+  
+      {/* Race */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Race :</label>
+        <div className="flex flex-wrap gap-2">
+          {['African', 'Coloured', 'Indian', 'White', 'Other'].map((race) => (
+            <label key={race} className="flex items-center">
+              <input
+                type="radio"
+                name="race"
+                value={race}
+                checked={formData.contactPerson.race === race}
+                onChange={(e) => handleChange(e, 'contactPerson')}
+                className="mr-2"
+              />
+              <span className="px-3 py-1 bg-blue-50 border rounded">{race}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+  {/* Funeral Parlour manager details */}
+
+  
+    <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
+      <div className="bg-[#1e3a8a] text-white p-3 -m-6 mb-6 rounded-t-lg">
+        <h3 className="text-lg font-semibold">FUNERAL PARLOUR MANAGER DETAILS</h3>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {/* Title */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Title :</label>
+          <select
+            name="title"
+            value={formData.manager?.title || ''}
+            onChange={(e) => handleChange(e, 'manager')}
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
+          >
+            <option value="">Select Title</option>
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Ms">Ms</option>
+            <option value="Dr">Dr</option>
+          </select>
+        </div>
+  
+        {/* Initials */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Initials :</label>
+          <input
+            type="text"
+            name="initials"
+            value={formData.manager?.initials || ''}
+            onChange={(e) => handleChange(e, 'manager')}
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
+          />
+        </div>
+  
+        {/* Gender */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Gender :</label>
+          <div className="flex space-x-4">
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="gender"
+                value="Male"
+                checked={formData.manager?.gender === 'Male'}
+                onChange={(e) => handleChange(e, 'manager')}
+                className="mr-2"
+              />
+              <span className="px-3 py-1 bg-blue-50 border rounded">Male</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="gender"
+                value="Female"
+                checked={formData.manager?.gender === 'Female'}
+                onChange={(e) => handleChange(e, 'manager')}
+                className="mr-2"
+              />
+              <span className="px-3 py-1 bg-blue-50 border rounded">Female</span>
+            </label>
+          </div>
+        </div>
+      </div>
+  
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Name */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Name :</label>
+          <input
+            type="text"
+            name="firstName"
+            value={formData.manager?.firstName || ''}
+            onChange={(e) => handleChange(e, 'manager')}
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
+          />
+        </div>
+  
+        {/* Surname */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Surname :</label>
+          <input
+            type="text"
+            name="lastName"
+            value={formData.manager?.lastName || ''}
+            onChange={(e) => handleChange(e, 'manager')}
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
+          />
+        </div>
+      </div>
+  
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Mobile Number */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number :</label>
+          <input
+            type="text"
+            name="cellphone"
+            value={formData.manager?.cellphone || ''}
+            onChange={(e) => handleChange(e, 'manager')}
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
+          />
+        </div>
+  
+        {/* Alt Number */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Alt Number :</label>
+          <input
+            type="text"
+            name="telephone"
+            value={formData.manager?.telephone || ''}
+            onChange={(e) => handleChange(e, 'manager')}
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
+          />
+        </div>
+      </div>
+  
+      {/* E-Mail */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">E-Mail :</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.manager?.email || ''}
+          onChange={(e) => handleChange(e, 'manager')}
+          className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
+        />
+      </div>
+  
+      {/* Race */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Race :</label>
+        <div className="flex flex-wrap gap-2">
+          {['African', 'Coloured', 'Indian', 'White', 'Other'].map((race) => (
+            <label key={race} className="flex items-center">
+              <input
+                type="radio"
+                name="race"
+                value={race}
+                checked={formData.manager?.race === race}
+                onChange={(e) => handleChange(e, 'manager')}
+                className="mr-2"
+              />
+              <span className="px-3 py-1 bg-blue-50 border rounded">{race}</span>
+            </label>
+          ))}
+        </div>
+      </div>
     </div>
+    </div>
+    
   );
+  
+  
+  
 
   const renderPhysicalAddress = () => (
     <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
@@ -1378,4 +1587,4 @@ const FuneralParlorRegistration = () => {
   );
 };
 
-export default FuneralParlorRegistration; 
+export default FuneralRegistration; 

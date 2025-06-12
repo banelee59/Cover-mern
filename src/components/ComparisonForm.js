@@ -761,14 +761,14 @@ const ComparisonForm = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-black mb-2">
+               <label className="block text-sm font-medium text-gray-700 mb-2">
                   Marital Status
                 </label>
                 <select
                   name="maritalStatus"
                   value={formData.maritalStatus}
                   onChange={handleChange}
-                  className="w-full p-3 border text-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
+                  className="w-full p-3 text-gray-700  border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
                   required
                 >
                   <option value="">Marital status</option>
@@ -991,7 +991,7 @@ const ComparisonForm = () => {
                       />
                     </div>
                     <div className="flex-1">
-                      <h5 className="font-semibold text-gray-800 mb-2">Individual cover</h5>
+                      <h5 className="font-semibold text-gray-800 mb-2">Individual Cover</h5>
                       <p className="text-sm text-gray-600">
                         Covers only the main policy-holder. Ideal for those who want a simple, personal funeral plan.
                       </p>
@@ -1018,7 +1018,7 @@ const ComparisonForm = () => {
                       />
                     </div>
                     <div className="flex-1">
-                      <h5 className="font-semibold text-gray-800 mb-2">Family cover</h5>
+                      <h5 className="font-semibold text-gray-800 mb-2">Family Cover</h5>
                       <p className="text-sm text-gray-600">
                         Includes the policyholder, their spouse, and children. A great choice for full household protection.
                       </p>
