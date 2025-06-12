@@ -235,8 +235,8 @@ const Home = () => {
                 </div>
               </div>
 
-              <button onClick={() => handleNavigation('/get-started')} className="mt-8 px-6 py-3 bg-[#00a9df] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
-                APPLY NOW
+              <button onClick={() => handleNavigation('/store-registration')} className="mt-8 px-6 py-3 bg-[#00a9df] text-white rounded-lg font-semibold hover:bg-[#00b3eb] transition-colors">
+               GET STARTED
               </button>
             </div>
 
@@ -366,40 +366,45 @@ const Home = () => {
 
 
        {/* Footer */}
-       <footer className="bg-[#376c6c] text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div>
-              <div className="text-xl font-bold mb-4">COVER UP</div>
-              <p className="text-white text-sm">CoverUp Insurance offers comprehensive insurance solutions to protect what matters most. Located in the heart of Johannesburg, we are dedicated to providing personalized service and peace of mind.</p>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold mb-4">Our Office</h3>
-              <p className="text-white text-sm">Address: Thornhill Office Park 84, Bekker road, Midrand 1685</p>
-            </div>
+<footer className="bg-[#173541] text-white pt-12">
+  <div className="container mx-auto px-4 pb-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div>
+        <div className="text-xl font-bold mb-4">COVER UP</div>
+        <p className="text-white text-sm">
+          CoverUp Insurance offers comprehensive insurance solutions to protect what matters most. Located in the heart of Johannesburg, we are dedicated to providing personalized service and peace of mind.
+        </p>
+      </div>
 
-            <div>
-              <h3 className="font-semibold mb-4">Contact Us</h3>
-              <p className="text-white text-sm">Email: info@coverupquotes.co.za</p>
-            </div>
+      <div>
+        <h3 className="font-semibold mb-4">Our Office</h3>
+        <p className="text-white text-sm">Address: Thornhill Office Park 84, Bekker road, Midrand 1685</p>
+      </div>
 
-            <div>
-              <h3 className="font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2 text-sm text-white">
-                <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/')}>Home</li>
-                <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/products')}>Products</li>
-                <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/about')}>About Us</li>
-                <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/contact')}>Contact Us</li>
-                <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/welcome')}>Get Started</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-white">
-            <p>© 2024 CoverUp Insurance | All rights reserved</p>
-          </div>
-        </div>
-      </footer>
+      <div>
+        <h3 className="font-semibold mb-4">Contact Us</h3>
+        <p className="text-white text-sm">Email: info@coverupquotes.co.za</p>
+      </div>
+
+      <div>
+        <h3 className="font-semibold mb-4">Quick Links</h3>
+        <ul className="space-y-2 text-sm text-white">
+          <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/')}>Home</li>
+          <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/products')}>Products</li>
+          <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/about')}>About Us</li>
+          <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/contact')}>Contact Us</li>
+          <li className="hover:text-white transition-colors cursor-pointer" onClick={() => handleNavigation('/welcome')}>Get Started</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {/* Bottom line and copyright */}
+  <div className="border-t border-gray-700 py-4 text-center text-sm text-white">
+    <p>© 2024 CoverUp Insurance | All rights reserved</p>
+  </div>
+</footer>
+
     </div>
   );
 };
