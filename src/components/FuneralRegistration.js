@@ -1,7 +1,7 @@
 // FuneralRegistration.js
 import React, { useState } from 'react';
 import useFormSubmission from '../hooks/useFormSubmission';
-import ProgressBar from './ProgressBar';
+import ProgressBar from './steps/ProgressBar';
 import BusinessDetails from './steps/BusinessDetails';
 import ContactDetails from './steps/ContactDetails';
 import PhysicalAddress from './steps/PhysicalAddress';
@@ -67,7 +67,7 @@ const FuneralRegistration = () => {
     dateEstablished: '',
     association: '',
     operatingRegion: '',
-    
+
     // Contact Details
     contactPerson: {
       title: '',
@@ -79,7 +79,7 @@ const FuneralRegistration = () => {
       cellphone: '',
       telephone: ''
     },
-    
+
     // Physical Address
     physicalAddress: {
       streetNumber: '',
@@ -89,7 +89,7 @@ const FuneralRegistration = () => {
       province: '',
       postalCode: '',
     },
-    
+
     // Operational Information
     operationalHours: {
       weekdays: {
@@ -120,7 +120,7 @@ const FuneralRegistration = () => {
       kitchen: false,
       restrooms: false
     },
-    
+
     // Extras
     extras: {
       draping: { selected: null, price: '' },
@@ -139,7 +139,7 @@ const FuneralRegistration = () => {
       graveLiners: { selected: null, price: '' },
       graveDigging: { selected: null, price: '' }
     },
-    
+
     // Declaration
     declaration: {
       agreed: false,
@@ -154,59 +154,376 @@ const FuneralRegistration = () => {
   const [touched, setTouched] = useState({});
   const { submitFuneralParlor, loading, error, success } = useFormSubmission();
 
-  // All the handler functions (handleChange, handleNext, handleSubmit, etc.)
-  // Validation functions
-  // Step navigation functions
+  const getCurrentStepFields = () => {
+    switch (currentStep) {
+      case 1: // Business Details
+        return [
+          { name: 'businessName' },
+          { name: 'registrationNumber' },
+          { name: 'businessType' },
+          { name: 'dateEstablished' },
+          { name: 'association' },
+          { name: 'operatingRegion' }
+        ];
+      case 2: // Contact Details
+        return [
+          { name: 'title', section: 'contactPerson' },
+          { name: 'firstName', section: 'contactPerson' },
+          { name: 'lastName', section: 'contactPerson' },
+          { name: 'position', section: 'contactPerson' },
+          { name: 'idNumber', section: 'contactPerson' },
+          { name: 'email', section: 'contactPerson' },
+          { name: 'cellphone', section: 'contactPerson' }
+        ];
+      case 3: // Physical Address
+        return [
+          { name: 'streetNumber', section: 'physicalAddress' },
+          { name: 'streetName', section: 'physicalAddress' },
+          { name: 'suburb', section: 'physicalAddress' },
+          { name: 'city', section: 'physicalAddress' },
+          { name: 'province', section: 'physicalAddress' },
+          { name: 'postalCode', section: 'physicalAddress' }
+        ];
+      case 4: // Operational Information
+        return [
+          { name: 'weekdays.start', section: 'operationalHours' },
+          { name: 'weekdays.end', section: 'operationalHours' },
+          { name: 'weekends.start', section: 'operationalHours' },
+          { name: 'weekends.end', section: 'operationalHours' },
+          { name: 'publicHolidays.start', section: 'operationalHours' },
+          { name: 'publicHolidays.end', section: 'operationalHours' }
+        ];
+      case 5: // Extras
+        return [
+          { name: 'draping', section: 'extras' },
+          { name: 'mobileToilets', section: 'extras' },
+          { name: 'groceryBenefit', section: 'extras' },
+          { name: 'mobileFridge', section: 'extras' },
+          { name: 'soundSystem', section: 'extras' },
+          { name: 'videoStreaming', section: 'extras' },
+          { name: 'airtimeAllowance', section: 'extras' },
+          { name: 'tombstone', section: 'extras' },
+          { name: 'catering', section: 'extras' },
+          { name: 'griefCounselling', section: 'extras' },
+          { name: 'floralArrangements', section: 'extras' },
+          { name: 'urns', section: 'extras' },
+          { name: 'funeralPrograms', section: 'extras' },
+          { name: 'graveLiners', section: 'extras' },
+          { name: 'graveDigging', section: 'extras' }
+        ];
+      case 6: // Declaration
+        return [
+          { name: 'agreed', section: 'declaration' },
+          { name: 'name', section: 'declaration' },
+          { name: 'position', section: 'declaration' },
+          { name: 'date', section: 'declaration' },
+          { name: 'signature', section: 'declaration' }
+        ];
+      default:
+        return [];
+    }
+  };
+
+  const getAllFields = () => {
+    return [
+      ...getCurrentStepFields(1),
+      ...getCurrentStepFields(2),
+      ...getCurrentStepFields(3),
+      ...getCurrentStepFields(4),
+      ...getCurrentStepFields(5),
+      ...getCurrentStepFields(6)
+    ];
+  };
+
+  const validateField = (name, value, section = null) => {
+    let error = '';
+
+    const isValidEmail = (email) => {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+
+    const isValidPhone = (phone) => {
+      const digitsOnly = phone.replace(/\D/g, ''); // Remove all non-digit characters
+      return /^\d{10}$/.test(digitsOnly); // Check if exactly 10 digits remain
+    };
+
+
+
+    const isValidIDNumber = (id) => {
+      return /^[0-9]{13}$/.test(id.replace(/[^0-9]/g, ''));
+    };
+
+    const fieldValue = section ? value[section][name] : value[name];
+
+    switch (name) {
+      case 'businessName':
+        if (!fieldValue) error = 'Business name is required';
+        else if (fieldValue.length < 3) error = 'Business name must be at least 3 characters';
+        break;
+
+      case 'registrationNumber':
+        if (!fieldValue) error = 'Registration number is required';
+        break;
+
+      case 'businessType':
+        if (!fieldValue) error = 'Business type is required';
+        break;
+
+      case 'dateEstablished':
+        if (!fieldValue) error = 'Date established is required';
+        break;
+
+      case 'title':
+        if (!fieldValue) error = 'Title is required';
+        break;
+
+      case 'firstName':
+        if (!fieldValue) error = 'First name is required';
+        break;
+
+      case 'lastName':
+        if (!fieldValue) error = 'Last name is required';
+        break;
+
+      case 'position':
+        if (!fieldValue) error = 'Position is required';
+        break;
+
+
+      case 'idNumber':
+        if (!fieldValue) error = 'ID number is required';
+        else if (!isValidIDNumber(fieldValue)) error = 'Please enter a valid 13-digit ID number';
+        break;
+
+      case 'email':
+        if (!fieldValue) error = 'Email is required';
+        else if (!isValidEmail(fieldValue)) error = 'Please enter a valid email address';
+        break;
+
+      case 'cellphone':
+        if (!fieldValue) {
+          error = 'Cell phone is required';
+        } else if (!isValidPhone(fieldValue)) {
+          error = 'Please enter a valid 10-digit phone number';
+        }
+        break;
+      case 'streetNumber':
+      case 'streetName':
+      case 'suburb':
+      case 'city':
+      case 'province':
+      case 'postalCode':
+        if (!fieldValue) error = `${name.replace(/([A-Z])/g, ' $1').trim()} is required`;
+        break;
+
+      default:
+        break;
+    }
+
+
+
+    if (section === 'extras') {
+      const hasSelection = Object.values(value.extras).some(val => val !== null);
+      if (!hasSelection) {
+        error = 'Please select Yes or No for at least one service';
+      }
+    }
+
+    if (section === 'operationalHours') {
+      const timeValue = value[section][name];
+      if (name.endsWith('.start') || name.endsWith('.end')) {
+        const [period, timeType] = name.split('.');
+        const periodTimes = value[section][period];
+
+        if (!periodTimes.isClosed) {
+          if (!timeValue) {
+            error = `${timeType.charAt(0).toUpperCase() + timeType.slice(1)} time is required`;
+          } else if (timeType === 'end' && periodTimes.start && periodTimes.start >= timeValue) {
+            error = 'End time must be after start time';
+          }
+        }
+      }
+    }
+
+    return error;
+  };
+
+  const handleChange = (e, section) => {
+    const { name, value, type, checked } = e.target;
+
+    if (section === 'operationalHours') {
+      const [period, timeType] = name.split('.');
+      setFormData(prev => ({
+        ...prev,
+        operationalHours: {
+          ...prev.operationalHours,
+          [period]: {
+            ...prev.operationalHours[period],
+            [timeType]: value
+          }
+        }
+      }));
+
+      setTouched(prev => ({
+        ...prev,
+        [`operationalHours.${period}.${timeType}`]: true
+      }));
+
+      const error = validateField(name, formData, section);
+      setErrors(prev => ({
+        ...prev,
+        [`operationalHours.${period}.${timeType}`]: error
+      }));
+    } else if (section) {
+      setFormData(prev => ({
+        ...prev,
+        [section]: {
+          ...prev[section],
+          [name]: type === 'checkbox' ? checked : value
+        }
+      }));
+
+      setTouched(prev => ({
+        ...prev,
+        [section ? `${section}.${name}` : name]: true
+      }));
+
+      const error = validateField(name, formData, section);
+      setErrors(prev => ({
+        ...prev,
+        [section ? `${section}.${name}` : name]: error
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+
+      setTouched(prev => ({
+        ...prev,
+        [name]: true
+      }));
+
+      const error = validateField(name, formData);
+      setErrors(prev => ({
+        ...prev,
+        [name]: error
+      }));
+    }
+  };
+
+  const handleNext = () => {
+    const currentFields = getCurrentStepFields();
+    const newErrors = {};
+    let hasErrors = false;
+
+    currentFields.forEach(field => {
+      const error = validateField(field.name, formData, field.section);
+      if (error) {
+        newErrors[field.section ? `${field.section}.${field.name}` : field.name] = error;
+        hasErrors = true;
+        setTouched(prev => ({
+          ...prev,
+          [field.section ? `${field.section}.${field.name}` : field.name]: true
+        }));
+      }
+    });
+
+    setErrors(prev => ({ ...prev, ...newErrors }));
+
+    if (!hasErrors) {
+      setCurrentStep(prev => prev + 1);
+    } else {
+      const errorSection = document.querySelector('.form-errors');
+      if (errorSection) {
+        errorSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const allFields = getAllFields();
+    const newErrors = {};
+    let hasErrors = false;
+
+    allFields.forEach(field => {
+      const error = validateField(field.name, formData, field.section);
+      if (error) {
+        newErrors[field.section ? `${field.section}.${field.name}` : field.name] = error;
+        hasErrors = true;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (hasErrors) {
+      alert('Please fill in all required fields correctly before submitting.');
+      return;
+    }
+
+    try {
+      const result = await submitFuneralParlor(formData);
+      if (result.success) {
+        alert(result.message);
+        // Optional: Reset form or redirect
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      alert(error.error);
+    }
+  };
 
   const renderCurrentStep = () => {
     switch (currentStep) {
       case 1:
-        return <BusinessDetails 
-                 formData={formData} 
-                 errors={errors} 
-                 touched={touched} 
-                 handleChange={handleChange} 
-                 setTouched={setTouched}
-                 associations={ASSOCIATIONS}
-                 regions={REGIONS}
-               />;
+        return <BusinessDetails
+          formData={formData}
+          errors={errors}
+          touched={touched}
+          handleChange={handleChange}
+          setTouched={setTouched}
+          associations={ASSOCIATIONS}
+          regions={REGIONS}
+        />;
       case 2:
-        return <ContactDetails 
-                 formData={formData} 
-                 errors={errors} 
-                 touched={touched} 
-                 handleChange={handleChange} 
-                 setTouched={setTouched}
-               />;
+        return <ContactDetails
+          formData={formData}
+          errors={errors}
+          touched={touched}
+          handleChange={handleChange}
+          setTouched={setTouched}
+        />;
       case 3:
-        return <PhysicalAddress 
-                 formData={formData} 
-                 errors={errors} 
-                 touched={touched} 
-                 handleChange={handleChange} 
-                 setTouched={setTouched}
-                 provinces={PROVINCES}
-               />;
+        return <PhysicalAddress
+          formData={formData}
+          errors={errors}
+          touched={touched}
+          handleChange={handleChange}
+          setTouched={setTouched}
+          provinces={PROVINCES}
+        />;
       case 4:
-        return <OperationalInformation 
-                 formData={formData} 
-                 setFormData={setFormData}
-               />;
+        return <OperationalInformation
+          formData={formData}
+          setFormData={setFormData}
+        />;
       case 5:
-        return <Extras 
-                 formData={formData} 
-                 setFormData={setFormData}
-                 errors={errors}
-                 touched={touched}
-               />;
+        return <Extras
+          formData={formData}
+          setFormData={setFormData}
+          errors={errors}
+          touched={touched}
+        />;
       case 6:
-        return <Declaration 
-                 formData={formData} 
-                 errors={errors} 
-                 touched={touched} 
-                 handleChange={handleChange} 
-                 setTouched={setTouched}
-               />;
+        return <Declaration
+          formData={formData}
+          errors={errors}
+          touched={touched}
+          handleChange={handleChange}
+          setTouched={setTouched}
+        />;
       default:
         return null;
     }
@@ -235,7 +552,7 @@ const FuneralRegistration = () => {
                   Previous
                 </button>
               )}
-              
+
               {currentStep < totalSteps ? (
                 <button
                   type="button"
