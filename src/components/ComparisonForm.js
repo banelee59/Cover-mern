@@ -862,7 +862,7 @@ const ComparisonForm = () => {
                     Province
                   </label>
                   <select
-                    name="address.province"
+                    name="province"
                     value={formData.address.province}
                     onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-white"
@@ -951,7 +951,7 @@ const ComparisonForm = () => {
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff] text-gray-700"
                 required
               >
-                <option value="">Number of dependants</option>
+                <option value="">Number of dependants?</option>
               
                 <option value="1">1 dependant</option>
                 <option value="2">2 dependants</option>
@@ -965,6 +965,33 @@ const ComparisonForm = () => {
                 
               </select>
             </div>
+
+          {/* Number of dependants dropdown */}
+          <div className="max-w-sm  text-right ">
+              <select
+                name="address.province"
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff] text-gray-700 "
+                required
+              >
+                <option value="">Which province do you need cover for?</option>
+              
+                <option value="">Select Province</option>
+                <option value="Gauteng">Gauteng</option>
+                    <option value="Western Cape">Western Cape</option>
+                    <option value="Eastern Cape">Eastern Cape</option>
+                    <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                    <option value="Free State">Free State</option>
+                    <option value="Limpopo">Limpopo</option>
+                    <option value="Mpumalanga">Mpumalanga</option>
+                    <option value="North West">North West</option>
+                    <option value="Northern Cape">Northern Cape</option>
+                    <option value="Northern Cape">National</option>
+
+                
+              </select>
+            </div>
+
       
             {/* Who do you want to cover section */}
             <div>
