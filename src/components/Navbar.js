@@ -23,7 +23,7 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="nav-links hidden md:flex">
           <Link to="/" className="hover:text-[#00c2ff]">Home</Link>
-          <Link to="/PRODUCTS" className="hover:text-[#00c2ff]">Products</Link>
+          
           <Link to="/about" className="hover:text-[#00c2ff]">About Us</Link>
           <Link to="/contact" className="hover:text-[#00c2ff]">Contact Us</Link>
           <Link to="/register-funeral-parlour" className="bg-[#00c2ff] hover:bg-[#00b3eb] text-white px-6 py-2 rounded-md font-semibold transition-colors">
@@ -43,7 +43,7 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
           <Link to="/" onClick={toggleMenu}>Home</Link>
-          <Link to="/PRODUCTS" onClick={toggleMenu}>Products</Link>
+          
           <Link to="/about" onClick={toggleMenu}>About Us</Link>
           <Link to="/contact" onClick={toggleMenu}>Contact Us</Link>
           <Link to="/register-funeral-parlour" onClick={toggleMenu} className="mobile-cta">

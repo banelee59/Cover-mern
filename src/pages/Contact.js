@@ -159,10 +159,12 @@ const Contact = () => {
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>© 2024 CoverUp Insurance | All rights reserved</p>
-          </div>
+          
         </div>
+         {/* Bottom line and copyright */}
+  <div className="border-t border-gray-700 py-4 text-center text-sm text-white">
+    <p>© 2024 CoverUp Insurance | All rights reserved</p>
+  </div>
       </footer>
     </div>
   );
