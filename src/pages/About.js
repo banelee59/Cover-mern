@@ -91,6 +91,45 @@ const About = () => {
           </section>
         </div>
       </div>
+
+          
+     {/* Footer */}
+     <footer className="bg-gray-800 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div>
+              <div className="text-xl font-bold mb-4">COVER UP</div>
+              <p className="text-gray-300 text-sm">CoverUp Insurance offers comprehensive insurance solutions to protect what matters most. Located in the heart of Johannesburg, we are dedicated to providing personalized service and peace of mind.</p>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold mb-4">Our Office</h3>
+              <p className="text-gray-300 text-sm">Address: Thornhill Office Park 84, Bekker road, Midrand 1685</p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-4">Contact Us</h3>
+              <p className="text-gray-300 text-sm">Email: info@coverupquotes.co.za</p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-4">Quick Links</h3>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li>Home</li>
+                <li>Products</li>
+                <li>About Us</li>
+                <li>Contact Us</li>
+                <li>Get Started</li>
+              </ul>
+            </div>
+          </div>
+          
+        </div>
+         {/* Bottom line and copyright */}
+  <div className="border-t border-gray-700 py-4 text-center text-sm text-white">
+    <p>© 2024 CoverUp Insurance | All rights reserved</p>
+  </div>
+      </footer>
     </div>
   );
 };
