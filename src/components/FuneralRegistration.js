@@ -77,7 +77,23 @@ const FuneralRegistration = () => {
       idNumber: '',
       email: '',
       cellphone: '',
-      telephone: ''
+      telephone: '',
+      initials: '',
+      gender: '',
+      race: ''
+    },
+    
+    // Manager object
+    manager: {
+      title: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      cellphone: '',
+      telephone: '',
+      initials: '',
+      gender: '',
+      race: ''
     },
 
     // Physical Address
@@ -247,8 +263,6 @@ const FuneralRegistration = () => {
       return /^\d{10}$/.test(digitsOnly); // Check if exactly 10 digits remain
     };
 
-
-
     const isValidIDNumber = (id) => {
       return /^[0-9]{13}$/.test(id.replace(/[^0-9]/g, ''));
     };
@@ -273,6 +287,14 @@ const FuneralRegistration = () => {
         if (!fieldValue) error = 'Date established is required';
         break;
 
+      case 'association':
+        if (!fieldValue) error = 'Funeral association is required';
+        break;
+
+      case 'operatingRegion':
+        if (!fieldValue) error = 'Operating region is required';
+        break;
+
       case 'title':
         if (!fieldValue) error = 'Title is required';
         break;
@@ -288,7 +310,6 @@ const FuneralRegistration = () => {
       case 'position':
         if (!fieldValue) error = 'Position is required';
         break;
-
 
       case 'idNumber':
         if (!fieldValue) error = 'ID number is required';
@@ -319,8 +340,6 @@ const FuneralRegistration = () => {
       default:
         break;
     }
-
-
 
     if (section === 'extras') {
       const hasSelection = Object.values(value.extras).some(val => val !== null);
@@ -353,58 +372,64 @@ const FuneralRegistration = () => {
 
     if (section === 'operationalHours') {
       const [period, timeType] = name.split('.');
-      setFormData(prev => ({
-        ...prev,
+      const updatedFormData = {
+        ...formData,
         operationalHours: {
-          ...prev.operationalHours,
+          ...formData.operationalHours,
           [period]: {
-            ...prev.operationalHours[period],
+            ...formData.operationalHours[period],
             [timeType]: value
           }
         }
-      }));
+      };
+      
+      setFormData(updatedFormData);
 
       setTouched(prev => ({
         ...prev,
         [`operationalHours.${period}.${timeType}`]: true
       }));
 
-      const error = validateField(name, formData, section);
+      const error = validateField(name, updatedFormData, section);
       setErrors(prev => ({
         ...prev,
         [`operationalHours.${period}.${timeType}`]: error
       }));
     } else if (section) {
-      setFormData(prev => ({
-        ...prev,
+      const updatedFormData = {
+        ...formData,
         [section]: {
-          ...prev[section],
+          ...formData[section],
           [name]: type === 'checkbox' ? checked : value
         }
-      }));
+      };
+      
+      setFormData(updatedFormData);
 
       setTouched(prev => ({
         ...prev,
         [section ? `${section}.${name}` : name]: true
       }));
 
-      const error = validateField(name, formData, section);
+      const error = validateField(name, updatedFormData, section);
       setErrors(prev => ({
         ...prev,
         [section ? `${section}.${name}` : name]: error
       }));
     } else {
-      setFormData(prev => ({
-        ...prev,
+      const updatedFormData = {
+        ...formData,
         [name]: value
-      }));
+      };
+      
+      setFormData(updatedFormData);
 
       setTouched(prev => ({
         ...prev,
         [name]: true
       }));
 
-      const error = validateField(name, formData);
+      const error = validateField(name, updatedFormData);
       setErrors(prev => ({
         ...prev,
         [name]: error

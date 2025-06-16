@@ -52,9 +52,16 @@ const BusinessDetails = ({ formData, errors, touched, handleChange, setTouched, 
             name="registrationNumber"
             value={formData.registrationNumber}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+            onBlur={() => setTouched(prev => ({ ...prev, registrationNumber: true }))}
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
+              ${errors.registrationNumber && touched.registrationNumber 
+                ? 'border-red-500' 
+                : 'border-gray-300'}`}
             required
           />
+          {errors.registrationNumber && touched.registrationNumber && (
+            <p className="mt-1 text-sm text-red-600">{errors.registrationNumber}</p>
+          )}
         </div>
         
         {/* VAT Number */}
@@ -80,8 +87,9 @@ const BusinessDetails = ({ formData, errors, touched, handleChange, setTouched, 
             name="businessType"
             value={formData.businessType}
             onChange={handleChange}
+            onBlur={() => setTouched(prev => ({ ...prev, businessType: true }))}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
-              ${errors.businessType && touched.businessType 
+              ${errors.businessType && touched.businessType
                 ? 'border-red-500' 
                 : 'border-gray-300'}`}
             required
@@ -107,6 +115,7 @@ const BusinessDetails = ({ formData, errors, touched, handleChange, setTouched, 
             name="dateEstablished"
             value={formData.dateEstablished}
             onChange={handleChange}
+            onBlur={() => setTouched(prev => ({ ...prev, dateEstablished: true }))}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
               ${errors.dateEstablished && touched.dateEstablished 
                 ? 'border-red-500' 
@@ -127,7 +136,11 @@ const BusinessDetails = ({ formData, errors, touched, handleChange, setTouched, 
             name="association"
             value={formData.association}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+            onBlur={() => setTouched(prev => ({ ...prev, association: true }))}
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
+              ${errors.association && touched.association 
+                ? 'border-red-500' 
+                : 'border-gray-300'}`}
             required
           >
             <option value="">Select Association</option>
@@ -137,6 +150,9 @@ const BusinessDetails = ({ formData, errors, touched, handleChange, setTouched, 
               </option>
             ))}
           </select>
+          {errors.association && touched.association && (
+            <p className="mt-1 text-sm text-red-600">{errors.association}</p>
+          )}
         </div>
         
         {/* Operating Region */}
@@ -148,7 +164,11 @@ const BusinessDetails = ({ formData, errors, touched, handleChange, setTouched, 
             name="operatingRegion"
             value={formData.operatingRegion}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+            onBlur={() => setTouched(prev => ({ ...prev, operatingRegion: true }))}
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]
+              ${errors.operatingRegion && touched.operatingRegion 
+                ? 'border-red-500' 
+                : 'border-gray-300'}`}
             required
           >
             <option value="">Select Region</option>
@@ -158,6 +178,9 @@ const BusinessDetails = ({ formData, errors, touched, handleChange, setTouched, 
               </option>
             ))}
           </select>
+          {errors.operatingRegion && touched.operatingRegion && (
+            <p className="mt-1 text-sm text-red-600">{errors.operatingRegion}</p>
+          )}
         </div>
       </div>
     </div>

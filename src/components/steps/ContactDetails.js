@@ -52,10 +52,10 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             <label className="flex items-center">
               <input
                 type="radio"
-                name="gender"
+                name="contactPersonGender"
                 value="Male"
                 checked={formData.contactPerson.gender === 'Male'}
-                onChange={(e) => handleChange(e, 'contactPerson')}
+                onChange={(e) => handleChange({ target: { name: 'gender', value: e.target.value } }, 'contactPerson')}
                 className="mr-2"
               />
               <span className="px-3 py-1 bg-blue-50 border rounded">Male</span>
@@ -63,10 +63,10 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             <label className="flex items-center">
               <input
                 type="radio"
-                name="gender"
+                name="contactPersonGender"
                 value="Female"
                 checked={formData.contactPerson.gender === 'Female'}
-                onChange={(e) => handleChange(e, 'contactPerson')}
+                onChange={(e) => handleChange({ target: { name: 'gender', value: e.target.value } }, 'contactPerson')}
                 className="mr-2"
               />
               <span className="px-3 py-1 bg-blue-50 border rounded">Female</span>
@@ -176,10 +176,10 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             <label key={race} className="flex items-center">
               <input
                 type="radio"
-                name="race"
+                name="contactPersonRace"
                 value={race}
                 checked={formData.contactPerson.race === race}
-                onChange={(e) => handleChange(e, 'contactPerson')}
+                onChange={(e) => handleChange({ target: { name: 'race', value: e.target.value } }, 'contactPerson')}
                 className="mr-2"
               />
               <span className="px-3 py-1 bg-blue-50 border rounded">{race}</span>
@@ -245,10 +245,10 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
               <label className="flex items-center">
                 <input
                   type="radio"
-                  name="gender"
+                  name="managerGender"
                   value="Male"
                   checked={formData.manager?.gender === 'Male'}
-                  onChange={(e) => handleChange(e, 'manager')}
+                  onChange={(e) => handleChange({ target: { name: 'gender', value: e.target.value } }, 'manager')}
                   onBlur={() => setTouched(prev => ({ ...prev, 'manager.gender': true }))}
                   className="mr-2"
                 />
@@ -257,10 +257,10 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
               <label className="flex items-center">
                 <input
                   type="radio"
-                  name="gender"
+                  name="managerGender"
                   value="Female"
                   checked={formData.manager?.gender === 'Female'}
-                  onChange={(e) => handleChange(e, 'manager')}
+                  onChange={(e) => handleChange({ target: { name: 'gender', value: e.target.value } }, 'manager')}
                   onBlur={() => setTouched(prev => ({ ...prev, 'manager.gender': true }))}
                   className="mr-2"
                 />
@@ -380,10 +380,10 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
               <label key={race} className="flex items-center">
                 <input
                   type="radio"
-                  name="race"
+                  name="managerRace"
                   value={race}
                   checked={formData.manager?.race === race}
-                  onChange={(e) => handleChange(e, 'manager')}
+                  onChange={(e) => handleChange({ target: { name: 'race', value: e.target.value } }, 'manager')}
                   onBlur={() => setTouched(prev => ({ ...prev, 'manager.race': true }))}
                   className="mr-2"
                 />
