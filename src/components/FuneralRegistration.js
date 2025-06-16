@@ -82,7 +82,7 @@ const FuneralRegistration = () => {
       gender: '',
       race: ''
     },
-    
+
     // Manager object
     manager: {
       title: '',
@@ -183,13 +183,20 @@ const FuneralRegistration = () => {
         ];
       case 2: // Contact Details
         return [
+          // Contact Person fields
           { name: 'title', section: 'contactPerson' },
           { name: 'firstName', section: 'contactPerson' },
           { name: 'lastName', section: 'contactPerson' },
-          { name: 'position', section: 'contactPerson' },
-          { name: 'idNumber', section: 'contactPerson' },
           { name: 'email', section: 'contactPerson' },
-          { name: 'cellphone', section: 'contactPerson' }
+          { name: 'cellphone', section: 'contactPerson' },
+          // Manager fields (if you want them required)
+          { name: 'title', section: 'manager' },
+          { name: 'firstName', section: 'manager' },
+          { name: 'lastName', section: 'manager' },
+          { name: 'email', section: 'manager' },
+          { name: 'cellphone', section: 'manager' },
+          { name: 'gender', section: 'manager' },
+          { name: 'race', section: 'manager' }
         ];
       case 3: // Physical Address
         return [
@@ -210,23 +217,7 @@ const FuneralRegistration = () => {
           { name: 'publicHolidays.end', section: 'operationalHours' }
         ];
       case 5: // Extras
-        return [
-          { name: 'draping', section: 'extras' },
-          { name: 'mobileToilets', section: 'extras' },
-          { name: 'groceryBenefit', section: 'extras' },
-          { name: 'mobileFridge', section: 'extras' },
-          { name: 'soundSystem', section: 'extras' },
-          { name: 'videoStreaming', section: 'extras' },
-          { name: 'airtimeAllowance', section: 'extras' },
-          { name: 'tombstone', section: 'extras' },
-          { name: 'catering', section: 'extras' },
-          { name: 'griefCounselling', section: 'extras' },
-          { name: 'floralArrangements', section: 'extras' },
-          { name: 'urns', section: 'extras' },
-          { name: 'funeralPrograms', section: 'extras' },
-          { name: 'graveLiners', section: 'extras' },
-          { name: 'graveDigging', section: 'extras' }
-        ];
+        return []; // Handle extras validation separately if needed
       case 6: // Declaration
         return [
           { name: 'agreed', section: 'declaration' },
@@ -239,6 +230,7 @@ const FuneralRegistration = () => {
         return [];
     }
   };
+
 
   const getAllFields = () => {
     return [
@@ -259,15 +251,15 @@ const FuneralRegistration = () => {
     };
 
     const isValidPhone = (phone) => {
-      const digitsOnly = phone.replace(/\D/g, ''); // Remove all non-digit characters
-      return /^\d{10}$/.test(digitsOnly); // Check if exactly 10 digits remain
+      const digitsOnly = phone.replace(/\D/g, '');
+      return /^\d{10}$/.test(digitsOnly);
     };
 
     const isValidIDNumber = (id) => {
       return /^[0-9]{13}$/.test(id.replace(/[^0-9]/g, ''));
     };
 
-    const fieldValue = section ? value[section][name] : value[name];
+    const fieldValue = section ? value[section]?.[name] : value[name];
 
     switch (name) {
       case 'businessName':
@@ -328,6 +320,15 @@ const FuneralRegistration = () => {
           error = 'Please enter a valid 10-digit phone number';
         }
         break;
+
+      case 'gender':
+        if (!fieldValue) error = 'Gender is required';
+        break;
+
+      case 'race':
+        if (!fieldValue) error = 'Race is required';
+        break;
+
       case 'streetNumber':
       case 'streetName':
       case 'suburb':
@@ -337,9 +338,19 @@ const FuneralRegistration = () => {
         if (!fieldValue) error = `${name.replace(/([A-Z])/g, ' $1').trim()} is required`;
         break;
 
+      // Declaration fields
+      case 'agreed':
+        if (!fieldValue) error = 'You must agree to the declaration';
+        break;
+
+      case 'signature':
+        if (!fieldValue) error = 'Signature is required';
+        break;
+
       default:
         break;
     }
+
 
     if (section === 'extras') {
       const hasSelection = Object.values(value.extras).some(val => val !== null);
@@ -382,7 +393,7 @@ const FuneralRegistration = () => {
           }
         }
       };
-      
+
       setFormData(updatedFormData);
 
       setTouched(prev => ({
@@ -403,7 +414,7 @@ const FuneralRegistration = () => {
           [name]: type === 'checkbox' ? checked : value
         }
       };
-      
+
       setFormData(updatedFormData);
 
       setTouched(prev => ({
@@ -421,7 +432,7 @@ const FuneralRegistration = () => {
         ...formData,
         [name]: value
       };
-      
+
       setFormData(updatedFormData);
 
       setTouched(prev => ({
