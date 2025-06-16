@@ -137,6 +137,21 @@ const FuneralRegistration = () => {
       restrooms: false
     },
 
+    services: {
+      burial: null,
+      cremation: null,
+      repatriation: null,
+      crossBorder: null,
+      documentPrep: null,
+      personalized: null,
+      legalAdmin: null,
+      memorial: null,
+      programDesign: null,
+      embalming: null,
+      viewing: null,
+      transport: null
+    },
+
     // Extras
     extras: {
       draping: { selected: null, price: '' },
@@ -209,12 +224,18 @@ const FuneralRegistration = () => {
         ];
       case 4: // Operational Information
         return [
-          { name: 'weekdays.start', section: 'operationalHours' },
-          { name: 'weekdays.end', section: 'operationalHours' },
-          { name: 'weekends.start', section: 'operationalHours' },
-          { name: 'weekends.end', section: 'operationalHours' },
-          { name: 'publicHolidays.start', section: 'operationalHours' },
-          { name: 'publicHolidays.end', section: 'operationalHours' }
+          { name: 'burial', section: 'services' },
+          { name: 'cremation', section: 'services' },
+          { name: 'repatriation', section: 'services' },
+          { name: 'crossBorder', section: 'services' },
+          { name: 'documentPrep', section: 'services' },
+          { name: 'personalized', section: 'services' },
+          { name: 'legalAdmin', section: 'services' },
+          { name: 'memorial', section: 'services' },
+          { name: 'programDesign', section: 'services' },
+          { name: 'embalming', section: 'services' },
+          { name: 'viewing', section: 'services' },
+          { name: 'transport', section: 'services' }
         ];
       case 5: // Extras
         return []; // Handle extras validation separately if needed
@@ -347,8 +368,40 @@ const FuneralRegistration = () => {
         if (!fieldValue) error = 'Signature is required';
         break;
 
+      case 'burial':
+      case 'cremation':
+      case 'repatriation':
+      case 'crossBorder':
+      case 'documentPrep':
+      case 'personalized':
+      case 'legalAdmin':
+      case 'memorial':
+      case 'programDesign':
+      case 'embalming':
+      case 'viewing':
+      case 'transport':
+        if (section === 'services') {
+          if (fieldValue === null || fieldValue === undefined) {
+            error = 'Please select Yes or No for this service';
+          }
+        }
+        break;
+
       default:
         break;
+    }
+
+    if (section === 'services') {
+      // Check if this is the last field being validated and no services are selected
+      const services = value.services || {};
+      const hasAnyServiceSelected = Object.values(services).some(val => val === true);
+
+      if (!hasAnyServiceSelected) {
+        // Only show this error on one field to avoid multiple identical error messages
+        if (name === 'burial') {
+          error = 'Please select "Yes" for at least one service your funeral parlour offers';
+        }
+      }
     }
 
 
