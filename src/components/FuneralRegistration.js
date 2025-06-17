@@ -1,4 +1,3 @@
-// FuneralRegistration.js
 import React, { useState } from 'react';
 import useFormSubmission from '../hooks/useFormSubmission';
 import ProgressBar from './steps/ProgressBar';
@@ -8,10 +7,11 @@ import PhysicalAddress from './steps/PhysicalAddress';
 import OperationalInformation from './steps/OperationalInformation';
 import Extras from './steps/Extras';
 import Declaration from './steps/Declaration';
+import Review from './steps/Review';
 
 const FuneralRegistration = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 6;
+  const totalSteps = 7;
 
   const steps = [
     { number: 1, title: "Business Details" },
@@ -19,7 +19,8 @@ const FuneralRegistration = () => {
     { number: 3, title: "Physical Address" },
     { number: 4, title: "Operational Information" },
     { number: 5, title: "Extras" },
-    { number: 6, title: "Declaration" }
+    { number: 6, title: "Declaration" },
+    { number: 7, title: "Review" }
   ];
 
   const ASSOCIATIONS = [
@@ -58,7 +59,6 @@ const FuneralRegistration = () => {
   ];
 
   const [formData, setFormData] = useState({
-    // Business Details
     businessName: '',
     tradingName: '',
     registrationNumber: '',
@@ -68,7 +68,6 @@ const FuneralRegistration = () => {
     association: '',
     operatingRegion: '',
 
-    // Contact Details
     contactPerson: {
       title: '',
       firstName: '',
@@ -83,7 +82,6 @@ const FuneralRegistration = () => {
       race: ''
     },
 
-    // Manager object
     manager: {
       title: '',
       firstName: '',
@@ -96,7 +94,6 @@ const FuneralRegistration = () => {
       race: ''
     },
 
-    // Physical Address
     physicalAddress: {
       streetNumber: '',
       streetName: '',
@@ -106,7 +103,6 @@ const FuneralRegistration = () => {
       postalCode: '',
     },
 
-    // Operational Information
     operationalHours: {
       weekdays: {
         start: '',
@@ -152,7 +148,6 @@ const FuneralRegistration = () => {
       transport: null
     },
 
-    // Extras
     extras: {
       draping: { selected: null, price: '' },
       mobileToilets: { selected: null, price: '' },
@@ -171,13 +166,21 @@ const FuneralRegistration = () => {
       graveDigging: { selected: null, price: '' }
     },
 
-    // Declaration
     declaration: {
       agreed: false,
       name: '',
       position: '',
       date: '',
-      signature: ''
+      signature: '',
+      documents: {
+        businessRegistration: null,
+        operatingLicense: null,
+        insuranceCertificate: null,
+        healthSafetyCertificate: null,
+        environmentalCompliance: null,
+        beeCertificate: null,
+        companyLogo: null
+      }
     }
   });
 
@@ -187,7 +190,7 @@ const FuneralRegistration = () => {
 
   const getCurrentStepFields = () => {
     switch (currentStep) {
-      case 1: // Business Details
+      case 1:
         return [
           { name: 'businessName' },
           { name: 'registrationNumber' },
@@ -196,15 +199,13 @@ const FuneralRegistration = () => {
           { name: 'association' },
           { name: 'operatingRegion' }
         ];
-      case 2: // Contact Details
+      case 2:
         return [
-          // Contact Person fields
           { name: 'title', section: 'contactPerson' },
           { name: 'firstName', section: 'contactPerson' },
           { name: 'lastName', section: 'contactPerson' },
           { name: 'email', section: 'contactPerson' },
           { name: 'cellphone', section: 'contactPerson' },
-          // Manager fields (if you want them required)
           { name: 'title', section: 'manager' },
           { name: 'firstName', section: 'manager' },
           { name: 'lastName', section: 'manager' },
@@ -213,7 +214,7 @@ const FuneralRegistration = () => {
           { name: 'gender', section: 'manager' },
           { name: 'race', section: 'manager' }
         ];
-      case 3: // Physical Address
+      case 3:
         return [
           { name: 'streetNumber', section: 'physicalAddress' },
           { name: 'streetName', section: 'physicalAddress' },
@@ -222,7 +223,7 @@ const FuneralRegistration = () => {
           { name: 'province', section: 'physicalAddress' },
           { name: 'postalCode', section: 'physicalAddress' }
         ];
-      case 4: // Operational Information
+      case 4:
         return [
           { name: 'burial', section: 'services' },
           { name: 'cremation', section: 'services' },
@@ -237,9 +238,9 @@ const FuneralRegistration = () => {
           { name: 'viewing', section: 'services' },
           { name: 'transport', section: 'services' }
         ];
-      case 5: // Extras
-        return []; // Handle extras validation separately if needed
-      case 6: // Declaration
+      case 5:
+        return [];
+      case 6:
         return [
           { name: 'agreed', section: 'declaration' },
           { name: 'name', section: 'declaration' },
@@ -250,18 +251,6 @@ const FuneralRegistration = () => {
       default:
         return [];
     }
-  };
-
-
-  const getAllFields = () => {
-    return [
-      ...getCurrentStepFields(1),
-      ...getCurrentStepFields(2),
-      ...getCurrentStepFields(3),
-      ...getCurrentStepFields(4),
-      ...getCurrentStepFields(5),
-      ...getCurrentStepFields(6)
-    ];
   };
 
   const validateField = (name, value, section = null) => {
@@ -287,69 +276,51 @@ const FuneralRegistration = () => {
         if (!fieldValue) error = 'Business name is required';
         else if (fieldValue.length < 3) error = 'Business name must be at least 3 characters';
         break;
-
       case 'registrationNumber':
         if (!fieldValue) error = 'Registration number is required';
         break;
-
       case 'businessType':
         if (!fieldValue) error = 'Business type is required';
         break;
-
       case 'dateEstablished':
         if (!fieldValue) error = 'Date established is required';
         break;
-
       case 'association':
         if (!fieldValue) error = 'Funeral association is required';
         break;
-
       case 'operatingRegion':
         if (!fieldValue) error = 'Operating region is required';
         break;
-
       case 'title':
         if (!fieldValue) error = 'Title is required';
         break;
-
       case 'firstName':
         if (!fieldValue) error = 'First name is required';
         break;
-
       case 'lastName':
         if (!fieldValue) error = 'Last name is required';
         break;
-
       case 'position':
         if (!fieldValue) error = 'Position is required';
         break;
-
       case 'idNumber':
         if (!fieldValue) error = 'ID number is required';
         else if (!isValidIDNumber(fieldValue)) error = 'Please enter a valid 13-digit ID number';
         break;
-
       case 'email':
         if (!fieldValue) error = 'Email is required';
         else if (!isValidEmail(fieldValue)) error = 'Please enter a valid email address';
         break;
-
       case 'cellphone':
-        if (!fieldValue) {
-          error = 'Cell phone is required';
-        } else if (!isValidPhone(fieldValue)) {
-          error = 'Please enter a valid 10-digit phone number';
-        }
+        if (!fieldValue) error = 'Cell phone is required';
+        else if (!isValidPhone(fieldValue)) error = 'Please enter a valid 10-digit phone number';
         break;
-
       case 'gender':
         if (!fieldValue) error = 'Gender is required';
         break;
-
       case 'race':
         if (!fieldValue) error = 'Race is required';
         break;
-
       case 'streetNumber':
       case 'streetName':
       case 'suburb':
@@ -358,16 +329,12 @@ const FuneralRegistration = () => {
       case 'postalCode':
         if (!fieldValue) error = `${name.replace(/([A-Z])/g, ' $1').trim()} is required`;
         break;
-
-      // Declaration fields
       case 'agreed':
         if (!fieldValue) error = 'You must agree to the declaration';
         break;
-
       case 'signature':
         if (!fieldValue) error = 'Signature is required';
         break;
-
       case 'burial':
       case 'cremation':
       case 'repatriation':
@@ -386,24 +353,17 @@ const FuneralRegistration = () => {
           }
         }
         break;
-
       default:
         break;
     }
 
     if (section === 'services') {
-      // Check if this is the last field being validated and no services are selected
       const services = value.services || {};
       const hasAnyServiceSelected = Object.values(services).some(val => val === true);
-
-      if (!hasAnyServiceSelected) {
-        // Only show this error on one field to avoid multiple identical error messages
-        if (name === 'burial') {
-          error = 'Please select "Yes" for at least one service your funeral parlour offers';
-        }
+      if (!hasAnyServiceSelected && name === 'burial') {
+        error = 'Please select "Yes" for at least one service your funeral parlour offers';
       }
     }
-
 
     if (section === 'extras') {
       const hasSelection = Object.values(value.extras).some(val => val !== null);
@@ -417,7 +377,6 @@ const FuneralRegistration = () => {
       if (name.endsWith('.start') || name.endsWith('.end')) {
         const [period, timeType] = name.split('.');
         const periodTimes = value[section][period];
-
         if (!periodTimes.isClosed) {
           if (!timeValue) {
             error = `${timeType.charAt(0).toUpperCase() + timeType.slice(1)} time is required`;
@@ -448,7 +407,6 @@ const FuneralRegistration = () => {
       };
 
       setFormData(updatedFormData);
-
       setTouched(prev => ({
         ...prev,
         [`operationalHours.${period}.${timeType}`]: true
@@ -469,7 +427,6 @@ const FuneralRegistration = () => {
       };
 
       setFormData(updatedFormData);
-
       setTouched(prev => ({
         ...prev,
         [section ? `${section}.${name}` : name]: true
@@ -487,7 +444,6 @@ const FuneralRegistration = () => {
       };
 
       setFormData(updatedFormData);
-
       setTouched(prev => ({
         ...prev,
         [name]: true
@@ -499,6 +455,19 @@ const FuneralRegistration = () => {
         [name]: error
       }));
     }
+  };
+
+  const handleFileUpload = (fieldName, file) => {
+    setFormData(prev => ({
+      ...prev,
+      declaration: {
+        ...prev.declaration,
+        documents: {
+          ...prev.declaration.documents,
+          [fieldName]: file
+        }
+      }
+    }));
   };
 
   const handleNext = () => {
@@ -533,7 +502,15 @@ const FuneralRegistration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const allFields = getAllFields();
+    const allFields = [
+      ...getCurrentStepFields(1),
+      ...getCurrentStepFields(2),
+      ...getCurrentStepFields(3),
+      ...getCurrentStepFields(4),
+      ...getCurrentStepFields(5),
+      ...getCurrentStepFields(6)
+    ];
+
     const newErrors = {};
     let hasErrors = false;
 
@@ -556,7 +533,6 @@ const FuneralRegistration = () => {
       const result = await submitFuneralParlor(formData);
       if (result.success) {
         alert(result.message);
-        // Optional: Reset form or redirect
       }
     } catch (error) {
       console.error('Registration error:', error);
@@ -612,6 +588,12 @@ const FuneralRegistration = () => {
           touched={touched}
           handleChange={handleChange}
           setTouched={setTouched}
+          handleFileUpload={handleFileUpload}
+        />;
+      case 7:
+        return <Review
+          formData={formData}
+          onEdit={(step) => setCurrentStep(step)}
         />;
       default:
         return null;
@@ -619,18 +601,32 @@ const FuneralRegistration = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 flex flex-col py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+    <div className="min-h-screen flex flex-col relative bg-white overflow-hidden">
+      <div className="w-full relative mb-0 mt-0 z-10">
+        <div className="absolute top-0 left-0 right-0 z-0" style={{
+          backgroundImage: 'url("/images/turtle-9.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'top',
+          backgroundRepeat: 'no-repeat',
+          width: '1440px',
+          height: '129px',
+          flexShrink: 0
+        }}></div>
+        
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-full">
+          <ProgressBar steps={steps} currentStep={currentStep} />
+        </div>
+      </div>
+      
+      <div className="bg-white rounded-xl shadow-lg p-8 mt-24 w-full">
+        <div className="bg-white rounded-xl p-8">
+          <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
             Funeral Parlour Membership Application
           </h2>
-
-          <ProgressBar steps={steps} currentStep={currentStep} />
-
-          <form onSubmit={handleSubmit} className="space-y-8">
+          
+          <form onSubmit={handleSubmit} className="space-y-6 w-full h-full">
             {renderCurrentStep()}
-
+            
             <div className="flex justify-between pt-6">
               {currentStep > 1 && (
                 <button
@@ -641,8 +637,7 @@ const FuneralRegistration = () => {
                   Previous
                 </button>
               )}
-
-              {currentStep < totalSteps ? (
+              {currentStep < totalSteps && currentStep !== 7 ? (
                 <button
                   type="button"
                   onClick={handleNext}
