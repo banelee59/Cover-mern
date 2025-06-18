@@ -3,9 +3,9 @@ import React from 'react';
 const ContactDetails = ({ formData, errors, touched, handleChange, setTouched }) => {
   return (
     <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
-      <div className="bg-[#1e3a8a] text-white p-3 -m-6 mb-6 rounded-t-lg">
-        <h3 className="text-lg font-semibold">FUNERAL PARLOUR OWNER DETAILS</h3>
-      </div>
+      <div className="text-black mb-4">
+  <h3 className="text-lg font-semibold">FUNERAL PARLOUR OWNER DETAILS</h3>
+</div>
       
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {/* Title */}
@@ -16,7 +16,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             value={formData.contactPerson.title}
             onChange={(e) => handleChange(e, 'contactPerson')}
             onBlur={() => setTouched(prev => ({ ...prev, 'contactPerson.title': true }))}
-            className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+            className={`w-full px-3 py-2 border rounded  
               ${errors['contactPerson.title'] && touched['contactPerson.title'] 
                 ? 'border-red-500' 
                 : 'border-gray-300'}`}
@@ -41,7 +41,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             name="initials"
             value={formData.contactPerson.initials || ''}
             onChange={(e) => handleChange(e, 'contactPerson')}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
+            className="w-full px-3 py-2 border border-gray-300 rounded "
           />
         </div>
 
@@ -58,7 +58,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
                 onChange={(e) => handleChange({ target: { name: 'gender', value: e.target.value } }, 'contactPerson')}
                 className="mr-2"
               />
-              <span className="px-3 py-1 bg-blue-50 border rounded">Male</span>
+              <span className="px-3 py-1  border rounded">Male</span>
             </label>
             <label className="flex items-center">
               <input
@@ -69,7 +69,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
                 onChange={(e) => handleChange({ target: { name: 'gender', value: e.target.value } }, 'contactPerson')}
                 className="mr-2"
               />
-              <span className="px-3 py-1 bg-blue-50 border rounded">Female</span>
+              <span className="px-3 py-1  border rounded">Female</span>
             </label>
           </div>
         </div>
@@ -84,7 +84,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             name="firstName"
             value={formData.contactPerson.firstName}
             onChange={(e) => handleChange(e, 'contactPerson')}
-            className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+            className={`w-full px-3 py-2 border rounded 
               ${errors['contactPerson.firstName'] && touched['contactPerson.firstName'] 
                 ? 'border-red-500' 
                 : 'border-gray-300'}`}
@@ -103,7 +103,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             name="lastName"
             value={formData.contactPerson.lastName}
             onChange={(e) => handleChange(e, 'contactPerson')}
-            className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+            className={`w-full px-3 py-2 border rounded 
               ${errors['contactPerson.lastName'] && touched['contactPerson.lastName'] 
                 ? 'border-red-500' 
                 : 'border-gray-300'}`}
@@ -124,7 +124,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             name="cellphone"
             value={formData.contactPerson.cellphone}
             onChange={(e) => handleChange(e, 'contactPerson')}
-            className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+            className={`w-full px-3 py-2 border rounded 
               ${errors['contactPerson.cellphone'] && touched['contactPerson.cellphone'] 
                 ? 'border-red-500' 
                 : 'border-gray-300'}`}
@@ -143,7 +143,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             name="telephone"
             value={formData.contactPerson.telephone}
             onChange={(e) => handleChange(e, 'contactPerson')}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50"
+            className="w-full px-3 py-2 border border-gray-300 rounded "
           />
         </div>
       </div>
@@ -157,7 +157,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
           value={formData.contactPerson.email}
           onChange={(e) => handleChange(e, 'contactPerson')}
           onBlur={() => setTouched(prev => ({ ...prev, 'contactPerson.email': true }))}
-          className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+          className={`w-full px-3 py-2 border rounded 
             ${errors['contactPerson.email'] && touched['contactPerson.email'] 
               ? 'border-red-500' 
               : 'border-gray-300'}`}
@@ -182,28 +182,28 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
                 onChange={(e) => handleChange({ target: { name: 'race', value: e.target.value } }, 'contactPerson')}
                 className="mr-2"
               />
-              <span className="px-3 py-1 bg-blue-50 border rounded">{race}</span>
+              <span className="px-3 py-1  border rounded">{race}</span>
             </label>
           ))}
         </div>
       </div>
 
       {/* Funeral Parlour manager details */}
-      <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
-        <div className="bg-[#1e3a8a] text-white p-3 -m-6 mb-6 rounded-t-lg">
-          <h3 className="text-lg font-semibold">FUNERAL PARLOUR MANAGER DETAILS</h3>
-        </div>
+     
+      <div className="text-black mb-4">
+      <h3 className="text-lg font-semibold">FUNERAL PARLOUR MANAGER DETAILS</h3>
+      </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 ">
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Title :</label>
+            <label className="block  text-sm font-medium text-gray-700 mb-1">Title :</label>
             <select
               name="title"
               value={formData.manager?.title || ''}
               onChange={(e) => handleChange(e, 'manager')}
               onBlur={() => setTouched(prev => ({ ...prev, 'manager.title': true }))}
-              className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+              className={`w-full px-3 py-2 border rounded 
                 ${errors['manager.title'] && touched['manager.title'] 
                   ? 'border-red-500' 
                   : 'border-gray-300'}`}
@@ -228,7 +228,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
               value={formData.manager?.initials || ''}
               onChange={(e) => handleChange(e, 'manager')}
               onBlur={() => setTouched(prev => ({ ...prev, 'manager.initials': true }))}
-              className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+              className={`w-full px-3 py-2 border
                 ${errors['manager.initials'] && touched['manager.initials'] 
                   ? 'border-red-500' 
                   : 'border-gray-300'}`}
@@ -252,7 +252,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
                   onBlur={() => setTouched(prev => ({ ...prev, 'manager.gender': true }))}
                   className="mr-2"
                 />
-                <span className="px-3 py-1 bg-blue-50 border rounded">Male</span>
+                <span className="px-3 py-1 border rounded">Male</span>
               </label>
               <label className="flex items-center">
                 <input
@@ -264,7 +264,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
                   onBlur={() => setTouched(prev => ({ ...prev, 'manager.gender': true }))}
                   className="mr-2"
                 />
-                <span className="px-3 py-1 bg-blue-50 border rounded">Female</span>
+                <span className="px-3 py-1  border rounded">Female</span>
               </label>
             </div>
             {errors['manager.gender'] && touched['manager.gender'] && (
@@ -283,7 +283,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
               value={formData.manager?.firstName || ''}
               onChange={(e) => handleChange(e, 'manager')}
               onBlur={() => setTouched(prev => ({ ...prev, 'manager.firstName': true }))}
-              className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+              className={`w-full px-3 py-2 border rounded 
                 ${errors['manager.firstName'] && touched['manager.firstName'] 
                   ? 'border-red-500' 
                   : 'border-gray-300'}`}
@@ -302,7 +302,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
               value={formData.manager?.lastName || ''}
               onChange={(e) => handleChange(e, 'manager')}
               onBlur={() => setTouched(prev => ({ ...prev, 'manager.lastName': true }))}
-              className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+              className={`w-full px-3 py-2 border rounded 
                 ${errors['manager.lastName'] && touched['manager.lastName'] 
                   ? 'border-red-500' 
                   : 'border-gray-300'}`}
@@ -323,7 +323,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
               value={formData.manager?.cellphone || ''}
               onChange={(e) => handleChange(e, 'manager')}
               onBlur={() => setTouched(prev => ({ ...prev, 'manager.cellphone': true }))}
-              className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+              className={`w-full px-3 py-2 border rounded 
                 ${errors['manager.cellphone'] && touched['manager.cellphone'] 
                   ? 'border-red-500' 
                   : 'border-gray-300'}`}
@@ -342,7 +342,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
               value={formData.manager?.telephone || ''}
               onChange={(e) => handleChange(e, 'manager')}
               onBlur={() => setTouched(prev => ({ ...prev, 'manager.telephone': true }))}
-              className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+              className={`w-full px-3 py-2 border rounded 
                 ${errors['manager.telephone'] && touched['manager.telephone'] 
                   ? 'border-red-500' 
                   : 'border-gray-300'}`}
@@ -362,7 +362,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             value={formData.manager?.email || ''}
             onChange={(e) => handleChange(e, 'manager')}
             onBlur={() => setTouched(prev => ({ ...prev, 'manager.email': true }))}
-            className={`w-full px-3 py-2 border rounded focus:ring-[#00c2ff] focus:border-[#00c2ff] bg-blue-50
+            className={`w-full px-3 py-2 border rounded 
               ${errors['manager.email'] && touched['manager.email'] 
                 ? 'border-red-500' 
                 : 'border-gray-300'}`}
@@ -387,7 +387,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
                   onBlur={() => setTouched(prev => ({ ...prev, 'manager.race': true }))}
                   className="mr-2"
                 />
-                <span className="px-3 py-1 bg-blue-50 border rounded">{race}</span>
+                <span className="px-3 py-1  border rounded">{race}</span>
               </label>
             ))}
           </div>
@@ -395,7 +395,7 @@ const ContactDetails = ({ formData, errors, touched, handleChange, setTouched })
             <p className="mt-1 text-sm text-red-600">{errors['manager.race']}</p>
           )}
         </div>
-      </div>
+      
     </div>
   );
 };
