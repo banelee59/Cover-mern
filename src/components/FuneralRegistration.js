@@ -198,7 +198,7 @@ const FuneralRegistration = () => {
           { name: 'businessType' },
           { name: 'dateEstablished' },
           { name: 'association' },
-          { name: 'operatingRegion' }
+          { name: 'association' }
         ];
       case 2:
         return [
