@@ -26,7 +26,7 @@ const Navbar = () => {
           
           <Link to="/about" className="hover:text-[#00c2ff]">About Us</Link>
           <Link to="/contact" className="hover:text-[#00c2ff]">Contact Us</Link>
-          <Link to="/register-funeral-parlour" className="bg-[#00c2ff] hover:bg-[#00b3eb] text-white px-6 py-2 rounded-md font-semibold transition-colors">
+          <Link to="/register-funeral-parlour" className="bg-[#00AEEF] hover:bg-[#00AEEF] text-white px-6 py-2 rounded-md font-semibold transition-colors">
             REGISTER FUNERAL PARLOUR
           </Link>
         </div>

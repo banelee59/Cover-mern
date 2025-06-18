@@ -37,7 +37,7 @@ const RegisterFuneralParlour = () => {
           <div className="flex-1 max-w-2xl">
             <h1 className="text-5xl font-bold text-white mb-6 leading-tight">
               Grow Your Business<br />
-              <span className="text-white">reach with CoverUp</span>
+              <span className="text-white">Reach With CoverUp</span>
             </h1>
             
             <p className="text-white text-lg mb-8 leading-relaxed relative z-10">
@@ -51,9 +51,7 @@ const RegisterFuneralParlour = () => {
               >
                 REGISTER 
               </button>
-              <button className="text-white border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-teal-700 transition-all">
-                ALREADY REGISTERED? <span style={{color: "#00a9df"}}> LOGIN</span> 
-              </button>
+             
             </div>
           </div>
         </div>

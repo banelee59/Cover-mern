@@ -8,6 +8,7 @@ import OperationalInformation from './steps/OperationalInformation';
 import Extras from './steps/Extras';
 import Declaration from './steps/Declaration';
 import Review from './steps/Review';
+import Reference from "./steps/Reference";
 
 const FuneralRegistration = () => {
   const [currentStep, setCurrentStep] = useState(1);
