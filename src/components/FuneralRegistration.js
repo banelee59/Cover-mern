@@ -246,8 +246,8 @@ const FuneralRegistration = () => {
           { name: 'agreed', section: 'declaration' },
           { name: 'name', section: 'declaration' },
           { name: 'position', section: 'declaration' },
-          { name: 'date', section: 'declaration' },
-          { name: 'signature', section: 'declaration' }
+          { name: 'date', section: 'declaration' }
+          
         ];
       default:
         return [];
@@ -263,12 +263,18 @@ const FuneralRegistration = () => {
 
     const isValidPhone = (phone) => {
       const digitsOnly = phone.replace(/\D/g, '');
-      return /^\d{10}$/.test(digitsOnly);
+    
+      // SA mobile prefixes range: 060-069, 071-079, 081-089
+      const localPattern = /^0(6\d|7[1-9]|8[1-9])\d{7}$/;
+      const intlPattern = /^27(6\d|7[1-9]|8[1-9])\d{7}$/;
+    
+      return localPattern.test(digitsOnly) || intlPattern.test(digitsOnly);
     };
-
+    
     const isValidIDNumber = (id) => {
       return /^[0-9]{13}$/.test(id.replace(/[^0-9]/g, ''));
     };
+  
 
     const fieldValue = section ? value[section]?.[name] : value[name];
 
