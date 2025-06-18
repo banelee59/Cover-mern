@@ -109,21 +109,7 @@ const Declaration = ({ formData, errors, touched, handleChange, setTouched, hand
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Signature
-              </label>
-              <input
-                type="text"
-                name="signature"
-                value={formData.declaration.signature}
-                onChange={(e) => handleChange(e, 'declaration')}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
-              />
-              {errors.declaration?.signature && touched.declaration?.signature && (
-                <p className="text-sm text-red-500">{errors.declaration.signature}</p>
-              )}
-            </div>
+            
           </div>
         </div>
 

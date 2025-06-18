@@ -184,6 +184,22 @@ const Review = ({ formData, onEdit }) => {
           )}
           {/* Add other document checks similarly */}
         </div>
+
+             {/* Confirmation Checkbox and Disclaimer */}
+      <div className="mt-6 bg-gray-50 p-4 rounded-lg">
+        <label className="flex items-start space-x-2 text-sm text-gray-700">
+          <input
+            type="checkbox"
+            required
+            className="mt-1 accent-blue-500"
+          />
+          <span>
+            By clicking 'Submit', you confirm that all information provided is accurate and complete, and that this action serves as your electronic signature on this application form.
+          </span>
+        </label>
+      </div>
+
+
       </div>
     </div>
   );
