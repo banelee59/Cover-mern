@@ -1,7 +1,17 @@
 import React from 'react';
 import { Upload } from 'lucide-react';
+import { useFormContext, useWatch } from 'react-hook-form';
 
-const Declaration = ({ formData, errors, touched, handleChange, setTouched, handleFileUpload }) => {
+const Declaration = () => {
+  const { register, setValue, formState: { errors } } = useFormContext();
+  
+  // Watch the declaration object to get current values
+  const declarationValues = useWatch({ name: 'declaration' });
+
+  const handleFileUpload = (fieldName, file) => {
+    setValue(`declaration.documents.${fieldName}`, file, { shouldValidate: true });
+  };
+
   const FileUploadButton = ({ label, fieldName, uploaded }) => (
     <div className="relative">
       <button
@@ -47,9 +57,9 @@ const Declaration = ({ formData, errors, touched, handleChange, setTouched, hand
               <input
                 type="checkbox"
                 id="declarationAgreement"
-                name="agreed"
-                checked={formData.declaration.agreed}
-                onChange={(e) => handleChange(e, 'declaration')}
+                {...register('declaration.agreed', {
+                  required: 'You must agree to the declaration to proceed'
+                })}
                 className="mt-1 mr-2"
               />
               <label htmlFor="declarationAgreement" className="text-sm text-gray-700">
@@ -57,39 +67,47 @@ const Declaration = ({ formData, errors, touched, handleChange, setTouched, hand
               </label>
             </div>
             
-            {errors.declaration?.agreed && touched.declaration?.agreed && (
-              <p className="text-sm text-red-500">{errors.declaration.agreed}</p>
+            {errors.declaration?.agreed && (
+              <p className="text-sm text-red-500">{errors.declaration.agreed.message}</p>
             )}
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Full Name
+                  Full Name *
                 </label>
                 <input
                   type="text"
-                  name="name"
-                  value={formData.declaration.name}
-                  onChange={(e) => handleChange(e, 'declaration')}
+                  {...register('declaration.name', {
+                    required: 'Full name is required',
+                    minLength: {
+                      value: 2,
+                      message: 'Name must be at least 2 characters'
+                    }
+                  })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
                 />
-                {errors.declaration?.name && touched.declaration?.name && (
-                  <p className="text-sm text-red-500">{errors.declaration.name}</p>
+                {errors.declaration?.name && (
+                  <p className="text-sm text-red-500">{errors.declaration.name.message}</p>
                 )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Position
+                  Position *
                 </label>
                 <input
                   type="text"
-                  name="position"
-                  value={formData.declaration.position}
-                  onChange={(e) => handleChange(e, 'declaration')}
+                  {...register('declaration.position', {
+                    required: 'Position is required',
+                    minLength: {
+                      value: 2,
+                      message: 'Position must be at least 2 characters'
+                    }
+                  })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
                 />
-                {errors.declaration?.position && touched.declaration?.position && (
-                  <p className="text-sm text-red-500">{errors.declaration.position}</p>
+                {errors.declaration?.position && (
+                  <p className="text-sm text-red-500">{errors.declaration.position.message}</p>
                 )}
               </div>
               <div>
@@ -98,18 +116,14 @@ const Declaration = ({ formData, errors, touched, handleChange, setTouched, hand
                 </label>
                 <input
                   type="date"
-                  name="date"
-                  value={formData.declaration.date}
-                  onChange={(e) => handleChange(e, 'declaration')}
+                  {...register('declaration.date')}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
                 />
-                {errors.declaration?.date && touched.declaration?.date && (
-                  <p className="text-sm text-red-500">{errors.declaration.date}</p>
+                {errors.declaration?.date && (
+                  <p className="text-sm text-red-500">{errors.declaration.date.message}</p>
                 )}
               </div>
             </div>
-
-            
           </div>
         </div>
 
@@ -119,37 +133,37 @@ const Declaration = ({ formData, errors, touched, handleChange, setTouched, hand
             <FileUploadButton 
               label="Upload Business Registration Certificate"
               fieldName="businessRegistration"
-              uploaded={formData.declaration.documents.businessRegistration}
+              uploaded={declarationValues?.documents?.businessRegistration}
             />
             <FileUploadButton 
               label="Upload Operating License"
               fieldName="operatingLicense"
-              uploaded={formData.declaration.documents.operatingLicense}
+              uploaded={declarationValues?.documents?.operatingLicense}
             />
             <FileUploadButton 
               label="Upload Insurance Certificate"
               fieldName="insuranceCertificate"
-              uploaded={formData.declaration.documents.insuranceCertificate}
+              uploaded={declarationValues?.documents?.insuranceCertificate}
             />
             <FileUploadButton 
               label="Upload Health and Safety Certificate"
               fieldName="healthSafetyCertificate"
-              uploaded={formData.declaration.documents.healthSafetyCertificate}
+              uploaded={declarationValues?.documents?.healthSafetyCertificate}
             />
             <FileUploadButton 
               label="Upload Environmental Compliance Certificate"
               fieldName="environmentalCompliance"
-              uploaded={formData.declaration.documents.environmentalCompliance}
+              uploaded={declarationValues?.documents?.environmentalCompliance}
             />
             <FileUploadButton 
               label="Upload BEE Certificate"
               fieldName="beeCertificate"
-              uploaded={formData.declaration.documents.beeCertificate}
+              uploaded={declarationValues?.documents?.beeCertificate}
             />
             <FileUploadButton 
               label="Upload Company Logo"
               fieldName="companyLogo"
-              uploaded={formData.declaration.documents.companyLogo}
+              uploaded={declarationValues?.documents?.companyLogo}
             />
           </div>
         </div>

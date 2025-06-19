@@ -1,6 +1,12 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 
-const OperationalInformation = ({ formData, setFormData }) => {
+const OperationalInformation = () => {
+  const {
+    watch,
+    setValue
+  } = useFormContext();
+
   const serviceOptions = [
     { key: 'burial', label: 'Burial Services' },
     { key: 'cremation', label: 'Cremation Services' },
@@ -15,6 +21,12 @@ const OperationalInformation = ({ formData, setFormData }) => {
     { key: 'viewing', label: 'Viewing and Visitation Arrangements' },
     { key: 'transport', label: 'Transport Services' },
   ];
+
+  const services = watch('services') || {};
+
+  const handleServiceChange = (serviceKey, value) => {
+    setValue(`services.${serviceKey}`, value);
+  };
 
   return (
     <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
@@ -41,28 +53,18 @@ const OperationalInformation = ({ formData, setFormData }) => {
                 <td className="px-4 py-2 text-center border-b border-gray-200">
                   <input
                     type="radio"
-                    name={service.key}
-                    checked={formData.services?.[service.key] === true}
-                    onChange={() =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        services: { ...prev.services, [service.key]: true },
-                      }))
-                    }
+                    name={`services.${service.key}`}
+                    checked={services[service.key] === true}
+                    onChange={() => handleServiceChange(service.key, true)}
                     className="w-4 h-4 text-[#00c2ff] border-gray-300 focus:ring-[#00c2ff]"
                   />
                 </td>
                 <td className="px-4 py-2 text-center border-b border-gray-200">
                   <input
                     type="radio"
-                    name={service.key}
-                    checked={formData.services?.[service.key] === false}
-                    onChange={() =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        services: { ...prev.services, [service.key]: false },
-                      }))
-                    }
+                    name={`services.${service.key}`}
+                    checked={services[service.key] === false}
+                    onChange={() => handleServiceChange(service.key, false)}
                     className="w-4 h-4 text-[#00c2ff] border-gray-300 focus:ring-[#00c2ff]"
                   />
                 </td>
