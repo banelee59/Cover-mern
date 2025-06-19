@@ -11,14 +11,7 @@ const RegistrationSuccess = () => {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6">
       <div className="max-w-2xl w-full bg-white rounded-lg shadow-sm p-8">
-        {/* Navigation Header (simplified) */}
-        <div className="flex justify-center space-x-8 mb-12">
-          <span className="font-medium">HOME</span>
-          <span className="font-medium">ABOUT US</span>
-          <span className="font-medium">BENEFITS</span>
-          <span className="font-medium">CONTACT</span>
-          <span className="font-medium">SIGN UP AS PARLOUR</span>
-        </div>
+       
 
         {/* Divider */}
         <div className="border-t border-gray-200 my-6"></div>
@@ -72,7 +65,7 @@ const RegistrationSuccess = () => {
             onClick={() => navigate('/')}
             className="px-6 py-3 border border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
           >
-            60 TO HOMEPAGE
+            GO TO HOMEPAGE
           </button>
         </div>
       </div>

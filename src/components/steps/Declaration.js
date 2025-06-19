@@ -1,9 +1,9 @@
 import React from 'react';
 import { Upload } from 'lucide-react';
-import { useFormContext, useWatch } from 'react-hook-form';
+import { useFormContext, useWatch, Controller } from 'react-hook-form';
 
 const Declaration = () => {
-  const { register, setValue, formState: { errors } } = useFormContext();
+  const { register, setValue, control, formState: { errors } } = useFormContext();
   
   // Watch the declaration object to get current values
   const declarationValues = useWatch({ name: 'declaration' });
@@ -136,12 +136,46 @@ const Declaration = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Date
+                  Date *
                 </label>
-                <input
-                  type="date"
-                  {...register('declaration.date')}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff]"
+                <Controller
+                  name="declaration.date"
+                  control={control}
+                  rules={{
+                    required: 'Date is required',
+                    validate: (value) => {
+                      if (!value) return 'Date is required';
+                      
+                      const selectedDate = new Date(value);
+                      const today = new Date();
+                      
+                      // Set today to end of day for comparison
+                      today.setHours(23, 59, 59, 999);
+                      
+                      if (selectedDate > today) {
+                        return 'Date cannot be in the future';
+                      }
+                      
+                      // Optional: Check if date is too far in the past (e.g., before 1800)
+                      const minDate = new Date('1800-01-01');
+                      if (selectedDate < minDate) {
+                        return 'Date cannot be before 1800';
+                      }
+                      
+                      return true;
+                    }
+                  }}
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      type="date"
+                      max={new Date().toISOString().split('T')[0]} // Hide future dates - only show today and backwards
+                      min="1800-01-01" // Set reasonable minimum date
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff] ${
+                        errors.declaration?.date ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                    />
+                  )}
                 />
                 {errors.declaration?.date && (
                   <p className="text-sm text-red-500">{errors.declaration.date.message}</p>
