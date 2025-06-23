@@ -100,21 +100,15 @@ const Home = () => {
                 Get burial scheme quotes in under 2 minutes.
               </h1>
               <p className="text-lg mb-8 opacity-90 leading-relaxed text-center lg:text-left">
-                Ensure peace of mind knowing that funeral arrangements are taken care of in advance. CoverUp is here to help you find the perfect funeral plan for your needs. Just follow a few simple steps to compare burial scheme quotes.
+                Ensure peace of mind knowing that funeral arrangements are taken care of in advance. CoverUp is here to help you find the perfect burial scheme for your needs. Just follow a few simple steps to compare burial scheme quotes.
               </p>
               
               {/* Phone Input */}
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md">
-                <input
-                  type="tel"
-                  placeholder="ENTER YOUR ID NUMBER"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  className="flex-1 px-4 py-3 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00c2ff]"
-                />
+              <div className="flex flex-col sm:flex-row gap- max-w-md">
+               
                 <button
                   onClick={handleGetStarted}
-                  className="px-6 py-3 bg-[#00a9df] text-white rounded-lg font-semibold hover:bg-[#00a9df] transition-colors"
+                  className="px-12 py-3 bg-[#00a9df] text-white rounded-lg font-semibold hover:bg-[#00a9df] transition-colors"
                 >
                   GET STARTED
                 </button>

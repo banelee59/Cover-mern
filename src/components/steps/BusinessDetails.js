@@ -96,7 +96,7 @@
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Company Registration Number*
               <span className="block text-xs text-gray-500 font-normal">
-                Format: YYYY/NNNNNN/NN or NNNNNN/NN
+                
               </span>
             </label>
             <Controller
@@ -107,7 +107,7 @@
                 <input
                   {...field}
                   type="text"
-                  placeholder="e.g., 2010/123456/07 or 123456/07"
+                  placeholder=" "
                   onBlur={handleRegistrationNumberBlur(field)}
                   className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff] ${
                     errors.registrationNumber ? 'border-red-500' : 'border-gray-300'

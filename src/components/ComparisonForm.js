@@ -165,10 +165,23 @@ const provincialCoverOptions = {
 
 
 const validateIdNumber = (idNumber) => {
-  // South African ID number validation (13 digits)
-  const idRegex = /^[0-9]{13}$/;
-  return idRegex.test(idNumber);
+  // Check if ID is exactly 13 digits
+  if (!/^\d{13}$/.test(idNumber)) return false;
+
+  // Luhn algorithm for SA ID
+  let sum = 0;
+  for (let i = 0; i < 13; i++) {
+    let digit = parseInt(idNumber.charAt(i), 10);
+    if ((i + 1) % 2 === 0) {
+      digit *= 2;
+      if (digit > 9) digit -= 9;
+    }
+    sum += digit;
+  }
+
+  return sum % 10 === 0;
 };
+
 
 const validateEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
