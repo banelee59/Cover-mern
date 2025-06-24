@@ -5,16 +5,18 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import RegisterFuneralParlour from './pages/RegisterFuneralParlour';
-import FuneralRegistration  from './components/FuneralRegistration';
+import FuneralRegistration from './components/FuneralRegistration';
 import Comparison from './pages/Comparison';
 import ComparisonForm from './components/ComparisonForm';
 import Welcome from './pages/Welcome';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import ScrollToTop from './pages/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop /> {/* Scrolls to top on every route change */}
       <div className="App">
         <Navbar />
         <Routes>
@@ -34,4 +36,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
