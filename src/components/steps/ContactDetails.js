@@ -15,6 +15,24 @@ const ContactDetails = () => {
   const managerInitials = watch('manager.initials');
   const managerFirstName = watch('manager.firstName');
 
+  // Watch all contact person values for the "same as above" functionality
+  const contactPersonData = watch('contactPerson');
+
+  // Function to copy contact person data to manager
+  const copyContactToManager = () => {
+    if (contactPersonData) {
+      setValue('manager.title', contactPersonData.title || '');
+      setValue('manager.initials', contactPersonData.initials || '');
+      setValue('manager.gender', contactPersonData.gender || '');
+      setValue('manager.firstName', contactPersonData.firstName || '');
+      setValue('manager.lastName', contactPersonData.lastName || '');
+      setValue('manager.cellphone', contactPersonData.cellphone || '');
+      setValue('manager.telephone', contactPersonData.telephone || '');
+      setValue('manager.email', contactPersonData.email || '');
+      setValue('manager.race', contactPersonData.race || '');
+    }
+  };
+
   // Validation function for name-initials matching
   const validateNameInitials = (name, initials) => {
     if (!name || !initials) return true; // Skip validation if either is empty
@@ -166,7 +184,7 @@ const ContactDetails = () => {
           <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number :</label>
           <input
             type="tel"
-            placeholder="0821234567 or +27821234567"
+            placeholder=""
             {...register('contactPerson.cellphone', { 
               validate: (value) => validatePhoneNumber(value, true)
             })}
@@ -183,7 +201,7 @@ const ContactDetails = () => {
           <label className="block text-sm font-medium text-gray-700 mb-1">Alt Number :</label>
           <input
             type="tel"
-            placeholder="0112345678 or +27112345678"
+            placeholder=""
             {...register('contactPerson.telephone', {
               validate: (value) => validatePhoneNumber(value, false)
             })}
@@ -235,8 +253,15 @@ const ContactDetails = () => {
       </div>
 
       {/* Funeral Parlour manager details */}
-      <div className="text-black mb-4">
-        <h3 className="text-lg font-semibold">FUNERAL PARLOUR MANAGER DETAILS</h3>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold text-black">FUNERAL PARLOUR MANAGER DETAILS</h3>
+        <button
+          type="button"
+          onClick={copyContactToManager}
+          className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+        >
+          Same as above
+        </button>
       </div>
         
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -341,7 +366,7 @@ const ContactDetails = () => {
           <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number :</label>
           <input
             type="tel"
-            placeholder="0821234567 or +27821234567"
+            placeholder=""
             {...register('manager.cellphone', {
               required: 'Mobile number is required',
               validate: (value) => validatePhoneNumber(value, true)
@@ -359,7 +384,7 @@ const ContactDetails = () => {
           <label className="block text-sm font-medium text-gray-700 mb-1">Alt Number :</label>
           <input
             type="tel"
-            placeholder="0112345678 or +27112345678"
+            placeholder=""
             {...register('manager.telephone', {
               validate: (value) => validatePhoneNumber(value, false)
             })}
