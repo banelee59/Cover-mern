@@ -215,33 +215,37 @@
       </div>
       
         {/* Operating Region */}
-        <div className="w-full max-w-md">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Operating Region*</label>
-          <Controller
-            name="operatingRegion"
-            control={control}
-            rules={{ required: 'Operating region is required' }}
-            render={({ field }) => (
-              <select
-                {...field}
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff] ${
-                  errors.operatingRegion ? 'border-red-500' : 'border-gray-300'
-                }`}
-              >
-                <option value="">Select Region</option>
-                {regions.map((region) => (
-                  <option key={region} value={region}>
-                    {region}
-                  </option>
-                ))}
-              </select>
-            )}
-          />
-          {errors.operatingRegion && (
-            <p className="mt-1 text-sm text-red-600">{errors.operatingRegion.message}</p>
-          )}
-        </div>
-  
+<div className="w-full max-w-md">
+  <label className="block text-sm font-medium text-gray-700 mb-1">Operating Region*</label>
+  <Controller
+    name="operatingRegion"
+    control={control}
+    rules={{ required: 'Operating region is required' }}
+    render={({ field }) => (
+      <select
+        {...field}
+        className={`w-full px-4 py-2 border rounded-lg focus:ring-[#00c2ff] focus:border-[#00c2ff] ${
+          errors.operatingRegion ? 'border-red-500' : 'border-gray-300'
+        }`}
+      >
+        <option value="">Select Region</option>
+        <option value="Eastern Cape">Eastern Cape</option>
+        <option value="Free State">Free State</option>
+        <option value="Gauteng">Gauteng</option>
+        <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+        <option value="Limpopo">Limpopo</option>
+        <option value="Mpumalanga">Mpumalanga</option>
+        <option value="Northern Cape">Northern Cape</option>
+        <option value="North West">North West</option>
+        <option value="Western Cape">Western Cape</option>
+      </select>
+    )}
+  />
+  {errors.operatingRegion && (
+    <p className="mt-1 text-sm text-red-600">{errors.operatingRegion.message}</p>
+  )}
+</div>
+
         {/* Funeral Association */}
         <div className="w-full max-w-md">
           <label className="block text-sm font-medium text-gray-700 mb-1">Funeral Association*</label>
