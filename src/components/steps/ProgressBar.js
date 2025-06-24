@@ -5,11 +5,7 @@ const ProgressBar = ({ steps, currentStep }) => {
   return (
     <div className="mb-12 px-8">
       <div className="flex items-center justify-between relative">
-        {/* Background Line */}
-        <div 
-          className="absolute top-[20px] left-[50px] right-[50px] h-1 bg-gray-200 -z-1"
-          style={{ width: 'calc(100% - 100px)' }}
-        />
+      
         
         {/* Progress Line */}
         <div 

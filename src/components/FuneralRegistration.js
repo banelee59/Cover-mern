@@ -215,7 +215,7 @@ const FuneralRegistration = () => {
     try {
       const result = await submitFuneralParlor(data);
       if (result.success) {
-        toast.success(result.message);
+        toast.success(result.message || 'Submitted successfully!');
         setCurrentStep(prev => prev + 1);
       } else {
         toast.error(result.error || 'Submission failed');
