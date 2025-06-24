@@ -37,6 +37,22 @@ const Extras = () => {
     setValue(`extras.${serviceName}.price`, price, { shouldValidate: true });
   };
 
+  // Calculate total of selected extras
+  const calculateTotal = () => {
+    if (!extrasValues) return 0;
+    
+    return services.reduce((total, service) => {
+      const serviceData = extrasValues[service.name];
+      if (serviceData?.selected === true && serviceData?.price) {
+        const price = parseFloat(serviceData.price) || 0;
+        return total + price;
+      }
+      return total;
+    }, 0);
+  };
+
+  const total = calculateTotal();
+
   return (
     <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
       <h3 className="text-xl font-semibold text-gray-900 border-b pb-2">Extra Service Offerings</h3>
@@ -95,6 +111,18 @@ const Extras = () => {
               );
             })}
           </tbody>
+          <tfoot>
+            <tr className="bg-gray-50 border-t-2 border-gray-300">
+              <td className="px-4 py-3 text-sm font-semibold text-gray-900" colSpan="3">
+                Total Additional Extras
+              </td>
+              <td className="px-4 py-3 text-center">
+                <span className="text-lg font-bold text-gray-900">
+                  R {total.toFixed(2)}
+                </span>
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
       
