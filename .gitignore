@@ -48,6 +48,6 @@ yarn-error.log*
 # Yarn Integrity file
 .yarn-integrity
 
-# misc
+# Misc
 .DS_Store
 Thumbs.db 
